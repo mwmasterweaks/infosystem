@@ -232,7 +232,6 @@
               size="sm"
               >Update SOA</b-button
             >
-
             <p-check
               v-if="
                 roles.accounting &&
