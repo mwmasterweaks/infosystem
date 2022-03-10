@@ -12,7 +12,7 @@ use App\User;
 class activity_ticket extends Model
 {
     protected $fillable = [
-        'ticket_type_id', 'client_id', 'created_by', 'updated_by', 'status', 'state', 'remarks', 'date_applied'
+        'ticket_type_id', 'client_id', 'created_by', 'updated_by', 'status', 'state'
     ];
 
     public function ticket_type()

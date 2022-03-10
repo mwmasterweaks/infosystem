@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\customer_payment;
 use App\Client;
 use App\billing;
-use App\bill_statement;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -21,10 +20,13 @@ class CustomerPaymentController extends Controller
 
         return response()->json($tbl);
     }
+
+
     public function create()
     {
         //
     }
+
     public function store(Request $request)
     {
         try {
@@ -66,16 +68,22 @@ class CustomerPaymentController extends Controller
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }
+
+
     public function show($id)
     {
         $tbl = customer_payment::where("client_id", $id)->get();
 
         return response()->json($tbl);
     }
+
+
     public function edit(customer_payment $customer_payment)
     {
         //
     }
+
+
     public function update(Request $request, $id)
     {
         try {
@@ -109,6 +117,7 @@ class CustomerPaymentController extends Controller
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }
+
     public function destroy($id)
     {
         try {
@@ -119,6 +128,7 @@ class CustomerPaymentController extends Controller
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }
+
     public function destroy1($id, $olt_id)
     {
         try {
@@ -149,6 +159,7 @@ class CustomerPaymentController extends Controller
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }
+
     public function dailyReport(Request $request)
     {
         $date_from = new Carbon($request->date_from);
@@ -228,90 +239,68 @@ class CustomerPaymentController extends Controller
 
     public function storePayment(Request $request)
     {
+        $acc_no = $request->acc_no;
+        $amount = $request->amount;
+        $ref = $request->ref;
+        $token = $request->token;
+
         try {
             DB::beginTransaction();
-            //$acc_no = $request->acc_no;
-            $ref = $request->base_ref;
-            $user_id = $request->user_id;
-            $payments = $request->payments;
-            $dataToInsert = [];
-            foreach ($payments as $payment) {
-                $payment = (object) $payment;
-                $client_id = 0;
-                if ($ref == "statement") {
-                    $bill_statements = bill_statement::where('id', $payment->Statement_id)->first();
-                    $client_id = $bill_statements->client_id;
-                }
-                //$client = Client::where('acc_no', $acc_no)->first();
-                $amount = $payment->Amount;
-                $dup_amount = $amount;
-                $remarks = $payment->Remarks;
-                $date = $payment->Date;
-                $or_number = $payment->OR;
-                if ($client_id != 0) {
-                    $billings = billing::where("client_id", $client_id)
-                        ->where("balance", ">", "0")
-                        ->orderBy("date")
-                        ->get();
-                    $amount_applied = 0;
-                    foreach ($billings as $billing) {
-                        $temp = $dup_amount - $billing->balance;
-                        if ($temp > 0) {
-                            DB::table("billings")
-                                ->where("id", $billing->id)
-                                ->update(["balance" => "0"]);
-                            $remarks .= $billing->date . ", ";
-                            $amount_applied += $billing->balance;
-                            $dup_amount = $temp;
-                        } else {
-                            $temp = $billing->balance - $dup_amount;
-                            DB::table("billings")
-                                ->where("id", $billing->id)
-                                ->update(["balance" => $temp]);
-                            $remarks .= $billing->date;
-                            $amount_applied += $dup_amount;
-                            $dup_amount = 0;
-                            break;
-                        }
-                    }
-                    $payment->amount_applied = $amount_applied;
-                    $dataToInsertTemp = [
-                        'client_id' => $client_id,
-                        'user_id' => $user_id,
-                        'payment_method_id' => '309',
-                        'amount' => $amount,
-                        'date' => $date,
-                        'or_number' => $or_number,
-                        'remarks' => $remarks
-                    ];
-                    array_push($dataToInsert, $dataToInsertTemp);
+            $client = Client::where('acc_no', $acc_no)->first();
+            $dup_amount = $amount;
+            $remarks = "711 Kiosk: ";
+
+            $billings = billing::where("client_id", $client->id)
+                ->where("balance", ">", "0")
+                ->orderBy("date")
+                ->get();
+
+            foreach ($billings as $billing) {
+
+                $temp = $dup_amount - $billing->balance;
+                if ($temp > 0) {
+                    DB::table("billings")
+                        ->where("id", $billing->id)
+                        ->update(["balance" => "0"]);
+                    $remarks .= $billing->date . ", ";
+                    $dup_amount = $temp;
+                } else {
+                    $temp = $billing->balance - $dup_amount;
+                    DB::table("billings")
+                        ->where("id", $billing->id)
+                        ->update(["balance" => $temp]);
+                    $remarks .= $billing->date;
+                    $dup_amount = 0;
+                    break;
                 }
             }
-            customer_payment::insert($dataToInsert);
-            // $tbl = new customer_payment;
-            // $tbl->client_id = $client->id;
-            // $tbl->user_id = "0";
-            // $tbl->payment_method_id = "309";
-            // $tbl->amount = $amount;
-            // $tbl->date = Carbon::now();
-            // $tbl->or_number = $ref;
-            // $tbl->remarks = $remarks;
-            // $tbl->tbl_name = "customer_payment";
-            // $tbl->created_at = Carbon::now();
-            // $tbl->updated_at = Carbon::now();
-            // $tbl->save();
+
+
+
+            $tbl = new customer_payment;
+            $tbl->client_id = $client->id;
+            $tbl->user_id = "0";
+            $tbl->payment_method_id = "309";
+            $tbl->amount = $amount;
+            $tbl->date = Carbon::now();
+            $tbl->or_number = $ref;
+            $tbl->remarks = $remarks;
+            $tbl->tbl_name = "customer_payment";
+            $tbl->created_at = Carbon::now();
+            $tbl->updated_at = Carbon::now();
+            $tbl->save();
 
             \Logger::instance()->log(
                 Carbon::now(),
-                $user_id,
-                "Import Payment",
+                "0",
+                "711 Kiosk",
                 $this->cname,
-                "storePayment",
+                "store",
                 "message",
-                "Import payment : " . json_encode($payments)
+                "Create new customer_payment: " . $tbl
             );
             DB::commit();
-            return response()->json($payments);
+            return "success";
         } catch (\Exception $ex) {
 
             DB::rollBack();
@@ -327,6 +316,7 @@ class CustomerPaymentController extends Controller
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }
+
     public function log($date, $userID, $userName, $ControllerName, $functionName, $logType, $message)
     {
         $filenameDate = date("mY");

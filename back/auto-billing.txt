@@ -1,0 +1,56 @@
+//button
+        <div>
+            <button
+              v-if="user.id == 1"
+              type="button"
+              style="margin-top:-20px;"
+              class="btn btn-success btn-labeled pull-right margin-right-10"
+              @click="testAutoBill"
+            >
+              Test Auto Bill
+            </button>
+          </div>
+
+
+
+//function
+
+
+ testAutoBill() {
+      this.$http
+        .get("api/calendar_events/auto_email")
+        .then(response => {
+          console.log(response.body);
+        })
+        .catch(response => {
+          console.log(response);
+        });
+    },
+
+
+ //CalendarController
+
+  public function auto_email()
+ {
+ set_time_limit(0);
+ $MailMessage = [];
+ try {
+
+ $dateNow = Carbon::now();
+ $date5daysBefore = $dateNow->copy()->addDays(5);
+ $clientsToEmail = Client::where('automatedBill', '=', 'Yes')->get();
+ $ret = [];
+
+
+ foreach ($clientsToEmail as $client) {
+ $bills = billing::where('client_id', $client->id)->where('date', $date5daysBefore->toDateString())->get();
+ $countBills = billing::where('client_id', $client->id)->where('date', $date5daysBefore->toDateString())
+
+ array_push($ret, $bills);
+ }
+
+ return $ret;
+ } catch (\Exception $ex) {
+ return response()->json(["error" => $ex, "message" => $MailMessage], 500);
+ }
+ }

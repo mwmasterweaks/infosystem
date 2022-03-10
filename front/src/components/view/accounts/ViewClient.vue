@@ -39,15 +39,15 @@
       </div>
       <div class="elClr panel-body">
         <!-- filter panel -->
-        <div style="display: flex">
-          <div style="width: 60%">
+        <div style="display:flex;">
+          <div style="width:60%;">
             <!-- search -->
             <b-row class="searchRow">
               <b-col>
                 <b-form-group>
                   <b-input-group>
                     <model-list-select
-                      style="min-width: 150px; max-width: 50px"
+                      style="min-width: 150px; max-width: 50px;"
                       :list="searchby_list"
                       v-model="searchby"
                       option-value="id"
@@ -64,18 +64,14 @@
                     ></b-form-input>
 
                     <b-input-group-append>
-                      <b-button @click="clearFilter" class="clearBtn"
-                        >Clear</b-button
-                      >
+                      <b-button @click="clearFilter" class="clearBtn">Clear</b-button>
                     </b-input-group-append>
                     <button
                       @click="fnExcelReport('accountsTable')"
                       type="button"
                       class="btn btn-success"
-                      style="width: 100px; color: white; margin-left: 10px"
-                    >
-                      Export
-                    </button>
+                      style="width:100px;color:white;margin-left:10px"
+                    >Export</button>
                   </b-input-group>
                 </b-form-group>
               </b-col>
@@ -85,120 +81,95 @@
               <button
                 @click="filterClick('dop')"
                 type="button"
-                class="
-                  btn btn-danger btn-labeled
-                  pull-right
-                  margin-left-10
-                  statusBtn
-                "
+                class="btn btn-danger btn-labeled pull-right margin-left-10 statusBtn"
               >
                 No DOP
                 <b-badge v-if="totalNoDOP > 0" variant="info">
-                  {{ totalNoDOP }}
+                  {{
+                  totalNoDOP
+                  }}
                 </b-badge>
               </button>
 
               <button
                 @click="filterClick('contract')"
                 type="button"
-                class="
-                  btn btn-danger btn-labeled
-                  pull-right
-                  margin-left-10
-                  statusBtn
-                "
+                class="btn btn-danger btn-labeled pull-right margin-left-10 statusBtn"
               >
                 No Contract
                 <b-badge v-if="totalNoContract > 0" variant="info">
-                  {{ totalNoContract }}
+                  {{
+                  totalNoContract
+                  }}
                 </b-badge>
               </button>
               <button
                 v-if="roles.helpdesk"
                 @click="filterClick('wfs')"
                 type="button"
-                class="
-                  btn btn-danger btn-labeled
-                  pull-right
-                  margin-left-10
-                  statusBtn
-                "
-                style="width: 80px"
+                class="btn btn-danger btn-labeled pull-right margin-left-10 statusBtn"
+                style="width:80px"
               >
                 WFS
                 <b-badge v-if="totalWFS > 0" variant="info">
-                  {{ totalWFS }}
+                  {{
+                  totalWFS
+                  }}
                 </b-badge>
               </button>
 
               <button
                 @click="filterClick('wfc')"
                 type="button"
-                class="
-                  btn btn-danger btn-labeled
-                  pull-right
-                  margin-left-10
-                  statusBtn
-                "
-                style="width: 80px"
+                class="btn btn-danger btn-labeled pull-right margin-left-10 statusBtn"
+                style="width:80px"
               >
                 WFC
                 <b-badge v-if="totalWFC > 0" variant="info">
-                  {{ totalWFC }}
+                  {{
+                  totalWFC
+                  }}
                 </b-badge>
               </button>
 
               <button
                 @click="filterClick('expired')"
                 type="button"
-                class="
-                  btn btn-danger btn-labeled
-                  pull-right
-                  margin-left-10
-                  statusBtn
-                "
+                class="btn btn-danger btn-labeled pull-right margin-left-10 statusBtn"
               >
                 Expired
                 <b-badge v-if="totalExpired > 0" variant="info">
-                  {{ totalExpired }}
+                  {{
+                  totalExpired
+                  }}
                 </b-badge>
               </button>
 
               <button
                 @click="filterClick('cease')"
                 type="button"
-                class="
-                  btn btn-warning btn-labeled
-                  pull-right
-                  margin-left-10
-                  statusBtn
-                "
-                style="width: 85px"
+                class="btn btn-warning btn-labeled pull-right margin-left-10 statusBtn"
+                style="width:85px"
               >
                 Cease
                 <b-badge v-if="totalNearToExpire > 0" variant="info">
-                  {{ totalNearToExpire }}
+                  {{
+                  totalNearToExpire
+                  }}
                 </b-badge>
               </button>
               <button
                 v-b-modal="'modalMultipleFilterClient'"
                 type="button"
-                class="
-                  btn btn-success btn-labeled
-                  pull-right
-                  margin-left-10
-                  statusBtn
-                "
-              >
-                Multiple Filter
-              </button>
+                class="btn btn-success btn-labeled pull-right margin-left-10 statusBtn"
+              >Multiple Filter</button>
             </b-row>
           </div>
         </div>
         <br />
         <!-- end of filter panel -->
 
-        <div class="breadcrumb flat" style="display: none">
+        <div class="breadcrumb flat" style="display:none">
           <a href="#" class="active">Client Entry</a>
           <a href="#">For Billing</a>
           <a href="#">Account Management</a>
@@ -208,16 +179,13 @@
         <!-- body -->
         <div id="dataPanel">
           <!-- switch -->
-          <div style="display: flex">
-            <div
-              class="row marginice"
-              style="margin-left: 1px; float: left; flex: 6"
-            >
+          <div style="display:flex">
+            <div class="row marginice" style="margin-left:1px;float:left;flex:6">
               <b>Showing {{ perPage }} out of {{ totalRows }} entries</b>
             </div>
-            <div class="row marginice" style="flex: 1">
+            <div class="row marginice" style="flex:1">
               <b-row>
-                <b-col style="float: right; display: flex">
+                <b-col style="float:right; display:flex;">
                   <span v-if="roles.rm" class="span-btn-group">
                     <button
                       class="btn btn-labeled box-deleted"
@@ -245,16 +213,13 @@
                     title="Show Columns"
                     @click="openColumnSettings"
                   >
-                    <i
-                      class="fas fa-columns"
-                      style="font-size: 15px; margin-top: 5px"
-                    ></i>
+                    <i class="fas fa-columns" style="font-size:15px;margin-top:5px;"></i>
                   </button>
-                  <b-form-group class="mb-0" style="flex: 2">
+                  <b-form-group class="mb-0" style="flex:2">
                     <b-form-select
                       v-b-tooltip.hover
                       title="Show Pages"
-                      style="height: 30px; font-size: 12px"
+                      style="height:30px;font-size:12px"
                       v-model="perPage"
                       :options="pageOptions"
                     ></b-form-select>
@@ -264,11 +229,7 @@
             </div>
           </div>
           <!-- table -->
-          <div
-            class="scrollmenu"
-            id="scrollmenuContainer"
-            @mousemove="mousemove"
-          >
+          <div class="scrollmenu" id="scrollmenuContainer" @mousemove="mousemove">
             <b-table
               id="accountsTable"
               class="elClr"
@@ -294,162 +255,139 @@
               </div>
               <template slot="table-caption"></template>
 
+              <span slot="olt" slot-scope="data" v-html="data.value"></span>
+              <span slot="pon" slot-scope="data" v-html="data.value"></span>
               <span slot="status" slot-scope="data" v-html="data.value"></span>
+
+              <template slot="olt" slot-scope="row">
+                <span>{{ row.item.olt.ip }}</span>
+              </template>
+
+              <template slot="pon" slot-scope="row">
+                <span
+                  v-if="row.item.pon1.pon != null"
+                >PON:{{ row.item.pon1.pon }} - {{ row.item.onu }}</span>
+              </template>
 
               <template v-slot:cell(status)="row">
                 <b-button
                   class="btn-status"
                   variant="success"
-                  v-if="row.item.status == 'Active'"
+                  v-if="
+                  row.item.status == 'Active'
+                "
                   size="sm"
                   :disabled="true"
-                  >Active</b-button
-                >
+                >Active</b-button>
                 <b-button
                   class="btn-status"
                   variant="dark"
-                  v-if="row.item.status == 'Disconnected'"
+                  v-if="
+                  row.item.status == 'Disconnected'
+                "
                   size="sm"
                   :disabled="true"
-                  >Disconnected</b-button
-                >
+                >Disconnected</b-button>
                 <b-button
                   class="btn-status"
                   variant="warning"
-                  v-if="row.item.status == 'Temp Discon'"
+                  v-if="
+                  row.item.status == 'Temp Discon'
+                "
                   size="sm"
                   :disabled="true"
-                  >Temp Disconn</b-button
-                >
+                >Temp Disconn</b-button>
                 <b-button
                   class="btn-status"
                   variant="danger"
-                  v-if="row.item.status == 'Cancelled'"
+                  v-if="
+                  row.item.status == 'Cancelled'
+                "
                   size="sm"
                   :disabled="true"
-                  >Cancelled</b-button
-                >
+                >Cancelled</b-button>
               </template>
 
               <template v-slot:cell(sched)="row">
-                <b-button
-                  variant="info"
-                  @click="openModalSched(row.item)"
-                  size="sm"
-                  >schedule</b-button
-                >
+                <b-button variant="info" @click="openModalSched(row.item)" size="sm">schedule</b-button>
               </template>
 
               <template v-slot:cell(action)="row">
-                <div class="action-col">
-                  <b-button
-                    v-if="user.id == 1"
-                    variant="warning"
-                    @click="verifiedClient(row.item)"
-                    size="sm"
-                    >Verify</b-button
-                  >
+                <b-button
+                  v-if="(roles.accounting || roles.account_management) &&
+                  row.item.status == 'Active'"
+                  variant="warning"
+                  @click="RequestActivity(row.item, 'Change Package')"
+                  size="sm"
+                >Change Package</b-button>
 
-                  <b-button
-                    v-if="
-                      roles.account_management && row.item.status == 'Active'
-                    "
-                    variant="warning"
-                    @click="RequestActivity(row.item, 'Change Package')"
-                    size="sm"
-                    >CP</b-button
-                  >
+                <b-button
+                  v-if="(roles.accounting || roles.account_management) &&
+                  row.item.status != 'Temp Discon'"
+                  variant="warning"
+                  @click="RequestActivity(row.item, 'Temp Discon')"
+                  size="sm"
+                >Temp Discon</b-button>
 
-                  <b-button
-                    v-if="
-                      (roles.accounting || roles.account_management) &&
-                      row.item.status != 'Temp Discon'
-                    "
-                    variant="warning"
-                    @click="RequestActivity(row.item, 'Temp Discon')"
-                    size="sm"
-                    >TD</b-button
-                  >
+                <b-button
+                  v-if="(roles.accounting || roles.account_management) &&
+                  row.item.status != 'Active'"
+                  variant="info"
+                  @click="RequestActivity(row.item, 'Activate')"
+                  size="sm"
+                >Re-Activate</b-button>
 
-                  <b-button
-                    v-if="
-                      (roles.accounting || roles.account_management) &&
-                      row.item.status != 'Active'
-                    "
-                    variant="info"
-                    @click="RequestActivity(row.item, 'Activate')"
-                    size="sm"
-                    >Re-Activate</b-button
-                  >
+                <b-button
+                  v-if="(roles.accounting || roles.account_management) &&
+                  row.item.status != 'Disconnected'"
+                  variant="danger"
+                  @click="RequestActivity(row.item, 'Discon')"
+                  size="sm"
+                >Discon</b-button>
 
-                  <b-button
-                    v-if="
-                      (roles.accounting || roles.account_management) &&
-                      row.item.status != 'Disconnected'
-                    "
-                    variant="danger"
-                    @click="RequestActivity(row.item, 'Discon')"
-                    size="sm"
-                    >Discon</b-button
-                  >
+                <b-button
+                  v-if="row.item.aging == null &&
+                roles.accounting &&
+                row.item.client_detail != null"
+                  variant="success"
+                  @click="openModalDOP(row.item)"
+                  size="sm"
+                >update DOP</b-button>
 
-                  <b-button
-                    v-if="
-                      row.item.aging == null &&
-                      roles.accounting &&
-                      row.item.client_detail != null
-                    "
-                    variant="success"
-                    @click="openModalDOP(row.item)"
-                    size="sm"
-                    >update DOP</b-button
-                  >
+                <b-button
+                  v-if="row.item.aging != null && roles.receive_payment ||
+                roles.receive_payment && row.item.client_detail == null"
+                  variant="success"
+                  @click="openModalReceivePayment(row.item)"
+                  size="sm"
+                >RP</b-button>
 
-                  <b-button
-                    v-if="
-                      (row.item.aging != null && roles.receive_payment) ||
-                      (roles.receive_payment && row.item.client_detail == null)
-                    "
-                    variant="success"
-                    @click="openModalReceivePayment(row.item)"
-                    size="sm"
-                    >RP</b-button
-                  >
+                <b-button
+                  v-if="row.item.aging != null && roles.create_wht ||
+                roles.receive_payment && row.item.client_detail == null"
+                  variant="success"
+                  @click="openModalWHT(row.item)"
+                  size="sm"
+                >WHT</b-button>
 
-                  <b-button
-                    v-if="
-                      (row.item.aging != null && roles.create_wht) ||
-                      (roles.receive_payment && row.item.client_detail == null)
-                    "
-                    variant="success"
-                    @click="openModalWHT(row.item)"
-                    size="sm"
-                    >WHT</b-button
-                  >
-
-                  <b-button
-                    v-if="
-                      row.item.contract_status == false &&
-                      roles.account_management
-                    "
-                    variant="success"
-                    @click="updateContract(row.item)"
-                    size="sm"
-                    >Contract</b-button
-                  >
-                </div>
+                <b-button
+                  v-if="row.item.contract_status == false && roles.account_management"
+                  variant="success"
+                  @click="updateContract(row.item)"
+                  size="sm"
+                >Contract</b-button>
               </template>
             </b-table>
           </div>
           <!-- footer -->
 
           <div class="elClr panel-footer">
-            <div class="row" style="background-color: ; padding: 15px">
-              <div class="col-md-8" style="background-color: ">
+            <div class="row" style="background-color:; padding:15px;">
+              <div class="col-md-8" style="background-color:;">
                 <span class="elClr">{{ totalRows }} item/s found.</span>
               </div>
 
-              <div class="col-md-4" style="background-color: ">
+              <div class="col-md-4" style="background-color:;">
                 <b-pagination
                   v-model="currentPage"
                   :total-rows="totalRows"
@@ -544,7 +482,7 @@
               color="success"
               v-model="withVat"
             ></p-check>
-            {{ withVat }}
+            {{withVat}}
           </div>
         </div>
 
@@ -556,10 +494,9 @@
             <p class="textLabel">OTC + MRR = FP:</p>
           </div>
           <div class="col-lg-9">
-            <p class="textLabel">
-              {{ editClient.OTC }} + {{ editClient.cashBond }} =
-              {{ editClient.fp }}
-            </p>
+            <p
+              class="textLabel"
+            >{{ editClient.OTC }} + {{ editClient.cashBond }} = {{ editClient.fp }}</p>
           </div>
         </div>
         <!-- Payment -->
@@ -574,8 +511,7 @@
               value="0"
               name="RDstaggered"
               color="success-o"
-              >Full</p-radio
-            >
+            >Full</p-radio>
 
             <p-radio
               class="textLabel p-default p-curve"
@@ -583,8 +519,7 @@
               value="1"
               name="RDstaggered"
               color="success-o"
-              >Staggered</p-radio
-            >
+            >Staggered</p-radio>
           </div>
         </div>
         <!-- Month to pay -->
@@ -638,7 +573,9 @@
           </div>
         </div>
 
-        <div v-if="editClient.isPayOnline">
+        <div v-if="
+          editClient.isPayOnline
+        ">
           <div class="rowFields mx-auto row">
             <div class="col-lg-3">
               <p class="textLabel">Bank Code:</p>
@@ -661,7 +598,7 @@
               <p class="textLabel">Date of Payment:</p>
             </div>
             <div class="col-lg-9">
-              <div class="input-group">{{ bank_code_selected.date }}</div>
+              <div class="input-group">{{bank_code_selected.date}}</div>
             </div>
           </div>
           <!-- Amount -->
@@ -670,7 +607,7 @@
               <p class="textLabel">Amount Pay:</p>
             </div>
             <div class="col-lg-9">
-              <div class="input-group">{{ editClient.amount_pay }}</div>
+              <div class="input-group">{{editClient.amount_pay}}</div>
             </div>
           </div>
         </div>
@@ -721,10 +658,9 @@
             <p class="textLabel">AmountPay - MRR= OTC Pay:</p>
           </div>
           <div class="col-lg-9">
-            <div class="input-group">
-              {{ editClient.amount_pay }} - {{ editClient.cashBond }} =
-              {{ OTCPay }}
-            </div>
+            <div
+              class="input-group"
+            >{{editClient.amount_pay}} - {{editClient.cashBond}} = {{OTCPay}}</div>
           </div>
         </div>
 
@@ -734,20 +670,16 @@
             <p class="textLabel">OTC - OTCPay = Balance:</p>
           </div>
           <div class="col-lg-9">
-            <div class="input-group">
-              {{ editClient.OTC }} - {{ OTCPay }} = {{ balance }}
-            </div>
+            <div class="input-group">{{ editClient.OTC }} - {{OTCPay}} = {{balance}}</div>
           </div>
         </div>
 
         <!-- OTC per month -->
         <div class="rowFields mx-auto row" v-if="editClient.staggered == '1'">
           <div class="col-lg-3">
-            <p class="textLabel">OTC per month({{ editClient.numMonths }}):</p>
+            <p class="textLabel">OTC per month({{editClient.numMonths}}):</p>
           </div>
-          <div class="col-lg-9">
-            {{ balance }} / {{ editClient.numMonths }} = {{ permonth }}
-          </div>
+          <div class="col-lg-9">{{balance}} / {{editClient.numMonths}} = {{permonth}}</div>
         </div>
 
         <div class="rowFields mx-auto row">
@@ -793,9 +725,7 @@
         </div>
 
         <template slot="modal-footer" slot-scope="{}">
-          <b-button size="sm" variant="success" @click="updateDOP()"
-            >Update</b-button
-          >
+          <b-button size="sm" variant="success" @click="updateDOP()">Update</b-button>
         </template>
       </b-modal>
       <!-- End modalDOP -->
@@ -810,42 +740,8 @@
         :header-bg-variant="' modal-modi-bg'"
         :footer-bg-variant="' modal-modi-bg'"
         size="lg"
+        title="Manage Client"
       >
-        <div slot="modal-header" style="width: 100%">
-          <h5 style="float: left">Manage Client</h5>
-          <p style="float: right">
-            <i
-              class="fas fa-chevron-right"
-              style="font-size: 22px; color: silver"
-            ></i>
-          </p>
-          <!-- <div class="rowFields mx-auto row">
-            <div class="col-lg-6">
-              <h5>Manage Client</h5>
-            </div>
-            <div class="col-lg-2">
-              <p-radio
-                class="textLabel p-default p-curve"
-                v-model="client.isNew"
-                value="0"
-                name="isNew"
-                color="success-o"
-                >New</p-radio
-              >
-            </div>
-            <div class="col-lg-2">
-              <p-radio
-                class="textLabel p-default p-curve"
-                v-model="client.isNew"
-                value="1"
-                name="isNew"
-                color="success-o"
-                >Existing</p-radio
-              >
-            </div>
-          </div> -->
-        </div>
-
         <!-- <div class="rowFields mx-auto row" v-if="updateClientList.re_email">
           <div class="col-lg-3">
             <p class>Re-Email:</p>
@@ -910,15 +806,13 @@
               v-b-tooltip.hover
               title="Input the account no"
               placeholder="Account Number"
-              v-on:keyup.enter="
-                updateClientPerRow('account_no', $event.target.value),
-                  (editPerRow.account_no = false)
-              "
+              v-on:keyup.enter="updateClientPerRow('account_no', $event.target.value),
+                  editPerRow.account_no = false"
               v-model.lazy="editClient.account_no"
               v-if="editPerRow.account_no"
             />
             <span v-else>
-              {{ editClient.account_no }}
+              {{editClient.account_no}}
               <span
                 class="buttonEdit"
                 v-if="user.id == 1"
@@ -942,16 +836,14 @@
               v-b-tooltip.hover
               title="Input the account name"
               placeholder="Account name"
-              v-on:keyup.enter="
-                updateClientPerRow('name', $event.target.value),
-                  (editPerRow.name = false)
-              "
+              v-on:keyup.enter="updateClientPerRow('name', $event.target.value),
+              editPerRow.name = false"
               v-model.lazy="editClient.name"
               v-validate="'required'"
               v-if="editPerRow.name"
             />
             <span v-else>
-              {{ editClient.name }}
+              {{editClient.name}}
               <span
                 class="buttonEdit"
                 v-if="updateClientList.name"
@@ -976,14 +868,12 @@
               title="Input the owner's name"
               placeholder="Owner's name"
               v-model.lazy="editClient.owner_name"
-              v-on:keyup.enter="
-                updateClientPerRow('owner_name', $event.target.value),
-                  (editPerRow.owner_name = false)
-              "
+              v-on:keyup.enter="updateClientPerRow('owner_name', $event.target.value),
+              editPerRow.owner_name = false"
               v-if="editPerRow.owner_name"
             />
             <span v-else>
-              {{ editClient.owner_name }}
+              {{editClient.owner_name}}
               <span
                 class="buttonEdit"
                 v-if="updateClientList.owner_name"
@@ -1008,14 +898,12 @@
               title="Input the Contact person"
               placeholder="Contact person"
               v-model.lazy="editClient.contact_person"
-              v-on:keyup.enter="
-                updateClientPerRow('contact_person', $event.target.value),
-                  (editPerRow.contact_person = false)
-              "
+              v-on:keyup.enter="updateClientPerRow('contact_person', $event.target.value),
+              editPerRow.contact_person = false"
               v-if="editPerRow.contact_person"
             />
             <span v-else>
-              {{ editClient.contact_person }}
+              {{editClient.contact_person}}
               <span
                 class="buttonEdit"
                 v-if="updateClientList.contact_person"
@@ -1041,14 +929,12 @@
               followed by space and must be 11digits per number E.g.(09123456789, 09987654321)"
               placeholder="Contact number"
               v-model.lazy="editClient.contact"
-              v-on:keyup.enter="
-                updateClientPerRow('contact', $event.target.value),
-                  (editPerRow.contact = false)
-              "
+              v-on:keyup.enter="updateClientPerRow('contact', $event.target.value),
+              editPerRow.contact = false"
               v-if="editPerRow.contact"
             />
             <span v-else>
-              {{ editClient.contact }}
+              {{editClient.contact}}
               <span
                 class="buttonEdit"
                 v-if="updateClientList.contact"
@@ -1074,14 +960,12 @@
               followed by space E.g.(test@test.com, test2@test.com)"
               placeholder="Email address"
               v-model.lazy="editClient.email_add"
-              v-on:keyup.enter="
-                updateClientPerRow('email_add', $event.target.value),
-                  (editPerRow.email_add = false)
-              "
+              v-on:keyup.enter="updateClientPerRow('email_add', $event.target.value),
+              editPerRow.email_add = false"
               v-if="editPerRow.email_add"
             />
             <span v-else>
-              {{ editClient.email_add }}
+              {{editClient.email_add}}
               <span
                 class="buttonEdit"
                 v-if="updateClientList.email_add"
@@ -1106,14 +990,12 @@
               title="Input the address"
               placeholder="Address"
               v-model.lazy="editClient.location"
-              v-on:keyup.enter="
-                updateClientPerRow('location', $event.target.value),
-                  (editPerRow.location = false)
-              "
+              v-on:keyup.enter="updateClientPerRow('location', $event.target.value),
+              editPerRow.location = false"
               v-if="editPerRow.location"
             />
             <span v-else>
-              {{ editClient.location }}
+              {{editClient.location}}
               <span
                 class="buttonEdit"
                 v-if="updateClientList.location"
@@ -1140,7 +1022,7 @@
               v-if="editPerRow.package"
             ></model-list-select>
             <span v-else>
-              {{ editClient.package.name }}
+              {{editClient.package.name}}
               <span
                 class="buttonEdit"
                 v-if="updateClientList.package"
@@ -1157,7 +1039,7 @@
             <label class>Max Speed:</label>
           </div>
           <div class="col-lg-9">
-            {{ editClient.package.max_speed }}
+            {{editClient.package.max_speed}}
             <!-- <input
               type="text"
               class="form-control"
@@ -1174,14 +1056,14 @@
           <div class="col-lg-3">
             <label class>CIR:</label>
           </div>
-          <div class="col-lg-9">{{ editClient.package.cir }}</div>
+          <div class="col-lg-9">{{editClient.package.cir}}</div>
         </div>
         <!-- MRR -->
         <div class="rowFields mx-auto row stripe-modi">
           <div class="col-lg-3">
             <label class>MRR:</label>
           </div>
-          <div class="col-lg-9">{{ editClient.package.mrr }}</div>
+          <div class="col-lg-9">{{editClient.package.mrr}}</div>
         </div>
         <!-- Package type -->
         <div class="rowFields mx-auto row">
@@ -1189,7 +1071,7 @@
             <label class>Package type:</label>
           </div>
           <div class="col-lg-9">
-            {{ editClient.package_type.name }}
+            {{editClient.package_type.name}}
             <!-- <model-list-select
               :list="packageTypes"
               v-model="editClient.package_type_id"
@@ -1218,14 +1100,12 @@
               title="Input the OTC"
               placeholder="OTC"
               v-model.lazy="editClient.OTC"
-              v-on:keyup.enter="
-                updateClientPerRow('OTC', $event.target.value),
-                  (editPerRow.OTC = false)
-              "
+              v-on:keyup.enter="updateClientPerRow('OTC', $event.target.value),
+              editPerRow.OTC = false"
               v-if="editPerRow.OTC"
             />
             <span v-else>
-              {{ editClient.OTC }}
+              {{editClient.OTC}}
               <span
                 class="buttonEdit"
                 v-if="updateClientList.OTC"
@@ -1247,14 +1127,12 @@
               class="form-control"
               placeholder="Term (number of months)"
               v-model.lazy="editClient.term"
-              v-on:keyup.enter="
-                updateClientPerRow('term', $event.target.value),
-                  (editPerRow.term = false)
-              "
+              v-on:keyup.enter="updateClientPerRow('term', $event.target.value),
+              editPerRow.term = false"
               v-if="editPerRow.term"
             />
             <span v-else>
-              {{ editClient.term }}
+              {{editClient.term}}
               <span
                 class="buttonEdit"
                 v-if="updateClientList.term"
@@ -1277,14 +1155,12 @@
               option-value="id"
               option-text="name"
               placeholder="Select a seller's name..."
-              @input="
-                updateClientPerRow('sales_id', editClient._sales),
-                  (editPerRow.sales = false)
-              "
+              @input="updateClientPerRow('sales_id', editClient._sales),
+              editPerRow.sales = false"
               v-if="editPerRow.sales"
             ></model-list-select>
             <span v-else>
-              {{ editClient.sales.user.name }}
+              {{editClient.sales.user.name}}
               <span
                 class="buttonEdit"
                 v-if="updateClientList.sales"
@@ -1308,14 +1184,12 @@
               option-value="id"
               option-text="name"
               placeholder="Select sales agent if this client deal by agent..."
-              @input="
-                updateClientPerRow('sales_agent_id', editClient.sales_agent),
-                  (editPerRow.agent = false)
-              "
+              @input="updateClientPerRow('sales_agent_id', editClient.sales_agent),
+              editPerRow.agent = false"
               v-if="editPerRow.agent"
             ></model-list-select>
             <span v-else>
-              {{ editClient.sales_agent.name }}
+              {{editClient.sales_agent.name}}
               <span
                 class="buttonEdit"
                 v-if="updateClientList.agent"
@@ -1339,14 +1213,12 @@
               option-value="id"
               option-text="name"
               placeholder="Select a engineer's name..."
-              @input="
-                updateClientPerRow('engineers_id', editClient.tech),
-                  (editPerRow.engineers = false)
-              "
+              @input="updateClientPerRow('engineers_id', editClient.tech),
+              editPerRow.engineers = false"
               v-if="editPerRow.engineers"
             ></model-list-select>
             <span v-else>
-              {{ editClient.engineer.name }}
+              {{editClient.engineer.name}}
               <span
                 class="buttonEdit"
                 v-if="updateClientList.engineers"
@@ -1369,16 +1241,12 @@
               option-value="id"
               option-text="name"
               placeholder="Select/Search a Branch..."
-              @input="
-                updateClientPerRow('branch', editBranchSelected),
-                  (editPerRow.branch = false)
-              "
+              @input="updateClientPerRow('branch', editBranchSelected),
+              editPerRow.branch = false"
               v-if="editPerRow.branch"
             ></model-list-select>
             <span v-else>
-              <span v-if="editClient.branch != null">{{
-                editClient.branch.name
-              }}</span>
+              <span v-if="editClient.branch != null">{{editClient.branch.name}}</span>
               <span
                 class="buttonEdit"
                 v-if="updateClientList.branch"
@@ -1395,9 +1263,7 @@
             <label class>Area:</label>
           </div>
           <div class="col-lg-9">
-            <span v-if="editClient.branch != null">{{
-              editClient.branch.area.name
-            }}</span>
+            <span v-if="editClient.branch != null">{{editClient.branch.area.name}}</span>
           </div>
         </div>
         <!-- Region -->
@@ -1406,9 +1272,7 @@
             <label class>Region:</label>
           </div>
           <div class="col-lg-9">
-            <span v-if="editClient.branch != null">{{
-              editClient.branch.area.region.name
-            }}</span>
+            <span v-if="editClient.branch != null">{{editClient.branch.area.region.name}}</span>
           </div>
         </div>
         <!-- Bucket -->
@@ -1425,14 +1289,12 @@
               option-text="name"
               name="bucket"
               placeholder="Select/Search a Bucket..."
-              @input="
-                updateClientPerRow('bucket_id', editClient.bucket.id),
-                  (editPerRow.bucket = false)
-              "
+              @input="updateClientPerRow('bucket_id', editClient.bucket.id),
+              editPerRow.bucket = false"
               v-if="editPerRow.bucket"
             ></model-list-select>
             <span v-else>
-              {{ editClient.bucket.IP }}
+              {{editClient.bucket.IP}}
               <span
                 class="buttonEdit"
                 v-if="updateClientList.bucket"
@@ -1457,14 +1319,12 @@
               title="subscription name in the bucket"
               placeholder="subscription name"
               v-model.lazy="editClient.subscription_name"
-              v-on:keyup.enter="
-                updateClientPerRow('subscription_name', $event.target.value),
-                  (editPerRow.subscription = false)
-              "
+              v-on:keyup.enter="updateClientPerRow('subscription_name', $event.target.value),
+              editPerRow.subscription = false"
               v-if="editPerRow.subscription"
             />
             <span v-else>
-              {{ editClient.subscription_name }}
+              {{editClient.subscription_name}}
               <span
                 class="buttonEdit"
                 v-if="updateClientList.subscription"
@@ -1487,14 +1347,12 @@
               option-value="name"
               option-text="name"
               placeholder="Select status"
-              @input="
-                updateClientPerRow('status', editClient.status),
-                  (editPerRow.status = false)
-              "
+              @input="updateClientPerRow('status', editClient.status),
+              editPerRow.status = false"
               v-if="editPerRow.status"
             ></model-list-select>
             <span v-else>
-              {{ editClient.status }}
+              {{editClient.status}}
               <span
                 class="buttonEdit"
                 v-if="updateClientList.status"
@@ -1524,10 +1382,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr
-                        v-for="status in editClient.status_log"
-                        :key="status.id"
-                      >
+                      <tr v-for="status in editClient.status_log" :key="status.id">
                         <td>{{ status.status }}</td>
                         <td>{{ status.date_change }}</td>
                         <td>{{ status.user.name }}</td>
@@ -1567,14 +1422,12 @@
               placeholder="Remarks/Note"
               v-model.lazy="editClient.remarks"
               @keydown.enter.exact.prevent
-              @keyup.enter.exact="
-                updateClientPerRow('remarks', $event.target.value),
-                  (editPerRow.remarks = false)
-              "
+              @keyup.enter.exact="updateClientPerRow('remarks', $event.target.value),
+              editPerRow.remarks = false"
               v-if="editPerRow.remarks"
             ></textarea>
             <span v-else>
-              <pre>{{ editClient.remarks }}</pre>
+              <pre>{{editClient.remarks}}</pre>
               <span
                 class="buttonEdit"
                 v-if="updateClientList.remarks"
@@ -1586,10 +1439,7 @@
           </div>
         </div>
 
-        <div
-          class="rowFields mx-auto row"
-          v-if="editClient.client_detail != null"
-        >
+        <div class="rowFields mx-auto row" v-if="editClient.client_detail != null">
           <div class="col-lg-3">
             <label class>Wait for client confirmation:</label>
           </div>
@@ -1599,10 +1449,8 @@
                 class="p-switch p-fill"
                 color="success"
                 v-model="editClient.wfc"
-                @change="
-                  updateClientDetailsPerRow('wfc', editClient.wfc),
-                    (editPerRow.wfc = false)
-                "
+                @change="updateClientDetailsPerRow('wfc', editClient.wfc),
+              editPerRow.wfc = false"
               >
                 <i class="fas fa-check" v-show="editClient.wfc" />
                 <i class="fas fa-times" v-show="!editClient.wfc" />
@@ -1613,10 +1461,8 @@
               <i class="fas fa-times" v-show="!editClient.wfc" />
               <span
                 class="buttonEdit"
-                v-if="
-                  updateClientList.wfc &&
-                  editClient.client_detail.status != 'finished'
-                "
+                v-if="updateClientList.wfc &&
+              editClient.client_detail.status != 'finished'"
                 @click="editPerRow.wfc = true"
               >
                 <i class="fas fa-pen"></i> Edit
@@ -1659,14 +1505,12 @@
               type="text"
               class="form-control"
               v-model="latlng"
-              v-on:keyup.enter="
-                updateClientPerRow('coordinates', $event.target.value),
-                  (editPerRow.coordinates = false)
-              "
+              v-on:keyup.enter="updateClientPerRow('coordinates', $event.target.value),
+              editPerRow.coordinates = false"
               v-if="editPerRow.coordinates"
             />
             <span v-else>
-              {{ editClient.lat }}, {{ editClient.lng }}
+              {{editClient.lat}}, {{editClient.lng}}
               <span
                 class="buttonEdit"
                 v-if="updateClientList.coordinates"
@@ -1689,7 +1533,7 @@
           </div>-->
         </div>
 
-        <!-- <div class="rowFields mx-auto row">
+        <div class="rowFields mx-auto row">
           <div class="col-lg-1"></div>
           <div class="col-lg-10">
             <GmapMap
@@ -1712,109 +1556,62 @@
             </GmapMap>
           </div>
           <div class="col-lg-1"></div>
-        </div>-->
+        </div>
 
         <b-card
           id="remarks"
           align="center"
-          style="max-height: 100%; border: none; background: none"
+          style="max-height:100%;border:none;background:none"
           :body-text-variant="' elClr'"
         >
           <center>
-            <div style="width: 100%">
-              <div
-                style="
-                  width: 100%;
-                  float: left;
-                  font-size: 13px;
-                  font-weight: bold;
-                "
-              >
-                <label style="float: left">Remarks</label>
+            <div style="width:100%">
+              <div style="width:100%;float:left;font-size:13px;font-weight:bold">
+                <label style="float:left">Remarks</label>
               </div>
               <br />
-              <div
-                style="
-                  width: 100%;
-                  float: left;
-                  margin-top: 2px;
-                  margin-bottom: 12px;
-                  display: flex;
-                "
-              >
-                <div style="width: 80%; flex-grow: 1">
+              <div style="width:100%;float:left;margin-top:2px;margin-bottom:12px;display:flex;">
+                <div style="width:80%;flex-grow:1">
                   <b-form-textarea
                     id="textarea-small"
                     size="sm"
                     v-model.lazy="remarksText"
-                    style="width: 100%; height: 90%"
+                    style="width:100%;height:90%"
                     placeholder="Type remarks here. . ."
                   ></b-form-textarea>
                 </div>
-                <div
-                  style="
-                    width: 12%;
-                    height: 100%;
-                    flex-grow: 1;
-                    margin-left: 15px;
-                  "
-                >
+                <div style="width:12%;height:100%;flex-grow:1;margin-left:15px;">
                   <b-button
                     squared
                     variant="success"
                     @click="addRemarks_clicked"
-                    style="
-                      width: 100%;
-                      height: 32px;
-                      float: right;
-                      color: white;
-                    "
-                    >ADD REMARKS</b-button
-                  >
+                    style="width:100%;height:32px;float:right;color:white"
+                  >ADD REMARKS</b-button>
                 </div>
               </div>
               <br />
               <div
-                style="margin-top: 20px"
+                style="margin-top:20px;"
                 v-for="(remarks, index) in editClient.remarks_log"
                 :key="index"
-                v-show="remarks.form_type == 'client'"
+                v-show="remarks.form_type =='client'"
               >
-                <div id="title" style="display: flex; width: 100%">
+                <div id="title" style="display:flex;width:100%">
                   <label
-                    style="
-                      float: left;
-                      text-align: left;
-                      font-size: 12px;
-                      font-weight: bold;
-                      width: 70%;
-                    "
+                    style="float:left;text-align:left;font-size:12px;font-weight:bold;width:70%"
                   >
-                    <i
-                      class="fa fa-user-circle"
-                      aria-hidden="true"
-                      style="margin-right: 5px"
-                    ></i>
+                    <i class="fa fa-user-circle" aria-hidden="true" style="margin-right:5px"></i>
                     {{ remarks.user.name }}
                   </label>
 
                   <label
-                    style="
-                      float: right;
-                      text-align: right;
-                      font-size: 10px;
-                      width: 30%;
-                    "
-                    >{{ remarks.created_at }}</label
-                  >
+                    style="float:right;text-align:right;font-size:10px;width:30%"
+                  >{{ remarks.created_at }}</label>
                 </div>
 
                 <br />
-                <div
-                  id="body"
-                  style="display: flex; width: 100%; margin-top: -8px"
-                >
-                  <div style="width: 82%; margin-left: 5px" class="wrapper">
+                <div id="body" style="display:flex;width:100%; margin-top:-8px">
+                  <div style="width:82%;margin-left:5px;" class="wrapper">
                     <!-- <label
                           style="float:left;text-align:left;"
                           role="textarea"
@@ -1831,9 +1628,9 @@
                       no-resize
                     ></b-form-textarea>
                   </div>
-                  <div style="width: 18%">
+                  <div style="width:18%;">
                     <label
-                      style="float: right; cursor: pointer; color: blue"
+                      style="float:right;cursor: pointer;color:blue"
                       @click="remarks.commentVisibility = 'show'"
                       v-if="remarks.commentVisibility == 'hide'"
                     >
@@ -1841,7 +1638,7 @@
                       <i class="fas fa-caret-down"></i>
                     </label>
                     <label
-                      style="float: right; cursor: pointer; color: blue"
+                      style="float:right;cursor: pointer;color:blue"
                       @click="remarks.commentVisibility = 'hide'"
                       v-if="remarks.commentVisibility == 'show'"
                     >
@@ -1854,97 +1651,60 @@
                 <!-- comments display -->
 
                 <div
-                  style="
-                    margin-top: 0;
-                    background: none;
-                    width: 95%;
-                    float: right;
-                  "
+                  style="margin-top:0;background:none;width:95%;float:right"
                   v-for="reply in remarks.replies"
                   :key="reply.id"
                 >
-                  <div id="title" style="display: flex; width: 100%">
+                  <div id="title" style="display:flex;width:100%">
                     <label
-                      style="
-                        float: left;
-                        text-align: left;
-                        font-size: 12px;
-                        font-weight: bold;
-                        width: 70%;
-                      "
+                      style="float:left;text-align:left;font-size:12px;font-weight:bold;width:70%"
                     >
-                      <i
-                        class="fa fa-user-circle"
-                        aria-hidden="true"
-                        style="margin-right: 5px"
-                      ></i>
+                      <i class="fa fa-user-circle" aria-hidden="true" style="margin-right:5px"></i>
                       {{ reply.user.name }}
                     </label>
 
                     <label
-                      style="
-                        float: right;
-                        text-align: right;
-                        font-size: 10px;
-                        width: 30%;
-                      "
-                      >{{ reply.created_at }}</label
-                    >
+                      style="float:right;text-align:right;font-size:10px;width:30%"
+                    >{{ reply.created_at }}</label>
                   </div>
 
                   <br />
-                  <div
-                    id="body"
-                    style="display: flex; width: 95%; margin-top: -8px"
-                  >
-                    <label style="float: left; text-align: left">
-                      {{ reply.comments }}
+                  <div id="body" style="display:flex;width:95%; margin-top:-8px">
+                    <label style="float:left;text-align:left;">
+                      {{
+                      reply.comments
+                      }}
                     </label>
                   </div>
                 </div>
 
                 <!-- new comment -->
                 <div
-                  style="
-                    width: 90%;
-                    float: right;
-                    margin-top: 2px;
-                    margin-bottom: 12px;
-                    display: flex;
-                  "
+                  style="width:90%;float:right;margin-top:2px;margin-bottom:12px;display:flex;"
                   v-if="remarks.commentVisibility == 'show'"
                 >
-                  <div style="width: 80%; flex-grow: 1">
+                  <div style="width:80%;flex-grow:1">
                     <b-form-textarea
                       id="textarea - small"
                       size="sm"
                       v-model="commentsText[index]"
-                      style="width: 100%; height: 90%"
+                      style="width:100%;height:90%"
                       placeholder="Type comment here. . ."
                     ></b-form-textarea>
                   </div>
-                  <div
-                    style="
-                      width: 12%;
-                      height: 100%;
-                      flex-grow: 1;
-                      margin-left: 15px;
-                    "
-                  >
+                  <div style="width:12%;height:100%;flex-grow:1;margin-left:15px;">
                     <b-button
                       squared
                       variant="success"
                       @click="
-                        addComments_clicked(remarks.id, index, remarks.replies)
-                      "
-                      style="
-                        width: 100%;
-                        height: 32px;
-                        float: right;
-                        color: white;
-                      "
-                      >ADD COMMENT</b-button
-                    >
+                            addComments_clicked(
+                              remarks.id,
+                              index,
+                              remarks.replies
+                            )
+                          "
+                      style="width:100%;height:32px;float:right;color:white"
+                    >ADD COMMENT</b-button>
                   </div>
                 </div>
               </div>
@@ -1957,25 +1717,15 @@
           <b-button
             size="sm"
             variant="warning"
-            v-if="roles.account_management && !deletedAcc"
-            v-b-modal="'modalAddAttachment'"
-            >Attach File</b-button
-          >
-
-          <b-button
-            size="sm"
-            variant="warning"
-            v-if="roles.rm && editClient.date_activated != null && !deletedAcc"
+            v-if="roles.rm && !deletedAcc"
             v-b-modal="'modalChangeDateActivated'"
-            >Change Date Activated</b-button
-          >
+          >Change Date Activated</b-button>
           <b-button
             size="sm"
             variant="success"
             v-if="roles.update_client && editClient.re_email && !deletedAcc"
             @click="updateClient()"
-            >Update and Send(Email)</b-button
-          >
+          >Update and Send(Email)</b-button>
           <!-- <b-button
             size="sm"
             variant="success"
@@ -1987,8 +1737,7 @@
             variant="danger"
             v-if="roles.delete_client && !deletedAcc"
             @click="cancelClient()"
-            >Delete</b-button
-          >
+          >Delete</b-button>
           <!-- <b-button
             size="sm"
             variant="danger"
@@ -2000,7 +1749,7 @@
             size="sm"
             variant="danger"
             v-if="roles.delete_client"
-            :hidden="deletedAcc == false"
+            :hidden="deletedAcc==false"
             @click="retrieveClient()"
           >
             <i class="fas fa-sync-alt"></i>Retrieve
@@ -2032,8 +1781,7 @@
                 value="0"
                 name="isNew"
                 color="success-o"
-                >New</p-radio
-              >
+              >New</p-radio>
             </div>
             <div class="col-lg-2">
               <p-radio
@@ -2042,8 +1790,7 @@
                 value="1"
                 name="isNew"
                 color="success-o"
-                >Existing</p-radio
-              >
+              >Existing</p-radio>
             </div>
           </div>
         </div>
@@ -2126,9 +1873,10 @@
               v-model.lazy="client.name"
               v-validate="'required'"
             />
-            <small class="text-danger pull-left" v-show="errors.has('name')"
-              >Account name is required.</small
-            >
+            <small
+              class="text-danger pull-left"
+              v-show="errors.has('name')"
+            >Account name is required.</small>
           </div>
         </div>
         <!-- Owner's Name -->
@@ -2150,8 +1898,7 @@
             <small
               class="text-danger pull-left"
               v-show="errors.has('owner_name')"
-              >Owner's name is required.</small
-            >
+            >Owner's name is required.</small>
           </div>
         </div>
         <!-- business_type -->
@@ -2213,17 +1960,14 @@
               placeholder="Contact number"
               v-model="client.contact"
             />
-            <small class="text-danger pull-left" v-show="errors.has('contact')"
-              >contact is required and contains exactly 11 digits .</small
-            >
+            <small
+              class="text-danger pull-left"
+              v-show="errors.has('contact')"
+            >contact is required and contains exactly 11 digits .</small>
           </div>
         </div>
         <div v-if="client_contacts.length > 0">
-          <div
-            class="rowFields mx-auto row"
-            v-for="(item, index) in client_contacts"
-            :key="index"
-          >
+          <div class="rowFields mx-auto row" v-for="(item, index) in client_contacts" :key="index">
             <div class="col-lg-3">
               <b-button
                 @click="removeContactField(index)"
@@ -2238,7 +1982,7 @@
             <div class="col-lg-9">
               <input
                 type="text"
-                :name="'contact[' + index + ']'"
+                :name="'contact['  + index  + ']'"
                 class="form-control"
                 v-b-tooltip.hover
                 title="Input Cellphone number of the client
@@ -2248,9 +1992,8 @@
               />
               <small
                 class="text-danger pull-left"
-                v-show="errors.has('contact[' + index + ']')"
-                >contact is required and contains exactly 11 digits .</small
-              >
+                v-show="errors.has('contact['  + index  + ']')"
+              >contact is required and contains exactly 11 digits .</small>
             </div>
           </div>
         </div>
@@ -2284,8 +2027,7 @@
             <small
               class="text-danger pull-left"
               v-show="errors.has('Email_address')"
-              >Email address is required.</small
-            >
+            >Email address is required.</small>
           </div>
         </div>
         <div v-if="client_emailadresses.length > 0">
@@ -2308,7 +2050,7 @@
             <div class="col-lg-9">
               <input
                 type="email"
-                :name="'client_emailadresses[' + index + ']'"
+                :name="'client_emailadresses['  + index  + ']'"
                 class="form-control"
                 v-b-tooltip.hover
                 title="Input Email address (The system will use this email address to email the client)"
@@ -2318,9 +2060,8 @@
               />
               <small
                 class="text-danger pull-left"
-                v-show="errors.has('client_emailadresses[' + index + ']')"
-                >Email address is required.</small
-              >
+                v-show="errors.has('client_emailadresses['  + index  + ']')"
+              >Email address is required.</small>
             </div>
           </div>
         </div>
@@ -2340,13 +2081,14 @@
               v-model.lazy="client.location"
               v-validate="'required'"
             />
-            <small class="text-danger pull-left" v-show="errors.has('location')"
-              >Address is required.</small
-            >
+            <small
+              class="text-danger pull-left"
+              v-show="errors.has('location')"
+            >Address is required.</small>
           </div>
         </div>
         <!-- Date of Payment -->
-        <div class="rowFields mx-auto row" style="display: none">
+        <div class="rowFields mx-auto row" style="display:none">
           <div class="col-lg-3">
             <p class="textLabel">Date of Payment:</p>
           </div>
@@ -2464,8 +2206,7 @@
             <small
               class="text-danger pull-left"
               v-show="errors.has('foc_length')"
-              >Length is required and must be a number from 0 to 2000.</small
-            >
+            >Length is required and must be a number from 0 to 2000.</small>
           </div>
         </div>
         <!-- Cable Category -->
@@ -2484,9 +2225,10 @@
               placeholder="Select Cable Category"
               v-validate="'required'"
             ></model-list-select>
-            <small class="text-danger pull-left" v-show="errors.has('cableCat')"
-              >Cable Category is required.</small
-            >
+            <small
+              class="text-danger pull-left"
+              v-show="errors.has('cableCat')"
+            >Cable Category is required.</small>
           </div>
         </div>
         <!-- OTC -->
@@ -2523,8 +2265,7 @@
             <small
               class="text-danger pull-left"
               v-show="errors.has('termnummonths')"
-              >Term is required.</small
-            >
+            >Term is required.</small>
           </div>
         </div>
         <!-- Sales in charge -->
@@ -2546,8 +2287,7 @@
             <small
               class="text-danger pull-left"
               v-show="errors.has('saleincharge')"
-              >Sales in charge is required.</small
-            >
+            >Sales in charge is required.</small>
           </div>
         </div>
         <!-- Sales Agent -->
@@ -2585,8 +2325,7 @@
             <small
               class="text-danger pull-left"
               v-show="errors.has('techincharge')"
-              >Tech sales in charge is required.</small
-            >
+            >Tech sales in charge is required.</small>
           </div>
         </div>
         <!-- Branch -->
@@ -2606,9 +2345,7 @@
               v-validate="'required'"
               @input="addClientChangeBranch()"
             ></model-list-select>
-            <small class="text-danger pull-left" v-show="errors.has('branch')"
-              >Branch is required.</small
-            >
+            <small class="text-danger pull-left" v-show="errors.has('branch')">Branch is required.</small>
           </div>
         </div>
         <!-- Area -->
@@ -2769,11 +2506,7 @@
             <p class="textLabel">Waiting for client confirmation:</p>
           </div>
           <div class="col-lg-9">
-            <p-check
-              class="textLabel p-switch p-fill"
-              color="success"
-              v-model="client.wfc"
-            >
+            <p-check class="textLabel p-switch p-fill" color="success" v-model="client.wfc">
               <i class="fas fa-check" v-show="client.wfc" />
               <i class="fas fa-times" v-show="!client.wfc" />
             </p-check>
@@ -2805,7 +2538,7 @@
           </div>
         </div>
 
-        <!-- <div class="rowFields mx-auto row">
+        <div class="rowFields mx-auto row">
           <div class="col-lg-1"></div>
           <div class="col-lg-10">
             <GmapMap
@@ -2828,13 +2561,11 @@
             </GmapMap>
           </div>
           <div class="col-lg-1"></div>
-        </div>-->
+        </div>
 
         <!--Form-------->
         <template slot="modal-footer" slot-scope="{}">
-          <b-button size="sm" variant="success" @click="btnCreate()"
-            >Create</b-button
-          >
+          <b-button size="sm" variant="success" @click="btnCreate()">Create</b-button>
         </template>
       </b-modal>
       <!-- end modalAdd-------->
@@ -2876,18 +2607,8 @@
                 </div>
 
                 <template v-slot:cell(act)="row">
-                  <b-button
-                    variant="success"
-                    @click="openModalEditSched(row.item)"
-                    size="sm"
-                    >update</b-button
-                  >
-                  <b-button
-                    variant="danger"
-                    @click="deleteSched(row.item)"
-                    size="sm"
-                    >delete</b-button
-                  >
+                  <b-button variant="success" @click="openModalEditSched(row.item)" size="sm">update</b-button>
+                  <b-button variant="danger" @click="deleteSched(row.item)" size="sm">delete</b-button>
                 </template>
               </b-table>
             </div>
@@ -2918,11 +2639,7 @@
             <p class="textLabel">Client Detail ID:</p>
           </div>
           <div class="col-lg-9">
-            <input
-              type="text"
-              class="form-control"
-              v-model="editSched.client_detail_id"
-            />
+            <input type="text" class="form-control" v-model="editSched.client_detail_id" />
           </div>
         </div>
 
@@ -2931,11 +2648,7 @@
             <p class="textLabel">Ticket ID:</p>
           </div>
           <div class="col-lg-9">
-            <input
-              type="text"
-              class="form-control"
-              v-model="editSched.ticket_id"
-            />
+            <input type="text" class="form-control" v-model="editSched.ticket_id" />
           </div>
         </div>
 
@@ -2944,11 +2657,7 @@
             <p class="textLabel">Team ID:</p>
           </div>
           <div class="col-lg-9">
-            <input
-              type="text"
-              class="form-control"
-              v-model="editSched.team_id"
-            />
+            <input type="text" class="form-control" v-model="editSched.team_id" />
           </div>
         </div>
 
@@ -2970,19 +2679,13 @@
             <p class="textLabel">Status:</p>
           </div>
           <div class="col-lg-9">
-            <input
-              type="text"
-              class="form-control"
-              v-model="editSched.status"
-            />
+            <input type="text" class="form-control" v-model="editSched.status" />
           </div>
         </div>
 
         <!-- /form -->
         <template slot="modal-footer" slot-scope="{}">
-          <b-button size="sm" variant="success" @click="btnUpdateSched()"
-            >Update</b-button
-          >
+          <b-button size="sm" variant="success" @click="btnUpdateSched()">Update</b-button>
         </template>
       </b-modal>
       <!-- End modalEditSched -->
@@ -3107,7 +2810,9 @@
             </div>
           </div>
 
-          <div v-if="receive_pay_data.isPayOnline">
+          <div v-if="
+          receive_pay_data.isPayOnline
+        ">
             <div class="rowFields mx-auto row">
               <div class="col-lg-3">
                 <p class="textLabel">Bank Code:</p>
@@ -3131,7 +2836,7 @@
                 <p class="textLabel">Amount Pay:</p>
               </div>
               <div class="col-lg-9">
-                <div class="input-group">{{ receive_pay_data.amount }}</div>
+                <div class="input-group">{{receive_pay_data.amount}}</div>
               </div>
             </div>
           </div>
@@ -3206,8 +2911,7 @@
                   value="month"
                   name="billRange"
                   color="success-o"
-                  >To this Month</p-radio
-                >
+                >To this Month</p-radio>
 
                 <p-radio
                   class="textLabel p-default p-curve"
@@ -3216,8 +2920,7 @@
                   value="nextmonth"
                   name="billRange"
                   color="success-o"
-                  >To Next Month</p-radio
-                >
+                >To Next Month</p-radio>
 
                 <p-radio
                   class="textLabel p-default p-curve"
@@ -3226,8 +2929,7 @@
                   value="wholebill"
                   name="billRange"
                   color="success-o"
-                  >Whole term</p-radio
-                >
+                >Whole term</p-radio>
               </div>
             </div>
           </div>
@@ -3237,7 +2939,7 @@
               <span>Amount Due:</span>
             </div>
             <div class="col-lg-1">
-              <span>{{ this.total_to_pay }}</span>
+              <span>{{this.total_to_pay}}</span>
             </div>
           </div>
           <div class="rowFields mx-auto row">
@@ -3246,7 +2948,7 @@
               <span>Applied:</span>
             </div>
             <div class="col-lg-1">
-              <span>{{ this.amount_applied }}</span>
+              <span>{{this.amount_applied}}</span>
             </div>
           </div>
           <!-- table -->
@@ -3272,12 +2974,8 @@
           </div>
         </div>
         <template slot="modal-footer" slot-scope="{}">
-          <b-button size="sm" variant="success" @click="receivePayment_OK()"
-            >Save</b-button
-          >
-          <b-button size="sm" variant="success" @click="openModalPrintOR"
-            >Print Preview</b-button
-          >
+          <b-button size="sm" variant="success" @click="receivePayment_OK()">Save</b-button>
+          <b-button size="sm" variant="success" @click="openModalPrintOR">Print Preview</b-button>
         </template>
       </b-modal>
       <!-- End modalReceivePayment -->
@@ -3375,8 +3073,7 @@
                 value="month"
                 name="billRange"
                 color="success-o"
-                >To this Month</p-radio
-              >
+              >To this Month</p-radio>
 
               <p-radio
                 class="textLabel p-default p-curve"
@@ -3385,8 +3082,7 @@
                 value="nextmonth"
                 name="billRange"
                 color="success-o"
-                >To Next Month</p-radio
-              >
+              >To Next Month</p-radio>
 
               <p-radio
                 class="textLabel p-default p-curve"
@@ -3395,8 +3091,7 @@
                 value="wholebill"
                 name="billRange"
                 color="success-o"
-                >Whole term</p-radio
-              >
+              >Whole term</p-radio>
             </div>
           </div>
         </div>
@@ -3406,7 +3101,7 @@
             <span>Amount Due:</span>
           </div>
           <div class="col-lg-1">
-            <span>{{ this.total_to_pay }}</span>
+            <span>{{this.total_to_pay}}</span>
           </div>
         </div>
         <!-- table -->
@@ -3433,9 +3128,7 @@
         </div>
 
         <template slot="modal-footer" slot-scope="{}">
-          <b-button size="sm" variant="success" @click="wht_OK()"
-            >Save</b-button
-          >
+          <b-button size="sm" variant="success" @click="wht_OK()">Save</b-button>
         </template>
       </b-modal>
       <!-- End modalWHT -->
@@ -3465,15 +3158,15 @@
             <label>Package type:</label>
           </div>
           <div class="col-lg-3">
-            <label>{{ editClient.package.name }}</label>
+            <label>{{editClient.package.name}}</label>
             <br />
-            <label>{{ editClient.package.max_speed }}</label>
+            <label>{{editClient.package.max_speed}}</label>
             <br />
-            <label>{{ editClient.package.cir }}</label>
+            <label>{{editClient.package.cir}}</label>
             <br />
-            <label>{{ editClient.package.mrr }}</label>
+            <label>{{editClient.package.mrr}}</label>
             <br />
-            <label>{{ editClient.package_type.name }}</label>
+            <label>{{editClient.package_type.name}}</label>
           </div>
         </div>
         <!-- table -->
@@ -3540,12 +3233,8 @@
           <b-button
             size="sm"
             variant="success"
-            @click="
-              updateClientPerRow('package_code', ''),
-                (editPerRow.package = false)
-            "
-            >Save</b-button
-          >
+            @click="updateClientPerRow('package_code', ''), editPerRow.package = false"
+          >Save</b-button>
         </template>
       </b-modal>
       <!-- End modalUpdateBilling -->
@@ -3559,96 +3248,58 @@
         :body-text-variant="' elClr'"
         :footer-bg-variant="' elBG'"
         :footer-text-variant="' elClr'"
-        style="width: 50px"
+        style="width:50px"
       >
         <div v-on:click="changeColDisplay('colOldAccount')">
-          <p-check
-            class="checkboxStyle p-switch p-slim"
-            color="success"
-            v-model="colOldAccount"
-          ></p-check
-          >Old Account No.
+          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colOldAccount"></p-check>Old Account No.
+        </div>
+        <br />
+        <div v-on:click="changeColDisplay('colOLT')">
+          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colOLT"></p-check>OLT
+        </div>
+        <br />
+        <div v-on:click="changeColDisplay('colPON')">
+          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colPON"></p-check>PON
         </div>
         <br />
         <div v-on:click="changeColDisplay('colModem')">
-          <p-check
-            class="checkboxStyle p-switch p-slim"
-            color="success"
-            v-model="colModem"
-          ></p-check
-          >Modem
+          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colModem"></p-check>Modem
         </div>
         <br />
         <div v-on:click="changeColDisplay('colMacAdd')">
-          <p-check
-            class="checkboxStyle p-switch p-slim"
-            color="success"
-            v-model="colMacAdd"
-          ></p-check
-          >Mac add.
+          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colMacAdd"></p-check>Mac add.
+        </div>
+        <br />
+        <div v-on:click="changeColDisplay('colVlan')">
+          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colVlan"></p-check>VLAN
         </div>
         <br />
         <div v-on:click="changeColDisplay('colIpAssigned')">
-          <p-check
-            class="checkboxStyle p-switch p-slim"
-            color="success"
-            v-model="colIpAssigned"
-          ></p-check
-          >Ip assigned
+          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colIpAssigned"></p-check>Ip assigned
         </div>
         <br />
         <div v-on:click="changeColDisplay('colDateAssigned')">
-          <p-check
-            class="checkboxStyle p-switch p-slim"
-            color="success"
-            v-model="colDateAssigned"
-          ></p-check
-          >Date assigned
+          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colDateAssigned"></p-check>Date assigned
         </div>
         <br />
         <div v-on:click="changeColDisplay('colPackage')">
-          <p-check
-            class="checkboxStyle p-switch p-slim"
-            color="success"
-            v-model="colPackage"
-          ></p-check
-          >Package
+          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colPackage"></p-check>Package
         </div>
         <br />
         <div v-on:click="changeColDisplay('colProtocol')">
-          <p-check
-            class="checkboxStyle p-switch p-slim"
-            color="success"
-            v-model="colProtocol"
-          ></p-check
-          >Protocol
+          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colProtocol"></p-check>Protocol
         </div>
         <br />
         <div v-on:click="changeColDisplay('colRegion')">
-          <p-check
-            class="checkboxStyle p-switch p-slim"
-            color="success"
-            v-model="colRegion"
-          ></p-check
-          >Region
+          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colRegion"></p-check>Region
         </div>
         <br />
         <div v-on:click="changeColDisplay('colSales')">
-          <p-check
-            class="checkboxStyle p-switch p-slim"
-            color="success"
-            v-model="colSales"
-          ></p-check
-          >Sales
+          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colSales"></p-check>Sales
         </div>
         <br />
         <div v-on:click="changeColDisplay('colSalesAgent')">
-          <p-check
-            class="checkboxStyle p-switch p-slim"
-            color="success"
-            v-model="colSalesAgent"
-          ></p-check
-          >Sales Agent
+          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colSalesAgent"></p-check>Sales Agent
         </div>
         <br />
 
@@ -3657,11 +3308,7 @@
 
       <modal_print_or v-bind:data="print_or_data"></modal_print_or>
       <modal_client_filter v-bind:data="'table'"></modal_client_filter>
-      <client_modals
-        v-bind:data="cModalData"
-        v-bind:packages="packages"
-        v-bind:client="editClient"
-      ></client_modals>
+      <client_modals v-bind:data="cModalData" v-bind:packages="packages" v-bind:client="editClient"></client_modals>
       <modal_fsr v-bind:data="item_row_click"></modal_fsr>
     </div>
   </div>
@@ -3696,13 +3343,13 @@ export default {
     modal_print_or: modal_print_or,
     modal_client_filter: modal_client_filter,
     client_modals: client_modals,
-    modal_fsr: modal_fsr,
+    modal_fsr: modal_fsr
   },
   data() {
     return {
       cModalData: {
         field: 0,
-        items: [],
+        items: []
       },
       editBranchSelected: {},
       areaSelected: {},
@@ -3712,6 +3359,7 @@ export default {
       fields: [],
       items: [],
       items_copy: [],
+      ponItems: "",
       tblFilter: null,
       tblFilter_copy: null,
       totalRows: "",
@@ -3727,7 +3375,7 @@ export default {
         { key: "team_id", sortable: true },
         { key: "target_date", sortable: true },
         { key: "type", sortable: true },
-        { key: "status", sortable: true },
+        { key: "status", sortable: true }
       ],
       sched_items: [],
       editSched: {
@@ -3737,7 +3385,7 @@ export default {
         team_id: "",
         target_date: "",
         type: "",
-        status: "",
+        status: ""
       },
       colOldAccount: false,
       colAdd: false,
@@ -3757,48 +3405,48 @@ export default {
       cableCategoryOption: [
         { id: "Drop Fiber", name: "Drop Fiber" },
         { id: "Hard Fiber", name: "Hard Fiber" },
-        { id: "UTP", name: "Unshielded twisted pair (UTP)" },
+        { id: "UTP", name: "Unshielded twisted pair (UTP)" }
       ],
       otcOption: [
         { id: "Paid", name: "Paid" },
-        { id: "", name: "Not Paid" },
+        { id: "", name: "Not Paid" }
       ],
       editClient: {
         package: {
           name: "",
           max_speed: "",
           cir: "",
-          mrr: "",
+          mrr: ""
         },
         remarks: "",
         package_type: {
-          name: "",
+          name: ""
         },
         sales: {
           user: {
-            name: "",
-          },
+            name: ""
+          }
         },
         sales_agent: {
-          name: "",
+          name: ""
         },
         engineer: {
-          name: "",
+          name: ""
         },
         _area: {
-          name: "",
+          name: ""
         },
         branch: {
           name: "",
           area: {
             name: "",
             region: {
-              name: "",
-            },
-          },
+              name: ""
+            }
+          }
         },
         bucket: {
-          IP: "",
+          IP: ""
         },
         staggered: 0,
         re_email: false,
@@ -3825,7 +3473,7 @@ export default {
         OTCPay: 0,
         amount_pay: 0,
         cashBond: 0,
-        balance: 0,
+        balance: 0
       },
       client: {
         isNew: "0",
@@ -3854,31 +3502,31 @@ export default {
         package_type_id: "",
         wfc: false,
         email_note: "",
-        branch: {},
+        branch: {}
       },
       engineer: {
         id: "",
         name: "",
-        position: "",
+        position: ""
       },
       salesInCharge: {
         id: "",
         name: "",
-        email: "",
+        email: ""
       },
       packAdd: {
         package_id: "",
         package_type_id: "",
         max_speed: "",
         cir: "",
-        mrr: 0,
+        mrr: 0
       },
       packEdit: {
         name: "",
         package_id: "",
         package_type_id: "",
         max_speed: "",
-        cir: "",
+        cir: ""
       },
       updateClientList: {
         re_email: false,
@@ -3897,20 +3545,24 @@ export default {
         modem: false,
         modem_mac_address: false,
         branch: false,
+        olt: false,
+        pon: false,
+        onu: false,
+        vlan: false,
         ip: false,
         date_assign: false,
         status: false,
-        wfc: false,
+        wfc: false
       },
       protocolOption: [
         { id: "Internet", name: "Internet" },
-        { id: "Intranet", name: "Intranet" },
+        { id: "Intranet", name: "Intranet" }
       ],
       statusOption: [
         { name: "Active" },
         { name: "Disconnected" },
         { name: "Temp Discon" },
-        { name: "Cancelled" },
+        { name: "Cancelled" }
       ],
       sales_agent: [],
       packages: [],
@@ -3924,11 +3576,11 @@ export default {
       client_emailadresses: [],
       olts: {
         name: "",
-        ip: "",
+        ip: ""
       },
       AppliedDateoptions: {
         format: "YYYY-MM-DD",
-        useCurrent: false,
+        useCurrent: false
       },
       totalNearToExpire: 0,
       totalExpired: 0,
@@ -3940,56 +3592,56 @@ export default {
       selectedEmails: [
         {
           email: "cnc@dctechmicro.com",
-          name: "Credit and Collection",
+          name: "Credit and Collection"
         },
         {
           email: "amgt@dctechmicro.com",
-          name: "Account Management",
+          name: "Account Management"
         },
         {
           email: "r11-tech@dctechmicro.com",
-          name: "Region 11 Technical ",
-        },
+          name: "Region 11 Technical "
+        }
       ],
       selectedEmailsCC: [
         {
           email: "srevilla@dctechmicro.com",
-          name: "Sandra Revilla",
-        },
+          name: "Sandra Revilla"
+        }
       ],
       selectedEmails_DOP: [
         {
           email: "amgt@dctechmicro.com",
-          name: "Account Management",
-        },
+          name: "Account Management"
+        }
       ],
       selectedEmailsCC_DOP: [
         {
           email: "r11-cnc@dctechmicro.com",
-          name: "R11 Credit and Collection",
-        },
+          name: "R11 Credit and Collection"
+        }
       ],
       Emails: [],
       map: null,
       coordinates: {
         lat: 0,
-        lng: 0,
+        lng: 0
       },
       markers: [
         {
           position: {
             lat: 0,
-            lng: 0,
-          },
-        },
+            lng: 0
+          }
+        }
       ],
       markers_edit: [
         {
           position: {
             lat: 0,
-            lng: 0,
-          },
-        },
+            lng: 0
+          }
+        }
       ],
       latitude: 0,
       longitude: 0,
@@ -3998,41 +3650,41 @@ export default {
       searchby_list: [
         {
           name: "Old Account No",
-          id: "account_no",
+          id: "account_no"
         },
         {
           name: "New Account No",
-          id: "acc_no",
+          id: "acc_no"
         },
         {
           name: "Account Name",
-          id: "name",
+          id: "name"
         },
         {
           name: "Address",
-          id: "location",
+          id: "location"
         },
         {
           name: "Contact",
-          id: "contact",
+          id: "contact"
         },
         {
           name: "Package Type",
-          id: "package_type_id",
+          id: "package_type_id"
         },
         {
           name: "Status",
-          id: "status",
+          id: "status"
         },
         {
           name: "Date Activated",
-          id: "date_activated",
+          id: "date_activated"
         },
 
         {
           name: "ID",
-          id: "id",
-        },
+          id: "id"
+        }
       ],
       searchby: "name",
       isLoading: false,
@@ -4043,11 +3695,11 @@ export default {
         id: 0,
         code: "",
         amount: 0,
-        date: "",
+        date: ""
       },
       pay_method_Selected: {
         id: "",
-        name: "",
+        name: ""
       },
       receive_pay_data: {
         client_id: "",
@@ -4058,7 +3710,7 @@ export default {
         date: "",
         or_number: "",
         remarks: "",
-        isPayOnline: false,
+        isPayOnline: false
       },
       withVat: false,
       rp_fields: [
@@ -4067,7 +3719,7 @@ export default {
         { key: "description" },
         { key: "price", label: "ORIG AMT" },
         { key: "balance", label: "AMT DUE." },
-        { key: "payment", label: "PAYMENT" },
+        { key: "payment", label: "PAYMENT" }
       ],
       total_to_pay: 0,
       amount_applied: 0,
@@ -4084,7 +3736,7 @@ export default {
         totalSales: 0,
         wht: 0,
         vatable: 0,
-        vat: 0,
+        vat: 0
       },
       bill_modi_fields: [
         { key: "selected" },
@@ -4093,7 +3745,7 @@ export default {
         { key: "price", label: "Amount" },
         { key: "balance", label: "Balance" },
         { key: "price_update", label: "Amount Update" },
-        { key: "balance_update", label: "Balance Update" },
+        { key: "balance_update", label: "Balance Update" }
       ],
       bill_modi_items: [],
       bill_modi_tblisBusy: false,
@@ -4118,7 +3770,7 @@ export default {
         status: false,
         remarks: false,
         wfc: false,
-        coordinates: false,
+        coordinates: false
       },
       roles: [],
       filterIn: null,
@@ -4129,24 +3781,24 @@ export default {
       history_fields: [
         {
           key: "id",
-          label: "ID",
+          label: "ID"
         },
         {
           key: "status",
-          label: "Status",
+          label: "Status"
         },
         {
           key: "date_changed",
-          label: "Date Changed",
-        },
+          label: "Date Changed"
+        }
       ],
       history: [],
       billings_to_export: [],
       item_row_click: {
         user: {
-          email: "",
-        },
-      },
+          email: ""
+        }
+      }
     };
   },
   beforeCreate() {
@@ -4163,29 +3815,29 @@ export default {
     if (this.roles.admin) {
       var temp = {
         key: "sched",
-        label: "Schedule",
+        label: "Schedule"
       };
       this.fields.push(temp);
 
       var temp = {
         key: "id",
         label: "ID",
-        sortable: true,
+        sortable: true
       };
       this.fields.push(temp);
     }
 
     this.$getLocation({})
-      .then((coordinates) => {
+      .then(coordinates => {
         this.coordinates = coordinates;
         this.markers[0].position = coordinates;
         this.client.lat = coordinates.lat;
         this.client.lng = coordinates.lng;
       })
-      .catch((error) => {
+      .catch(error => {
         var coor = {
           lat: 7.040641,
-          lng: 125.577053,
+          lng: 125.577053
         };
         this.coordinates = coor;
         this.markers[0].position = coor;
@@ -4211,18 +3863,18 @@ export default {
   },
   updated() {},
   computed: {
-    // mapCoordinates() {
-    //   if (!this.map) {
-    //     return {
-    //       lat: 0,
-    //       lng: 0
-    //     };
-    //   }
-    //   return {
-    //     lat: this.map.getCenter().lat(),
-    //     lng: this.map.getCenter().lng()
-    //   };
-    // },
+    mapCoordinates() {
+      if (!this.map) {
+        return {
+          lat: 0,
+          lng: 0
+        };
+      }
+      return {
+        lat: this.map.getCenter().lat(),
+        lng: this.map.getCenter().lng()
+      };
+    },
     OTCPay() {
       this.editClient.OTCPay =
         this.editClient.amount_pay - this.editClient.cashBond;
@@ -4248,15 +3900,15 @@ export default {
         this.balance / this.editClient.numMonths
       );
       return this.editClient.permonth;
-    },
+    }
   },
   methods: {
     load() {
       this.deletedAcc = false;
 
       this.$root.$emit("clearNav");
-      this.$nextTick(function () {
-        setTimeout(function () {
+      this.$nextTick(function() {
+        setTimeout(function() {
           document.getElementById("accountsMenu").className =
             "customeDropDown dropdown-menu";
 
@@ -4267,8 +3919,7 @@ export default {
 
       this.$http
         .get("api/Client/subIndex/" + this.user.region_id)
-        .then(function (response) {
-          // console.log(response.body);
+        .then(function(response) {
           this.items = response.body.items;
           this.billings_to_export = response.body.billings;
           this.items_copy = this.items;
@@ -4276,32 +3927,32 @@ export default {
           this.$root.$emit("pageLoaded");
         });
 
-      this.$http.get("api/getEmails").then(function (response) {
+      this.$http.get("api/getEmails").then(function(response) {
         this.Emails = response.body;
       });
 
-      this.$http.get("api/BusinessType").then((response) => {
+      this.$http.get("api/BusinessType").then(response => {
         this.business_types = response.body;
       });
-      this.$http.get("api/Branch").then((response) => {
+      this.$http.get("api/Branch").then(response => {
         this.branches = response.body;
       });
 
-      this.$http.get("api/Paymethod").then((response) => {
+      this.$http.get("api/Paymethod").then(response => {
         this.pay_method = response.body;
       });
 
-      this.$http.get("api/BankCode").then((response) => {
+      this.$http.get("api/BankCode").then(response => {
         this.bank_code = response.body;
       });
 
-      this.$http.get("api/Bucket").then((response) => {
+      this.$http.get("api/Bucket").then(response => {
         this.buckets = response.body;
       });
-      this.$http.get("api/Package").then(function (response) {
+      this.$http.get("api/Package").then(function(response) {
         this.packages = response.body;
       });
-      this.$http.get("api/getStatusHistory").then(function (response) {
+      this.$http.get("api/getStatusHistory").then(function(response) {
         this.history = response.body;
       });
 
@@ -4312,6 +3963,7 @@ export default {
     getBankCode(code) {
       return `${code.code} - ${code.date} - ${code.amount}`;
     },
+
     onChangeBankCode() {
       this.editClient.amount_pay = this.bank_code_selected.amount;
       this.editClient.banking_payment_code_id = this.bank_code_selected.id;
@@ -4337,8 +3989,7 @@ export default {
     onChangeBankCode_RP() {
       this.receive_pay_data.date = this.bank_code_selected.date;
       this.receive_pay_data.amount = this.bank_code_selected.amount;
-      this.receive_pay_data.banking_payment_code_id =
-        this.bank_code_selected.id;
+      this.receive_pay_data.banking_payment_code_id = this.bank_code_selected.id;
       this.calculateToPay();
     },
     updateCounts(data) {
@@ -4376,7 +4027,7 @@ export default {
         package_id: "",
         package_type_id: "",
         max_speed: "",
-        cir: "",
+        cir: ""
       };
 
       item.modem_id = parseInt(item.modem_id);
@@ -4390,12 +4041,13 @@ export default {
           this.packEdit.cir = "(Package assigned has no cir)";
       } else {
         item.package = {
-          name: "",
+          name: ""
         };
       }
 
       this.setEditClient(item);
 
+      this.ponItems = "";
       if (item.lat != null) {
         this.markers_edit[0].position.lat = parseFloat(item.lat);
         this.markers_edit[0].position.lng = parseFloat(item.lng);
@@ -4403,18 +4055,21 @@ export default {
         this.lnglat = this.editClient.lng + "," + this.editClient.lat;
       }
 
-      if (!this.roles.admin) {
+      if (this.roles.admin) {
         if (this.roles.helpdesk) {
           this.updateClientList.location = true;
           this.updateClientList.modem = true;
           this.updateClientList.modem_mac_address = true;
           this.updateClientList.package = true;
+          this.updateClientList.olt = true;
+          this.updateClientList.pon = true;
+          this.updateClientList.onu = true;
+          this.updateClientList.vlan = true;
           this.updateClientList.subscription = true;
           this.updateClientList.ip = true;
           this.updateClientList.date_assign = true;
           this.updateClientList.status = true;
           this.updateClientList.branch = true;
-          this.updateClientList.coordinates = true;
         }
         if (this.roles.accounting) {
           this.updateClientList.account_no = true;
@@ -4462,6 +4117,7 @@ export default {
             remarks: true,
             coordinates: true,
             wfc: true,
+            coordinates: true
           };
         }
       } else {
@@ -4489,24 +4145,25 @@ export default {
           remarks: true,
           coordinates: true,
           wfc: true,
-          coordinates: true,
+          coordinates: true
         };
       }
+      this.onChangeOLT();
       this.selectedEmails = [];
 
       this.selectedEmails.push({
         email: "cnc@dctechmicro.com",
-        name: "Credit and Collection",
+        name: "Credit and Collection"
       });
 
       this.selectedEmails.push({
         email: "amgt@dctechmicro.com",
-        name: "Account Management",
+        name: "Account Management"
       });
 
       this.selectedEmails.push({
         email: item.sales.user.email,
-        name: item.sales.user.name,
+        name: item.sales.user.name
       });
 
       this.$bvModal.show("modalEdit");
@@ -4516,6 +4173,8 @@ export default {
       if (item.sales_agent == null) item.sales_agent = {};
 
       this.editClient = item;
+      this.editClient.olt_id = item.olt.id;
+      this.editClient.pon_id = item.pon1.id;
       this.editClient.rm_remarks = "";
       if (item.sales != null) this.editClient._sales = item.sales;
       else this.editClient._sales = {};
@@ -4548,7 +4207,7 @@ export default {
       this.bill_modi_tblisBusy = true;
       this.$http
         .post("api/Billing/to_pay/" + this.editClient.id + "/wholebill")
-        .then((response) => {
+        .then(response => {
           var temp = response.body;
           temp.forEach((item, index) => {
             var datenow = new Date();
@@ -4562,19 +4221,19 @@ export default {
           this.bill_modi_items = temp;
           this.bill_modi_tblisBusy = false;
         })
-        .catch((response) => {
+        .catch(response => {
           console.log(response.body);
           swal({
             title: "Error",
             text: response.body.error + " " + response.body.message,
             icon: "error",
-            dangerMode: true,
+            dangerMode: true
           });
           this.bill_modi_tblisBusy = false;
         });
     },
     btnCreate() {
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then(result => {
         if (result) {
           if (this.client.package_id != null) {
             if (this.client.salesInCharge_email != null) {
@@ -4584,8 +4243,8 @@ export default {
                   text: "",
                   icon: "warning",
                   buttons: ["No", "Yes"],
-                  dangerMode: true,
-                }).then((update) => {
+                  dangerMode: true
+                }).then(update => {
                   if (update) {
                     this.tblisBusy = true;
                     this.$root.$emit("pageLoading");
@@ -4594,7 +4253,7 @@ export default {
                     this.client.user_email = this.user.email;
                     this.selectedEmails.push({
                       email: this.client.salesInCharge_email,
-                      name: this.client.salesInCharge_name,
+                      name: this.client.salesInCharge_name
                     });
 
                     // this.client.sendTo = this.selectedEmails;
@@ -4621,12 +4280,12 @@ export default {
                       this.client.contract = this.formatDate(new Date());
                     this.$http
                       .post("api/Client", this.client)
-                      .then((response) => {
+                      .then(response => {
                         swal("Created", "", "success");
                         this.salesInCharge = {
                           id: "",
                           name: "",
-                          email: "",
+                          email: ""
                         };
                         this.client = {
                           isNew: "0",
@@ -4655,16 +4314,16 @@ export default {
                           package_type_id: "",
                           wfc: false,
                           email_note: "",
-                          branch: {},
+                          branch: {}
                         };
                         this.engineer = {
                           id: "",
                           name: "",
-                          position: "",
+                          position: ""
                         };
                         this.packAdd = {
                           package_id: "",
-                          package_type_id: "",
+                          package_type_id: ""
                         };
                         this.items = response.body.items;
                         this.totalRows = response.body.items.length;
@@ -4674,13 +4333,13 @@ export default {
 
                         this.updateCounts(response.body);
                       })
-                      .catch((response) => {
+                      .catch(response => {
                         console.log(response);
                         swal({
                           title: response.body.error,
                           text: "",
                           icon: "error",
-                          dangerMode: true,
+                          dangerMode: true
                         });
                         this.tblisBusy = false;
                         this.$root.$emit("pageLoaded");
@@ -4702,15 +4361,15 @@ export default {
     updateClient() {
       console.log(this.editClient);
 
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then(result => {
         if (result) {
           swal({
             title: "Are you sure?",
             text: "",
             icon: "warning",
             buttons: ["No", "Yes"],
-            dangerMode: true,
-          }).then((update) => {
+            dangerMode: true
+          }).then(update => {
             if (update) {
               this.$root.$emit("pageLoading");
               this.editClient.user_region_id = this.user.region_id;
@@ -4721,8 +4380,7 @@ export default {
               this.editClient.sendTo = this.selectedEmails;
               this.editClient.CCTO = this.selectedEmailsCC;
 
-              this.editClient.salesInCharge_name =
-                this.editClient.sales.user.name;
+              this.editClient.salesInCharge_name = this.editClient.sales.user.name;
               this.editClient.packagetype = this.editClient.package_type.name;
               this.editClient.packCode = this.editClient.package.name;
               this.editClient.packSpeed = this.editClient.package.max_speed;
@@ -4734,7 +4392,7 @@ export default {
 
               this.$http
                 .put("api/Client/" + this.editClient.id, this.editClient)
-                .then((response) => {
+                .then(response => {
                   //this.items = response.body.items; comment dyud dapat ni siya
                   console.log(response.body);
 
@@ -4743,13 +4401,13 @@ export default {
                   this.$bvModal.hide("modalEdit");
                   this.$root.$emit("pageLoaded");
                 })
-                .catch((response) => {
+                .catch(response => {
                   console.log(response.body);
                   swal({
                     title: response.body.error,
                     text: "",
                     icon: "error",
-                    dangerMode: true,
+                    dangerMode: true
                   });
                   this.$root.$emit("pageLoaded");
                 });
@@ -4767,8 +4425,8 @@ export default {
           text: "",
           icon: "warning",
           buttons: ["No", "Yes"],
-          dangerMode: true,
-        }).then((willDelete) => {
+          dangerMode: true
+        }).then(willDelete => {
           if (willDelete) {
             this.tblisBusy = true;
             this.$root.$emit("pageLoading");
@@ -4780,11 +4438,11 @@ export default {
               filterIn: this.filterIn,
               cbFilter: this.cbFilter,
               searchby: this.searchby,
-              tblFilter: this.tblFilter_copy,
+              tblFilter: this.tblFilter_copy
             };
             this.$http
               .post("api/Client/destroy1", data)
-              .then((response) => {
+              .then(response => {
                 console.log(response.body);
                 this.$bvModal.hide("modalEdit");
 
@@ -4795,13 +4453,13 @@ export default {
                 this.tblisBusy = false;
                 this.$root.$emit("pageLoaded");
               })
-              .catch((response) => {
+              .catch(response => {
                 console.log(response.body);
                 swal({
                   title: response.body.error,
                   text: "",
                   icon: "error",
-                  dangerMode: true,
+                  dangerMode: true
                 });
                 this.tblisBusy = false;
                 this.$root.$emit("pageLoaded");
@@ -4814,7 +4472,7 @@ export default {
           text: "You are not allow to delete a client",
           icon: "warning",
           buttons: true,
-          dangerMode: true,
+          dangerMode: true
         });
       }
     },
@@ -4824,16 +4482,16 @@ export default {
       this.setEditClient(item);
       this.selectedEmails_DOP.push({
         email: "amgt@dctechmicro.com",
-        name: "Account Management",
+        name: "Account Management"
       });
 
       this.selectedEmails_DOP.push({
         email: item.sales.user.email,
-        name: item.sales.user.name,
+        name: item.sales.user.name
       });
       this.selectedEmails_DOP.push({
         email: item.region.user.email,
-        name: item.region.user.name,
+        name: item.region.user.name
       });
       if (item.OTC == null) item.OTC = 0;
       if (item.package == null) item.package = {};
@@ -4851,7 +4509,7 @@ export default {
         item.fp = item.OTC + item.package.mrr;
       }
 
-      this.$http.get("api/BankCode").then((response) => {
+      this.$http.get("api/BankCode").then(response => {
         this.bank_code = response.body;
       });
       this.$bvModal.show("modalDOP");
@@ -4871,7 +4529,7 @@ export default {
         wht: 0,
         vatable: 0,
         vat: 0,
-        date: null,
+        date: null
       };
 
       this.billRangeChange();
@@ -4920,8 +4578,8 @@ export default {
           text: "",
           icon: "warning",
           buttons: ["No", "Yes"],
-          dangerMode: true,
-        }).then((update) => {
+          dangerMode: true
+        }).then(update => {
           if (update) {
             this.$root.$emit("pageLoading");
             this.editClient.user_region_id = this.user.region_id;
@@ -4933,20 +4591,20 @@ export default {
             this.editClient.CCTO = this.selectedEmailsCC_DOP;
             this.$http
               .post("api/Client/updateDOP", this.editClient)
-              .then((response) => {
+              .then(response => {
                 this.items = response.body.items; //comment dyud dapat ni siya
                 this.totalNoDOP--;
                 swal("Updated", "", "success");
                 this.$bvModal.hide("modalDOP");
                 this.$root.$emit("pageLoaded");
               })
-              .catch((response) => {
+              .catch(response => {
                 console.log(response.body);
                 swal({
                   title: response.body.error,
                   text: "",
                   icon: "error",
-                  dangerMode: true,
+                  dangerMode: true
                 });
                 this.$root.$emit("pageLoaded");
               });
@@ -4964,8 +4622,8 @@ export default {
         confirmButtonText: '<i class="fa fa-thumbs-up"></i>',
         confirmButtonAriaLabel: "Thumbs up, great!",
         cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
-        cancelButtonAriaLabel: "Thumbs down",
-      }).then((update) => {
+        cancelButtonAriaLabel: "Thumbs down"
+      }).then(update => {
         if (update.value) {
           Swal2.fire({
             title: "<strong>do you want to send email?</strong>",
@@ -4977,8 +4635,8 @@ export default {
             confirmButtonText: '<i class="fa fa-thumbs-up"></i>',
             confirmButtonAriaLabel: "Thumbs up, great!",
             cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: "Thumbs down",
-          }).then((update) => {
+            cancelButtonAriaLabel: "Thumbs down"
+          }).then(update => {
             if (update.value) {
               item.sendEmail = true;
             } else {
@@ -4994,24 +4652,24 @@ export default {
             item.sendTo = [
               {
                 email: "cnc@dctechmicro.com",
-                name: "Credits and Collection",
-              },
+                name: "Credits and Collection"
+              }
             ];
 
             item.CCTO = [
               {
                 email: this.user.email,
-                name: this.user.name,
+                name: this.user.name
               },
               {
                 email: item.sales.user.email,
-                name: item.sales.user.name,
-              },
+                name: item.sales.user.name
+              }
             ];
 
             this.$http
               .post("api/Client/updateContract", item)
-              .then((response) => {
+              .then(response => {
                 this.items = response.body.items;
                 this.totalNoContract--;
                 this.$bvModal.hide("modalEdit");
@@ -5033,8 +4691,8 @@ export default {
         confirmButtonText: '<i class="fa fa-thumbs-up"></i>',
         confirmButtonAriaLabel: "Thumbs up, great!",
         cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
-        cancelButtonAriaLabel: "Thumbs down",
-      }).then((update) => {
+        cancelButtonAriaLabel: "Thumbs down"
+      }).then(update => {
         if (update.value) {
           this.$root.$emit("pageLoading");
           item.user_region_id = this.user.region_id;
@@ -5043,7 +4701,7 @@ export default {
 
           this.$http
             .post("api/Client/updateSubscription", item)
-            .then((response) => {
+            .then(response => {
               this.items = response.body.items;
               this.totalWFS--;
               this.$bvModal.hide("modalEdit");
@@ -5062,7 +4720,7 @@ export default {
     openModalSched(item) {
       this.sched_items = [];
       this.$bvModal.show("modalManageSched");
-      this.$http.post("api/getSched", item).then((response) => {
+      this.$http.post("api/getSched", item).then(response => {
         this.sched_items = response.body.installation;
         this.sched_items = this.sched_items.concat(response.body.ticket);
       });
@@ -5074,7 +4732,7 @@ export default {
     openModalPrintOR() {
       const options = {
         minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
+        maximumFractionDigits: 2
       };
 
       this.print_or_data.totalSales = this.amount_applied;
@@ -5112,10 +4770,10 @@ export default {
         text: "",
         icon: "warning",
         buttons: ["No", "Yes"],
-        dangerMode: true,
-      }).then((willDelete) => {
+        dangerMode: true
+      }).then(willDelete => {
         if (willDelete) {
-          this.$http.delete("api/Schedule/" + item.id).then((response) => {
+          this.$http.delete("api/Schedule/" + item.id).then(response => {
             this.$bvModal.hide("modalManageSched");
             swal("Deleted", "", "success");
           });
@@ -5128,20 +4786,36 @@ export default {
         text: "",
         icon: "warning",
         buttons: ["No", "Yes"],
-        dangerMode: true,
-      }).then((update) => {
+        dangerMode: true
+      }).then(update => {
         if (update) {
           this.$http
             .put("api/Schedule/" + this.editSched.id, this.editSched)
-            .then((response) => {
+            .then(response => {
               swal("Updated", "", "success");
               this.$bvModal.hide("modalManageSched");
             });
         }
       });
     },
+    getOLTDesc(olt) {
+      return `${olt.name} - ${olt.ip}`;
+    },
     getBucketDesc(bucket) {
       return `${bucket.name} - ${bucket.IP}`;
+    },
+    getPonDesc(item) {
+      return `PON:${item.pon} - Area:${item.area}`;
+    },
+    onChangeOLT() {
+      //
+      if (this.editClient.olt_id != null) this.loadPONS();
+      else this.ponItems = "";
+    },
+    loadPONS() {
+      this.$http.get("api/pon/" + this.editClient.olt_id).then(response => {
+        this.ponItems = response.body;
+      });
     },
     onChangeAddclient() {
       this.client.package_id = this.packAdd.id;
@@ -5171,7 +4845,7 @@ export default {
     onDateSelected(daterange) {
       this.tblisBusy = true;
       daterange.region_id = this.user.region_id;
-      this.$http.post("api/Client/filterByDate", daterange).then((response) => {
+      this.$http.post("api/Client/filterByDate", daterange).then(response => {
         this.items = response.body.items;
         this.billings_to_export = response.body.billings;
         this.updateCounts(response.body);
@@ -5187,17 +4861,17 @@ export default {
         {
           key: "location",
           label: "Address",
-          formatter: (value) => {
+          formatter: value => {
             if (value.length > 40) return value.slice(0, 40) + "...";
             else return value;
           },
-          sortable: true,
+          sortable: true
         },
         { key: "contact", sortable: true },
         { key: "email_add", label: "Email", sortable: true },
         { key: "package_type.name", label: "Type", sortable: true },
         { key: "package.mrr", label: "MRR", sortable: true },
-        { key: "OTC", label: "OTC", sortable: true },
+        { key: "OTC", label: "OTC", sortable: true }
       ];
 
       if ("colOldAccount" == check) {
@@ -5207,9 +4881,16 @@ export default {
         var temp = {
           key: "account_no",
           label: "Old Account No.",
-          sortable: true,
+          sortable: true
         };
         this.fields.unshift(temp);
+      }
+      if ("colOLT" == check) {
+        this.colOLT = !this.colOLT;
+      }
+      if (this.colOLT) {
+        var temp = { key: "olt", label: "OLT", sortable: true };
+        this.fields.push(temp);
       }
 
       if ("colSales" == check) {
@@ -5226,8 +4907,16 @@ export default {
         var temp = {
           key: "sales_agent.name",
           label: "Sales Agent",
-          sortable: true,
+          sortable: true
         };
+        this.fields.push(temp);
+      }
+
+      if ("colPON" == check) {
+        this.colPON = !this.colPON;
+      }
+      if (this.colPON) {
+        var temp = { key: "pon", label: "PON", sortable: true };
         this.fields.push(temp);
       }
 
@@ -5246,8 +4935,16 @@ export default {
         var temp = {
           key: "modem_mac_address",
           label: "Mac Add.",
-          sortable: true,
+          sortable: true
         };
+        this.fields.push(temp);
+      }
+
+      if ("colVlan" == check) {
+        this.colVlan = !this.colVlan;
+      }
+      if (this.colVlan) {
+        var temp = { key: "vlan", label: "VLAN", sortable: true };
         this.fields.push(temp);
       }
 
@@ -5282,7 +4979,7 @@ export default {
         var temp = {
           key: "communication_protocol",
           label: "Protocol",
-          sortable: true,
+          sortable: true
         };
         this.fields.push(temp);
       }
@@ -5300,40 +4997,40 @@ export default {
       var extra = {
         key: "date_activate",
         label: "Date Activated",
-        sortable: true,
+        sortable: true
       };
       this.fields.push(extra);
 
       var extra = {
         key: "termExpire",
         label: "Term Expire",
-        sortable: true,
+        sortable: true
       };
       this.fields.push(extra);
 
       var extra = {
         key: "termStatus",
         label: "Term Status",
-        sortable: true,
+        sortable: true
       };
       this.fields.push(extra);
 
       var temp = {
         key: "created_at",
-        label: "Created At",
+        label: "Created At"
       };
       this.fields.push(temp);
       if (this.user.id == 1) {
         var temp = {
           key: "sched",
-          label: "Schedule",
+          label: "Schedule"
         };
         this.fields.push(temp);
 
         var temp = {
           key: "id",
           label: "ID",
-          sortable: true,
+          sortable: true
         };
         this.fields.push(temp);
       }
@@ -5341,9 +5038,9 @@ export default {
     fnExcelReport(tbl) {
       this.currentPage = 1;
       this.perPage = this.totalRows;
-      this.$nextTick(function () {
+      this.$nextTick(function() {
         setTimeout(
-          function () {
+          function() {
             var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
             var textRange;
             var j = 0;
@@ -5398,7 +5095,7 @@ export default {
       if (txt == "dop") {
         this.$http
           .get("api/Client/filterNoDOP/" + this.user.region_id)
-          .then(function (response) {
+          .then(function(response) {
             this.items = response.body.items;
             this.billings_to_export = response.body.billings;
             this.totalRows = this.items.length;
@@ -5407,7 +5104,7 @@ export default {
       } else if (txt == "wfc") {
         this.$http
           .get("api/Client/filterWFC/" + this.user.region_id)
-          .then(function (response) {
+          .then(function(response) {
             this.items = response.body.items;
             this.billings_to_export = response.body.billings;
             this.totalRows = this.items.length;
@@ -5416,7 +5113,7 @@ export default {
       } else if (txt == "wfs") {
         this.$http
           .get("api/Client/filterWFS/" + this.user.region_id)
-          .then(function (response) {
+          .then(function(response) {
             this.items = response.body.items;
             this.billings_to_export = response.body.billings;
             this.totalRows = this.items.length;
@@ -5425,7 +5122,7 @@ export default {
       } else if (txt == "contract") {
         this.$http
           .get("api/Client/filterNoContract/" + this.user.region_id)
-          .then(function (response) {
+          .then(function(response) {
             this.items = response.body.items;
             this.billings_to_export = response.body.billings;
             this.totalRows = this.items.length;
@@ -5434,7 +5131,7 @@ export default {
       } else if (txt == "expired") {
         this.$http
           .get("api/Client/filterExpired/" + this.user.region_id)
-          .then(function (response) {
+          .then(function(response) {
             this.items = response.body.items;
             this.billings_to_export = response.body.billings;
             this.totalRows = this.items.length;
@@ -5443,7 +5140,7 @@ export default {
       } else if (txt == "cease") {
         this.$http
           .get("api/Client/filterCease/" + this.user.region_id)
-          .then(function (response) {
+          .then(function(response) {
             this.items = response.body.items;
             this.billings_to_export = response.body.billings;
             this.totalRows = this.items.length;
@@ -5496,17 +5193,17 @@ export default {
         this.editClient.user_name = this.user.name;
         this.$http
           .post("api/updateDateActivated", this.editClient)
-          .then((response) => {
+          .then(response => {
             swal("Updated", "", "success");
             this.$bvModal.hide("modalChangeDateActivated");
           })
-          .catch((response) => {
+          .catch(response => {
             console.log(response.body);
             swal({
               title: response.body.error,
               text: "",
               icon: "error",
-              dangerMode: true,
+              dangerMode: true
             });
           });
       } else swal("Remarks is required", "", "warning");
@@ -5514,8 +5211,8 @@ export default {
     testlog() {
       this.$http
         .post("api/testlog")
-        .then((response) => {})
-        .catch((response) => {
+        .then(response => {})
+        .catch(response => {
           console.log(response);
         });
     },
@@ -5524,7 +5221,7 @@ export default {
     },
     asyncFind(query) {
       this.isLoading = true;
-      ajaxFindCountry(query).then((response) => {
+      ajaxFindCountry(query).then(response => {
         this.countries = response;
         this.isLoading = false;
       });
@@ -5535,7 +5232,7 @@ export default {
     addTagEEDOP(newTag) {
       const tag = {
         email: newTag,
-        name: newTag,
+        name: newTag
       };
       this.Emails.push(tag);
       this.selectedEmails_DOP.push(tag);
@@ -5543,7 +5240,7 @@ export default {
     addTagCCDOP(newTag) {
       const tag = {
         email: newTag,
-        name: newTag,
+        name: newTag
       };
       this.Emails.push(tag);
       this.selectedEmailsCC_DOP.push(tag);
@@ -5551,7 +5248,7 @@ export default {
     addTagCreateTo(newTag) {
       const tag = {
         email: newTag,
-        name: newTag,
+        name: newTag
       };
       this.Emails.push(tag);
       this.selectedEmails.push(tag);
@@ -5559,7 +5256,7 @@ export default {
     addTagCreateCC(newTag) {
       const tag = {
         email: newTag,
-        name: newTag,
+        name: newTag
       };
       this.Emails.push(tag);
       this.selectedEmailsCC.push(tag);
@@ -5648,7 +5345,7 @@ export default {
         var temp = {
           key: "account_no",
           label: "Old Account No.",
-          sortable: true,
+          sortable: true
         };
         this.fields.unshift(temp);
       }
@@ -5661,7 +5358,7 @@ export default {
             "/" +
             this.deletedAcc
         )
-        .then((response) => {
+        .then(response => {
           this.items = response.body.items;
           this.billings_to_export = response.body.billings;
           this.filterIn = "search";
@@ -5669,7 +5366,7 @@ export default {
           this.totalRows = this.items.length;
           console.log(response.body);
         })
-        .catch((response) => {
+        .catch(response => {
           console.log(response);
         });
     },
@@ -5747,8 +5444,8 @@ export default {
           focusConfirm: true,
           text: "",
           icon: "warning",
-          buttons: ["No", "Yes"],
-        }).then((update) => {
+          buttons: ["No", "Yes"]
+        }).then(update => {
           if (update) {
             this.$root.$emit("pageLoading");
             this.receive_pay_data.user_id = this.user.id;
@@ -5756,18 +5453,18 @@ export default {
             this.receive_pay_data.selectedToPay = this.selectedToPay;
             this.$http
               .post("api/CustomerPayment", this.receive_pay_data)
-              .then((response) => {
+              .then(response => {
                 console.log(response.body);
                 swal("Saved", "", "success");
                 this.$bvModal.hide("modalReceivePayment");
                 this.$root.$emit("pageLoaded");
               })
-              .catch((response) => {
+              .catch(response => {
                 swal({
                   title: "Error",
                   text: response.body.error,
                   icon: "error",
-                  dangerMode: true,
+                  dangerMode: true
                 });
                 this.$root.$emit("pageLoaded");
               });
@@ -5781,8 +5478,8 @@ export default {
         focusConfirm: true,
         text: "",
         icon: "warning",
-        buttons: ["No", "Yes"],
-      }).then((update) => {
+        buttons: ["No", "Yes"]
+      }).then(update => {
         if (update) {
           this.$root.$emit("pageLoading");
           this.receive_pay_data.description =
@@ -5792,18 +5489,18 @@ export default {
           this.receive_pay_data.selectedToPay = this.selectedToPay;
           this.$http
             .post("api/WHT", this.receive_pay_data)
-            .then((response) => {
+            .then(response => {
               console.log(response.body);
               swal("Saved", "", "success");
               this.$bvModal.hide("modalWHT");
               this.$root.$emit("pageLoaded");
             })
-            .catch((response) => {
+            .catch(response => {
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true,
+                dangerMode: true
               });
               this.$root.$emit("pageLoaded");
             });
@@ -5819,17 +5516,17 @@ export default {
             "/" +
             this.billRange
         )
-        .then((response) => {
+        .then(response => {
           console.log(response.body);
           this.rp_items = response.body;
           this.rp_tblisBusy = false;
         })
-        .catch((response) => {
+        .catch(response => {
           swal({
             title: "Error",
             text: response.body.error + " " + response.body.message,
             icon: "error",
-            dangerMode: true,
+            dangerMode: true
           });
           this.rp_tblisBusy = false;
         });
@@ -5841,7 +5538,7 @@ export default {
     },
     tblToPayRowClicked(item, index, event) {
       if (item.isSelected == true)
-        this.$nextTick(function () {
+        this.$nextTick(function() {
           setTimeout((item.isSelected = false), 400);
           setTimeout((item.payment = 0), 400);
         });
@@ -5851,7 +5548,7 @@ export default {
       this.total_to_pay = 0;
       this.amount_applied = 0;
       var amount = parseFloat(this.receive_pay_data.amount);
-      this.selectedToPay.forEach((item) => {
+      this.selectedToPay.forEach(item => {
         this.total_to_pay += item.balance;
         item.isSelected = true;
         if (amount >= item.balance) {
@@ -5874,7 +5571,7 @@ export default {
       this.total_to_pay = 0;
 
       var amount = parseFloat(this.receive_pay_data.val);
-      this.selectedToPay.forEach((item) => {
+      this.selectedToPay.forEach(item => {
         item.isSelected = true;
         if (amount >= item.balance) {
           this.total_to_pay = this.total_to_pay + item.balance;
@@ -5925,14 +5622,14 @@ export default {
         data = {
           branch_id: value.id,
           area_id: value.area.id,
-          region_id: value.area.region.id,
+          region_id: value.area.region.id
         };
       }
       if (row == "package_code") {
         data = {
           package_id: this.packEdit.id,
           package_type_id: this.packEdit.package_type.id,
-          soa_items: this.bill_modi_items,
+          soa_items: this.bill_modi_items
         };
       }
       if (row == "coordinates") {
@@ -5946,7 +5643,7 @@ export default {
 
         data = {
           lat: parseFloat(this.editClient.lat),
-          lng: parseFloat(this.editClient.lng),
+          lng: parseFloat(this.editClient.lng)
         };
       }
 
@@ -5955,25 +5652,25 @@ export default {
         row: row,
         data: data,
         user_id: this.user.id,
-        user_name: this.user.name,
+        user_name: this.user.name
       };
       console.log(dataa);
       // this.$root.$emit("pageLoading");
       this.$http
         .post("api/Client/update_per_row", dataa)
-        .then((response) => {
+        .then(response => {
           console.log(response.body);
           swal("Updated", "", "success");
 
           this.$bvModal.hide("modalUpdateBilling");
           this.$root.$emit("pageLoaded");
         })
-        .catch((response) => {
+        .catch(response => {
           swal({
             title: response.body.error,
             text: "",
             icon: "error",
-            dangerMode: true,
+            dangerMode: true
           });
           this.tblisBusy = false;
           this.$root.$emit("pageLoaded");
@@ -5994,23 +5691,23 @@ export default {
         row: row,
         data: data,
         user_id: this.user.id,
-        user_name: this.user.name,
+        user_name: this.user.name
       };
       this.$root.$emit("pageLoading");
       this.$http
         .post("api/clientDetail/update_per_row", data)
-        .then((response) => {
+        .then(response => {
           console.log(response.body);
           swal("Updated", "", "success");
 
           this.$root.$emit("pageLoaded");
         })
-        .catch((response) => {
+        .catch(response => {
           swal({
             title: response.body.error,
             text: "",
             icon: "error",
-            dangerMode: true,
+            dangerMode: true
           });
           this.tblisBusy = false;
           this.$root.$emit("pageLoaded");
@@ -6029,13 +5726,13 @@ export default {
         text: "",
         icon: "warning",
         buttons: ["No", "Yes"],
-        dangerMode: true,
-      }).then((willDelete) => {
+        dangerMode: true
+      }).then(willDelete => {
         if (willDelete) {
           this.$root.$emit("pageLoading");
           this.$http
             .post("api/Client/cancelClient", this.editClient)
-            .then((response) => {
+            .then(response => {
               this.$root.$emit("pageLoaded");
               this.items = response.body.items;
               this.totalRows = this.items.length;
@@ -6043,13 +5740,13 @@ export default {
               this.$bvModal.hide("modalEdit");
               console.log(response.body);
             })
-            .catch((response) => {
+            .catch(response => {
               console.log(response.body);
               swal({
                 title: response.body.error,
                 text: "",
                 icon: "error",
-                dangerMode: true,
+                dangerMode: true
               });
               this.tblisBusy = false;
               this.$root.$emit("pageLoaded");
@@ -6066,7 +5763,7 @@ export default {
       if (this.deletedAcc == true) {
         this.$http
           .get("api/Client/cancelled/" + this.user.region_id)
-          .then(function (response) {
+          .then(function(response) {
             console.log(response.body);
             this.items = response.body.items;
             this.items_copy = this.items;
@@ -6087,12 +5784,12 @@ export default {
         text: "",
         icon: "warning",
         buttons: ["No", "Yes"],
-        dangerMode: true,
-      }).then((willDelete) => {
+        dangerMode: true
+      }).then(willDelete => {
         if (willDelete) {
           this.$http
             .post("api/Client/retrieveClient", this.editClient)
-            .then((response) => {
+            .then(response => {
               this.items = response.body.items;
               this.totalRows = this.items.length;
               swal("Updated", "", "success");
@@ -6100,7 +5797,7 @@ export default {
 
               // console.log(response.body);
             })
-            .catch((response) => {
+            .catch(response => {
               console.log(response);
             });
         }
@@ -6121,9 +5818,9 @@ export default {
           user_id: this.user.id,
           user_name: this.user.name,
           remarks: this.remarksText,
-          form_type: "client",
+          form_type: "client"
         };
-        this.$http.post("api/TicketRemarksLog", data).then((response) => {
+        this.$http.post("api/TicketRemarksLog", data).then(response => {
           this.remarksText = "";
           this.editClient.remarks_log = response.body;
           console.log(response.body);
@@ -6139,11 +5836,11 @@ export default {
           remarks_id: id,
           user_id: this.user.id,
           user: this.user,
-          comments: this.commentsText[i],
+          comments: this.commentsText[i]
         };
         stor.push(data);
         // console.log(data);
-        this.$http.post("api/TicketCommentsLog", data).then((response) => {
+        this.$http.post("api/TicketCommentsLog", data).then(response => {
           this.commentsText[i] = "";
           console.log(response.body);
         });
@@ -6152,9 +5849,9 @@ export default {
       }
     },
     excelReportCSV(tbl, name) {
-      this.$nextTick(function () {
+      this.$nextTick(function() {
         setTimeout(
-          function () {
+          function() {
             var csv_data = [];
             var tab = document.getElementById(tbl);
 
@@ -6221,7 +5918,7 @@ export default {
       var temp = {};
       this.$http
         .post("api/Billing/getBillToExport", temp)
-        .then((response) => {
+        .then(response => {
           // this.items = response.body.items;
           // this.totalRows = this.items.length;
           // swal("Updated", "", "success");
@@ -6232,7 +5929,7 @@ export default {
           this.cModalData.items = response.body;
           this.excelReportCSV("genTable1", "bill");
         })
-        .catch((response) => {
+        .catch(response => {
           console.log(response);
         });
     },
@@ -6265,87 +5962,40 @@ export default {
           confirmButtonText: '<i class="fa fa-thumbs-up"></i>',
           confirmButtonAriaLabel: "Thumbs up, great!",
           cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
-          cancelButtonAriaLabel: "Thumbs down",
-        }).then((update) => {
+          cancelButtonAriaLabel: "Thumbs down"
+        }).then(update => {
           if (update.value) {
             var data = {
               ticket_type_id: type_id,
               client_id: item.id,
               created_by: this.user.id,
               status: "Pending",
-              state: "helpdesk",
+              state: "helpdesk"
             };
 
             this.$root.$emit("pageLoading");
             this.$http
               .post("api/ActivityTicket", data)
-              .then((response) => {
+              .then(response => {
                 console.log(response.body);
                 swal("Requested!", "", "success");
                 this.$root.$emit("pageLoaded");
               })
-              .catch((response) => {
+              .catch(response => {
                 console.log(response.body);
                 this.$root.$emit("pageLoaded");
                 swal({
                   title: "Error",
                   text: response.body.error,
                   icon: "error",
-                  dangerMode: true,
+                  dangerMode: true
                 });
               });
           }
         });
       }
-    },
-    verifiedClient(item) {
-      Swal2.fire({
-        title: "<strong>Are you sure?</strong>",
-        type: "warning",
-        html: "",
-        showCloseButton: true,
-        showCancelButton: true,
-        focusConfirm: false,
-        confirmButtonText: '<i class="fa fa-thumbs-up"></i>',
-        confirmButtonAriaLabel: "Thumbs up, great!",
-        cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
-        cancelButtonAriaLabel: "Thumbs down",
-      }).then((update) => {
-        if (update.value) {
-          var data = {
-            data: [
-              {
-                row: "verify",
-                val: "verified",
-              },
-            ],
-            client_id: item.id,
-            user_id: this.user.id,
-            user_name: this.user.name,
-          };
-
-          this.$root.$emit("pageLoading");
-          this.$http
-            .post("api/Client/updateRows", data)
-            .then((response) => {
-              console.log(response.body);
-              swal("Verified!", "", "success");
-              this.$root.$emit("pageLoaded");
-            })
-            .catch((response) => {
-              console.log(response.body);
-              this.$root.$emit("pageLoaded");
-              swal({
-                title: "Error",
-                text: response.body.error,
-                icon: "error",
-                dangerMode: true,
-              });
-            });
-        }
-      });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -6611,13 +6261,6 @@ export default {
   border-radius: 10px;
   /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1); */
   background-color: #c8e9ca;
-}
-.action-col {
-  display: flex;
-}
-.action-col > button {
-  flex: 1;
-  margin-left: 5px;
 }
 </style>
 <style src="vue-multiselect/dist/vue-multiselect.min.css" />;

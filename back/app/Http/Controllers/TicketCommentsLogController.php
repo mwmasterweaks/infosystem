@@ -99,8 +99,28 @@ class TicketCommentsLogController extends Controller
 
             $cmd->fill($input)->save();
             $logTo = $cmd;
+            // $this
+            //     ->log(
+            //         Carbon::now(),
+            //         $request->user_id,
+            //         $request->user_name,
+            //         $this->cname,
+            //         "update",
+            //         "message",
+            //         "update ticket_commments_log id " . $id . "\nFrom: " . $logFrom . "\nTo: " . $logTo
+            //     );
             return $this->index();
         } catch (\Exception $ex) {
+            // $this
+            //     ->log(
+            //         Carbon::now(),
+            //         $request->user_id,
+            //         $request->user_name,
+            //         $this->cname,
+            //         "update",
+            //         "Error",
+            //         $ex->getMessage()
+            //     );
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }

@@ -8,7 +8,7 @@
             <button
               v-if="roles.create_event"
               type="button"
-              style="margin-top: -20px"
+              style="margin-top:-20px;"
               class="btn btn-success btn-labeled pull-right margin-right-10"
               v-b-modal="'ModelAddEvent'"
             >
@@ -25,7 +25,7 @@
             <button
               v-if="user.id == 1"
               type="button"
-              style="margin-top: -20px"
+              style="margin-top:-20px;"
               class="btn btn-success btn-labeled pull-right margin-right-10"
               @click="testSSH"
             >
@@ -35,7 +35,7 @@
             <button
               v-if="user.id == 1"
               type="button"
-              style="margin-top: -20px"
+              style="margin-top:-20px;"
               class="btn btn-success btn-labeled pull-right margin-right-10"
               @click="testMail('gmail')"
             >
@@ -45,7 +45,7 @@
             <button
               v-if="user.id == 1"
               type="button"
-              style="margin-top: -20px"
+              style="margin-top:-20px;"
               class="btn btn-success btn-labeled pull-right margin-right-10"
               @click="testMail('zimbra')"
             >
@@ -55,7 +55,7 @@
             <button
               v-if="user.id == 1"
               type="button"
-              style="margin-top: -20px"
+              style="margin-top:-20px;"
               class="btn btn-success btn-labeled pull-right margin-right-10"
               @click="download_database"
             >
@@ -66,7 +66,7 @@
             <button
               v-if="user.id == 1"
               type="button"
-              style="margin-top: -20px"
+              style="margin-top:-20px;"
               class="btn btn-success btn-labeled pull-right margin-right-10"
               @click="test"
             >
@@ -117,10 +117,10 @@
       <!-- form -->
       <div class="rowFields mx-auto row">
         <div class="col-lg-2">
-          <p class="textLabel" style="margin: 0px">Contact person:</p>
+          <p class="textLabel" style="margin: 0px;">Contact person:</p>
         </div>
         <div class="col-lg-9">
-          <p class="textLabel" style="margin: 0px">
+          <p class="textLabel" style="margin: 0px;">
             <b>{{ client_details.contact_person }}</b>
           </p>
         </div>
@@ -128,10 +128,10 @@
 
       <div class="rowFields mx-auto row">
         <div class="col-lg-2">
-          <p class="textLabel" style="margin: 0px">Contact No.:</p>
+          <p class="textLabel" style="margin: 0px;">Contact No.:</p>
         </div>
         <div class="col-lg-9">
-          <p class="textLabel" style="margin: 0px">
+          <p class="textLabel" style="margin: 0px;">
             <b>{{ client_details.contact }}</b>
           </p>
         </div>
@@ -139,10 +139,10 @@
 
       <div class="rowFields mx-auto row">
         <div class="col-lg-2">
-          <p class="textLabel" style="margin: 0px">Address:</p>
+          <p class="textLabel" style="margin: 0px;">Address:</p>
         </div>
         <div class="col-lg-9">
-          <p class="textLabel" style="margin: 0px">
+          <p class="textLabel" style="margin: 0px;">
             <b>{{ client_details.location }}</b>
           </p>
         </div>
@@ -150,10 +150,10 @@
 
       <div class="rowFields mx-auto row">
         <div class="col-lg-2">
-          <p class="textLabel" style="margin: 0px">Sales In-Charge:</p>
+          <p class="textLabel" style="margin: 0px;">Sales In-Charge:</p>
         </div>
         <div class="col-lg-9">
-          <p class="textLabel" style="margin: 0px">
+          <p class="textLabel" style="margin: 0px;">
             <b>{{ client_details.client1.sales.name }}</b>
           </p>
         </div>
@@ -161,10 +161,10 @@
 
       <div class="rowFields mx-auto row">
         <div class="col-lg-2">
-          <p class="textLabel" style="margin: 0px">Tech In-Charge:</p>
+          <p class="textLabel" style="margin: 0px;">Tech In-Charge:</p>
         </div>
         <div class="col-lg-9">
-          <p class="textLabel" style="margin: 0px">
+          <p class="textLabel" style="margin: 0px;">
             <b>{{ client_details.client1.engineer.name }}</b>
           </p>
         </div>
@@ -172,10 +172,10 @@
 
       <div class="rowFields mx-auto row">
         <div class="col-lg-2">
-          <p class="textLabel" style="margin: 0px">Cable Category:</p>
+          <p class="textLabel" style="margin: 0px;">Cable Category:</p>
         </div>
         <div class="col-lg-9">
-          <p class="textLabel" style="margin: 0px">
+          <p class="textLabel" style="margin: 0px;">
             <b>{{ client_details.cable_category }}</b>
           </p>
         </div>
@@ -183,10 +183,10 @@
 
       <div class="rowFields mx-auto row">
         <div class="col-lg-2">
-          <p class="textLabel" style="margin: 0px">FOC Layout:</p>
+          <p class="textLabel" style="margin: 0px;">FOC Layout:</p>
         </div>
         <div class="col-lg-9">
-          <p class="textLabel" style="margin: 0px">
+          <p class="textLabel" style="margin: 0px;">
             <b>{{ client_details.foc_layout }}</b>
           </p>
         </div>
@@ -197,10 +197,10 @@
         v-if="client_details.foc_layout != 'Completed'"
       >
         <div class="col-lg-2">
-          <p class="textLabel" style="margin: 0px">Layout Remarks:</p>
+          <p class="textLabel" style="margin: 0px;">Layout Remarks:</p>
         </div>
         <div class="col-lg-9">
-          <p class="textLabel" style="margin: 0px">
+          <p class="textLabel" style="margin: 0px;">
             <b>{{ client_details.layout_remarks }}</b>
           </p>
         </div>
@@ -208,10 +208,10 @@
 
       <div class="rowFields mx-auto row">
         <div class="col-lg-2">
-          <p class="textLabel" style="margin: 0px">OTC:</p>
+          <p class="textLabel" style="margin: 0px;">OTC:</p>
         </div>
         <div class="col-lg-9">
-          <p class="textLabel" style="margin: 0px">
+          <p class="textLabel" style="margin: 0px;">
             <b>{{ client_details.otc }}</b>
           </p>
         </div>
@@ -219,10 +219,10 @@
 
       <div class="rowFields mx-auto row">
         <div class="col-lg-2">
-          <p class="textLabel" style="margin: 0px">Aging:</p>
+          <p class="textLabel" style="margin: 0px;">Aging:</p>
         </div>
         <div class="col-lg-9">
-          <p class="textLabel" style="margin: 0px">
+          <p class="textLabel" style="margin: 0px;">
             <b>{{ client_details.agingCount }}</b>
           </p>
         </div>
@@ -230,7 +230,7 @@
 
       <div class="rowFields mx-auto row">
         <div class="col-lg-2">
-          <p class="textLabel" style="margin: 0px">Mapping Status:</p>
+          <p class="textLabel" style="margin: 0px;">Mapping Status:</p>
         </div>
         <div class="col-lg-9">
           <i class="fas fa-check" v-show="client_details.contract_status" />
@@ -240,7 +240,7 @@
 
       <div class="rowFields mx-auto row">
         <div class="col-lg-2">
-          <p class="textLabel" style="margin: 0px">Modem Status:</p>
+          <p class="textLabel" style="margin: 0px;">Modem Status:</p>
         </div>
         <div class="col-lg-9">
           <i class="fas fa-check" v-show="client_details.modem_status" />
@@ -250,10 +250,10 @@
 
       <div class="rowFields mx-auto row">
         <div class="col-lg-2">
-          <p class="textLabel" style="margin: 0px">Applied date:</p>
+          <p class="textLabel" style="margin: 0px;">Applied date:</p>
         </div>
         <div class="col-lg-9">
-          <p class="textLabel" style="margin: 0px">
+          <p class="textLabel" style="margin: 0px;">
             <b>{{ client_details.applied_date }}</b>
           </p>
         </div>
@@ -412,8 +412,8 @@
           class="rowFields mx-auto row"
           v-if="
             editTicket.Status_Ticket_id == '1' ||
-            editTicket.Status_Ticket_id == '2' ||
-            editTicket.Status_Ticket_id == '4'
+              editTicket.Status_Ticket_id == '2' ||
+              editTicket.Status_Ticket_id == '4'
           "
         >
           <div class="col-lg-3">
@@ -803,43 +803,43 @@
 
                 <span
                   class="btn btn-success disabled"
-                  style="width: 100%"
+                  style="width:100%;"
                   v-if="
                     row.item.target_date != null &&
-                    row.item.target_date != datenow &&
-                    row.item.target_date != dateTomorrow &&
-                    row.item.target_date != dateYesterday &&
-                    1 > dateDiffInDays(datenow, row.item.target_date)
+                      row.item.target_date != datenow &&
+                      row.item.target_date != dateTomorrow &&
+                      row.item.target_date != dateYesterday &&
+                      1 > dateDiffInDays(datenow, row.item.target_date)
                   "
                   >{{ row.item.target_date }}</span
                 >
 
                 <span
                   class="btn btn-success disabled"
-                  style="width: 100%"
+                  style="width:100%;"
                   v-if="row.item.target_date == datenow"
                   >Today</span
                 >
                 <span
                   class="btn btn-success disabled"
-                  style="width: 100%"
+                  style="width:100%;"
                   v-if="row.item.target_date == dateTomorrow"
                   >Tomorrow</span
                 >
 
                 <span
                   class="btn btn-warning disabled"
-                  style="width: 100%"
+                  style="width:100%;"
                   v-if="row.item.target_date == dateYesterday"
                   >Yesterday</span
                 >
 
                 <span
                   class="btn btn-danger disabled"
-                  style="width: 100%"
+                  style="width:100%;"
                   v-if="
                     1 < dateDiffInDays(datenow, row.item.target_date) &&
-                    row.item.target_date != null
+                      row.item.target_date != null
                   "
                 >
                   {{ dateDiffInDays(datenow, row.item.target_date) }} Days delay
@@ -893,13 +893,13 @@ export default {
     "model-list-select": ModelListSelect,
     "p-check": PrettyCheck,
     "p-radio": PrettyRadio,
-    client_modals: client_modals,
+    client_modals: client_modals
   },
   data() {
     return {
       cModalData: {
         field: 0,
-        items: [],
+        items: []
       },
       isDestroy: false,
       tblisBusy: false,
@@ -910,15 +910,15 @@ export default {
           key: "mTicket_id",
           label: "Ticket No.",
           sortable: true,
-          formatter: (value) => {
+          formatter: value => {
             return "<i><b>" + value + "</b></i>";
-          },
+          }
         },
         {
           key: "statname",
           label: "Status",
           sortable: true,
-          formatter: (value) => {
+          formatter: value => {
             if (value == "Close")
               return '<span class="btn btn-success disabled" style="width:100%;"> Fixed </span>';
             else if (value == "For Rebates")
@@ -930,59 +930,59 @@ export default {
             else if (value == "For Tech Visit")
               return '<span class="btn btn-primary disabled" style="width:100%;"> For tech visit </span>';
             else return value;
-          },
+          }
         },
         {
           key: "target_date",
           label: "Target Date",
-          sortable: true,
+          sortable: true
         },
         { key: "client.name", label: "Account name", sortable: true },
         {
           key: "complain",
           label: "Complaint",
-          formatter: (value) => {
+          formatter: value => {
             var temp = "";
             if (value != null) {
               if (value.length > 50) temp = "...";
               return value.slice(0, 50) + temp;
             } else return "";
-          },
+          }
         },
         {
           key: "findings",
           label: "Findings",
 
-          formatter: (value) => {
+          formatter: value => {
             var temp = "";
             if (value != null) {
               if (value.length > 50) temp = "...";
               return value.slice(0, 50) + temp;
             } else return "";
-          },
+          }
         },
         {
           key: "action",
           label: "Action",
-          formatter: (value) => {
+          formatter: value => {
             var temp = "";
             if (value != null) {
               if (value.length > 50) temp = "...";
               return value.slice(0, 50) + temp;
             } else return "";
-          },
+          }
         },
         {
           key: "remarks",
           label: "Remarks",
-          formatter: (value) => {
+          formatter: value => {
             var temp = "";
             if (value != null) {
               if (value.length > 50) temp = "...";
               return value.slice(0, 50) + temp;
             } else return "";
-          },
-        },
+          }
+        }
       ],
       datenow: new Date(),
       dateTomorrow: new Date(),
@@ -1015,24 +1015,24 @@ export default {
           location: "",
           contact: "",
           sales: {
-            name: "",
+            name: ""
           },
           engineer: {
-            name: "",
-          },
+            name: ""
+          }
         },
         client: {
           name: "",
           location: "",
-          contact: "",
-        },
+          contact: ""
+        }
       },
       sales: [],
       focLayoutOption: [
         { id: "Done", name: "Done" },
         { id: "Done outside only", name: "Done outside only" },
         { id: "Done inside only", name: "Done inside only" },
-        { id: "Pending", name: "Pending" },
+        { id: "Pending", name: "Pending" }
       ],
       otcOption: [
         { id: "Paid", name: "Paid" },
@@ -1040,16 +1040,16 @@ export default {
         { id: "Billing", name: "Billing" },
         { id: "Waived", name: "Waived" },
         { id: "Waiting for C&C advisory", name: "Waiting for C&C advisory" },
-        { id: "NTP", name: "NTP" },
+        { id: "NTP", name: "NTP" }
       ],
       cableCategoryOption: [
         { id: "Drop Fiber", name: "Drop Fiber" },
         { id: "Hard Fiber", name: "Hard Fiber" },
-        { id: "UTP", name: "Unshielded twisted pair (UTP)" },
+        { id: "UTP", name: "Unshielded twisted pair (UTP)" }
       ],
       AppliedDateoptions: {
         format: "YYYY-MM-DD",
-        useCurrent: false,
+        useCurrent: false
       },
       editTicket: {
         client_id: "",
@@ -1063,11 +1063,11 @@ export default {
         client: {
           name: "",
           location: "",
-          contact: "",
+          contact: ""
         },
         user: {
-          name: "",
-        },
+          name: ""
+        }
       },
       user: [],
       ticket_select_list: [],
@@ -1076,11 +1076,11 @@ export default {
       Status_Ticket: [],
       frequency_list: [
         {
-          name: "Yearly",
+          name: "Yearly"
         },
         {
-          name: "This year only",
-        },
+          name: "This year only"
+        }
       ],
       item_add: {
         name: "",
@@ -1088,7 +1088,7 @@ export default {
         location: "",
         frequency: "frequency",
         from: "",
-        to: "",
+        to: ""
       },
       item_edit: {
         name: "",
@@ -1096,19 +1096,19 @@ export default {
         location: "",
         frequency: "frequency",
         from: "",
-        to: "",
+        to: ""
       },
       Dateoptions: {
         format: "YYYY-MM-DD",
-        useCurrent: false,
+        useCurrent: false
       },
       DateTimeOptions: {
         // https://momentjs.com/docs/#/displaying/ YYYY-MM-DD h:mm
         format: "YYYY-MM-DD HH:mm",
         useCurrent: false,
         showClear: true,
-        showClose: true,
-      },
+        showClose: true
+      }
     };
   },
   created() {
@@ -1149,16 +1149,16 @@ export default {
           num: 0,
           name: "",
           date: "",
-          data: [],
+          data: []
         };
 
         this.$http
           .get("api/Ticket/subIndex/" + this.user.region_id)
-          .then(function (response) {
+          .then(function(response) {
             this.tickets = response.body.items;
             var c = -1;
             var bgcolor = "";
-            this.tickets.forEach((ticket) => {
+            this.tickets.forEach(ticket => {
               if (
                 ticket.statname == "Pending" ||
                 ticket.statname == "Urgent" ||
@@ -1184,7 +1184,7 @@ export default {
                       title: data.num + " " + data.name,
                       start: data.date,
                       end: data.date,
-                      data: data.data,
+                      data: data.data
                     };
                     this.events.push(temp);
                   }
@@ -1210,17 +1210,17 @@ export default {
               title: data.num + " " + data.name,
               start: data.date,
               end: data.date,
-              data: data.data,
+              data: data.data
             };
             this.events.push(temp);
           });
 
         this.$http
           .get("api/clientDetail/subIndex/" + this.user.region_id)
-          .then(function (response) {
+          .then(function(response) {
             this.schedules = response.body;
 
-            this.schedules.forEach((schedule) => {
+            this.schedules.forEach(schedule => {
               if (schedule.status == "done") {
                 var temp = {
                   id: schedule.client_id,
@@ -1229,7 +1229,7 @@ export default {
                   title: schedule.client1.name,
                   start: schedule.target_date,
                   end: schedule.target_date,
-                  data: schedule,
+                  data: schedule
                 };
                 this.events.push(temp);
               }
@@ -1238,10 +1238,10 @@ export default {
 
         this.$http
           .get("api/calendar_events/subIndex/" + this.user.region_id)
-          .then(function (response) {
+          .then(function(response) {
             this.calendar_events = response.body;
 
-            this.calendar_events.forEach((cal_event) => {
+            this.calendar_events.forEach(cal_event => {
               var temp = {
                 id: cal_event.id,
                 backgroundColor: "grey",
@@ -1249,7 +1249,7 @@ export default {
                 title: cal_event.name,
                 start: cal_event.from,
                 end: cal_event.to,
-                data: cal_event,
+                data: cal_event
               };
               this.events.push(temp);
             });
@@ -1264,13 +1264,13 @@ export default {
     addNewEvent() {
       axios
         .post("/api/calendar", {
-          ...this.newEvent,
+          ...this.newEvent
         })
-        .then((data) => {
+        .then(data => {
           this.getEvents(); // update our list of events
           this.resetForm(); // clear newEvent properties (e.g. title, start_date and end_date)
         })
-        .catch((err) =>
+        .catch(err =>
           console.log("Unable to add new event!", err.response.data)
         );
     },
@@ -1278,11 +1278,11 @@ export default {
       if (arg.event.backgroundColor == "green") {
         if (arg.event.extendedProps.data.client1.sales == null)
           arg.event.extendedProps.data.client1.sales = {
-            name: "",
+            name: ""
           };
         if (arg.event.extendedProps.data.client1.engineer == null)
           arg.event.extendedProps.data.client1.engineer = {
-            name: "",
+            name: ""
           };
         this.client_details = arg.event.extendedProps.data;
         this.$bvModal.show("modalEdit");
@@ -1303,11 +1303,11 @@ export default {
           client: {
             name: "",
             location: "",
-            contact: "",
+            contact: ""
           },
           user: {
-            name: "",
-          },
+            name: ""
+          }
         };
         this.ticket_selected = {};
         this.$bvModal.show("modalTicketList");
@@ -1321,12 +1321,12 @@ export default {
     deleteEvent() {
       axios
         .delete("/api/calendar/" + this.indexToUpdate)
-        .then((resp) => {
+        .then(resp => {
           this.resetForm();
           this.getEvents();
           this.addingMode = !this.addingMode;
         })
-        .catch((err) =>
+        .catch(err =>
           console.log("Unable to delete event!", err.response.data)
         );
     },
@@ -1339,12 +1339,12 @@ export default {
         num: 0,
         name: "",
         date: "",
-        data: [],
+        data: []
       };
 
       var c = -1;
       var bgcolor = "";
-      this.tickets.forEach((ticket) => {
+      this.tickets.forEach(ticket => {
         if (
           ticket.statname == "Pending" ||
           ticket.statname == "Urgent" ||
@@ -1367,7 +1367,7 @@ export default {
                 title: data.num + " " + data.name,
                 start: data.date,
                 end: data.date,
-                data: data.data,
+                data: data.data
               };
               this.events.push(temp);
             }
@@ -1393,11 +1393,11 @@ export default {
         title: data.num + " " + data.name,
         start: data.date,
         end: data.date,
-        data: data.data,
+        data: data.data
       };
       this.events.push(temp);
 
-      this.schedules.forEach((schedule) => {
+      this.schedules.forEach(schedule => {
         if (schedule.status == "done") {
           var temp = {
             id: schedule.client_id,
@@ -1406,12 +1406,12 @@ export default {
             title: schedule.client1.name,
             start: schedule.target_date,
             end: schedule.target_date,
-            data: schedule,
+            data: schedule
           };
           this.events.push(temp);
         }
       });
-      this.calendar_events.forEach((cal_event) => {
+      this.calendar_events.forEach(cal_event => {
         var temp = {
           id: cal_event.id,
           backgroundColor: "grey",
@@ -1419,7 +1419,7 @@ export default {
           title: cal_event.name,
           start: cal_event.from,
           end: cal_event.to,
-          data: cal_event,
+          data: cal_event
         };
         this.events.push(temp);
       });
@@ -1429,17 +1429,17 @@ export default {
         title: "Confirmation",
         text: "Do you really want to ACTIVATE this client?",
         icon: "warning",
-        buttons: ["No", "Yes"],
-      }).then((yes) => {
+        buttons: ["No", "Yes"]
+      }).then(yes => {
         if (yes) {
           //this.tblisBusy = true;
           this.$http
             .get(
               "api/clientDetail/activateClient/" + this.client_details.client_id
             )
-            .then((response) => {
+            .then(response => {
               swal("Activated!", "activate successfully", "success").then(
-                (value) => {
+                value => {
                   this.schedules = response.body;
 
                   this.getEvents();
@@ -1449,13 +1449,13 @@ export default {
                 }
               );
             })
-            .catch((response) => {
+            .catch(response => {
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true,
-              }).then((value) => {
+                dangerMode: true
+              }).then(value => {
                 if (value) {
                 }
               });
@@ -1464,32 +1464,32 @@ export default {
       });
     },
     btnUpdateTicket() {
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then(result => {
         if (result) {
           swal({
             title: "Are you sure?",
             text: "Do you want to Update this Ticket?",
             icon: "warning",
             buttons: true,
-            dangerMode: true,
-          }).then((update) => {
+            dangerMode: true
+          }).then(update => {
             if (update) {
               this.editTicket.region_id = this.user.region_id;
               this.$http
                 .put("api/Ticket/" + this.editTicket.id, this.editTicket)
-                .then((response) => {
+                .then(response => {
                   this.tickets = response.body;
                   swal("", "Update successfully", "success");
                   this.getEvents();
                   this.$bvModal.hide("modalEditTicket");
                 })
-                .catch((response) => {
+                .catch(response => {
                   swal({
                     title: "Error",
                     text: response.body.error,
                     icon: "error",
-                    dangerMode: true,
-                  }).then((value) => {
+                    dangerMode: true
+                  }).then(value => {
                     if (value) {
                     }
                   });
@@ -1500,14 +1500,14 @@ export default {
       });
     },
     btnAdd() {
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then(result => {
         if (result) {
           this.item_add.region_id = this.user.region_id;
           this.item_add.user_id = this.user.id;
           this.item_add.user_name = this.user.name;
           this.$http
             .post("api/calendar_events", this.item_add)
-            .then((response) => {
+            .then(response => {
               swal("Notification", "Added successfully", "success");
               this.calendar_events = response.body;
               this.item_add = {
@@ -1516,19 +1516,19 @@ export default {
                 location: "",
                 frequency: "frequency",
                 from: "",
-                to: "",
+                to: ""
               };
 
               this.$bvModal.hide("ModelAddEvent");
               this.getEvents();
             })
-            .catch((response) => {
+            .catch(response => {
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true,
-              }).then((value) => {
+                dangerMode: true
+              }).then(value => {
                 if (value) {
                 }
               });
@@ -1537,7 +1537,7 @@ export default {
       });
     },
     btnUpdate() {
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then(result => {
         if (result) {
           this.tblisBusy = true;
           swal({
@@ -1545,27 +1545,27 @@ export default {
             text: "Do you want to Update this item?",
             icon: "warning",
             buttons: true,
-            dangerMode: true,
-          }).then((update) => {
+            dangerMode: true
+          }).then(update => {
             if (update) {
               this.item_edit.user_id = this.user.id;
               this.item_edit.user_name = this.user.name;
               this.$http
                 .put("api/calendar_events/" + this.item_edit.id, this.item_edit)
-                .then((response) => {
+                .then(response => {
                   this.calendar_events = response.body;
                   swal("", "Update successfully", "success");
                   this.$bvModal.hide("modalEditEvent");
 
                   this.getEvents();
                 })
-                .catch((response) => {
+                .catch(response => {
                   swal({
                     title: "Error",
                     text: response.body.error,
                     icon: "error",
-                    dangerMode: true,
-                  }).then((value) => {
+                    dangerMode: true
+                  }).then(value => {
                     if (value) {
                     }
                   });
@@ -1581,8 +1581,8 @@ export default {
         text: "Do you really want to delete this item permanently",
         icon: "warning",
         buttons: true,
-        dangerMode: true,
-      }).then((willDelete) => {
+        dangerMode: true
+      }).then(willDelete => {
         if (willDelete) {
           this.items = [];
           this.tblisBusy = true;
@@ -1590,24 +1590,24 @@ export default {
             id: this.item_edit.id,
             region_id: this.user.region_id,
             user_id: this.user.id,
-            user_name: this.user.name,
+            user_name: this.user.name
           };
           this.$http
             .post("api/calendar_events/destroy1", data)
-            .then((response) => {
+            .then(response => {
               this.$bvModal.hide("modalEditEvent");
-              swal("", "Item has been deleted", "success").then((value) => {
+              swal("", "Item has been deleted", "success").then(value => {
                 this.calendar_events = response.body;
                 this.getEvents();
               });
             })
-            .catch((response) => {
+            .catch(response => {
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true,
-              }).then((value) => {
+                dangerMode: true
+              }).then(value => {
                 if (value) {
                 }
               });
@@ -1641,16 +1641,16 @@ export default {
         title: "Confirmation",
         text: "Do you really want to ACTIVATE this client?",
         icon: "warning",
-        buttons: ["No", "Yes"],
-      }).then((yes) => {
+        buttons: ["No", "Yes"]
+      }).then(yes => {
         if (yes) {
           this.$root.$emit("pageLoading");
           var data = {
-            command: "asdf",
+            command: "asdf"
           };
           this.$http
             .post("api/calendar_events/testSSH", data)
-            .then((response) => {
+            .then(response => {
               this.$root.$emit("pageLoaded");
               console.log(response.body);
             });
@@ -1665,63 +1665,63 @@ export default {
     },
     testMail(mail) {
       this.$root.$emit("pageLoading");
-      // this.$http
-      //   .get("api/calendar_events/testAutoCommand")
-      //   .then(response => {
-      //     console.log(response.body);
-      //     this.$root.$emit("pageLoaded");
-      //   })
-      //   .catch(response => {
-      //     console.log(response);
-      //     this.$root.$emit("pageLoaded");
-      //   });
-      swal({
+      this.$http
+        .get("api/calendar_events/testAutoCommand")
+        .then(response => {
+          console.log(response.body);
+          this.$root.$emit("pageLoaded");
+        })
+        .catch(response => {
+          console.log(response);
+          this.$root.$emit("pageLoaded");
+        });
+      /*  swal({
         title: "Confirmation",
         text: "Do you really want to ACTIVATE this client?",
         icon: "warning",
-        buttons: ["No", "Yes"],
-      }).then((yes) => {
+        buttons: ["No", "Yes"]
+      }).then(yes => {
         if (yes) {
           this.$root.$emit("pageLoading");
 
           var sendTO = [
             {
               email: "mwmasterweaks@gmail.com",
-              name: "Masterweak",
+              name: "Masterweak"
             },
-            // {
-            //   email: "pbismonte@dctechmicro.com",
-            //   name: "Peter Pogi"
-            // }
+            {
+              email: "pbismonte@dctechmicro.com",
+              name: "Peter Pogi"
+            }
           ];
           var ccto = [
             {
               email: "rnd@dctechmicro.com",
-              name: "rnd",
-            },
+              name: "rnd"
+            }
           ];
           var data = {
             email: mail,
             user_email: this.user.email,
             user_name: this.user.name,
             sendTo: sendTO,
-            CCTO: ccto,
+            CCTO: ccto
           };
 
           this.$http
             .post("api/calendar_events/testEmail", data)
-            .then((response) => {
+            .then(response => {
               console.log(response.body);
               this.$root.$emit("pageLoaded");
             });
         }
-      });
+      }); */
     },
     test() {
       this.$root.$emit("pageLoading");
       this.$http
         .post("api/calendar_events/testfunction")
-        .then((response) => {
+        .then(response => {
           console.log(response.body);
 
           var bucketIP = "202.137.112.14";
@@ -1731,9 +1731,9 @@ export default {
           this.excelReportCSV("genTable1", bucketIP + " BUCKET TO IS");
 
           //BUCKET LIST NA WALA SA IS BASE SUBS_NAME
-          this.$nextTick(function () {
+          this.$nextTick(function() {
             setTimeout(
-              function () {
+              function() {
                 this.cModalData.field = 3;
                 this.cModalData.items = response.body.oneIsToZero;
                 this.excelReportCSV(
@@ -1745,9 +1745,9 @@ export default {
             );
           });
           //BUCKET LIST NA WALA SA IS BASE SUBS_NAME
-          this.$nextTick(function () {
+          this.$nextTick(function() {
             setTimeout(
-              function () {
+              function() {
                 this.cModalData.field = 3;
                 this.cModalData.items = response.body.oneIsToMany;
                 this.excelReportCSV(
@@ -1761,24 +1761,25 @@ export default {
             );
           });
         })
-        .catch((response) => {
+        .catch(response => {
           swal("error");
           console.log(response);
           this.$root.$emit("pageLoaded");
         });
     },
+
     download_database() {
       swal({
         title: "Confirmation",
         text: "Do you really want to ACTIVATE this client?",
         icon: "warning",
-        buttons: ["No", "Yes"],
-      }).then((yes) => {
+        buttons: ["No", "Yes"]
+      }).then(yes => {
         if (yes) {
           this.$root.$emit("pageLoading");
           this.$http
             .post("api/calendar_events/download_database")
-            .then((response) => {
+            .then(response => {
               var localDate = new Date();
               var month = localDate.getMonth();
               var day = localDate.getDate();
@@ -1814,9 +1815,9 @@ export default {
       });
     },
     excelReportCSV(tbl, name) {
-      this.$nextTick(function () {
+      this.$nextTick(function() {
         setTimeout(
-          function () {
+          function() {
             var csv_data = [];
             var tab = document.getElementById(tbl);
 
@@ -1873,13 +1874,13 @@ export default {
       // Automatically click the link to trigger download
       temp_link.click();
       document.body.removeChild(temp_link);
-    },
+    }
   },
   watch: {
     indexToUpdate() {
       return this.indexToUpdate;
-    },
-  },
+    }
+  }
 };
 </script>
 

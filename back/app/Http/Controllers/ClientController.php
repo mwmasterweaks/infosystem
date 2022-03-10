@@ -34,7 +34,7 @@ class ClientController extends Controller
         $this->mainComand_cancel = clients_cancelled::with([
             "package", "modem", "package_type", "region.user", "region.area", "area", "branch.area.region", "pon",
             "sales.user", "sales.agent", "sales_agent", "engineer", "bucket", "clientDetail",
-            "remarks_log.user", "remarks_log.replies.user", "status_log.user", "billings.client"
+            "remarks_log.user", "remarks_log.replies.user", "status_log.user"
         ]);
     }
 
@@ -127,7 +127,7 @@ class ClientController extends Controller
     public function subIndex($region_id)
     {
         $tbl = (clone $this->mainComand)
-            ->take(80)
+            ->take(120)
             ->orderBy("name");
         if ($region_id != 0) {
             $tbl->where("region_id", $region_id);
@@ -146,16 +146,14 @@ class ClientController extends Controller
             foreach ($item->remarks_log as $r_log) {
                 $r_log->commentVisibility = 'hide';
             }
-            // $id = $item->pon;
-            // $olts = olt::where("id", $id["olt_id"])
-            //     ->first();
+            $id = $item->pon;
+            $olts = olt::where("id", $id["olt_id"])
+                ->first();
 
-            // $item->olt = (object) $olts;
-            // $item->pon1 = (object) $item->pon;
-            if (isset($item->clientDetail["aging"]))
-                $item->aging = $item->clientDetail["aging"];
-            else
-                $item->aging = null;
+            $item->olt = (object) $olts;
+            $item->pon1 = (object) $item->pon;
+            $item->aging = $item->clientDetail["aging"];
+
             $item->contract_status = false;
             if ($item->contract != null)
                 $item->contract_status = true;
@@ -698,6 +696,7 @@ class ClientController extends Controller
 
     public function update_per_row(Request $request)
     {
+
         DB::beginTransaction();
         try {
             $id = $request->id;
@@ -1519,12 +1518,12 @@ class ClientController extends Controller
             return $this->subIndex($request->region_id);
         } catch (Exception $ex) {
             DB::rollBack();
-            \Logger::instance()->logError(
+            \Logger::instance()->log(
                 Carbon::now(),
                 $request->user_id,
                 $request->user_name,
                 $this->cname,
-                "cancelClient",
+                "store",
                 "Error",
                 $ex->getMessage()
             );
@@ -1547,7 +1546,7 @@ class ClientController extends Controller
                 $request->user_id,
                 $request->user_name,
                 $this->cname,
-                "retrieveClient",
+                "store",
                 "message",
                 "Cancelled Client: " . $data
             );
@@ -1556,12 +1555,12 @@ class ClientController extends Controller
             return $this->cancelled($request->region_id);
         } catch (Exception $ex) {
             DB::rollBack();
-            \Logger::instance()->logError(
+            \Logger::instance()->log(
                 Carbon::now(),
                 $request->user_id,
                 $request->user_name,
                 $this->cname,
-                "retrieveClient",
+                "store",
                 "Error",
                 $ex->getMessage()
             );
@@ -1572,47 +1571,14 @@ class ClientController extends Controller
                 return response()->json(["error" => $ex->getMessage()], 500);
         }
     }
-    public function updateRows(Request $request)
+    public function log($date, $userID, $userName, $ControllerName, $functionName, $logType, $message)
     {
-        try {
-            DB::beginTransaction();
-
-            $values = array();
-            if ($request->data != null)
-                foreach ($request->data as $item) {
-                    $item = (object) $item;
-                    $temp = array($item->row => $item->val);
-                    $values = array_merge($values, $temp);
-                }
-
-            $oldData = Client::where("id", $request->client_id)->first();
-
-            $newData = Client::where("id", $request->client_id)->update($values);
-            \Logger::instance()->log(
-                Carbon::now(),
-                $request->user_id,
-                $request->user_name,
-                $this->cname,
-                "updateRows",
-                "message",
-                "Old data: " . json_encode($oldData) . "/r/n" .
-                    "New data: " . json_encode($newData)
-            );
-
-            DB::commit();
-            return "ok";
-        } catch (Exception $ex) {
-            DB::rollBack();
-            \Logger::instance()->logError(
-                Carbon::now(),
-                $request->user_id,
-                $request->user_name,
-                $this->cname,
-                "updateRows",
-                "Error",
-                $ex->getMessage()
-            );
-            return response()->json(["error" => $ex->getMessage()], 500);
-        }
+        $filenameDate = date("mY");
+        $myfile = fopen("logs/log" . $filenameDate . ".txt", "a") or die("Unable to open file!");
+        $txt = $date . "\t--\t" . $userID . "\t--\t" . $userName . "\t--\t" . $ControllerName .
+            "\t--\t" . $functionName . "\t--\t" . $logType . "\t--\t" . $message . "\n\n";
+        fwrite($myfile, $txt);
+        fclose($myfile);
+        return "ok";
     }
 }

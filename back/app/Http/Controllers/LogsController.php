@@ -2,84 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\log;
+use View;
+use File;
+use Response;
 use Illuminate\Http\Request;
 
 class LogsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function downloadJSONFile()
     {
-        //
-    }
+        $data = json_encode(['Example 1', 'Example 2', 'Example 3',]);
+        $fileName = time() . '_datafile.json';
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function show(log $log)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(log $log)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, log $log)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(log $log)
-    {
-        //
+        //File::put(public_path('/upload/json/' . $fileName), $data);
+        // return Response::download(public_path('/upload/jsonfile/' . $fileName));
     }
 }

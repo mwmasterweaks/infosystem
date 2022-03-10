@@ -48,59 +48,16 @@ class Logger
     public function mailerZimbra($subject, $message, $sender, $senderName, $sendTo, $CCTO)
     {
         $mail = new PHPMailer(true);
-        $mail->SMTPDebug = 0;
-        $mail->isSMTP();
-
-        $mail->Host = 'appmta.dctechmicro.com'; //'smtp.gmail.com';
-        $mail->SMTPAuth = false;
-        $mail->SMTPAutoTLS = false;
-        $mail->SMTPSecure = false;
-        $mail->Port = 25;
-        $mail->CharSet = 'utf-8';
-        $mail->SMTPOptions = array(
-            'ssl' => array(
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-                'allow_self_signed' => true
-            )
-        );
-        $mail->setFrom('customeractivation@dctechmicro.com', "DCTECH Mailer");
-        if ($sendTo != null)
-            foreach ($sendTo as $item) {
-                $item = (object) $item;
-                $mail->addAddress($item->email, $item->name);
-            }
-        if ($CCTO != null)
-            foreach ($CCTO as $item) {
-                $item = (object) $item;
-                $mail->addCC($item->email, $item->name);
-            }
-        $mail->isHTML(true);  // Set email format to HTML
-        $mail->Subject = $subject;
-        $mail->Body    = $message;
-
-        if (!$mail->send()) {
-            return 'Mailer Error: ' . $mail->ErrorInfo;
-        } else {
-            return 'ok';
-        }
-    }
-
-    public function mailer($subject, $message, $sender, $senderName, $sendTo, $CCTO)
-    {
-        return "ok";
-        $mail = new PHPMailer(true);
+        // Server settings
         $mail->SMTPDebug = 0;
         //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
         $mail->isSMTP();
 
-        $mail->Host = 'appmta.dctechmicro.com'; //'smtp.gmail.com';
-        $mail->SMTPAuth = false;
-        //$mail->Username = 'customeractivation@dctechmicro.com';
-        //$mail->Password = 'dctech123';
-        //$mail->SMTPSecure = 'tls';
-        $mail->SMTPAutoTLS = false;
-        $mail->SMTPSecure = false;
+        $mail->Host = 'mail.dctechmicro.com'; //'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'customeractivation@dctechmicro.com';
+        $mail->Password = 'dctech123';
+        $mail->SMTPSecure = 'tls';
         $mail->Port = 25;
         $mail->CharSet = 'utf-8';
         $mail->SMTPOptions = array(
@@ -110,6 +67,8 @@ class Logger
                 'allow_self_signed' => true
             )
         );
+
+        //any suggestion about the sender??
         $mail->setFrom('customeractivation@dctechmicro.com', "DCTECH Mailer");
         if ($sendTo != null)
             foreach ($sendTo as $item) {
@@ -133,29 +92,74 @@ class Logger
         $mail->isHTML(true);                                                                     // Set email format to HTML
         $mail->Subject = $subject;
         $mail->Body    = $message;
+        $mail->send();
+    }
 
-        if (!$mail->send()) {
-            return 'Mailer Error: ' . $mail->ErrorInfo;
-        } else {
-            return 'ok';
-        }
+    public function mailer($subject, $message, $sender, $senderName, $sendTo, $CCTO)
+    {
+        $mail = new PHPMailer(true);
+        // Server settings
+        $mail->SMTPDebug = 0;
+        //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+        $mail->isSMTP();
+
+        $mail->Host = 'mail.dctechmicro.com'; //'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'customeractivation@dctechmicro.com';
+        $mail->Password = 'dctech123';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 25;
+        $mail->CharSet = 'utf-8';
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+
+        //any suggestion about the sender??
+        $mail->setFrom('customeractivation@dctechmicro.com', "DCTECH Mailer");
+        if ($sendTo != null)
+            foreach ($sendTo as $item) {
+                $item = (object) $item;
+                $mail->addAddress($item->email, $item->name);
+            }
+        if ($CCTO != null)
+            foreach ($CCTO as $item) {
+                $item = (object) $item;
+                $mail->addCC($item->email, $item->name);
+            }
+
+        //$mail->addReplyTo($request->email, 'Mailer');
+        //$mail->addCC('pbismonte@dctechmicro.com');
+        //$mail->addBCC('his-her-email@gmail.com');
+
+        //Attachments (optional)
+        // $mail->addAttachment('/var/tmp/file.tar.gz');			// Add attachments
+        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');	// Optional name
+
+        $mail->isHTML(true);                                                                     // Set email format to HTML
+        $mail->Subject = $subject;
+        $mail->Body    = $message;
+        $mail->send();
     }
 
     public function mailerGmail($subject, $message, $sender, $senderName, $sendTo, $CCTO)
     {
+
         $mail = new PHPMailer();
         // Server settings
         //$mail->SMTPDebug = SMTP::DEBUG_SERVER;   // mag return ni ug shit
-        $mail->SMTPDebug = 1;
+        $mail->SMTPDebug = 0;
         $mail->isSMTP();
 
         $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPSecure = "ssl";
+        $mail->Port = 587;
         $mail->SMTPSecure = "tls";
         $mail->SMTPAuth = true;
-        $mail->Port = 465;
-        $mail->Username = 'mwmasterweaks@gmail.com';
-        $mail->Password = 'mweakthegenius';
+        $mail->Username = 'r11cnc.dctech@gmail.com';
+        $mail->Password = 'r11accounting';
 
         // $mail->CharSet = 'utf-8';
         // $mail->SMTPOptions = array(
@@ -166,6 +170,8 @@ class Logger
         //     )
         // );
 
+
+        //any suggestion about the sender??
         $mail->setFrom('r11cnc.dctech@gmail.com', "DCTECH Mailer");
         if ($sendTo != null)
             foreach ($sendTo as $item) {
@@ -189,12 +195,7 @@ class Logger
         $mail->isHTML(true);                                                                     // Set email format to HTML
         $mail->Subject = $subject;
         $mail->Body    = $message;
-
-        if (!$mail->send()) {
-            return 'Mailer Error: ' . $mail->ErrorInfo;
-        } else {
-            return 'ok';
-        }
+        $mail->send();
         // if (!$mail->send()) {
         //     return 'Mailer Error: ' . $mail->ErrorInfo;
         // } else {
@@ -264,6 +265,9 @@ class Logger
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $ret = curl_exec($ch); //get error
         curl_close($ch);
+
+
+
         // \Logger::instance()->logText(
         //     Carbon::now(),
         //     "",
@@ -278,6 +282,7 @@ class Logger
         }
         return $ret;
     }
+
     public function test()
     {
         $connection = ssh2_connect('hosting-new.dctechmicro.com', 22);
@@ -285,13 +290,18 @@ class Logger
             return "nect";
         } else {
             ssh2_auth_password($connection, 'root', '8tnhbaa0');
+
             $stream = ssh2_exec($connection, 'php -m');
+
+
             stream_set_blocking($stream, true);
             $data = "";
             while ($buf = fread($stream, 4096)) {
                 $data .= $buf;
             }
             fclose($stream);
+
+
             return $data;
             //return strval($stream);
         }
@@ -304,7 +314,9 @@ class Logger
 
     public function telnet_test()
     {
+
         TelnetClient::setDebug(true);
+
         $telnet = new TelnetClient('127.0.0.1', 23);
         $telnet->connect();
         $telnet->setPrompt('$');

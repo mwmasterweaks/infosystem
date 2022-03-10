@@ -64,15 +64,16 @@ class MacTableController extends Controller
                     $tbl->mac_address_first = $mac_address_first;
                     $tbl->mac_address_second = $max_second;
                     $tbl->save();
-                    \Logger::instance()->log(
-                        Carbon::now(),
-                        $request->user_id,
-                        $request->user_name,
-                        $this->cname,
-                        "store",
-                        "message",
-                        "Create new mac_table: " . $tbl
-                    );
+                    $this
+                        ->log(
+                            Carbon::now(),
+                            $request->user_id,
+                            $request->user_name,
+                            $this->cname,
+                            "store",
+                            "message",
+                            "Create new mac_table: " . $tbl
+                        );
                     return $this->index();
                 } else {
                     return response()->json(['error' => 'Can\'t Generate Already has max Mac or has duplicate Mac'], 500);

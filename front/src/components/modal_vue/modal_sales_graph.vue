@@ -104,33 +104,52 @@
               <span
                 @click="cellClick(row.item.total_clients)"
                 class="c-point"
-              >{{ row.item.total_clients.length }}</span>
+                >{{ row.item.total_clients.length }}</span
+              >
             </template>
 
             <template v-slot:cell(total_no_contract)="row">
               <span
                 @click="cellClick(row.item.total_no_contract)"
                 class="c-point"
-              >{{ row.item.total_no_contract.length }}</span>
+                >{{ row.item.total_no_contract.length }}</span
+              >
             </template>
 
             <template v-slot:cell(total_no_otc)="row">
+<<<<<<< HEAD
               <span @click="cellClick(row.item.total_no_otc)" class="c-point">{{
                 row.item.total_no_otc.length
               }}</span>
+=======
+              <span @click="cellClick(row.item.total_no_otc)" class="c-point">
+                {{
+                row.item.total_no_otc.length
+                }}
+              </span>
+>>>>>>> summary email Mice (2021-11-26)
             </template>
 
             <template v-slot:cell(for_activation)="row">
               <span
                 @click="cellClick(row.item.for_activation)"
                 class="c-point"
-              >{{ row.item.for_activation.length }}</span>
+                >{{ row.item.for_activation.length }}</span
+              >
             </template>
 
             <template v-slot:cell(activated)="row">
+<<<<<<< HEAD
               <span @click="cellClick(row.item.activated)" class="c-point">{{
                 row.item.activated.length
               }}</span>
+=======
+              <span @click="cellClick(row.item.activated)" class="c-point">
+                {{
+                row.item.activated.length
+                }}
+              </span>
+>>>>>>> summary email Mice (2021-11-26)
             </template>
 
             <template slot="table-caption"></template>

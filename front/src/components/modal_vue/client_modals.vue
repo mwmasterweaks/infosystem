@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="display: none">
+    <div style="display:none;">
       <b-table
         id="genTable1"
         class="elClr"
@@ -35,8 +35,7 @@
             value="4"
             name="isNew"
             color="success-o"
-            >Upgrade</p-radio
-          >
+          >Upgrade</p-radio>
         </div>
         <div class="col-lg-3">
           <p-radio
@@ -45,8 +44,7 @@
             value="5"
             name="isNew"
             color="success-o"
-            >Downgrade</p-radio
-          >
+          >Downgrade</p-radio>
         </div>
       </div>
 
@@ -67,107 +65,15 @@
 
       <!-- /form -->
       <template slot="modal-footer" slot-scope="{}">
-        <b-button size="sm" variant="success" @click="btnChangePackage()"
-          >Create Job Order</b-button
-        >
+        <b-button size="sm" variant="success" @click="btnChangePackage()">Create Job Order</b-button>
       </template>
     </b-modal>
     <!-- End modalChangePackage -->
-
-    <!-- modalAddAttachment ---------------------------------------------------------------------------------------->
-    <b-modal
-      id="modalAddAttachment"
-      :header-bg-variant="' elBG'"
-      :header-text-variant="' elClr'"
-      :body-bg-variant="' elBG'"
-      :body-text-variant="' elClr'"
-      :footer-bg-variant="' elBG'"
-      :footer-text-variant="' elClr'"
-      size="xl"
-      title="Attach file"
-    >
-      <!-- form -->
-
-      <div class="rowFields mx-auto row">
-        <div class="col-lg-3">
-          <p class="textLabel">Attachment:</p>
-        </div>
-        <div class="col-lg-9">
-          <b-form-file
-            v-model="selectedFile"
-            @change="fileChange"
-            :state="Boolean(attachData.attachment)"
-            placeholder="Choose a file or drop it here..."
-            drop-placeholder="Drop file here..."
-          ></b-form-file>
-        </div>
-      </div>
-
-      <div class="rowFields mx-auto row">
-        <div class="col-lg-3">
-          <p class="textLabel">Type:</p>
-        </div>
-        <div class="col-lg-9">
-          <div class="input-group">
-            <model-list-select
-              :list="attachTypeList"
-              v-model="attachData.type"
-              option-value="name"
-              option-text="name"
-              placeholder="Type"
-              v-validate="'required'"
-            ></model-list-select>
-          </div>
-        </div>
-      </div>
-
-      <div class="rowFields mx-auto row">
-        <div class="col-lg-3">
-          <p class="textLabel">Description:</p>
-        </div>
-        <div class="col-lg-9">
-          <textarea
-            rows="2"
-            name="description"
-            class="form-control"
-            v-b-tooltip.hover
-            title="Input Description"
-            placeholder="Description"
-            v-model.trim="attachData.description"
-          ></textarea>
-        </div>
-      </div>
-
-      <!-- Date Applied -->
-      <div class="rowFields mx-auto row">
-        <div class="col-lg-3">
-          <p class="textLabel">Date Applied:</p>
-        </div>
-        <div class="col-lg-9">
-          <div class="input-group">
-            <date-picker
-              v-model="attachData.date_applied"
-              :config="AppliedDateoptions"
-              autocomplete="off"
-            ></date-picker>
-          </div>
-        </div>
-      </div>
-
-      <!-- /form -->
-      <template slot="modal-footer" slot-scope="{}">
-        <b-button size="sm" variant="success" @click="btnAttach()"
-          >Attach
-        </b-button>
-      </template>
-    </b-modal>
-    <!-- End modalAddAttachment -->
   </div>
 </template>
 <script>
 import { ModelListSelect } from "vue-search-select";
 import swal from "sweetalert";
-import datePicker from "vue-bootstrap-datetimepicker";
 
 import VueRangedatePicker from "vue-rangedate-picker";
 import PrettyRadio from "pretty-checkbox-vue/radio";
@@ -177,8 +83,7 @@ export default {
   components: {
     "p-radio": PrettyRadio,
     "model-list-select": ModelListSelect,
-    "rangedate-picker": VueRangedatePicker,
-    "date-picker": datePicker,
+    "rangedate-picker": VueRangedatePicker
   },
   data() {
     return {
@@ -188,9 +93,9 @@ export default {
           {
             key: "balance1",
             label: "balance",
-            formatter: (value) => {
+            formatter: value => {
               return 0;
-            },
+            }
           },
           { key: "id", label: "billing_number" },
           {
@@ -204,14 +109,14 @@ export default {
                 0
               );
               return this.formatDate_mmddyyyy(lastDayOfMonth);
-            },
+            }
           },
           {
             key: "date1",
             label: "issue_date",
             formatter: (value, key, item) => {
               return this.formatDate_mmddyyyy(Date.now());
-            },
+            }
           },
           { key: "service_datefrom", label: "service_datefrom" },
           { key: "service_dateto", label: "service_dateto" },
@@ -221,16 +126,16 @@ export default {
             label: "status",
             formatter: (value, key, item) => {
               return "PENDING";
-            },
-          },
+            }
+          }
         ],
         [
           {
             key: "biller_code",
             label: "biller_code",
-            formatter: (value) => {
+            formatter: value => {
               return "11940655";
-            },
+            }
           },
           { key: "acc_no", label: "account_number" },
           {
@@ -238,7 +143,7 @@ export default {
             label: "account_name",
             formatter: (value, key, item) => {
               return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            },
+            }
           },
           {
             key: "date_activated",
@@ -246,58 +151,58 @@ export default {
             formatter: (value, key, item) => {
               if (value == null) return this.formatDate_mmddyyyy("01-01-1970");
               else return this.formatDate_mmddyyyy(value);
-            },
+            }
           },
           {
             key: "status",
             label: "status",
             formatter: (value, key, item) => {
               return "Active";
-            },
+            }
           },
           { key: "package.name", label: "subscription_plan" },
-          { key: "id", label: "reference_number" },
+          { key: "id", label: "reference_number" }
         ],
         [
           {
             key: "bucket_ip",
             label: "bucket_ip",
-            formatter: (value) => {
+            formatter: value => {
               return "202.137.112.10";
-            },
+            }
           },
           { key: "pk_subscription_id", label: "pk_subscription_id" },
           { key: "info_client.id", label: "IIS_ID" },
           { key: "subscription_name", label: "subscription_name" },
           {
             key: "info_client.subscription_name",
-            label: "IIS_subscription_name",
+            label: "IIS_subscription_name"
           },
           { key: "package_name", label: "package_name" },
           { key: "info_client.pack_name", label: "IIS_package_name" },
           { key: "status_name", label: "status_name" },
           { key: "info_client.status", label: "IIS_status" },
           { key: "client_name", label: "client_name" },
-          { key: "info_client.name", label: "IIS_client_name" },
+          { key: "info_client.name", label: "IIS_client_name" }
         ],
         [
           { key: "pk_subscription_id", label: "pk_subscription_id" },
           { key: "subscription_name", label: "subscription_name" },
           {
             key: "subscription_desc",
-            label: "subscription_desc",
+            label: "subscription_desc"
           },
           { key: "package_name", label: "package_name" },
           { key: "client_name", label: "client_name" },
-          { key: "status_name", label: "status_name" },
+          { key: "status_name", label: "status_name" }
         ],
         [
           {
             key: "bucket_ip",
             label: "bucket_ip",
-            formatter: (value) => {
+            formatter: value => {
               return "202.137.112.14";
-            },
+            }
           },
           { key: "pk_subscription_id", label: "pk_subscription_id" },
           { key: "subscription_name", label: "subscription_name" },
@@ -307,36 +212,15 @@ export default {
           { key: "info_client.name", label: "is_name" },
           { key: "info_client.pack_name", label: "is_package" },
           { key: "info_client.mrr", label: "is_mrr" },
-          { key: "info_client.status", label: "is_status" },
-        ],
+          { key: "info_client.status", label: "is_status" }
+        ]
       ],
       user: [],
       cp: {
         type: 4,
-        pack: {},
+        pack: {}
       },
-      selectedFile: null,
-      attachData: {
-        client_id: null,
-        attachment: null,
-        type: null,
-        description: null,
-        date_applied: null,
-      },
-      AppliedDateoptions: {
-        format: "YYYY-MM-DD",
-        useCurrent: false,
-      },
-      attachTypeList: [
-        { name: "Contract" },
-        { name: "Upgrade" },
-        { name: "Downgrade" },
-        { name: "Renewal" },
-        { name: "Line Transfer" },
-        { name: "Extension" },
-        { name: "Change of account name" },
-      ],
-      roles: [],
+      roles: []
     };
   },
   created() {
@@ -352,9 +236,9 @@ export default {
       this.$root.$emit("call_undo");
     },
     excelReportCSV(tbl) {
-      this.$nextTick(function () {
+      this.$nextTick(function() {
         setTimeout(
-          function () {
+          function() {
             var tab_text = "<table>";
             var textRange;
             var j = 0;
@@ -417,8 +301,8 @@ export default {
         text: "",
         icon: "warning",
         buttons: ["No", "Yes"],
-        dangerMode: true,
-      }).then((update) => {
+        dangerMode: true
+      }).then(update => {
         if (update) {
           var data = {
             ticket_type_id: this.cp.type,
@@ -426,78 +310,31 @@ export default {
             created_by: this.user.id,
             status: "Addendum",
             state: "am",
-            remarks: "Change package:" + this.cp.pack.name,
+            remarks: "Change package: " + this.cp.pack.name
           };
 
           this.$root.$emit("pageLoading");
           this.$http
             .post("api/ActivityTicket", data)
-            .then((response) => {
+            .then(response => {
               console.log(response.body);
               swal("Requested!", "", "success");
               this.$root.$emit("pageLoaded");
             })
-            .catch((response) => {
+            .catch(response => {
               console.log(response.body);
               this.$root.$emit("pageLoaded");
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true,
+                dangerMode: true
               });
             });
         }
       });
-    },
-    fileChange(e) {
-      var fileName = e.target.files[0].name;
-      this.attachData.file_ext = fileName.split(".").pop();
-
-      console.log(this.attachData.file_ext);
-      var fileReader = new FileReader();
-      fileReader.readAsDataURL(e.target.files[0]);
-
-      fileReader.onload = (e) => {
-        console.log(e);
-        this.attachData.attachment = e.target.result;
-      };
-    },
-    btnAttach() {
-      swal({
-        title: "Are you sure?",
-        text: "",
-        icon: "warning",
-        buttons: ["No", "Yes"],
-        dangerMode: true,
-      }).then((ok) => {
-        if (ok) {
-          this.attachData.client_id = this.client.id;
-          this.attachData.user_id = this.user.id;
-          this.attachData.user_name = this.user.name;
-
-          this.$root.$emit("pageLoading");
-          this.$http
-            .post("api/ClientAttachment", this.attachData)
-            .then((response) => {
-              console.log(response.body);
-              swal("Attached!", "", "success");
-              this.$root.$emit("pageLoaded");
-            })
-            .catch((response) => {
-              console.log(response.body);
-              this.$root.$emit("pageLoaded");
-              swal({
-                title: "Error",
-                text: response.body.error,
-                icon: "error",
-                dangerMode: true,
-              });
-            });
-        }
-      });
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
@@ -505,3 +342,5 @@ export default {
   text-align: center;
 }
 </style>
+
+

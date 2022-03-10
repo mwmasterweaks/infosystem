@@ -16,7 +16,6 @@ use App\Branch;
 use App\pon;
 use App\splitter_port;
 use App\area;
-use App\billing;
 use App\User;
 
 class clients_cancelled extends Model
@@ -116,10 +115,5 @@ class clients_cancelled extends Model
     public function status_log()
     {
         return $this->hasMany(client_status_history::class, 'client_id', 'id')->latest();
-    }
-
-    public function billings()
-    {
-        return $this->hasMany(billing::class, 'client_id', 'id')->latest();
     }
 }

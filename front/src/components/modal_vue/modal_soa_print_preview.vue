@@ -190,8 +190,8 @@
                           v-if="data.client.region_id == 22"
                         >
                           <b>
-                            <br />MDFI Building, Ground Floor, <br />Stall #26,
-                            Alunan Avenue, <br />Koronadal City, Philippines
+                            <br />Unit 3 G/F, JYC building, <br />Arellano
+                            Street Zone 3, <br />Koronadal City, Philippines
                             <br />Tel #: (082) 221-2380 <br />VAT Registered
                             TIN: 003-375-571-001
                           </b>
@@ -555,9 +555,9 @@
                           border-style: none solid none solid;
                         "
                       >
-                        <span v-if="item.priceFormated != null">
-                          {{ item.priceFormated }}
-                        </span>
+                        <span v-if="item.priceFormated != null">{{
+                          item.priceFormated
+                        }}</span>
                         <span v-else>{{ item.sub_amount }}</span>
                       </td>
                       <td
@@ -721,35 +721,34 @@
                   disconnection. <br />&nbsp;&nbsp;&nbsp;DISREGARD THIS
                   STATEMENT IF PAYMENT HAS BEEN MADE.
                   <br />
-                  <br />* FOR PAYMENT OPTION: <br />&nbsp;&nbsp;&nbsp;Pay with
-                  CASH or CHECK to one of our designated branches.
-                  <br />&nbsp;&nbsp;&nbsp;Fund transfer to our DCTECH bank
-                  account using GCASH or mobile banking app.
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•UNION BANK: Account
-                  Name - Dctech Micro Services, Inc.
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;Account Number:
-                  002820007527 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•LAND
-                  BANK: Account Name - Dctech Micro Services, Inc.
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;Account Number:
-                  0162-1053-45 <br />&nbsp;&nbsp;&nbsp;Online and digital
-                  payment options(
-                  <a
-                    href="https://drive.google.com/file/d/1IeLtWdLFNsttFSynn3Vg95h3ZsmLNfNi/view?usp=sharing"
-                    >Click here for instructions</a
-                  >) <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Dragon Pay(
-                  <a
-                    href="https://gw.dragonpay.ph/GenPay.aspx?merchantid=DCTECHMICROSERV"
-                    >Click here to pay</a
-                  >) <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Union Bank
-                  App(You will need to have a Union Bank account.)
+                  <br />* For Payment Method: <br />&nbsp;&nbsp;&nbsp;Deposit to
+                  any Security Bank offices. -
+                  <span v-if="data.client.region_id == 21"
+                    >0401-030-900-011</span
+                  >
+                  <span v-else>0401-030-900-004</span>
+                  <br />&nbsp;&nbsp;&nbsp;Fund transfer to our Dctech Security
+                  Bank account (You may use GCASH or other mobile banking.)
+                  <br />* All checks must be paid to DCTECH MICRO SERVICES, INC.
+                  Your prompt payment is highly appreciated. <br />* PLEASE PAY
+                  TO AUTHORIZED DCTECH PERSONNEL ONLY.
                   <br />
-                  <br />* FOR MORE INQUIRIES, PLEASE CALL: (082) 221-2380
-                  <br />&nbsp;&nbsp;&nbsp;Mobile No. Sun : 0922-817-2349 /
-                  0922-593-7914, <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; Globe: 0906-585-1320 /
-                  0917-305-9051, <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; Smart: 0928-713-2518 /
-                  0908-886-9736.
+                  <br />* FOR BILLING INQUIRIES, PLEASE CALL: (082) 221-2380
+                  local 1111, 1113 & 1134. <br />&nbsp;&nbsp;&nbsp;Mobile No.
+                  <span v-if="data.client.region_id == 21">0927-024-0834</span>
+                  <span v-else>0925-714-6924</span>
+                  (sun cellular), 0917-705-4366 (globe) & 0999-885-7343 (smart)
+                  Email:
+                  <span v-if="data.client.region_id == 12"
+                    >dctechtagum.acctg@gmail.com</span
+                  >
+                  <span v-else>r11cnc.dctech@gmail.com</span>
+                  <br />
+                  <br />* FOR TECHNICAL SUPPORT PLEASE CALL: (082) 221-2380
+                  Email: helpdesk@dctechmicro.com <br />&nbsp;&nbsp;&nbsp;Mobile
+                  No. 0922-817-2349 / 0922-593-7914 (sun cellular),
+                  0906-585-1320 / 0917-305-9051 (globe) & 0928-713-2518 /
+                  0908-886-9736 (smart).
                   <br />
                   <br />
                   <span style="color: red"
@@ -953,7 +952,7 @@ export default {
     "p-check": PrettyCheck,
     "model-list-select": ModelListSelect,
     "rangedate-picker": VueRangedatePicker,
-    multiselect: Multiselect,
+    multiselect: Multiselect
   },
   data() {
     return {
@@ -969,23 +968,23 @@ export default {
         sendTo: [],
         CCTO: [],
         togmail: "yes",
-        emailSender: "default",
+        emailSender: "default"
       },
       modiView: {
         data: {
-          due_date: "",
+          due_date: ""
         },
-        due_date: false,
+        due_date: false
       },
       AppliedDateoptions: {
         format: "YYYY-MM-DD",
-        useCurrent: false,
+        useCurrent: false
       },
       emailSenderData: {
         email: "",
-        pass: "",
+        pass: ""
       },
-      roles: [],
+      roles: []
     };
   },
   created() {
@@ -997,7 +996,7 @@ export default {
       this.emailSenderData.pass = this.$global.getSoaEmailPass();
     }
 
-    this.$http.get("api/getClientEmail").then((response) => {
+    this.$http.get("api/getClientEmail").then(response => {
       this.contacts = response.body;
       // console.log(this.contacts);
       // console.log(response.body);
@@ -1016,9 +1015,9 @@ export default {
       return [year, month, day].join("-");
     },
     fnExcelReport(tbl) {
-      this.$nextTick(function () {
+      this.$nextTick(function() {
         setTimeout(
-          function () {
+          function() {
             var tab_text = "<table border='2px'><tr>";
             var textRange;
             var j = 0;
@@ -1078,7 +1077,7 @@ export default {
         "Sept.",
         "Oct.",
         "Nov.",
-        "Dec.",
+        "Dec."
       ];
       return [mstring[month - 1], day, year].join(" ");
     },
@@ -1108,8 +1107,8 @@ export default {
       this.email_data.CCTO = [
         {
           email: this.user.email,
-          name: this.user.name,
-        },
+          name: this.user.name
+        }
       ];
       this.email_data.sendTo = [];
       var tempEmail = email.split(", ");
@@ -1117,7 +1116,7 @@ export default {
       for (var i = 0; i < tempEmail.length; ++i) {
         this.email_data.sendTo.push({
           email: tempEmail[i],
-          name: this.data.client.name,
+          name: this.data.client.name
         });
       }
       this.$bvModal.show("modal_select_recipientttt");
@@ -1130,7 +1129,7 @@ export default {
       console.log(this.email_data);
       this.$http
         .post("api/Billing/emailSOA", this.email_data)
-        .then((response) => {
+        .then(response => {
           console.log(response.body);
           this.$root.$emit("pageLoaded");
           this.$global.setSoaEmail(this.emailSenderData.email);
@@ -1139,13 +1138,13 @@ export default {
           if (response.body.includes("ok")) swal("Email Sent!");
           else swal("Send Failed");
         })
-        .catch((response) => {
+        .catch(response => {
           this.$root.$emit("pageLoaded");
           swal({
             title: "Error",
             text: response.body.error + " " + response.body.message,
             icon: "error",
-            dangerMode: true,
+            dangerMode: true
           });
           this.tblisBusy = false;
         });
@@ -1156,25 +1155,25 @@ export default {
       console.log(this.data);
       this.$http
         .post("api/Billing/storeBillStatement", this.data)
-        .then((response) => {
+        .then(response => {
           console.log(response.body);
           this.data.saved = true;
           this.data.id = response.body.id;
           swal("Saved! you can now print or email this statement now.");
         })
-        .catch((response) => {
+        .catch(response => {
           swal({
             title: "Error",
             text: response.body.error + " " + response.body.message,
             icon: "error",
-            dangerMode: true,
+            dangerMode: true
           });
         });
     },
     addTagInSendTo(newTag) {
       const tag = {
         name: newTag,
-        email: newTag,
+        email: newTag
       };
       this.contacts.push(tag);
       this.email_data.sendTo.push(tag);
@@ -1182,7 +1181,7 @@ export default {
     addTagInCCTo(newTag) {
       const tag = {
         name: newTag,
-        email: newTag,
+        email: newTag
       };
       this.contacts.push(tag);
       this.email_data.CCTO.push(tag);
@@ -1202,8 +1201,8 @@ export default {
           text: "",
           icon: "warning",
           buttons: ["No", "Yes"],
-          dangerMode: true,
-        }).then((willDelete) => {
+          dangerMode: true
+        }).then(willDelete => {
           if (willDelete) {
             this.data.user_id = this.user.id;
             this.data.user_name = this.user.name;
@@ -1211,19 +1210,19 @@ export default {
 
             this.$http
               .post("api/Billing/deleteBillState", this.data)
-              .then((response) => {
+              .then(response => {
                 console.log(response.body);
-                swal("Deleted", "", "success").then((value) => {});
+                swal("Deleted", "", "success").then(value => {});
                 this.$bvModal.hide("modalSoaPrintPreview");
                 this.$root.$emit("reloadBillStatement");
               })
-              .catch((response) => {
+              .catch(response => {
                 swal({
                   title: "Error",
                   text: response.body.error,
                   icon: "error",
-                  dangerMode: true,
-                }).then((value) => {
+                  dangerMode: true
+                }).then(value => {
                   if (value) {
                   }
                 });
@@ -1236,11 +1235,11 @@ export default {
           text: "You are not allow to delete a method",
           icon: "warning",
           buttons: true,
-          dangerMode: true,
+          dangerMode: true
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

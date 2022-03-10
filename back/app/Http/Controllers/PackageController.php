@@ -105,16 +105,17 @@ class PackageController extends Controller
                 $tbl1 = Package::findOrFail($id);
                 Package::destroy($id);
 
-                \Logger::instance()->log(
-                    Carbon::now(),
-                    "",
-                    "",
-                    $this->cname,
-                    "destroy",
-                    "message",
-                    "delete Package id " . $id .
-                        "\nOld Package: " . $tbl1
-                );
+                $this
+                    ->log(
+                        Carbon::now(),
+                        "",
+                        "",
+                        $this->cname,
+                        "destroy",
+                        "message",
+                        "delete Package id " . $id .
+                            "\nOld Package: " . $tbl1
+                    );
 
                 return $this->index();
             } else {

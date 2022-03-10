@@ -201,11 +201,6 @@ export default function(Vue) {
       //   plugin.setAttribute("src", "src/plugins/assets/js/pages/form_inputs.js");
       //   plugin.async = true;
       //   document.head.appendChild(plugin);
-    },
-    excelDateToJSDate(excelDate) {
-      var date = new Date(Math.round((excelDate - 25569) * 86400 * 1000));
-      var converted_date = date.toISOString().split("T")[0];
-      return converted_date;
     }
   };
 

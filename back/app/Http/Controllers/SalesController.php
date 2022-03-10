@@ -35,15 +35,16 @@ class SalesController extends Controller
 
             if ($chk == null) {
                 $data = Sales::create($request->all());
-                \Logger::instance()->log(
-                    Carbon::now(),
-                    $request->user_id_log,
-                    $request->user_name_log,
-                    $this->cname,
-                    "store",
-                    "message",
-                    "Create new Sales: " . $data
-                );
+                $this
+                    ->log(
+                        Carbon::now(),
+                        $request->user_id_log,
+                        $request->user_name_log,
+                        $this->cname,
+                        "store",
+                        "message",
+                        "Create new Sales: " . $data
+                    );
                 return $this->index();
             } else {
                 return response()->json(['error' => "The Sales you select are already in the list."], 500);

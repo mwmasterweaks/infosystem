@@ -17,6 +17,7 @@ Route::get('/test', function () {
 Route::get('calendar_events/testAutoCommand', 'CalendarEventController@testAutoCommand');
 
 Route::post('log_login', 'UserController@log_login');
+Route::post('CustomerPayment/storePayment', 'CustomerPaymentController@storePayment');
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/user', function (Request $request) {
@@ -80,7 +81,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('sales_agent', 'SalesAgentController');
     Route::resource('Rebates', 'RebateController');
     Route::resource('getStatusHistory', 'ClientStatusHistoryController');
-    Route::resource('ClientAttachment', 'ClientAttachmentController');
 
     Route::post('Rebates/report', 'RebateController@report');
     Route::post('WHT/report', 'WhtController@report');
@@ -106,7 +106,6 @@ Route::group(['middleware' => 'auth:api'], function () {
 
 
     Route::post('CustomerPayment/dailyReport', 'CustomerPaymentController@dailyReport');
-    Route::post('CustomerPayment/storePayment', 'CustomerPaymentController@storePayment');
 
     Route::post('Splitter/modiStore', 'SplitterController@modiStore');
 
@@ -208,7 +207,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('Client/update_per_row', 'ClientController@update_per_row');
     Route::post('Client/cancelClient', 'ClientController@cancelClient');
     Route::post('Client/retrieveClient', 'ClientController@retrieveClient');
-    Route::post('Client/updateRows', 'ClientController@updateRows');
 
 
 
@@ -247,5 +245,4 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('ActivityTicket/verify', 'ActivityTicketController@verify');
     Route::get('ActivityTicket/search_data/{by}/{search}', 'ActivityTicketController@search_data');
     Route::get('ActivityTicket/subIndex/{role}', 'ActivityTicketController@subIndex');
-    Route::post('ActivityTicket/updateSOA/', 'ActivityTicketController@updateSOA');
 });

@@ -160,16 +160,18 @@ class ClosureController extends Controller
                 } else {
                     $tbl1111 = closure::findOrFail($id);
                     closure::destroy($id);
-                    \Logger::instance()->log(
-                        Carbon::now(),
-                        "",
-                        "",
-                        $this->cname,
-                        "destroy",
-                        "message",
-                        "delete closure id " . $id .
-                            "\nOld closure: " . $tbl1111
-                    );
+
+                    $this
+                        ->log(
+                            Carbon::now(),
+                            "",
+                            "",
+                            $this->cname,
+                            "destroy",
+                            "message",
+                            "delete closure id " . $id .
+                                "\nOld closure: " . $tbl1111
+                        );
                     return app('App\Http\Controllers\NodeController')->index();
                 }
             }
