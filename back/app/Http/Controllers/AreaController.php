@@ -1,0 +1,139 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\area;
+use Illuminate\Http\Request;
+use Carbon\Carbon;
+
+class AreaController extends Controller
+{
+    private $cname = "AreaController";
+
+    public function index()
+    {
+        $area = area::with(['region'])->get();
+
+        return response()->json($area);
+    }
+
+    public function create()
+    {
+        //
+    }
+
+
+    public function store(Request $request)
+    {
+        try {
+            $data = area::create($request->all());
+            \Logger::instance()->log(
+                Carbon::now(),
+                $request->user_id,
+                $request->user_name,
+                $this->cname,
+                "store",
+                "message",
+                "Create new area: " . $data
+            );
+            return $this->index();
+        } catch (\Illuminate\Database\QueryException $ex) {
+            \Logger::instance()->log(
+                Carbon::now(),
+                $request->user_id,
+                $request->user_name,
+                $this->cname,
+                "store",
+                "Error",
+                $ex->getMessage()
+            );
+            return response()->json(['error' => $ex->errorInfo[2]], 500);
+        }
+    }
+
+
+    public function show(area $area)
+    {
+        //
+    }
+
+    public function edit(area $area)
+    {
+        //
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+
+            $cmd  = area::findOrFail($id);
+            $logFrom = $cmd->replicate();
+            $input = $request->all();
+
+            $cmd->fill($input)->save();
+            $logTo = $cmd;
+            \Logger::instance()->log(
+                Carbon::now(),
+                $request->user_id,
+                $request->user_name,
+                $this->cname,
+                "update",
+                "message",
+                "update area id " . $id . "\nFrom: " . $logFrom . "\nTo: " . $logTo
+            );
+            return $this->index();
+        } catch (\Illuminate\Database\QueryException $ex) {
+            \Logger::instance()->log(
+                Carbon::now(),
+                $request->user_id,
+                $request->user_name,
+                $this->cname,
+                "update",
+                "Error",
+                $ex->getMessage()
+            );
+            return response()->json(['error' => $ex->getMessage()], 500);
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $tbl1 = area::findOrFail($id);
+            area::destroy($id);
+
+            \Logger::instance()->log(
+                Carbon::now(),
+                "",
+                "",
+                $this->cname,
+                "destroy",
+                "message",
+                "delete area id " . $id .
+                    "\nOld area: " . $tbl1
+            );
+            return $this->index();
+        } catch (\Exception $ex) {
+            \Logger::instance()->log(
+                Carbon::now(),
+                "",
+                "",
+                $this->cname,
+                "destroy",
+                "Error",
+                $ex->getMessage()
+            );
+            return response()->json(['error' => 'There was a problem deleting this area.'], 500);
+        }
+    }
+    public function log($date, $userID, $userName, $ControllerName, $functionName, $logType, $message)
+    {
+        $filenameDate = date("mY");
+        $myfile = fopen("logs/log" . $filenameDate . ".txt", "a") or die("Unable to open file!");
+        $txt = $date . "\t--\t" . $userID . "\t--\t" . $userName . "\t--\t" . $ControllerName .
+            "\t--\t" . $functionName . "\t--\t" . $logType . "\t--\t" . $message . "\n\n";
+        fwrite($myfile, $txt);
+        fclose($myfile);
+        return "ok";
+    }
+}

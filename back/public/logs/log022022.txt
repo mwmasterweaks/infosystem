@@ -1,0 +1,4 @@
+2022-02-05 10:45:02	--	1	--	Peter R. Bismonte	--	ClientDetailController	--	storeJobOrder	--	message	--	Create new job order: 1
+
+2022-02-07 10:13:39	--	1	--	Peter R. Bismonte	--	ClientDetailController	--	storeJobOrder	--	message	--	Create new job order: 1
+

@@ -1,0 +1,60 @@
+<<<<<<< HEAD
+2022-01-31 14:23:46	--	1	--	Peter R. Bismonte	--	TicketController	--	destroy	--	message	--	delete Ticket id 18458
+Old Ticket: {"id":18458,"ticket_id":"RES20211214","client_id":29407,"user_id":2211,"updated_by":null,"complain":null,"findings":null,"action":null,"complaint_new":1,"bwmon":null,"device":null,"loss":null,"downtime":null,"cacti":null,"rep_findings":null,"rep_action":null,"rebatable":null,"remarks":null,"report":null,"prev_status":null,"Status_Ticket_id":2,"area_id":16,"connection_status":"down","technical_assigned":null,"target_date":null,"team_assigned":null,"downtime_hours":null,"date_time_fixed":null,"to_soa":0,"created_at":"2021-12-14 12:48:54","updated_at":"2021-12-14 12:48:54"}
+=======
+2022-01-11 16:42:03	--	1	--	Peter R. Bismonte	--	TicketController	--	update	--	message	--	update Ticket id 17493
+From: {"id":17493,"ticket_id":"RES20220111","client_id":11575,"user_id":1,"updated_by":null,"complain":null,"findings":null,"action":null,"complaint_new":1,"bwmon":null,"device":null,"loss":null,"downtime":null,"cacti":null,"rep_findings":null,"rep_action":null,"rebatable":null,"remarks":null,"report":null,"prev_status":null,"Status_Ticket_id":2,"area_id":12,"connection_status":"down","technical_assigned":null,"target_date":null,"team_assigned":null,"downtime_hours":null,"date_time_fixed":null,"to_soa":1,"created_at":"2022-01-11 16:41:33","updated_at":"2022-01-11 16:42:00"}
+To: 1
+
+2022-01-11 16:51:54	--	1	--	Peter R. Bismonte	--	BillingController	--	deleteSOA	--	message	--	delete deleteSOA id 15811
+Old deleteSOA: 1
+
+2022-01-11 16:52:02	--	1	--	Peter R. Bismonte	--	BillingController	--	deleteSOA	--	message	--	delete deleteSOA id 10526
+Old deleteSOA: 1
+
+2022-01-11 16:52:08	--	1	--	Peter R. Bismonte	--	BillingController	--	deleteSOA	--	message	--	delete deleteSOA id 5776
+Old deleteSOA: 1
+
+2022-01-31 13:43:25	--	1	--	Peter R. Bismonte	--	ActivityTicketTypeController	--	store	--	message	--	Create new activity_ticket_type: {"name":"123456","updated_at":"2022-01-31 13:43:25","created_at":"2022-01-31 13:43:25","id":5}
+
+2022-01-31 13:43:30	--		--		--	ActivityTicketTypeController	--	destroy	--	Error	--	Method App\Http\Controllers\ActivityTicketTypeController::log does not exist.
+
+2022-01-31 13:52:26	--	1	--	Peter R. Bismonte	--	ActivityTicketTypeController	--	store	--	message	--	Create new activity_ticket_type: {"name":"Test 1234","updated_at":"2022-01-31 13:52:26","created_at":"2022-01-31 13:52:26","id":1}
+
+2022-01-31 13:52:35	--	1	--	Peter R. Bismonte	--	ActivityTicketTypeController	--	update	--	message	--	update activity_ticket_type id 1
+From: {"name":"Test 1234"}
+To: {"id":1,"name":"Test","created_at":"2022-01-31 13:52:26","updated_at":"2022-01-31 13:52:35"}
+
+2022-01-31 13:52:40	--		--		--	ActivityTicketTypeController	--	destroy	--	Error	--	Method App\Http\Controllers\ActivityTicketTypeController::log does not exist.
+
+2022-01-31 13:55:05	--	1	--	Peter R. Bismonte	--	ActivityTicketTypeController	--	store	--	message	--	Create new activity_ticket_type: {"name":"test","updated_at":"2022-01-31 13:55:05","created_at":"2022-01-31 13:55:05","id":2}
+
+2022-01-31 13:56:34	--		--		--	ActivityTicketTypeController	--	destroy	--	Error	--	Method App\Http\Controllers\ActivityTicketTypeController::log does not exist.
+
+2022-01-31 14:09:59	--	1	--	Peter R. Bismonte	--	ActivityTicketTypeController	--	store	--	message	--	Create new activity_ticket_type: {"name":"Test123","updated_at":"2022-01-31 14:09:59","created_at":"2022-01-31 14:09:59","id":3}
+
+2022-01-31 14:10:06	--	1	--	Peter R. Bismonte	--	ActivityTicketTypeController	--	update	--	message	--	update activity_ticket_type id 3
+From: {"name":"Test123"}
+To: {"id":3,"name":"Test","created_at":"2022-01-31 14:09:59","updated_at":"2022-01-31 14:10:06"}
+>>>>>>> 3ec713e2f94dd177b10406cd9b9134688c1f9dc8
+
+2022-01-31 17:31:48	--	1	--	Peter R. Bismonte	--	ActivityTicketTypeController	--	store	--	message	--	Create new activity_ticket_type: {"name":"Temp Discon","updated_at":"2022-01-31 17:31:48","created_at":"2022-01-31 17:31:48","id":1}
+
+2022-01-31 18:12:02	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28040
+Row: status
+From: Active
+To: Active
+
+2022-01-31 18:39:33	--		--		--	ActivityTicketController	--	store	--	message	--	Create new activity_ticket: {"ticket_type_id":1,"client_id":28033,"created_by":1,"status":"pending","updated_at":"2022-01-31 18:39:33","created_at":"2022-01-31 18:39:33","id":1}
+
+2022-01-31 18:47:19	--		--		--	ActivityTicketController	--	store	--	message	--	Create new activity_ticket: {"ticket_type_id":1,"client_id":28040,"created_by":1,"status":"pending","updated_at":"2022-01-31 18:47:19","created_at":"2022-01-31 18:47:19","id":2}
+
+2022-01-31 20:15:47	--	1	--	Peter R. Bismonte	--	ActivityTicketTypeController	--	store	--	message	--	Create new activity_ticket_type: {"name":"Permanent Discon","updated_at":"2022-01-31 20:15:47","created_at":"2022-01-31 20:15:47","id":2}
+
+2022-01-31 20:15:56	--	1	--	Peter R. Bismonte	--	ActivityTicketTypeController	--	store	--	message	--	Create new activity_ticket_type: {"name":"Activate","updated_at":"2022-01-31 20:15:56","created_at":"2022-01-31 20:15:56","id":3}
+
+2022-01-31 20:35:20	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28033
+Row: status
+From: Temp Discon
+To: Active
+

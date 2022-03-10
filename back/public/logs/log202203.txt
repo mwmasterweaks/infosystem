@@ -1,0 +1,42 @@
+2022-03-04 08:07:32	--	1	--	Peter R. Bismonte	--	ClientDetailController	--	update	--	message	--	update Client_detail id 22839
+From: {"id":22839,"client_id":1255,"otc":"Paid","contract_status":null,"mapping_status":1,"cable_category":"Drop Fiber","foc_length":"400","foc_layout":"Pending","foc_schedule":null,"foc_plan_duration":null,"layout_remarks":null,"modem_status":0,"sales_id":null,"applied_date":null,"inst_remarks":null,"target_date":"2021-10-21","aging":null,"date_activated":null,"status":"Confirmed","line_transfer":1,"team_assigned":0,"layout_status":null,"created_at":"2021-10-20 08:17:51","updated_at":"2021-10-20 08:18:40"}
+To: {"id":22839,"client_id":1255,"otc":"Paid","contract_status":null,"mapping_status":1,"cable_category":"Drop Fiber","foc_length":"400","foc_layout":"Pending","foc_schedule":null,"foc_plan_duration":null,"layout_remarks":null,"modem_status":0,"sales_id":null,"applied_date":null,"inst_remarks":null,"target_date":"2021-10-21","aging":null,"date_activated":null,"status":"Confirmed","line_transfer":1,"team_assigned":0,"layout_status":null,"created_at":"2021-10-20 08:17:51","updated_at":"2022-03-04 08:07:32"}
+
+2022-03-04 08:28:59	--	1	--	Peter R. Bismonte	--	ClientController	--	store	--	Error	--	SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Peter Bismonte' for key 'name' (SQL: insert into `clients` (`account_no`, `name`, `owner_name`, `contact_person`, `business_type`, `email_add`, `OTC`, `sales_agent_id`, `term`, `sales_id`, `engineers_id`, `bucket_id`, `subscription_name`, `status`, `date_activated`, `location`, `contact`, `package_id`, `communication_protocol`, `package_type_id`, `lat`, `lng`, `branch_id`, `area_id`, `region_id`, `updated_at`, `created_at`) values (?, Peter Bismonte, peter, peter, Pisonet, bismontepeter@gmail.com, 3360, ?, 36, 1, 1, ?, ?, ?, ?, KATAMBAK STREET, 09092104014, 480, Internet, 3, 7.0406396, 125.5769922, 40, 11, 51, 2022-03-04 08:28:59, 2022-03-04 08:28:59))
+
+2022-03-04 08:29:09	--	1	--	Peter R. Bismonte	--	ClientController	--	store	--	message	--	Create new Client: id: 34925,client_details: {"client_id":34925,"aging":null,"mapping_status":1,"foc_layout":"Pending","applied_date":null,"cable_category":"Drop Fiber","foc_length":"150","created_at":"2022-03-04 08:29:09","updated_at":"2022-03-04 08:29:09","status":"Confirmed","id":28304}
+
+2022-03-04 08:29:09	--	1	--	Peter R. Bismonte	--	ClientController	--	store	--	message	--	Create new Client: {"account_no":null,"name":"Peter Bismonte line 2","owner_name":"peter","contact_person":"peter","business_type":"Pisonet","email_add":"bismontepeter@gmail.com","OTC":3360,"sales_agent_id":null,"term":"36","sales_id":1,"engineers_id":1,"bucket_id":null,"subscription_name":null,"status":null,"date_activated":null,"location":"KATAMBAK STREET","contact":"09092104014","package_id":480,"communication_protocol":"Internet","package_type_id":3,"lat":7.0406396,"lng":125.5769922,"branch_id":40,"area_id":11,"region_id":51,"updated_at":"2022-03-04 08:29:09","created_at":"2022-03-04 08:29:09","id":34925}
+
+2022-03-04 08:46:42	--	1	--	Peter R. Bismonte	--	ClientController	--	updateContract	--	message	--	update Contract client ID34925
+
+2022-03-04 08:50:07	--	1	--	Peter R. Bismonte	--	ClientDetailController	--	storeJobOrder	--	message	--	Create new job order: 1
+
+2022-03-04 08:50:07	--	1	--	Peter R. Bismonte	--	ClientDetailController	--	updateTargetDate	--	message	--	Update target date from: {"target_date":null} to: {"target_date":"2022-03-05"}  of client_detail ID: 28304
+
+2022-03-04 08:51:38	--	1	--	Peter R. Bismonte	--	ClientDetailController	--	updateTargetDate	--	message	--	Update target date from: {"target_date":"2022-03-05"} to: {"target_date":"2022-03-03"} (date_only) of client_detail ID: 28304
+
+2022-03-04 08:54:26	--		--		--	JobOrderController	--	update	--	message	--	update Job_order id 25856
+From: {"id":25856,"jo_num":1,"client_id":34925,"client_detail_id":28304,"region_id":40,"details":null,"location":null,"project_description":"Installation","cable_category":"Drop Fiber","foc_length":"150","started":"2022-03-05","finished":null,"engineer_in_charge":1,"prepare":4,"approve":2,"note":1,"created_at":"2022-03-04 08:50:07","updated_at":"2022-03-04 08:50:07"}
+To: {"id":25856,"jo_num":1,"client_id":34925,"client_detail_id":28304,"region_id":40,"details":null,"location":null,"project_description":"Installation","cable_category":"Drop Fiber","foc_length":"150","started":"2022-03-05","finished":"2022-03-04","engineer_in_charge":1,"prepare":4,"approve":2,"note":1,"created_at":"2022-03-04 08:50:07","updated_at":"2022-03-04 08:54:26"}
+
+2022-03-07 19:47:19	--		--		--	ActivityTicketController	--	store	--	message	--	Create new activity_ticket: {"ticket_type_id":"4","client_id":13197,"created_by":1,"status":"Addendum","state":"am","remarks":"Change package:SP700K34M","updated_at":"2022-03-07 19:47:19","created_at":"2022-03-07 19:47:19","id":14}
+
+2022-03-07 23:16:43	--	1	--	Peter R. Bismonte	--	ActivityTicketTypeController	--	store	--	message	--	Create new activity_ticket_type: {"name":"Temp Discon","updated_at":"2022-03-07 23:16:43","created_at":"2022-03-07 23:16:43","id":1}
+
+2022-03-07 23:16:53	--	1	--	Peter R. Bismonte	--	ActivityTicketTypeController	--	store	--	message	--	Create new activity_ticket_type: {"name":"Disconnected","updated_at":"2022-03-07 23:16:53","created_at":"2022-03-07 23:16:53","id":2}
+
+2022-03-07 23:17:03	--	1	--	Peter R. Bismonte	--	ActivityTicketTypeController	--	store	--	message	--	Create new activity_ticket_type: {"name":"Active","updated_at":"2022-03-07 23:17:03","created_at":"2022-03-07 23:17:03","id":3}
+
+2022-03-07 23:17:11	--	1	--	Peter R. Bismonte	--	ActivityTicketTypeController	--	store	--	message	--	Create new activity_ticket_type: {"name":"Upgrade","updated_at":"2022-03-07 23:17:11","created_at":"2022-03-07 23:17:11","id":4}
+
+2022-03-07 23:17:22	--	1	--	Peter R. Bismonte	--	ActivityTicketTypeController	--	store	--	message	--	Create new activity_ticket_type: {"name":"Downgrade","updated_at":"2022-03-07 23:17:22","created_at":"2022-03-07 23:17:22","id":5}
+
+2022-03-08 16:53:39	--		--		--	ClientController	--	retrieveClient	--	message	--	Cancelled Client: {"id":28024,"account_no":"RES-20219-28024","acc_no":null,"region_id":9,"area_id":11,"branch_id":45,"name":"(711)Matina Aplaya","owner_name":"Matina Aplaya","location":"Aplaya Arcade cor. Purok Malinawon, Matina Aplaya, Davao City","contact_person":null,"business_type":null,"contact":null,"email_add":"711@gmail.com","contract":"2021-09-28","remarks":null,"term":24,"OTC":3360,"sales_id":26,"sales_agent_id":null,"engineers_id":5,"package_id":13,"modem_id":null,"communication_protocol":"Internet","package_type_id":4,"onu":null,"modem_mac_address":null,"vlan":null,"ip_assigned":null,"date_assigned":null,"status":"Active","date_activated":"2021-09-29","wfs":0,"lat":null,"lng":null,"bucket_id":18,"subscription_name":"7-11_Matina_Aplaya_bw1","updated_at":"2022-03-08 16:53:39","created_at":"2022-03-08 16:53:39"}
+
+2022-03-08 21:17:21	--	1	--	Peter R. Bismonte	--	ActivityTicketController	--	update	--	message	--	update activity_ticket id 14
+From: {"ticket_type_id":4,"client_id":13197,"created_by":1,"updated_by":null,"status":"Addendum","state":"am","remarks":"Change package:SP700K34M","date_applied":null}
+To: 1
+
+2022-03-09 22:37:01	--	1	--	Import Payment	--	CustomerPaymentController	--	storePayment	--	message	--	Import payment : [{"Create Date":44626.29195601852,"Date":"2022-03-07","OR":"BTIUX754","Merchant Txn Id":1235147,"Ccy":"PHP","Amount":1200,"Fee":20,"Settlement":1180,"Proc":"ECPY","Statement_id":91168,"Account_name":"Lolet M. Morta","Remarks":"AAAAAAAAAAAaAA"},{"Create Date":44627.36417824074,"Date":"2022-03-07","OR":"J3NHJEW5","Merchant Txn Id":1236217,"Ccy":"PHP","Amount":1460,"Fee":10,"Settlement":1450,"Proc":"MBTC","Statement_id":92749,"Account_name":"Wilma Hinlog","Remarks":"BBBBBBBBBBB","Account_no":"RES-202108-26102"}]
+
