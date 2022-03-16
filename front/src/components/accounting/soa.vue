@@ -64,7 +64,7 @@
                 color="success"
                 v-model="billStateShow"
                 @change="billStateChange"
-                v-if="roles.accounting || roles.helpdesk"
+                v-if="roles.accounting"
               >
                 <i slot="extra" class="icon fas fa-check"></i> </p-check
               >Billing statement list

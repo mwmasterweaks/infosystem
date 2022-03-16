@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\calendar_event;
+use App\Client;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\billing;
@@ -179,7 +180,7 @@ class CalendarEventController extends Controller
     public function testEmail(Request $request)
     {
         if ($request->email == "gmail") {
-            return \Logger::instance()->mailerGmail(
+            \Logger::instance()->mailerGmail(
                 "Test Email send",
                 "body test",
                 $request->user_email,
@@ -216,7 +217,6 @@ class CalendarEventController extends Controller
             $tbl2daysBefore = billing::where("date", $date2daysBefore->toDateString())
                 ->whereHas("client", function ($query) {
                     $query->where("package_type_id", "4");
-                    $query->where("status", "!=", "Disconnected");
                 })
                 ->groupBy('client_id')
                 ->get();
@@ -224,7 +224,6 @@ class CalendarEventController extends Controller
             $tblToday = billing::where("date", $dateNow->toDateString())
                 ->whereHas("client", function ($query) {
                     $query->where("package_type_id", "4");
-                    $query->where("status", "!=", "Disconnected");
                 })->groupBy('client_id')
                 ->get();
 
@@ -232,13 +231,11 @@ class CalendarEventController extends Controller
             $tbl5daysAfter = billing::where("date", $date5daysAfter->toDateString())
                 ->whereHas("client", function ($query) {
                     $query->where("package_type_id", "4");
-                    $query->where("status", "!=", "Disconnected");
                 })->groupBy('client_id')
                 ->get();
             $tbl8daysAfter = billing::where("date", $date8daysAfter->toDateString())
                 ->whereHas("client", function ($query) {
                     $query->where("package_type_id", "4");
-                    $query->where("status", "!=", "Disconnected");
                 })->groupBy('client_id')
                 ->get();
 
@@ -469,7 +466,7 @@ class CalendarEventController extends Controller
                         return $item["region_id"] == $region->id;
                     });
                     if (count($mssgg) > 0)
-                        \Logger::instance()->mailer(
+                        \Logger::instance()->mailerZimbra(
                             "SMS Logs for " . $region->name . " Region Clients",
                             $mssgg->implode("msg", " "),
                             "",

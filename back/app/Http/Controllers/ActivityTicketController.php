@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\activity_ticket;
 use App\billing;
-use App\Package;
 use App\Client;
 use App\logs;
 use App\client_status_history;
@@ -19,7 +18,7 @@ class ActivityTicketController extends Controller
     private $mainComand;
     public function __construct()
     {
-        $this->mainComand = activity_ticket::with(['ticket_type', 'client.branch', 'created_by', 'updated_by', "remarks_log.user", "remarks_log.replies.user"]);
+        $this->mainComand = activity_ticket::with(['ticket_type', 'client', 'created_by', 'updated_by', "remarks_log.user", "remarks_log.replies.user"]);
     }
 
     public function index()
@@ -54,7 +53,6 @@ class ActivityTicketController extends Controller
     {
         $tbl = (clone $this->mainComand)
             ->join("clients", "activity_tickets.client_id", "clients.id")
-            ->join("activity_ticket_types", "activity_tickets.ticket_type_id", "activity_ticket_types.id")
             ->where($by, 'like', '%' . $search . '%')
             ->select("activity_tickets.*")
             ->orderBy('activity_tickets.created_at')
@@ -76,13 +74,6 @@ class ActivityTicketController extends Controller
             $aging = $dt->diffInDays($dtnow, false);
             $item->aging = $aging;
             $item->check = false;
-
-            //add updated package to item
-            if ($item->ticket_type_id == 4 || $item->ticket_type_id == 5) {
-                $remarks = explode(":", $item->remarks);
-                $pack = Package::with(['package_type'])->where("name", $remarks[1])->first();
-                $item->packageToUpdate = $pack;
-            }
             array_push($temp, $item);
         }
         $c1 = collect();
@@ -105,7 +96,7 @@ class ActivityTicketController extends Controller
     public function store(Request $request)
     {
         try {
-            DB::beginTransaction();
+
             $tbl = activity_ticket::where('client_id', $request->client_id)
                 ->where('status', 'Pending')
                 ->first();
@@ -113,30 +104,18 @@ class ActivityTicketController extends Controller
                 return response()->json(['error' => "Client has already job order request"], 500);
 
             $data = activity_ticket::create($request->all());
-
-            logs::create([
-                'user_id' => $request->user_id,
-                'controller' => $this->cname,
-                'function_name' => 'store',
-                'action' => 'Create new activity_ticket',
-                'source_table' => 'activity_tickets',
-                'source_id' => $data->id,
-                'data' => $data,
-            ]);
-            // \Logger::instance()->log(
-            //     Carbon::now(),
-            //     $request->user_id,
-            //     $request->user_name,
-            //     $this->cname,
-            //     "store",
-            //     "message",
-            //     "Create new activity_ticket: " . $data
-            // );
-            DB::commit();
+            \Logger::instance()->log(
+                Carbon::now(),
+                $request->user_id,
+                $request->user_name,
+                $this->cname,
+                "store",
+                "message",
+                "Create new activity_ticket: " . $data
+            );
             return $this->index();
         } catch (\Illuminate\Database\QueryException $ex) {
-            DB::rollBack();
-            \Logger::instance()->logError(
+            \Logger::instance()->log(
                 Carbon::now(),
                 $request->user_id,
                 $request->user_name,
@@ -161,22 +140,13 @@ class ActivityTicketController extends Controller
 
     public function update(Request $request, $id)
     {
-
         try {
+
             $cmd  = activity_ticket::findOrFail($id);
             $logFrom = $cmd->replicate();
-
-            $logTo = DB::table("activity_tickets")
-                ->where("id", $id)
-                ->update([
-                    'ticket_type_id' => $request->ticket_type_id,
-                    'updated_by' => $request->updated_by,
-                    'status' => $request->status,
-                    'state' => $request->state,
-                    'remarks' => $request->remarks,
-                    'updated_at' => Carbon::now(),
-                ]);
-
+            $input = $request->all();
+            $cmd->fill($input)->save();
+            $logTo = $cmd;
             \Logger::instance()->log(
                 Carbon::now(),
                 $request->user_id,
@@ -186,7 +156,7 @@ class ActivityTicketController extends Controller
                 "message",
                 "update activity_ticket id " . $id . "\nFrom: " . $logFrom . "\nTo: " . $logTo
             );
-            return $this->subIndex($request->role);
+            return $this->index();
         } catch (\Illuminate\Database\QueryException $ex) {
             \Logger::instance()->log(
                 Carbon::now(),
@@ -239,31 +209,19 @@ class ActivityTicketController extends Controller
             DB::table("activity_tickets")
                 ->where("id", $activity_ticket->id)
                 ->update([
-                    'status' => $request->status,
-                    'state' => $request->state,
-                    'updated_by' => $request->user_id,
-                    'date_applied' => Carbon::now(),
+                    'status' => 'Completed',
                 ]);
 
 
-            logs::create([
-                'user_id' => $request->user_id,
-                'controller' => $this->cname,
-                'function_name' => 'updateClientStatus',
-                'action' => 'Update status to ' . $type,
-                'source_table' => 'clients',
-                'source_id' => $id,
-                'data' => '',
-            ]);
-            // \Logger::instance()->log(
-            //     Carbon::now(),
-            //     $request->user_id,
-            //     $request->user_name,
-            //     $this->cname,
-            //     "updateClientStatus",
-            //     "message",
-            //     "activity_ticket_id: " . $activity_ticket->id
-            // );
+            \Logger::instance()->log(
+                Carbon::now(),
+                $request->user_id,
+                $request->user_name,
+                $this->cname,
+                "updateClientStatus",
+                "message",
+                "activity_ticket_id: " . $activity_ticket->id
+            );
 
             DB::commit();
             return $this->subIndex($request->role);
@@ -274,7 +232,7 @@ class ActivityTicketController extends Controller
                 $request->user_id,
                 $request->user_name,
                 $this->cname,
-                "updateClientStatus",
+                "update_per_row",
                 "Error",
                 $ex->getMessage()
             );
@@ -348,30 +306,20 @@ class ActivityTicketController extends Controller
                     ->update([
                         'status' => 'Pending',
                         'state' => 'helpdesk',
-                        'updated_by' => $request->user_id,
                         'updated_at' => Carbon::now(),
                     ]);
                 $log_msg .= $item->id . ', ';
             }
 
-            logs::create([
-                'user_id' => $request->user_id,
-                'controller' => $this->cname,
-                'function_name' => 'verify',
-                'action' => 'verify selected JO ',
-                'source_table' => 'activity_tickets',
-                'source_id' => $log_msg,
-                'data' => '',
-            ]);
-            // \Logger::instance()->log(
-            //     Carbon::now(),
-            //     $request->user_id,
-            //     $request->user_name,
-            //     $this->cname,
-            //     "verify",
-            //     "message",
-            //     "verify selected: " . $log_msg
-            // );
+            \Logger::instance()->log(
+                Carbon::now(),
+                $request->user_id,
+                $request->user_name,
+                $this->cname,
+                "verify",
+                "message",
+                "verify selected: " . $log_msg
+            );
             DB::commit();
             return $this->subIndex($request->role);
         } catch (\Exception $ex) {

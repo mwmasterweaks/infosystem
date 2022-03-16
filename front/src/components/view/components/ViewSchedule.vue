@@ -1002,7 +1002,7 @@
           </div>
         </div>-->
 
-        <!-- <div class="rowFields mx-auto row">
+        <div class="rowFields mx-auto row">
           <div class="col-lg-2"></div>
           <div class="col-lg-8">
             <center>
@@ -1059,7 +1059,7 @@
             </GmapMap>
           </div>
           <div class="col-lg-2"></div>
-        </div>-->
+        </div>
 
         <div class="rowFields mx-auto row">
           <div class="col-lg-3">
@@ -2672,7 +2672,6 @@ export default {
       });
     },
     updateTargetDate() {
-      console.log(this.client_update_target_date);
       swal({
         title: "Are you sure?",
         text: "",
@@ -3002,7 +3001,6 @@ export default {
       });
     },
     btnUpdateJO() {
-      console.log(this.View_Job_Order_All.JobOrder);
       swal({
         title: "Are you sure?",
         text: "",
@@ -3010,7 +3008,7 @@ export default {
         buttons: ["No", "Yes"],
       }).then((yes) => {
         if (yes) {
-          this.View_Job_Order_All.JobOrder.update_in = "schedule";
+          this.View_Job_Order_All.update_in = "schedule";
           this.$http
             .put(
               "api/JobOrder/" + this.View_Job_Order_Id,

@@ -16,6 +16,7 @@
 
 2022-03-08 16:31:18	--		--		--	ClientController	--	retrieveClient	--	Error	--	SQLSTATE[42S22]: Column not found: 1054 Unknown column 'pon_id' in 'field list' (SQL: insert into `clients` (`id`, `account_no`, `acc_no`, `region_id`, `area_id`, `branch_id`, `name`, `owner_name`, `location`, `contact_person`, `business_type`, `contact`, `email_add`, `contract`, `remarks`, `term`, `OTC`, `sales_id`, `sales_agent_id`, `engineers_id`, `package_id`, `modem_id`, `communication_protocol`, `package_type_id`, `pon_id`, `onu`, `modem_mac_address`, `vlan`, `ip_assigned`, `date_assigned`, `status`, `date_activated`, `wfs`, `lat`, `lng`, `bucket_id`, `subscription_name`, `updated_at`, `created_at`) values (28024, RES-20219-28024, ?, 9, 11, 45, (711)Matina Aplaya, Matina Aplaya, Aplaya Arcade cor. Purok Malinawon, Matina Aplaya, Davao City, ?, ?, ?, 711@gmail.com, 2021-09-28, ?, 24, 3360, 26, ?, 5, 13, ?, Internet, 4, ?, ?, ?, ?, ?, ?, Active, 2021-09-29, 0, ?, ?, 18, 7-11_Matina_Aplaya_bw1, 2022-03-08 16:31:18, 2022-03-08 16:31:18))
 
+<<<<<<< HEAD
 2022-03-11 09:57:57	--		--		--	ActivityTicketController	--	store	--	Error	--	SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'user_id' cannot be null (SQL: insert into `logs` (`user_id`, `controller`, `function_name`, `action`, `source_table`, `source_id`, `data`, `updated_at`, `created_at`) values (?, ActivityTicketController, store, Create new activity_ticket, activity_tickets, 15, {"ticket_type_id":2,"client_id":28046,"created_by":1,"status":"Pending","state":"helpdesk","updated_at":"2022-03-11 09:57:57","created_at":"2022-03-11 09:57:57","id":15}, 2022-03-11 09:57:57, 2022-03-11 09:57:57))
 
 2022-03-11 11:24:48	--		--		--	UserController	--	Log in Incorrect credentials	--	Error	--	Username used: rnd@dctechmicro.com password used: mweakthegenius
@@ -31,4 +32,29 @@
 2022-03-12 21:04:35	--		--		--	UserController	--	Log in Incorrect credentials	--	Error	--	Username used: rnd@dctechmicro.com password used: mweakthegenius
 
 2022-03-12 21:05:24	--		--		--	UserController	--	Log in Incorrect credentials	--	Error	--	Username used: rnd@dctechmicro.com password used: mweakthegenius
+=======
+2022-03-10 15:38:59	--		--		--	UserController	--	Log in Incorrect credentials	--	Error	--	Username used: rnd@dctechmicro.com password used: mweakthegenius
+
+2022-03-10 15:51:31	--		--		--	UserController	--	Log in Incorrect credentials	--	Error	--	Username used: rnd@dctechmicro.com password used: mweakthegenius
+
+2022-03-10 15:52:07	--		--		--	UserController	--	Log in Incorrect credentials	--	Error	--	Username used: rnd@dctechmicro.com password used: mweakthegenius
+
+2022-03-10 15:52:14	--		--		--	UserController	--	Log in Incorrect credentials	--	Error	--	Username used: rnd@dctechmicro.com password used: mweakthegenius
+
+2022-03-10 15:53:38	--		--		--	UserController	--	Log in Incorrect credentials	--	Error	--	Username used: rnd@dctechmicro.com password used: mweakthegenius
+
+2022-03-10 15:54:24	--		--		--	UserController	--	Log in Incorrect credentials	--	Error	--	Username used: rnd@dctechmicro.com password used: mweakthegenius123
+
+2022-03-10 15:55:25	--		--		--	UserController	--	Log in Incorrect credentials	--	Error	--	Username used: rnd@dctechmicro.com password used: mweakthegenius
+
+2022-03-10 15:56:10	--		--		--	UserController	--	Log in Incorrect credentials	--	Error	--	Username used: mdmorta@dctechmicro.com password used: incorrect4
+
+2022-03-10 15:59:33	--		--		--	UserController	--	Log in Incorrect credentials	--	Error	--	Username used: rnd@dctechmicro.com password used: mweakthegenius
+
+2022-03-10 16:03:37	--		--		--	UserController	--	Log in Incorrect credentials	--	Error	--	Username used: rnd@dctechmicro.com password used: mweakthegenius
+
+2022-03-10 16:03:48	--		--		--	UserController	--	Log in Incorrect credentials	--	Error	--	Username used: rnd@dctechmicro.com password used: mweakthegenius
+
+2022-03-10 16:05:04	--		--		--	UserController	--	Log in Incorrect credentials	--	Error	--	Username used: rnd@dctechmicro.com password used: mweakthegenius
+>>>>>>> ed9b54e23ffb7e0758e550cc2388aea4b612c204
 

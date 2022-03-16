@@ -3,7 +3,7 @@
     <div class="elBG panel">
       <div class="panel-heading">
         <p class="elClr panel-title">
-          Internal Job Order
+          Job Order
           <router-link tag="span" to="/ViewActivityTicketType">
             <button
               type="button"
@@ -25,14 +25,14 @@
 
       <div class="elClr panel-body">
         <div id="searchPanel">
-          <div style="display: flex">
-            <div style="width: 50%">
-              <b-row style="width: 100%; margin-left: 5px; margin-top: 0">
+          <div style="display:flex;">
+            <div style="width:50%;">
+              <b-row style="width:100%; margin-left:5px; margin-top: 0;">
                 <b-col>
                   <b-form-group>
                     <b-input-group>
                       <model-list-select
-                        style="min-width: 150px; max-width: 50px"
+                        style="min-width: 150px; max-width: 50px;"
                         :list="searchby_list"
                         v-model="searchby"
                         option-value="id"
@@ -42,11 +42,7 @@
 
                       <b-form-input
                         id="txtbox_filter"
-                        style="
-                          height: 30px;
-                          margin-left: 5px;
-                          border-radius: 5px 0 0 5px;
-                        "
+                        style="height:30px; margin-left:5px; border-radius:5px 0 0 5px"
                         v-model="tblFilter"
                         v-on:keyup.enter="search_data"
                         placeholder="Search"
@@ -55,11 +51,7 @@
                       <b-input-group-append>
                         <b-button
                           @click="filterClear"
-                          style="
-                            width: 100px;
-                            color: white;
-                            border-radius: 0 5px 5px 0;
-                          "
+                          style="width:100px;color:white;border-radius:0 5px 5px 0"
                           >Clear</b-button
                         >
                       </b-input-group-append>
@@ -67,7 +59,7 @@
                         @click="fnExcelReport('tbl_activity_ticket')"
                         type="button"
                         class="btn btn-success"
-                        style="width: 100px; color: white; margin-left: 10px"
+                        style="width:100px;color:white;margin-left:10px"
                       >
                         Export
                       </button>
@@ -75,28 +67,18 @@
                   </b-form-group>
                 </b-col>
               </b-row>
-              <b-row style="width: 100%; margin-left: 5px; margin-top: 0">
+              <b-row style="width:100%; margin-left:5px; margin-top: 0;">
                 <button
                   type="button"
                   @click="filter_data('activity_tickets.status', 'Completed')"
-                  class="
-                    btn btn-success btn-labeled
-                    pull-right
-                    margin-left-10
-                    statusBtn
-                  "
+                  class="btn btn-success btn-labeled pull-right margin-left-10 statusBtn"
                 >
                   Completed
                 </button>
                 <button
                   type="button"
                   @click="filter_data('activity_tickets.status', 'Pending')"
-                  class="
-                    btn btn-success btn-labeled
-                    pull-right
-                    margin-left-10
-                    statusBtn
-                  "
+                  class="btn btn-success btn-labeled pull-right margin-left-10 statusBtn"
                 >
                   Pending
                 </button>
@@ -105,12 +87,7 @@
                   @click="
                     filter_data('activity_tickets.status', 'Verification')
                   "
-                  class="
-                    btn btn-success btn-labeled
-                    pull-right
-                    margin-left-10
-                    statusBtn
-                  "
+                  class="btn btn-success btn-labeled pull-right margin-left-10 statusBtn"
                 >
                   Verification
                 </button>
@@ -119,22 +96,22 @@
           </div>
         </div>
 
-        <div style="display: flex">
+        <div style="display:flex">
           <div
             class="row marginice"
-            style="margin-left: 1px; float: left; width: 80%"
+            style="margin-left:1px;float:left;width:80%"
           >
             <b>Showing {{ perPage }} out of {{ totalRows }} entries</b>
           </div>
-          <div class="row marginice" style="width: 8%">
+          <div class="row marginice" style="width:8%">
             <b-row>
-              <b-col style="float: right; padding-right: 0"></b-col>
-              <b-col style="float: right">
+              <b-col style="float:right;padding-right:0"></b-col>
+              <b-col style="float:right">
                 <b-form-group class="mb-0">
                   <b-form-select
                     v-b-tooltip.hover
                     title="Show Pages"
-                    style="height: 30px; font-size: 12px"
+                    style="height:30px;font-size:12px"
                     v-model="perPage"
                     :options="pageOptions"
                   ></b-form-select>
@@ -160,7 +137,7 @@
           head-variant=" elClr"
           @filtered="onFiltered"
           @row-clicked="tblRowClicked"
-          style="cursor: pointer"
+          style="cursor:pointer"
         >
           <div slot="table-busy" class="text-center text-danger my-2">
             <b-spinner class="align-middle"></b-spinner>
@@ -170,8 +147,8 @@
             <b-button
               v-if="
                 roles.helpdesk &&
-                row.item.ticket_type_id == 1 &&
-                row.item.status == 'Pending'
+                  row.item.ticket_type_id == 1 &&
+                  row.item.status == 'Pending'
               "
               variant="success"
               @click="
@@ -183,8 +160,8 @@
             <b-button
               v-if="
                 roles.helpdesk &&
-                row.item.ticket_type_id == 2 &&
-                row.item.status == 'Pending'
+                  row.item.ticket_type_id == 2 &&
+                  row.item.status == 'Pending'
               "
               variant="success"
               @click="
@@ -196,8 +173,8 @@
             <b-button
               v-if="
                 roles.helpdesk &&
-                row.item.ticket_type_id == 3 &&
-                row.item.status == 'Pending'
+                  row.item.ticket_type_id == 3 &&
+                  row.item.status == 'Pending'
               "
               variant="success"
               @click="btnChangeStatus(row.item, 'Active', 'Completed', 'all')"
@@ -248,8 +225,8 @@
             <p-check
               v-if="
                 roles.accounting &&
-                row.item.ticket_type_id == 1 &&
-                row.item.status == 'Verification'
+                  row.item.ticket_type_id == 1 &&
+                  row.item.status == 'Verification'
               "
               class="p-icon p-curve p-jelly p-bigger"
               color="success"
@@ -283,24 +260,21 @@
               v-if="row.item.ticket_type_id == 3"
               size="sm"
               :disabled="true"
-              >Re-Activate</b-button
-            >
+            >Re-Activate</b-button>
             <b-button
               class="btn-status"
               variant="success"
               v-if="row.item.ticket_type_id == 4"
               size="sm"
               :disabled="true"
-              >Upgrade</b-button
-            >
+            >Upgrade</b-button>
             <b-button
               class="btn-status"
               variant="success"
               v-if="row.item.ticket_type_id == 5"
               size="sm"
               :disabled="true"
-              >Downgrade</b-button
-            >
+            >Downgrade</b-button>
           </template>
 
           <template slot="table-caption"></template>
@@ -320,12 +294,12 @@
         </div>
       </div>
       <div class="elClr panel-footer">
-        <div class="row" style="background-color: ; padding: 15px">
-          <div class="col-md-8" style="background-color: ">
+        <div class="row" style="background-color:; padding:15px;">
+          <div class="col-md-8" style="background-color:;">
             <span class="elClr">{{ totalRows }} item/s found.</span>
           </div>
 
-          <div class="col-md-4" style="background-color: ">
+          <div class="col-md-4" style="background-color:;">
             <b-pagination
               v-model="currentPage"
               :total-rows="totalRows"
@@ -336,347 +310,237 @@
         </div>
       </div>
     </div>
-
-    <!-- modalViewJO -->
-    <b-modal
-      id="modalViewJO"
-      :header-bg-variant="' elBG'"
-      :header-text-variant="' elClr'"
-      :body-bg-variant="' elBG'"
-      body-text-variant="dark"
-      :footer-bg-variant="' elBG'"
-      :footer-text-variant="' elClr'"
-      size="lg"
-      ok-only
-    >
-      <div slot="modal-header" class="w-100">
-        <div class="rowFields mx-auto row">
-          <div class="col-lg-6">
-            <h5>Job Order Info</h5>
-          </div>
-          <div class="col-lg-6">
-            <i>
-              <p class="float-right textLabel1">
-                Created By:{{ editTicket.created_by.name }}
-                <br />
-                <br />
-                Created On:{{ editTicket.created_at }}
-              </p>
-            </i>
+      <!-- modalViewJO -->
+      <b-modal
+        id="modalViewJO"
+        :header-bg-variant="' elBG'"
+        :header-text-variant="' elClr'"
+        :body-bg-variant="' elBG'"
+        body-text-variant="dark"
+        :footer-bg-variant="' elBG'"
+        :footer-text-variant="' elClr'"
+        size="lg"
+        ok-only
+      >
+        <div slot="modal-header" class="w-100">
+          <div class="rowFields mx-auto row">
+            <div class="col-lg-6">
+              <h5>Job Order Info</h5>
+            </div>
+            <div class="col-lg-6">
+              <i>
+                <p class="float-right textLabel1">
+                  Created By:{{ editTicket.created_by.name }}
+                  <br />
+                  <br />
+                  Created On:{{ editTicket.created_at }}
+                </p>
+              </i>
+            </div>
           </div>
         </div>
-      </div>
-      <b-card
-        bg-variant="light"
-        align="center"
-        style="max-height: 100%"
-        class="editTicket-bcard"
-        id="client"
-      >
-        <center>
-          <div style="display: flex; font-size: 12px">
-            <div style="width: 50%; float: left">
-              <label
-                style="
-                  display: block;
-                  text-align: left;
-                  font-weight: bold;
-                  color: green;
-                "
-                >Ticket No.:{{ editTicket.id }}</label
-              >
-              <label style="display: block; text-align: left"
-                >Account No.: {{ editTicket.client.acc_no }}</label
-              >
-              <label style="display: block; text-align: left"
-                >Account Name: {{ editTicket.client.name }}</label
-              >
-
-              <label style="display: block; text-align: left"
-                >Address: {{ editTicket.client.location }}</label
-              >
-              <label style="display: block; text-align: left"
-                >Contact No.: {{ editTicket.client.contact }}</label
-              >
-            </div>
-            <!-- <div style="width:50%; float:left">{{ editTicket }}</div> -->
-
-            <br />
-          </div>
-        </center>
-      </b-card>
-      <hr />
-      <b-card
-        v-if="editTicket.ticket_type_id == 4 || editTicket.ticket_type_id == 5"
-        bg-variant="light"
-        align="center"
-        style="max-height: 100%"
-        class="editTicket-bcard"
-      >
-        <center>
-          <div style="display: flex; font-size: 12px">
-            <div style="width: 50%; float: left">
-              <label
-                style="
-                  display: block;
-                  text-align: left;
-                  font-weight: bold;
-                  color: green;
-                "
-                >Package to be change</label
-              >
-              <label style="display: block; text-align: left"
-                >Package Code: {{ editTicket.packageToUpdate.name }}</label
-              >
-              <label style="display: block; text-align: left"
-                >Max Speed: {{ editTicket.packageToUpdate.max_speed }}</label
-              >
-              <label style="display: block; text-align: left"
-                >CIR: {{ editTicket.packageToUpdate.cir }}</label
-              >
-              <label style="display: block; text-align: left"
-                >MRR: {{ editTicket.packageToUpdate.mrr }}</label
-              >
-            </div>
-            <!-- <div style="width:50%; float:left">{{ editTicket }}</div> -->
-            <br />
-          </div>
-        </center>
-      </b-card>
-
-      <!--  remarks area -->
-      <b-card
-        id="remarks"
-        align="center"
-        style="max-height: 100%; border: none; background: none"
-        :body-text-variant="' elClr'"
-      >
-        <center>
-          <div style="width: 100%">
-            <div
-              style="
-                width: 100%;
-                float: left;
-                font-size: 13px;
-                font-weight: bold;
-              "
-            >
-              <label style="float: left">Remarks</label>
-            </div>
-            <br />
-            <div
-              style="
-                width: 100%;
-                float: left;
-                margin-top: 2px;
-                margin-bottom: 12px;
-                display: flex;
-              "
-            >
-              <div style="width: 80%; flex-grow: 1">
-                <b-form-textarea
-                  id="textarea-small"
-                  size="sm"
-                  v-model.lazy="remarksText"
-                  style="width: 100%; height: 90%"
-                  placeholder="Type remarks here. . ."
-                ></b-form-textarea>
-              </div>
-              <div
-                style="
-                  width: 12%;
-                  height: 100%;
-                  flex-grow: 1;
-                  margin-left: 15px;
-                "
-              >
-                <b-button
-                  squared
-                  variant="success"
-                  @click="addRemarks_clicked"
-                  style="width: 100%; height: 32px; float: right; color: white"
-                  >ADD REMARKS</b-button
-                >
-              </div>
-              <div style="width: 50%; float: left"></div>
-
-              <br />
-            </div>
-            <br />
-            <div
-              style="margin-top: 20px"
-              v-for="(remarks, index) in editTicket.remarks_log"
-              :key="index"
-              v-show="remarks.form_type == 'jobOrder'"
-            >
-              <div id="title" style="display: flex; width: 100%">
+        <b-card
+          bg-variant="light"
+          align="center"
+          style="max-height:100%"
+          class="editTicket-bcard"
+          id="client"
+        >
+          <center>
+            <div style="display:flex;font-size:12px;">
+              <div style="width:50%; float:left">
                 <label
-                  style="
-                    float: left;
-                    text-align: left;
-                    font-size: 12px;
-                    font-weight: bold;
-                    width: 70%;
-                  "
-                >
-                  <i
-                    class="fa fa-user-circle"
-                    aria-hidden="true"
-                    style="margin-right: 5px"
-                  ></i>
-                  {{ remarks.user.name }}
+                  style="display:block;text-align:left;font-weight:bold;color:green"
+                  >Ticket No.:{{ editTicket.id }}
                 </label>
+                <label style="display:block;text-align:left"
+                  >Account No.: {{ editTicket.client.acc_no }}
+                </label>
+                <label style="display:block;text-align:left"
+                  >Account Name: {{ editTicket.client.name }}</label
+                >
 
-                <label
-                  style="
-                    float: right;
-                    text-align: right;
-                    font-size: 10px;
-                    width: 30%;
-                  "
-                  >{{ remarks.created_at }}</label
+                <label style="display:block;text-align:left"
+                  >Address: {{ editTicket.client.location }}</label
+                >
+                <label style="display:block;text-align:left"
+                  >Contact No.: {{ editTicket.client.contact }}</label
                 >
               </div>
+              <div style="width:50%; float:left"></div>
 
               <br />
+            </div>
+          </center>
+        </b-card>
+
+        <!--  remarks area -->
+        <b-card
+          id="remarks"
+          align="center"
+          style="max-height:100%;border:none;background:none"
+          :body-text-variant="' elClr'"
+        >
+          <center>
+            <div style="width:100%">
               <div
-                id="body"
-                style="display: flex; width: 100%; margin-top: -8px"
+                style="width:100%;float:left;font-size:13px;font-weight:bold"
               >
-                <div style="width: 82%; margin-left: 5px" class="wrapper">
+                <label style="float:left">Remarks</label>
+              </div>
+              <br />
+              <div
+                style="width:100%;float:left;margin-top:2px;margin-bottom:12px;display:flex;"
+              >
+                <div style="width:80%;flex-grow:1">
                   <b-form-textarea
                     id="textarea-small"
                     size="sm"
-                    v-model.lazy="remarks.remarks"
-                    class="remarks"
-                    readonly="readonly"
-                    rows="2"
-                    max-rows="5"
-                    no-resize
-                  ></b-form-textarea>
-                </div>
-                <div style="width: 18%">
-                  <label
-                    style="float: right; cursor: pointer; color: blue"
-                    @click="remarks.commentVisibility = 'show'"
-                    v-if="remarks.commentVisibility == 'hide'"
-                  >
-                    Reply
-                    <i class="fas fa-caret-down"></i>
-                  </label>
-                  <label
-                    style="float: right; cursor: pointer; color: blue"
-                    @click="remarks.commentVisibility = 'hide'"
-                    v-if="remarks.commentVisibility == 'show'"
-                  >
-                    Reply
-                    <i class="fas fa-caret-up"></i>
-                  </label>
-                </div>
-              </div>
-
-              <!-- comments display -->
-
-              <div
-                style="
-                  margin-top: 0;
-                  background: none;
-                  width: 95%;
-                  float: right;
-                "
-                v-for="reply in remarks.replies"
-                :key="reply.id"
-              >
-                <div id="title" style="display: flex; width: 100%">
-                  <label
-                    style="
-                      float: left;
-                      text-align: left;
-                      font-size: 12px;
-                      font-weight: bold;
-                      width: 70%;
-                    "
-                  >
-                    <i
-                      class="fa fa-user-circle"
-                      aria-hidden="true"
-                      style="margin-right: 5px"
-                    ></i>
-                    {{ reply.user.name }}
-                  </label>
-
-                  <label
-                    style="
-                      float: right;
-                      text-align: right;
-                      font-size: 10px;
-                      width: 30%;
-                    "
-                    >{{ reply.created_at }}</label
-                  >
-                </div>
-
-                <br />
-                <div
-                  id="body"
-                  style="display: flex; width: 95%; margin-top: -8px"
-                >
-                  <label style="float: left; text-align: left">{{
-                    reply.comments
-                  }}</label>
-                </div>
-              </div>
-
-              <!-- new comment -->
-              <div
-                style="
-                  width: 90%;
-                  float: right;
-                  margin-top: 2px;
-                  margin-bottom: 12px;
-                  display: flex;
-                "
-                v-if="remarks.commentVisibility == 'show'"
-              >
-                <div style="width: 80%; flex-grow: 1">
-                  <b-form-textarea
-                    id="textarea - small"
-                    size="sm"
-                    v-model="commentsText[index]"
-                    style="width: 100%; height: 90%"
-                    placeholder="Type comment here. . ."
+                    v-model.lazy="remarksText"
+                    style="width:100%;height:90%"
+                    placeholder="Type remarks here. . ."
                   ></b-form-textarea>
                 </div>
                 <div
-                  style="
-                    width: 12%;
-                    height: 100%;
-                    flex-grow: 1;
-                    margin-left: 15px;
-                  "
+                  style="width:12%;height:100%;flex-grow:1;margin-left:15px;"
                 >
                   <b-button
                     squared
                     variant="success"
-                    @click="
-                      addComments_clicked(remarks.id, index, remarks.replies)
-                    "
-                    style="
-                      width: 100%;
-                      height: 32px;
-                      float: right;
-                      color: white;
-                    "
-                    >ADD COMMENT</b-button
+                    @click="addRemarks_clicked"
+                    style="width:100%;height:32px;float:right;color:white"
+                    >ADD REMARKS</b-button
                   >
                 </div>
               </div>
-            </div>
-            <br />
-          </div>
-        </center>
-      </b-card>
+              <br />
+              <div
+                style="margin-top:20px;"
+                v-for="(remarks, index) in editTicket.remarks_log"
+                :key="index"
+                v-show="remarks.form_type == 'jobOrder'"
+              >
+                <div id="title" style="display:flex;width:100%">
+                  <label
+                    style="float:left;text-align:left;font-size:12px;font-weight:bold;width:70%"
+                  >
+                    <i
+                      class="fa fa-user-circle"
+                      aria-hidden="true"
+                      style="margin-right:5px"
+                    ></i>
+                    {{ remarks.user.name }}
+                  </label>
 
+                  <label
+                    style="float:right;text-align:right;font-size:10px;width:30%"
+                    >{{ remarks.created_at }}</label
+                  >
+                </div>
+
+                <br />
+                <div id="body" style="display:flex;width:100%; margin-top:-8px">
+                  <div style="width:82%;margin-left:5px;" class="wrapper">
+                    <b-form-textarea
+                      id="textarea-small"
+                      size="sm"
+                      v-model.lazy="remarks.remarks"
+                      class="remarks"
+                      readonly="readonly"
+                      rows="2"
+                      max-rows="5"
+                      no-resize
+                    ></b-form-textarea>
+                  </div>
+                  <div style="width:18%;">
+                    <label
+                      style="float:right;cursor: pointer;color:blue"
+                      @click="remarks.commentVisibility = 'show'"
+                      v-if="remarks.commentVisibility == 'hide'"
+                    >
+                      Reply
+                      <i class="fas fa-caret-down"></i>
+                    </label>
+                    <label
+                      style="float:right;cursor: pointer;color:blue"
+                      @click="remarks.commentVisibility = 'hide'"
+                      v-if="remarks.commentVisibility == 'show'"
+                    >
+                      Reply
+                      <i class="fas fa-caret-up"></i>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- comments display -->
+
+                <div
+                  style="margin-top:0;background:none;width:95%;float:right"
+                  v-for="reply in remarks.replies"
+                  :key="reply.id"
+                >
+                  <div id="title" style="display:flex;width:100%">
+                    <label
+                      style="float:left;text-align:left;font-size:12px;font-weight:bold;width:70%"
+                    >
+                      <i
+                        class="fa fa-user-circle"
+                        aria-hidden="true"
+                        style="margin-right:5px"
+                      ></i>
+                      {{ reply.user.name }}
+                    </label>
+
+                    <label
+                      style="float:right;text-align:right;font-size:10px;width:30%"
+                      >{{ reply.created_at }}</label
+                    >
+                  </div>
+
+                  <br />
+                  <div
+                    id="body"
+                    style="display:flex;width:95%; margin-top:-8px"
+                  >
+                    <label style="float:left;text-align:left;">
+                      {{ reply.comments }}
+                    </label>
+                  </div>
+                </div>
+
+                <!-- new comment -->
+                <div
+                  style="width:90%;float:right;margin-top:2px;margin-bottom:12px;display:flex;"
+                  v-if="remarks.commentVisibility == 'show'"
+                >
+                  <div style="width:80%;flex-grow:1">
+                    <b-form-textarea
+                      id="textarea - small"
+                      size="sm"
+                      v-model="commentsText[index]"
+                      style="width:100%;height:90%"
+                      placeholder="Type comment here. . ."
+                    ></b-form-textarea>
+                  </div>
+                  <div
+                    style="width:12%;height:100%;flex-grow:1;margin-left:15px;"
+                  >
+                    <b-button
+                      squared
+                      variant="success"
+                      @click="
+                        addComments_clicked(remarks.id, index, remarks.replies)
+                      "
+                      style="width:100%;height:32px;float:right;color:white"
+                      >ADD COMMENT</b-button
+                    >
+                  </div>
+                </div>
+              </div>
+              <br />
+            </div>
+          </center>
+        </b-card>
       <template slot="modal-footer" slot-scope="{}">
         <b-button
           v-if="editTicket.status == 'Addendum'"
@@ -701,7 +565,7 @@
           >SOA</b-button
         >
       </template>
-    </b-modal>
+      </b-modal>
     <!-- End modalViewJO -->
 
     <!-- modalPrintPreviewAddendum -->
@@ -722,6 +586,7 @@
         <label>Print Preview</label>
       </template>
       <div id="printAddendum" class="printAddendum" style="color: black">
+
         <table class="parent">
           <tr style="background-color: rgba(255, 255, 255, 0.8)">
             <td>
@@ -751,15 +616,14 @@
                             vertical-align: text-top;
                             font-size: 12px;
                             line-height: 1.3;
-                            float: right;
+                            float:right
                           "
                         >
                           <b>
-                            Control No: {{ editTicket.id }} <br />Dctech
-                            Building, Shanghai Street, <br />Matina Aplaya,
-                            Davao City <br />Davao Del Sur 8000, Philippines
-                            <br />Tel #: (082) 221-2380 <br />VAT Registered
-                            TIN: 003-375-571-000
+                            <br />Dctech Building, Shanghai Street, <br />Matina
+                            Aplaya, Davao City <br />Davao Del Sur 8000,
+                            Philippines <br />Tel #: (082) 221-2380 <br />VAT
+                            Registered TIN: 003-375-571-000
                           </b>
                         </p>
                       </td>
@@ -772,22 +636,30 @@
                     class="normalTbl"
                   >
                     <tr class>
-                      <td class="normalTbl" style="vertical-align: center">
+                      <td class="normalTbl" style="width: 30%"></td>
+                      <td
+                        class="normalTbl"
+                        style="vertical-align: center; width: 40%"
+                      >
                         <center>
                           <h4>
                             <strong>Addendum to an Existing Contract</strong>
                           </h4>
                         </center>
                       </td>
+                      <td
+                        class="normalTbl"
+                        style="vertical-align: top; width: 30%"
+                      ></td>
                     </tr>
                   </table>
                 </div>
-                <div class="rowFields mx-auto row" style="margin-top: 30px">
+                <div class="rowFields mx-auto row" style="margin-top:30px">
                   <div class="rowFields2 mx-auto row">
-                    <label class="pull-left paragraph">
-                      This document is in reference to a contract agreement
-                      dated __________________________, between the following
-                      parties that are named below in this document.
+                    <label class="pull-left paragraph"
+                      >This document is in reference to a contract agreement
+                      dated __________________________, between the following parties that
+                      are named below in this document.
                     </label>
                   </div>
                 </div>
@@ -798,8 +670,8 @@
                       consideration, do hereby agree to make the following
                       changes and / or additions that are outlined below. These
                       additions shall be made valid as if they are included in
-                      the original stated contract.
-                    </label>
+                      the original stated contract.</label
+                    >
                   </div>
                 </div>
 
@@ -808,46 +680,27 @@
                 <b-card
                   bg-variant="light"
                   align="center"
-                  style="
-                    max-height: 100%;
-                    margin-top: 30px;
-                    width: 80%;
-                    margin-left: 10%;
-                  "
+                  style="max-height:100%; margin-top:30px;width:80%;margin-left:10%"
                   class="editTicket-bcard"
+                  id="client"
                 >
                   <center>
-                    <div style="display: flex; font-size: 12px">
-                      <div style="width: 50%; float: left">
+                    <div style="display:flex;font-size:12px;">
+                      <div style="width:50%; float:left">
                         <label
-                          style="
-                            display: block;
-                            text-align: left;
-                            font-weight: bold;
-                            color: green;
-                          "
-                          >UPGRADE</label
-                        >
+                          style="display:block;text-align:left;font-weight:bold;color:green"
+                          >UPGRADE
+                        </label>
                         <label
-                          style="
-                            margin-top: 15px;
-                            display: block;
-                            text-align: left;
-                            font-weight: bold;
-                          "
-                          >NEW PACKAGE:</label
-                        >
+                          style="margin-top:15px;display:block;text-align:left;font-weight:bold"
+                          >NEW PACKAGE:
+                        </label>
                         <label
-                          style="
-                            margin-top: 15px;
-                            display: block;
-                            text-align: left;
-                            font-weight: bold;
-                          "
-                          >OLD PACKAGE:</label
-                        >
+                          style="margin-top:15px;display:block;text-align:left;font-weight:bold"
+                          >OLD PACKAGE:
+                        </label>
                       </div>
-                      <div style="width: 50%; float: left"></div>
+                      <div style="width:50%; float:left"></div>
 
                       <br />
                     </div>
@@ -857,23 +710,22 @@
                 <!-- END OF JO DETAILS -->
                 <div class="rowFields mx-auto row">
                   <div class="rowFields2 mx-auto row">
-                    <label class="pull-left paragraph">
-                      This contract shall take effect
-                      ___________________________________________ until
-                      ________________________________ .
-                    </label>
+                    <label class="pull-left paragraph"
+                      >This contract shall take effect
+                      ___________________________________________ until ________________________________ .</label
+                    >
                   </div>
                 </div>
                 <div class="rowFields mx-auto row">
                   <div class="rowFields2 mx-auto row">
-                    <label class="pull-left paragraph">
-                      No other terms or conditions of the above mentioned
+                    <label class="pull-left paragraph"
+                      >No other terms or conditions of the above mentioned
                       contract shall be negated or changed as a result of this
-                      here stated addendum.
-                    </label>
+                      here stated addendum.</label
+                    >
                   </div>
                 </div>
-                <div class="rowFields mx-auto row" style="margin-top: 50px">
+                <div class="rowFields mx-auto row" style="margin-top:50px">
                   <table
                     style="width: 100%; border-collapse: collapse"
                     class="normalTbl"
@@ -885,13 +737,10 @@
                       ></td>
                       <td
                         class="normalTbl"
-                        style="text-align: center; width: 30%"
+                        style="text-align: center; width: 30%; "
                       >
                         <h6>
-                          <strong>
-                            DCTECH MICRO SERVICES, INC.
-                            <br />
-                          </strong>
+                          <strong>DCTECH MICRO SERVICES, INC. <br /> </strong>
                           (DCTECH)
                         </h6>
                       </td>
@@ -904,10 +753,7 @@
                         style="text-align: center; width: 30%"
                       >
                         <h6>
-                          <strong>
-                            {{ editTicket.client.name }}
-                            <br />
-                          </strong>
+                          <strong>{{ editTicket.client.name }} <br /> </strong>
                           (CLIENT)
                         </h6>
                       </td>
@@ -930,10 +776,10 @@
                       ></td>
                       <td
                         class="normalTbl"
-                        style="text-align: left; width: 30%"
+                        style="text-align: left; width: 30%; "
                       >
                         <h6>
-                          <strong>By:</strong>
+                          <strong>By: </strong>
                         </h6>
                       </td>
                       <td
@@ -945,7 +791,7 @@
                         style="text-align: left; width: 30%"
                       >
                         <h6>
-                          <strong>By:</strong>
+                          <strong>By: </strong>
                         </h6>
                       </td>
                       <td
@@ -967,13 +813,10 @@
                       ></td>
                       <td
                         class="normalTbl"
-                        style="text-align: center; width: 30%"
+                        style="text-align: center; width: 30%; "
                       >
                         <h6>
-                          <strong>
-                            RYAN SUMALINOG
-                            <br />
-                          </strong>
+                          <strong>RYAN SUMALINOG <br /> </strong>
                           Vice-President for Operations
                         </h6>
                       </td>
@@ -986,10 +829,7 @@
                         style="text-align: center; width: 30%"
                       >
                         <h6>
-                          <strong>
-                            {{ editTicket.client.owner_name }}
-                            <br />
-                          </strong>
+                          <strong>{{ editTicket.client.name }} <br /> </strong>
                           Owner
                         </h6>
                       </td>
@@ -1012,19 +852,19 @@
                       ></td>
                       <td
                         class="normalTbl"
-                        style="text-align: left; width: 30%"
+                        style="text-align: left; width: 30%; "
                       >
-                        <label class="pull-left paragraph"
-                          >Signed in the Presence of:</label
-                        >
-                        <br />
-                        <label class="pull-left paragraph"
-                          >______________________________________</label
-                        >
+                       <label class="pull-left paragraph">
+                         Signed in the Presence of:
+                       </label><br>
+                       <label class="pull-left paragraph">
+                         ______________________________________
+                       </label>
+                        </p>
                       </td>
                       <td
                         class="normalTbl"
-                        style="text-align: left; width: 60%"
+                        style="text-align: left; width: 60%; "
                       ></td>
                     </tr>
                   </table>
@@ -1033,17 +873,10 @@
             </td>
           </tr>
         </table>
-      </div>
-      <template slot="modal-footer" slot-scope="{}">
-        <b-button
-          size="sm"
-          variant="success"
-          @click="printElement('printAddendum')"
-          >Print</b-button
-        >
-      </template>
-    </b-modal>
-    <!-- modalPrintPreviewAddendum -->
+
+    </div>
+      </b-modal>
+      <!-- end modal addendum -->
 
     <!-- modalUpdateBilling ---------------------------------------------------------------------------------------->
     <b-modal
@@ -1180,7 +1013,6 @@ export default {
         { key: "ticket_type.name", label: "Ticket Type", sortable: true },
         { key: "client.acc_no", label: "Account #", sortable: true },
         { key: "client.name", label: "Client Name", sortable: true },
-        { key: "client.branch.name", label: "Branch", sortable: true },
         { key: "created_by.name", label: "Created By", sortable: true },
         { key: "aging", label: "Aging", sortable: true },
         { key: "date_applied", sortable: true },
@@ -1195,27 +1027,17 @@ export default {
           name: "Account Name",
           id: "clients.name",
         },
-        {
-          name: "Ticket type",
-          id: "activity_ticket_types.name",
-        },
       ],
       totalRows: 1,
       currentPage: 1,
-      perPage: 50,
-      pageOptions: [20, 50, 100, 250],
+      perPage: 10,
+      pageOptions: [10, 20, 50, 100],
       showVerifyBtn: false,
       verifySelected: [],
       user: [],
       roles: [],
       state_role: "",
-      fsr_data: {
-        user: {
-          email: "",
-        },
-      },
       editTicket: {
-        packageToUpdate: {},
         aging: "",
         check: false,
         client: [],
@@ -1410,6 +1232,7 @@ export default {
       }).then((update) => {
         if (update) {
           this.tblisBusy = true;
+
           var dataa = {
             id: item.client_id,
             row: "status",
@@ -1442,27 +1265,6 @@ export default {
               this.tblisBusy = false;
               this.$root.$emit("pageLoaded");
             });
-        }
-      });
-    },
-    btnChangePackage(item, type) {
-      console.log(item);
-      swal({
-        title: "Are you sure?",
-        text: "",
-        icon: "warning",
-        buttons: ["No", "Yes"],
-        dangerMode: true,
-      }).then((update) => {
-        if (update) {
-          this.$root.$emit("pageLoading");
-          item.updated_by = this.user.id;
-          item.state = "accounting";
-          item.status = "Update Billing";
-          item.user_name = this.user.name;
-          item.user_id = this.user.id;
-          item.role = this.state_role;
-          this.updateActivityTicket(item, item.id);
         }
       });
     },

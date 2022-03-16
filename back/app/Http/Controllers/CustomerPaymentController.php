@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\customer_payment;
 use App\Client;
 use App\billing;
-use App\bill_statement;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -21,10 +20,13 @@ class CustomerPaymentController extends Controller
 
         return response()->json($tbl);
     }
+
+
     public function create()
     {
         //
     }
+
     public function store(Request $request)
     {
         try {
@@ -66,16 +68,22 @@ class CustomerPaymentController extends Controller
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }
+
+
     public function show($id)
     {
         $tbl = customer_payment::where("client_id", $id)->get();
 
         return response()->json($tbl);
     }
+
+
     public function edit(customer_payment $customer_payment)
     {
         //
     }
+
+
     public function update(Request $request, $id)
     {
         try {
@@ -109,6 +117,7 @@ class CustomerPaymentController extends Controller
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }
+
     public function destroy($id)
     {
         try {
@@ -119,6 +128,7 @@ class CustomerPaymentController extends Controller
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }
+
     public function destroy1($id, $olt_id)
     {
         try {
@@ -149,6 +159,7 @@ class CustomerPaymentController extends Controller
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }
+
     public function dailyReport(Request $request)
     {
         $date_from = new Carbon($request->date_from);
@@ -316,12 +327,12 @@ class CustomerPaymentController extends Controller
 
             \Logger::instance()->log(
                 Carbon::now(),
-                $user_id,
-                "Import Payment",
+                "0",
+                "711 Kiosk",
                 $this->cname,
-                "storePayment",
+                "store",
                 "message",
-                "Import payment : " . json_encode($payments)
+                "Create new customer_payment: "
             );
             DB::commit();
             return response()->json($c);
@@ -340,6 +351,7 @@ class CustomerPaymentController extends Controller
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }
+
     public function log($date, $userID, $userName, $ControllerName, $functionName, $logType, $message)
     {
         $filenameDate = date("mY");

@@ -73,101 +73,11 @@
       </template>
     </b-modal>
     <!-- End modalChangePackage -->
-
-    <!-- modalAddAttachment ---------------------------------------------------------------------------------------->
-    <b-modal
-      id="modalAddAttachment"
-      :header-bg-variant="' elBG'"
-      :header-text-variant="' elClr'"
-      :body-bg-variant="' elBG'"
-      :body-text-variant="' elClr'"
-      :footer-bg-variant="' elBG'"
-      :footer-text-variant="' elClr'"
-      size="xl"
-      title="Attach file"
-    >
-      <!-- form -->
-
-      <div class="rowFields mx-auto row">
-        <div class="col-lg-3">
-          <p class="textLabel">Attachment:</p>
-        </div>
-        <div class="col-lg-9">
-          <b-form-file
-            v-model="selectedFile"
-            @change="fileChange"
-            :state="Boolean(attachData.attachment)"
-            placeholder="Choose a file or drop it here..."
-            drop-placeholder="Drop file here..."
-          ></b-form-file>
-        </div>
-      </div>
-
-      <div class="rowFields mx-auto row">
-        <div class="col-lg-3">
-          <p class="textLabel">Type:</p>
-        </div>
-        <div class="col-lg-9">
-          <div class="input-group">
-            <model-list-select
-              :list="attachTypeList"
-              v-model="attachData.type"
-              option-value="name"
-              option-text="name"
-              placeholder="Type"
-              v-validate="'required'"
-            ></model-list-select>
-          </div>
-        </div>
-      </div>
-
-      <div class="rowFields mx-auto row">
-        <div class="col-lg-3">
-          <p class="textLabel">Description:</p>
-        </div>
-        <div class="col-lg-9">
-          <textarea
-            rows="2"
-            name="description"
-            class="form-control"
-            v-b-tooltip.hover
-            title="Input Description"
-            placeholder="Description"
-            v-model.trim="attachData.description"
-          ></textarea>
-        </div>
-      </div>
-
-      <!-- Date Applied -->
-      <div class="rowFields mx-auto row">
-        <div class="col-lg-3">
-          <p class="textLabel">Date Applied:</p>
-        </div>
-        <div class="col-lg-9">
-          <div class="input-group">
-            <date-picker
-              v-model="attachData.date_applied"
-              :config="AppliedDateoptions"
-              autocomplete="off"
-            ></date-picker>
-          </div>
-        </div>
-      </div>
-
-      <!-- /form -->
-      <template slot="modal-footer" slot-scope="{}">
-        <b-button size="sm" variant="success" @click="btnAttach()"
-          >Attach
-        </b-button>
-      </template>
-    </b-modal>
-    <!-- End modalAddAttachment -->
   </div>
 </template>
 <script>
 import { ModelListSelect } from "vue-search-select";
 import swal from "sweetalert";
-import datePicker from "vue-bootstrap-datetimepicker";
 
 import VueRangedatePicker from "vue-rangedate-picker";
 import PrettyRadio from "pretty-checkbox-vue/radio";
@@ -178,7 +88,6 @@ export default {
     "p-radio": PrettyRadio,
     "model-list-select": ModelListSelect,
     "rangedate-picker": VueRangedatePicker,
-    "date-picker": datePicker,
   },
   data() {
     return {
@@ -315,27 +224,6 @@ export default {
         type: 4,
         pack: {},
       },
-      selectedFile: null,
-      attachData: {
-        client_id: null,
-        attachment: null,
-        type: null,
-        description: null,
-        date_applied: null,
-      },
-      AppliedDateoptions: {
-        format: "YYYY-MM-DD",
-        useCurrent: false,
-      },
-      attachTypeList: [
-        { name: "Contract" },
-        { name: "Upgrade" },
-        { name: "Downgrade" },
-        { name: "Renewal" },
-        { name: "Line Transfer" },
-        { name: "Extension" },
-        { name: "Change of account name" },
-      ],
       roles: [],
     };
   },
@@ -451,53 +339,6 @@ export default {
         }
       });
     },
-    fileChange(e) {
-      var fileName = e.target.files[0].name;
-      this.attachData.file_ext = fileName.split(".").pop();
-
-      console.log(this.attachData.file_ext);
-      var fileReader = new FileReader();
-      fileReader.readAsDataURL(e.target.files[0]);
-
-      fileReader.onload = (e) => {
-        console.log(e);
-        this.attachData.attachment = e.target.result;
-      };
-    },
-    btnAttach() {
-      swal({
-        title: "Are you sure?",
-        text: "",
-        icon: "warning",
-        buttons: ["No", "Yes"],
-        dangerMode: true,
-      }).then((ok) => {
-        if (ok) {
-          this.attachData.client_id = this.client.id;
-          this.attachData.user_id = this.user.id;
-          this.attachData.user_name = this.user.name;
-
-          this.$root.$emit("pageLoading");
-          this.$http
-            .post("api/ClientAttachment", this.attachData)
-            .then((response) => {
-              console.log(response.body);
-              swal("Attached!", "", "success");
-              this.$root.$emit("pageLoaded");
-            })
-            .catch((response) => {
-              console.log(response.body);
-              this.$root.$emit("pageLoaded");
-              swal({
-                title: "Error",
-                text: response.body.error,
-                icon: "error",
-                dangerMode: true,
-              });
-            });
-        }
-      });
-    },
   },
 };
 </script>
@@ -506,3 +347,5 @@ export default {
   text-align: center;
 }
 </style>
+
+
