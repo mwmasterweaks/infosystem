@@ -283,16 +283,17 @@ class NodeController extends Controller
                 $tbl1 = node::findOrFail($id);
                 node::destroy($id);
 
-                \Logger::instance()->log(
-                    Carbon::now(),
-                    "",
-                    "",
-                    $this->cname,
-                    "destroy",
-                    "message",
-                    "delete node id " . $id .
-                        "\nOld node: " . $tbl1
-                );
+                $this
+                    ->log(
+                        Carbon::now(),
+                        "",
+                        "",
+                        $this->cname,
+                        "destroy",
+                        "message",
+                        "delete node id " . $id .
+                            "\nOld node: " . $tbl1
+                    );
                 return $this->index();
             }
         } catch (\Exception $ex) {

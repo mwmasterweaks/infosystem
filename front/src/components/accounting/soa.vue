@@ -27,7 +27,7 @@
             type="button"
             class="btn btn-success btn-labeled pull-right margin-right-10"
           >
-            Import Dragon pay
+            Import Payment
           </button>
 
           <input
@@ -64,7 +64,7 @@
                 color="success"
                 v-model="billStateShow"
                 @change="billStateChange"
-                v-if="roles.accounting || roles.helpdesk"
+                v-if="roles.accounting"
               >
                 <i slot="extra" class="icon fas fa-check"></i> </p-check
               >Billing statement list
@@ -664,6 +664,8 @@
         :footer-bg-variant="' elBG'"
         :footer-text-variant="' elClr'"
         size="xl"
+        no-close-on-backdrop
+        no-close-on-esc
         title="Import Payment"
       >
         <!--Form-------->
@@ -691,6 +693,15 @@
           <b-button size="sm" variant="success" @click="btnPay('statement')"
             >Insert base statement ID</b-button
           >
+          <b-button size="sm" variant="success" @click="btnPay('account_name')"
+            >Insert base Account Name</b-button
+          >
+          <b-button size="sm" variant="success" @click="btnPay('account_no')"
+            >Insert base Account Number</b-button
+          >
+          <!-- <b-button size="sm" variant="success" @click="btnPay('id')"
+            >Insert base ID</b-button
+          > -->
         </template>
       </b-modal>
       <!--modalImportRP-------->
@@ -801,7 +812,17 @@ export default {
         { key: "Account_name", sortable: true },
         { key: "Account_no", sortable: true },
         { key: "Statement_id", sortable: true },
-        { key: "Action" },
+        {
+          key: "amount_applied_return",
+          label: "status",
+          sortable: true,
+          formatter: (value, key, item) => {
+            if (item.Amount == value) return "Applied";
+            else if (value > 0 && value != item.Amount)
+              return "Applied " + value;
+            else return value;
+          },
+        },
       ],
       tblisBusy_import_rp: false,
     };
@@ -1287,7 +1308,6 @@ export default {
       document.getElementById("fileSelect").click();
     },
     previewFiles(e) {
-      //DARI KO
       var files = e.target.files,
         f = files[0];
       var reader = new FileReader();
@@ -1304,7 +1324,7 @@ export default {
 
         this.items_import_rp.forEach((element) => {
           element.Date = this.$global.excelDateToJSDate(element.Date);
-
+          element.amount_applied_return = 0;
           // const temp = element.Description.split("/");
           // element.Remarks = temp[2];
           // element.account_name = temp[1];
@@ -1328,6 +1348,7 @@ export default {
       this.$http
         .post("api/CustomerPayment/storePayment", data)
         .then((response) => {
+          this.items_import_rp = response.body.payments;
           this.$root.$emit("pageLoaded");
           console.log(response.body);
           swal("Done");

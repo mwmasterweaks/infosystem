@@ -61,14 +61,14 @@
 
       <div class="elClr panel-body">
         <div id="searchPanel">
-          <div style="display: flex">
-            <div style="width: 50%">
-              <b-row style="width: 100%; margin-left: 5px; margin-top: 0">
+          <div style="display:flex;">
+            <div style="width:50%;">
+              <b-row style="width:100%; margin-left:5px; margin-top: 0;">
                 <b-col>
                   <b-form-group>
                     <b-input-group>
                       <model-list-select
-                        style="min-width: 150px; max-width: 50px"
+                        style="min-width: 150px; max-width: 50px;"
                         :list="searchby_list"
                         v-model="searchby"
                         option-value="id"
@@ -78,11 +78,7 @@
 
                       <b-form-input
                         id="txtbox_filter"
-                        style="
-                          height: 30px;
-                          margin-left: 5px;
-                          border-radius: 5px 0 0 5px;
-                        "
+                        style="height:30px; margin-left:5px; border-radius:5px 0 0 5px"
                         v-model="tblFilter_copy"
                         v-on:keyup.enter="search_data"
                         placeholder="Search"
@@ -91,11 +87,7 @@
                       <b-input-group-append>
                         <b-button
                           @click="filterClear"
-                          style="
-                            width: 100px;
-                            color: white;
-                            border-radius: 0 5px 5px 0;
-                          "
+                          style="width:100px;color:white;border-radius:0 5px 5px 0"
                           >Clear</b-button
                         >
                       </b-input-group-append>
@@ -103,7 +95,7 @@
                         @click="fnExcelReport('ticketTable')"
                         type="button"
                         class="btn btn-success"
-                        style="width: 100px; color: white; margin-left: 10px"
+                        style="width:100px;color:white;margin-left:10px"
                       >
                         Export
                       </button>
@@ -113,144 +105,103 @@
               </b-row>
 
               <b-row
-                style="
-                  margin-top: 20px;
-                  margin-left: 0;
-                  width: 100%;
-                  height: 30px;
-                  margin-bottom: 10px;
-                "
+                style="margin-top:20px;margin-left:0;width:100%;height:30px;margin-bottom:10px"
               >
                 <button
                   @click="filterChange('1')"
                   type="button"
-                  class="
-                    btn btn-warning btn-labeled
-                    pull-right
-                    margin-left-10
-                    statusBtn
-                  "
+                  class="btn btn-warning btn-labeled pull-right margin-left-10 statusBtn"
                 >
                   Pendings
-                  <b-badge v-if="totalPendings > 0" variant="info">{{
-                    totalPendings
-                  }}</b-badge>
+                  <b-badge v-if="totalPendings > 0" variant="info">
+                    {{ totalPendings }}
+                  </b-badge>
                 </button>
                 <button
                   @click="filterChange('9')"
                   type="button"
-                  class="
-                    btn btn-dark btn-labeled
-                    pull-right
-                    margin-left-10
-                    statusBtn
-                  "
+                  class="btn btn-dark btn-labeled pull-right margin-left-10 statusBtn"
                 >
                   Modem/Line Transfer
-                  <b-badge v-if="totalTransfer > 0" variant="info">{{
-                    totalTransfer
-                  }}</b-badge>
+                  <b-badge v-if="totalTransfer > 0" variant="info">
+                    {{ totalTransfer }}
+                  </b-badge>
                 </button>
                 <button
                   @click="filterChange('2')"
                   type="button"
-                  class="
-                    btn btn-danger btn-labeled
-                    pull-right
-                    margin-left-10
-                    statusBtn
-                  "
+                  class="btn btn-danger btn-labeled pull-right margin-left-10 statusBtn"
                 >
                   Urgents
-                  <b-badge v-if="totalUrgents > 0" variant="info">{{
-                    totalUrgents
-                  }}</b-badge>
+                  <b-badge v-if="totalUrgents > 0" variant="info">
+                    {{ totalUrgents }}
+                  </b-badge>
                 </button>
                 <button
                   @click="filterChange('7')"
                   type="button"
-                  class="
-                    btn btn-info btn-labeled
-                    pull-right
-                    margin-left-10
-                    statusBtn
-                  "
+                  class="btn btn-info btn-labeled pull-right margin-left-10 statusBtn"
                 >
                   For ITND
-                  <b-badge v-if="totalITND > 0" variant="info">{{
-                    totalITND
-                  }}</b-badge>
+                  <b-badge v-if="totalITND > 0" variant="info">
+                    {{ totalITND }}
+                  </b-badge>
                 </button>
                 <button
                   @click="filterChange('4')"
                   type="button"
-                  class="
-                    btn btn-primary btn-labeled
-                    pull-right
-                    margin-left-10
-                    statusBtn
-                  "
+                  class="btn btn-primary btn-labeled pull-right margin-left-10 statusBtn"
                 >
                   For tech visit
-                  <b-badge v-if="totalTechVisit > 0" variant="info">{{
-                    totalTechVisit
-                  }}</b-badge>
+                  <b-badge v-if="totalTechVisit > 0" variant="info">
+                    {{ totalTechVisit }}
+                  </b-badge>
                 </button>
                 <button
                   @click="filterChange('3')"
                   type="button"
-                  class="
-                    btn btn-success btn-labeled
-                    pull-right
-                    margin-left-10
-                    statusBtn
-                  "
+                  class="btn btn-success btn-labeled pull-right margin-left-10 statusBtn"
                 >
                   Fixed
                 </button>
                 <button
                   v-b-modal="'modalMultipleFilterTicket'"
                   type="button"
-                  class="
-                    btn btn-success btn-labeled
-                    pull-right
-                    margin-left-10
-                    statusBtn
-                  "
+                  class="btn btn-success btn-labeled pull-right margin-left-10 statusBtn"
                   @click="filterData = 'table'"
                 >
                   Multiple Filter
                 </button>
               </b-row>
             </div>
-            <div style="width: 50%; height: 100%">
+            <div style="width:50%;height:100%">
               <b-card
                 border-variant="default"
                 align="center"
-                style="width: 80%; float: right; margin-right: 15px"
+                style="width:80%;float:right;margin-right:15px"
                 class="trend-bcard"
                 bg-variant="light"
               >
                 <header v-if="trendTime == '3'">
-                  <p style="font-weight: bold">TICKETS TREND AS OF TODAY</p>
+                  <p style="font-weight:bold">TICKETS TREND AS OF TODAY</p>
                 </header>
                 <header v-if="trendTime == '' || trendTime == '1'">
-                  <p style="font-weight: bold">
+                  <p style="font-weight:bold">
                     TICKETS TREND FOR THE PAST 24 HOURS
                   </p>
                 </header>
                 <header v-if="trendTime == '2'">
-                  <p style="font-weight: bold">
+                  <p style="font-weight:bold">
                     TICKETS TREND FOR THE PAST 48 HOURS
                   </p>
                 </header>
-                <b-card-text style="width: 100%">
+                <b-card-text style="width:100%;">
                   <div
                     class="input-group input-group-sm mb-3"
-                    style="display: flex"
+                    style="display:flex"
                   >
                     <model-list-select
-                      style="float: left; background: #e4e4e4; width: 20%"
+                      style="float:left;background:#e4e4e4;width:20%"
                       :list="time"
                       v-model="trendTime"
                       option-value="id"
@@ -258,12 +209,7 @@
                       placeholder="24 Hours"
                     ></model-list-select>
                     <model-list-select
-                      style="
-                        float: left;
-                        margin-left: 5px;
-                        background: #e4e4e4;
-                        width: 53%;
-                      "
+                      style="float:left;margin-left:5px;background:#e4e4e4;width:53%"
                       :list="regions"
                       v-model="trendregion"
                       option-value="id"
@@ -274,12 +220,7 @@
                       <button
                         class="btn"
                         type="button"
-                        style="
-                          font-size: 12px;
-                          background: green;
-                          color: white;
-                          width: 55px;
-                        "
+                        style="font-size:12px;background:green;color:white;width:55px"
                         @click="generateTrend"
                       >
                         Filter
@@ -287,12 +228,7 @@
                       <button
                         class="btn"
                         type="button"
-                        style="
-                          font-size: 12px;
-                          background: #6c757d;
-                          color: white;
-                          margin-left: 2px;
-                        "
+                        style="font-size:12px;background:#6c757d;color:white;margin-left:2px"
                         @click="clearTrend"
                       >
                         Clear Filter
@@ -323,16 +259,16 @@
             </div>
           </div>
 
-          <div style="display: flex">
+          <div style="display:flex">
             <div
               class="row marginice"
-              style="margin-left: 1px; float: left; width: 80%"
+              style="margin-left:1px;float:left;width:80%"
             >
               <b>Showing {{ perPage }} out of {{ totalRows }} entries</b>
             </div>
-            <div class="row marginice" style="width: 8%">
+            <div class="row marginice" style="width:8%">
               <b-row>
-                <b-col style="float: right; padding-right: 0">
+                <b-col style="float:right;padding-right:0">
                   <button
                     class="btn btn-labeled btn-set"
                     v-b-tooltip.hover
@@ -341,16 +277,16 @@
                   >
                     <i
                       class="fas fa-columns"
-                      style="font-size: 15px; margin-top: 5px"
+                      style="font-size:15px;margin-top:5px;"
                     ></i>
                   </button>
                 </b-col>
-                <b-col style="float: right">
+                <b-col style="float:right">
                   <b-form-group class="mb-0">
                     <b-form-select
                       v-b-tooltip.hover
                       title="Show Pages"
-                      style="height: 30px; font-size: 12px"
+                      style="height:30px;font-size:12px"
                       v-model="perPage"
                       :options="pageOptions"
                     ></b-form-select>
@@ -418,7 +354,7 @@
               </center>
 
               <b-button
-                style="width: 100%"
+                style="width:100%;"
                 v-show="
                   (row.item.statname == 'Urgent' &&
                     row.item.target_date == null) ||
@@ -435,7 +371,7 @@
 
               <b-button
                 variant="success"
-                style="width: 100%"
+                style="width:100%;"
                 v-if="
                   row.item.target_date != null &&
                     row.item.target_date != datenow &&
@@ -452,7 +388,7 @@
 
               <b-button
                 variant="success"
-                style="width: 100%"
+                style="width:100%;"
                 v-if="row.item.target_date == datenow"
                 :disabled="
                   row.item.statname != 'Urgent' || !roles.create_client_details
@@ -462,7 +398,7 @@
               >
               <b-button
                 variant="success"
-                style="width: 100%"
+                style="width:100%;"
                 v-if="row.item.target_date == dateTomorrow"
                 :disabled="
                   row.item.statname != 'Urgent' || !roles.create_client_details
@@ -473,7 +409,7 @@
 
               <b-button
                 variant="warning"
-                style="width: 100%"
+                style="width:100%;"
                 v-if="row.item.target_date == dateYesterday"
                 :disabled="
                   row.item.statname != 'Urgent' || !roles.create_client_details
@@ -484,7 +420,7 @@
 
               <b-button
                 variant="danger"
-                style="width: 100%"
+                style="width:100%;"
                 v-if="
                   1 < dateDiffInDays(datenow, row.item.target_date) &&
                     row.item.target_date != null
@@ -493,9 +429,9 @@
                   row.item.statname != 'Urgent' || !roles.create_client_details
                 "
                 @click="openModalUpdateTargetDate(row.item)"
-                >{{ dateDiffInDays(datenow, row.item.target_date) }} Days
-                delay</b-button
               >
+                {{ dateDiffInDays(datenow, row.item.target_date) }} Days delay
+              </b-button>
             </template>
 
             <template slot="table-caption"></template>
@@ -503,12 +439,12 @@
         </div>
       </div>
       <div class="elClr panel-footer">
-        <div class="row" style="background-color: ; padding: 15px">
-          <div class="col-md-8" style="background-color: ">
+        <div class="row" style="background-color:; padding:15px;">
+          <div class="col-md-8" style="background-color:;">
             <span class="elClr">{{ totalRows }} item/s found.</span>
           </div>
 
-          <div class="col-md-4" style="background-color: ">
+          <div class="col-md-4" style="background-color:;">
             <b-pagination
               v-model="currentPage"
               :total-rows="totalRows"
@@ -586,7 +522,7 @@
             </div>
             <div class="elClr panel-body">
               <div>
-                <b-row style="margin: 10px">
+                <b-row style="margin:10px;">
                   <b-col md="5" class="my-1">
                     <b-form-group label-cols-sm="2" label="Filter" class="mb-0">
                       <b-input-group>
@@ -660,12 +596,12 @@
               </div>
             </div>
             <div class="elClr panel-footer">
-              <div class="row" style="background-color: ; padding: 15px">
-                <div class="col-md-8" style="background-color: ">
+              <div class="row" style="background-color:; padding:15px;">
+                <div class="col-md-8" style="background-color:;">
                   <span class="elClr">{{ StattotalRows }} item/s found.</span>
                 </div>
 
-                <div class="col-md-4" style="background-color: ">
+                <div class="col-md-4" style="background-color:;">
                   <b-pagination
                     v-model="currentPage"
                     :total-rows="StattotalRows"
@@ -786,7 +722,7 @@
             </div>
             <div class="elClr panel-body">
               <div>
-                <b-row style="margin: 10px">
+                <b-row style="margin:10px;">
                   <b-col md="5" class="my-1">
                     <b-form-group label-cols-sm="2" label="Filter" class="mb-0">
                       <b-input-group>
@@ -860,12 +796,12 @@
               </div>
             </div>
             <div class="elClr panel-footer">
-              <div class="row" style="background-color: ; padding: 15px">
-                <div class="col-md-8" style="background-color: ">
+              <div class="row" style="background-color:; padding:15px;">
+                <div class="col-md-8" style="background-color:;">
                   <span class="elClr">{{ ComptotalRows }} item/s found.</span>
                 </div>
 
-                <div class="col-md-4" style="background-color: ">
+                <div class="col-md-4" style="background-color:;">
                   <b-pagination
                     v-model="currentPage"
                     :total-rows="ComptotalRows"
@@ -993,10 +929,10 @@
                     v-show="errors.has('content')"
                     >Template content is required.</small
                   >
-                  <span style="float: right">
+                  <span style="float:right">
                     <b>/450</b>
                   </span>
-                  <span style="float: right">
+                  <span style="float:right">
                     <b v-text="maxText - msg.length"></b>
                   </span>
                 </div>
@@ -1022,7 +958,7 @@
             </div>
             <div class="elClr panel-body">
               <div>
-                <b-row style="margin: 10px">
+                <b-row style="margin:10px;">
                   <b-col md="5" class="my-1">
                     <b-form-group label-cols-sm="2" label="Filter" class="mb-0">
                       <b-input-group>
@@ -1096,12 +1032,12 @@
               </div>
             </div>
             <div class="elClr panel-footer">
-              <div class="row" style="background-color: ; padding: 15px">
-                <div class="col-md-8" style="background-color: ">
+              <div class="row" style="background-color:; padding:15px;">
+                <div class="col-md-8" style="background-color:;">
                   <span class="elClr">{{ AdvtotalRows }} item/s found.</span>
                 </div>
 
-                <div class="col-md-4" style="background-color: ">
+                <div class="col-md-4" style="background-color:;">
                   <b-pagination
                     v-model="currentPage"
                     :total-rows="AdvtotalRows"
@@ -1167,10 +1103,10 @@
                 :maxlength="maxText"
                 v-model="manageAdv.content"
               ></textarea>
-              <span style="float: right">
+              <span style="float:right">
                 <b>/450</b>
               </span>
-              <span style="float: right">
+              <span style="float:right">
                 <b v-text="maxText - msg.length"></b>
               </span>
             </div>
@@ -1196,9 +1132,9 @@
           size="lg"
           title="INET SMS"
         >
-          <div style="width: 50%; display: flex; float: right; height: 80%">
+          <div style="width:50%;display:flex;float:right;height:80%">
             <model-list-select
-              style="margin-left: 5px; background: #e4e4e4; width: 60%"
+              style="margin-left:5px;background:#e4e4e4;width:60%;"
               :list="templates"
               v-model="selectedTemp"
               option-value="id"
@@ -1206,11 +1142,11 @@
               placeholder="Select Template"
               @input="selectTemp"
             ></model-list-select>
-            <div class="input-group-append" style="width: 40%">
+            <div class="input-group-append" style="width:40%">
               <b-button
                 squared
                 variant="dark"
-                style="width: 50%; max-height: 100%; color: white"
+                style="width:50%;max-height:100%;color:white;"
                 @click="clearTemp"
                 >Clear Filter</b-button
               >
@@ -1218,12 +1154,7 @@
                 v-b-modal="'modalMultipleFilterClient'"
                 squared
                 variant="success"
-                style="
-                  width: 50%;
-                  max-height: 100%;
-                  color: white;
-                  margin-left: 3px;
-                "
+                style="width:50%;max-height:100%;color:white;margin-left:3px"
                 @click="filterData = 'text'"
                 >Bulk Add</b-button
               >
@@ -1232,19 +1163,19 @@
 
           <div
             class="rowFields mx-auto row"
-            style="width: 100%; display: flex; margin-top: 50px"
+            style="width:100%;display:flex;margin-top:50px"
           >
-            <div style="width: 15%; display: flex">
-              <p class="textLabel" style="width: 60%">Send To:</p>
+            <div style="width:15%;display:flex">
+              <p class="textLabel" style="width:60%;">Send To:</p>
               <b-button
                 variant="outline-dark"
-                style="width: 40%; float: right; height: 40px"
+                style="width:40%;float:right;height:40px"
                 v-b-tooltip="'Clear Recipients'"
                 @click="resetRecipients"
                 >X</b-button
               >
             </div>
-            <div style="width: 85%" id="multiselectSMS">
+            <div style="width:85%" id="multiselectSMS">
               <multiselect
                 v-model="selectedContacts"
                 :options="contacts"
@@ -1264,18 +1195,18 @@
             </div>
           </div>
 
-          <div class="rowFields mx-auto row" style="width: 100%; display: flex">
-            <div style="width: 15%; display: flex">
-              <p class="textLabel" style="width: 70%">Message:</p>
+          <div class="rowFields mx-auto row" style="width:100%;display:flex">
+            <div style="width:15%;display:flex">
+              <p class="textLabel" style="width:70%;">Message:</p>
               <b-button
                 variant="outline-dark"
-                style="width: 40%; float: right; height: 30px"
+                style="width:40%;float:right;height:30px"
                 v-b-tooltip="'Clear Field'"
                 @click="resetField"
                 >X</b-button
               >
             </div>
-            <div style="width: 85%">
+            <div style="width:85%">
               <textarea
                 autocomplete="off"
                 autocorrect="off"
@@ -1291,10 +1222,10 @@
                 v-model="msg"
               ></textarea>
               <!-- <small style="float:right" v-text="maxText - msg.length"> </small> -->
-              <span style="float: right">
+              <span style="float:right">
                 <b>/450</b>
               </span>
-              <span style="float: right">
+              <span style="float:right">
                 <b v-text="maxText - msg.length"></b>
               </span>
             </div>
@@ -1310,7 +1241,7 @@
         <b-alert
           v-model="showSending"
           class="position-fixed fixed-bottom m-0 rounded-0"
-          style="z-index: 2000"
+          style="z-index: 2000;"
           variant="warning"
           dismissible
           >Sending Message/s. . . . . . .</b-alert
@@ -1319,7 +1250,7 @@
         <b-alert
           v-model="showSent"
           class="position-fixed fixed-bottom m-0 rounded-0"
-          style="z-index: 2000"
+          style="z-index: 2000;"
           variant="success"
           dismissible
           >Messages Sent Successfully!</b-alert
@@ -1328,7 +1259,7 @@
         <b-alert
           v-model="showFailed"
           class="position-fixed fixed-bottom m-0 rounded-0"
-          style="z-index: 2000"
+          style="z-index: 2000;"
           variant="danger"
           dismissible
           >Sending Failed !</b-alert
@@ -1351,7 +1282,11 @@
           <div id='toPDF'>
   <form @submit.prevent>
             <div id="new ticket">
-              <b-card align="center" style="height: 20px; border: none">
+              <b-card
+                align="center"
+                style="height:20px;border:none;
+                "
+              >
                 <center>
                   <div class="ticketOption">
                     <p-radio
@@ -1432,34 +1367,26 @@
               <!-- client details card  -->
               <b-card bg-variant="light" align="center" class="b-card-ticket">
                 <center>
-                  <div style="display: flex; width: 95%">
-                    <div style="width: 15%; height: 20%">
-                      <h6 style="text-align: left">Client Details</h6>
+                  <div style="display:flex;width:95%">
+                    <div style="width:15%;height:20%">
+                      <h6 style="text-align:left">Client Details</h6>
                     </div>
                     <br />
 
                     <!-- for individual tickets  -->
                     <div
-                      style="width: 85%; height: 80%"
+                      style="width:85%;height:80%"
                       v-if="ticket.ticketType == '1'"
                     >
                       <b-row class="clientRow">
                         <b-col class="clientCol">
                           <label
-                            style="
-                              float: left;
-                              padding-left: 7px;
-                              margin-top: 3px;
-                            "
+                            style="float:left;padding-left:7px;margin-top:3px"
                             >Account Name</label
                           >
                         </b-col>
                         <b-col
-                          style="
-                            margin-left: -4px;
-                            margin-top: -5px;
-                            max-width: 80%;
-                          "
+                          style="margin-left:-4px;margin-top:-5px;max-width:80%"
                         >
                           <b-form-group>
                             <b-input-group>
@@ -1490,14 +1417,14 @@
                           </b-form-group>
                         </b-col>
                       </b-row>
-                      <span style="display: none">{{ clientSelected.id }}</span>
+                      <span style="display:none">{{ clientSelected.id }}</span>
                       <div
                         class="input-group"
-                        style="margin-top: -10px; width: 50%"
+                        style="margin-top:-10px;width:50%"
                         v-show="ref.includes(clientSelected.id)"
                       >
                         <label
-                          style="font-size: 12px; margin-top: 6px"
+                          style="font-size:12px;margin-top:6px"
                           class="input-group-addon"
                           >Input Client Name</label
                         >
@@ -1512,25 +1439,17 @@
                       <b-row class="clientRow">
                         <b-col class="clientCol">
                           <label
-                            style="
-                              float: left;
-                              padding-left: 7px;
-                              margin-top: 3px;
-                            "
+                            style="float:left;padding-left:7px;margin-top:3px"
                             >Address</label
                           >
                         </b-col>
                         <b-col
-                          style="
-                            margin-left: -4px;
-                            margin-top: -5px;
-                            max-width: 80%;
-                          "
+                          style="margin-left:-4px;margin-top:-5px;max-width:80%"
                         >
                           <b-form-group>
                             <b-form-input
                               id="input-default"
-                              style="height: 30px"
+                              style="height:30px"
                               :placeholder="clientSelected.address"
                               disabled
                             ></b-form-input>
@@ -1540,20 +1459,12 @@
                       <b-row class="clientRow">
                         <b-col class="clientCol">
                           <label
-                            style="
-                              float: left;
-                              padding-left: 7px;
-                              margin-top: 3px;
-                            "
+                            style="float:left;padding-left:7px;margin-top:3px"
                             >Area</label
                           >
                         </b-col>
                         <b-col
-                          style="
-                            margin-left: -4px;
-                            margin-top: -5px;
-                            max-width: 80%;
-                          "
+                          style="margin-left:-4px;margin-top:-5px;max-width:80%"
                         >
                           <b-form-group>
                             <b-input-group>
@@ -1576,21 +1487,17 @@
                     </div>
                     <!-- for multiple tickets -->
                     <div
-                      style="width: 85%; height: 80%"
+                      style="width:85%;height:80%"
                       v-if="ticket.ticketType == '2'"
                     >
                       <div class="rowFields mx-auto row multipleClient">
                         <div class="multipleClient2">
                           <label
-                            style="
-                              float: left;
-                              padding-left: 7px;
-                              margin-top: 3px;
-                            "
+                            style="float:left;padding-left:7px;margin-top:3px"
                             >Account Name</label
                           >
                         </div>
-                        <div style="width: 78%; margin-left: 1.5px">
+                        <div style="width:78%;margin-left:1.5px;">
                           <multiselect
                             v-model="ticket.multipleClients"
                             :options="clients"
@@ -1611,20 +1518,12 @@
                       <b-row class="clientRow">
                         <b-col class="clientCol">
                           <label
-                            style="
-                              float: left;
-                              padding-left: 7px;
-                              margin-top: 3px;
-                            "
+                            style="float:left;padding-left:7px;margin-top:3px"
                             >Client Region</label
                           >
                         </b-col>
                         <b-col
-                          style="
-                            margin-left: -4px;
-                            margin-top: -5px;
-                            max-width: 80%;
-                          "
+                          style="margin-left:-4px;margin-top:-5px;max-width:80%"
                         >
                           <b-form-group>
                             <b-input-group>
@@ -1642,11 +1541,11 @@
                       </b-row>
                       <div
                         class="input-group"
-                        style="margin-top: -10px; width: 50%"
+                        style="margin-top:-10px;width:50%"
                         v-show="ticket.clientRegion != null"
                       >
                         <label
-                          style="font-size: 12px; margin-top: 6px"
+                          style="font-size:12px;margin-top:6px"
                           class="input-group-addon"
                           >Input Client Name</label
                         >
@@ -1659,7 +1558,7 @@
                         />
                         <button
                           class="btn btn-success btn-labeled"
-                          style="margin-left: 3px"
+                          style="margin-left:3px"
                           @click="addClient(ticket.complain)"
                         >
                           <i class="fas fa-plus"></i>
@@ -1668,20 +1567,12 @@
                       <b-row class="clientRow">
                         <b-col class="clientCol">
                           <label
-                            style="
-                              float: left;
-                              padding-left: 7px;
-                              margin-top: 3px;
-                            "
+                            style="float:left;padding-left:7px;margin-top:3px"
                             >Area</label
                           >
                         </b-col>
                         <b-col
-                          style="
-                            margin-left: -4px;
-                            margin-top: -5px;
-                            max-width: 80%;
-                          "
+                          style="margin-left:-4px;margin-top:-5px;max-width:80%"
                         >
                           <b-form-group>
                             <b-input-group>
@@ -1704,19 +1595,14 @@
                     </div>
                     <!-- for group tickets -->
                     <div
-                      style="width: 85%; height: 80%"
+                      style="width:85%;height:80%"
                       v-if="ticket.ticketType == '3'"
                     >
                       <b-button
                         v-b-modal="'modalMultipleFilterClient'"
                         squared
                         variant="success"
-                        style="
-                          width: 20%;
-                          max-height: 100%;
-                          color: white;
-                          float: right;
-                        "
+                        style="width:20%;max-height:100%;color:white;float:right"
                         @click="filterData = 'ticket'"
                         >Bulk Add</b-button
                       >
@@ -1724,15 +1610,11 @@
                       <div class="rowFields mx-auto row multipleClient">
                         <div class="multipleClient2">
                           <label
-                            style="
-                              float: left;
-                              padding-left: 7px;
-                              margin-top: 3px;
-                            "
+                            style="float:left;padding-left:7px;margin-top:3px"
                             >Account Name</label
                           >
                         </div>
-                        <div style="width: 78%; margin-left: 1.5px">
+                        <div style="width:78%;margin-left:1.5px;">
                           <multiselect
                             v-model="ticket.multipleClients"
                             :options="clients"
@@ -1757,30 +1639,22 @@
               <!-- complaint details card -->
               <b-card bg-variant="light" align="center" class="b-card-ticket">
                 <center>
-                  <div style="display: flex; width: 95%">
-                    <div style="width: 15%; height: 20%">
-                      <h6 style="text-align: left">Complaint Details</h6>
+                  <div style="display:flex;width:95%">
+                    <div style="width:15%;height:20%">
+                      <h6 style="text-align:left">Complaint Details</h6>
                     </div>
                     <br />
 
-                    <div style="width: 85%; height: 80%">
+                    <div style="width:85%;height:80%">
                       <b-row class="findingsRow">
                         <b-col class="clientCol">
                           <label
-                            style="
-                              float: left;
-                              padding-left: 7px;
-                              margin-top: 5px;
-                            "
+                            style="float:left;padding-left:7px;margin-top:5px;"
                             >Complaint</label
                           >
                         </b-col>
                         <b-col
-                          style="
-                            margin-left: -4px;
-                            margin-top: -5px;
-                            max-width: 80%;
-                          "
+                          style="margin-left:-4px;margin-top:-5px;max-width:80%"
                         >
                           <b-form-group>
                             <b-input-group>
@@ -1806,20 +1680,12 @@
                       <b-row class="findingsRow">
                         <b-col class="clientCol">
                           <label
-                            style="
-                              float: left;
-                              padding-left: 7px;
-                              margin-top: 5px;
-                            "
+                            style="float:left;padding-left:7px;margin-top:5px;"
                             >Connection Status</label
                           >
                         </b-col>
                         <b-col
-                          style="
-                            margin-left: -4px;
-                            margin-top: -5px;
-                            max-width: 80%;
-                          "
+                          style="margin-left:-4px;margin-top:-5px;max-width:80%"
                         >
                           <b-form-group>
                             <b-input-group>
@@ -1844,20 +1710,12 @@
                       <b-row class="findingsRow">
                         <b-col class="clientCol">
                           <label
-                            style="
-                              float: left;
-                              padding-left: 7px;
-                              margin-top: 5px;
-                            "
+                            style="float:left;padding-left:7px;margin-top:5px;"
                             >Ticket Status</label
                           >
                         </b-col>
                         <b-col
-                          style="
-                            margin-left: -4px;
-                            margin-top: -5px;
-                            max-width: 80%;
-                          "
+                          style="margin-left:-4px;margin-top:-5px;max-width:80%"
                         >
                           <b-form-group>
                             <b-input-group>
@@ -1880,9 +1738,7 @@
                         </b-col>
                       </b-row>
                       <b-row class="findingsRow">
-                        <b-col
-                          style="float: left; margin-top: -5px; width: 100%"
-                        >
+                        <b-col style="float:left;margin-top:-5px;width:100%">
                           <b>NOTE:</b>
                           <b-form-textarea
                             id="textarea-small"
@@ -1906,22 +1762,18 @@
                     <b-card align="center" class="trouble-bcard">
                       <div
                         id="bucket"
-                        style="display: flex; margin-top: 0; width: 100%"
+                        style="display:flex;margin-top:0; width: 100%"
                       >
-                        <div style="width: 30%">
-                          <b-form-group style="float: left; text-align: left">
+                        <div style="width:30%">
+                          <b-form-group style="float:left;text-align:left">
                             <label class="tsCheckboxes"
                               >BUCKET SERVER STATUS :</label
                             >
                           </b-form-group>
                         </div>
-                        <div style="width: 70%">
+                        <div style="width:70%;">
                           <div
-                            class="
-                              pretty
-                              p-icon p-jelly p-bigger
-                              troubleCheckbox
-                            "
+                            class="pretty p-icon p-jelly p-bigger troubleCheckbox"
                           >
                             <input
                               type="checkbox"
@@ -1934,11 +1786,7 @@
                             </div>
                           </div>
                           <div
-                            class="
-                              pretty
-                              p-icon p-jelly p-bigger
-                              troubleCheckbox
-                            "
+                            class="pretty p-icon p-jelly p-bigger troubleCheckbox"
                           >
                             <input
                               type="checkbox"
@@ -1952,7 +1800,7 @@
                           </div>
                           <div
                             class="input-group"
-                            style="width: 53%; margin-right: 30px; float: right"
+                            style="width:53%;margin-right:30px;float:right"
                           >
                             <label class="tsCheckboxes">Usage</label>
                             <input
@@ -1968,20 +1816,16 @@
 
                       <div
                         id="device"
-                        style="width: 100%; display: flex; margin-top: 0"
+                        style="width:100%;display:flex;margin-top:0"
                       >
-                        <div style="width: 30%">
-                          <b-form-group style="float: left; text-align: left">
+                        <div style="width:30%">
+                          <b-form-group style="float:left;text-align:left">
                             <label class="tsCheckboxes">DEVICE STATUS :</label>
                           </b-form-group>
                         </div>
-                        <div style="width: 70%">
+                        <div style="width:70%;">
                           <div
-                            class="
-                              pretty
-                              p-icon p-jelly p-bigger
-                              troubleCheckbox
-                            "
+                            class="pretty p-icon p-jelly p-bigger troubleCheckbox"
                           >
                             <input
                               type="checkbox"
@@ -1994,11 +1838,7 @@
                             </div>
                           </div>
                           <div
-                            class="
-                              pretty
-                              p-icon p-jelly p-bigger
-                              troubleCheckbox
-                            "
+                            class="pretty p-icon p-jelly p-bigger troubleCheckbox"
                           >
                             <input
                               type="checkbox"
@@ -2011,11 +1851,7 @@
                             </div>
                           </div>
                           <div
-                            class="
-                              pretty
-                              p-icon p-jelly p-bigger
-                              troubleCheckbox
-                            "
+                            class="pretty p-icon p-jelly p-bigger troubleCheckbox"
                           >
                             <input
                               type="checkbox"
@@ -2031,11 +1867,11 @@
                       </div>
                       <div
                         id="others"
-                        style="width: 100%; display: flex; margin-top: -15px"
+                        style="width:100%;display:flex;margin-top:-15px;"
                       >
-                        <div style="width: 30%"></div>
-                        <div style="width: 70%">
-                          <div class="input-group" style="width: 95%">
+                        <div style="width:30%"></div>
+                        <div style="width:70%">
+                          <div class="input-group" style="width:95%">
                             <label class="tsCheckboxes">Others</label>
                             <input
                               id="loss"
@@ -2049,15 +1885,15 @@
                       </div>
                       <div
                         id="loss"
-                        style="width: 100%; display: flex; margin-top: 5px"
+                        style="width:100%;display:flex;margin-top:5px"
                       >
-                        <div style="width: 30%">
-                          <b-form-group style="float: left; text-align: left">
+                        <div style="width:30%">
+                          <b-form-group style="float:left;text-align:left">
                             <label class="tsCheckboxes">OPTICAL POWER :</label>
                           </b-form-group>
                         </div>
-                        <div style="width: 70%">
-                          <div class="input-group" style="width: 95%">
+                        <div style="width:70%">
+                          <div class="input-group" style="width:95%">
                             <label class="tsCheckboxes">Loss</label>
                             <input
                               id="loss"
@@ -2071,17 +1907,17 @@
                       </div>
                       <div
                         id="downtime"
-                        style="width: 100%; display: flex; margin-top: 0"
+                        style="width:100%;display:flex;margin-top:0"
                       >
-                        <div style="width: 30%">
-                          <b-form-group style="float: left; text-align: left">
+                        <div style="width:30%">
+                          <b-form-group style="float:left;text-align:left">
                             <label class="tsCheckboxes"
                               >AFFECTED BY DOWNTIME :</label
                             >
                           </b-form-group>
                         </div>
-                        <div style="width: 70%">
-                          <div class="input-group" style="width: 95%">
+                        <div style="width:70%">
+                          <div class="input-group" style="width:95%">
                             <label class="tsCheckboxes">Details</label>
                             <input
                               id="downtime"
@@ -2095,22 +1931,18 @@
                       </div>
                       <div
                         id="ping"
-                        style="width: 100%; display: flex; margin-top: 0"
+                        style="width:100%;display:flex;margin-top:0"
                       >
-                        <div style="width: 30%">
-                          <b-form-group style="float: left; text-align: left">
+                        <div style="width:30%">
+                          <b-form-group style="float:left;text-align:left">
                             <label class="tsCheckboxes"
                               >PING & TRACEROUTE TEST :</label
                             >
                           </b-form-group>
                         </div>
-                        <div style="width: 70%">
+                        <div style="width:70%">
                           <div
-                            class="
-                              pretty
-                              p-icon p-jelly p-bigger
-                              troubleCheckbox
-                            "
+                            class="pretty p-icon p-jelly p-bigger troubleCheckbox"
                           >
                             <input
                               type="checkbox"
@@ -2126,20 +1958,16 @@
                       </div>
                       <div
                         id="speed"
-                        style="width: 100%; display: flex; margin-top: 0"
+                        style="width:100%;display:flex;margin-top:0"
                       >
-                        <div style="width: 30%">
-                          <b-form-group style="float: left; text-align: left">
+                        <div style="width:30%">
+                          <b-form-group style="float:left;text-align:left">
                             <label class="tsCheckboxes">SPEED TEST :</label>
                           </b-form-group>
                         </div>
-                        <div style="width: 70%">
+                        <div style="width:70%">
                           <div
-                            class="
-                              pretty
-                              p-icon p-jelly p-bigger
-                              troubleCheckbox
-                            "
+                            class="pretty p-icon p-jelly p-bigger troubleCheckbox"
                           >
                             <input
                               type="checkbox"
@@ -2164,13 +1992,13 @@
               <!-- attachments card -->
               <b-card bg-variant="light" align="center" class="b-card-ticket">
                 <center>
-                  <div style="display: flex; width: 100%">
-                    <div style="width: 15%">
-                      <h6 style="text-align: left">Attachments</h6>
+                  <div style="display:flex;width:100%">
+                    <div style="width:15%">
+                      <h6 style="text-align:left">Attachments</h6>
                     </div>
                     <br />
 
-                    <div style="width: 85%; height: 80%">
+                    <div style="width:85%;height:80%">
                       <UploadImages
                         type="input"
                         accept="image/*"
@@ -2187,36 +2015,26 @@
               <b-card
                 id="remarks"
                 align="center"
-                style="
-                  max-height: 100%;
-                  border: none;
-                  background: none;
-                  display: none;
-                "
+                style="max-height:100%;border:none;background:none;display:none"
                 :body-text-variant="' elClr'"
               >
                 <center>
-                  <div style="width: 100%">
+                  <div style="width:100%">
                     <div
-                      style="
-                        width: 100%;
-                        float: left;
-                        font-size: 13px;
-                        font-weight: bold;
-                      "
+                      style="width:100%;float:left;font-size:13px;font-weight:bold"
                     >
-                      <label style="float: left">Remarks</label>
+                      <label style="float:left">Remarks</label>
                     </div>
                     <br />
                     <div style="width:100%;max-height;100%margin-top:10px">
                       <b-row class="reportRow">
-                        <b-col style="margin-left: -10px; margin-top: 10px">
+                        <b-col style="margin-left:-10px;margin-top:10px;">
                           <b-form-group>
                             <b-form-textarea
                               id="textarea-small"
                               size="sm"
                               v-model.lazy="ticket.remarks"
-                              style="width: 100%; height: 100%"
+                              style="width:100%;height:100%"
                               placeholder="Type remarks here. . ."
                             ></b-form-textarea>
                           </b-form-group>
@@ -2279,9 +2097,9 @@
           <!-- form -->
 
           <div id="newEditTicket">
-            <b-card align="center" style="height: 20px; border: none">
+            <b-card align="center" style="height:20px;border:none">
               <center>
-                <div style="float: left; margin-top: -20px; margin-left: -15px">
+                <div style="float:left;margin-top:-20px;margin-left:-15px">
                   <button
                     class="btn btn-labeled btn-copy"
                     v-b-tooltip.hover
@@ -2291,9 +2109,7 @@
                     <i class="far fa-copy"></i> &nbsp;Copy
                   </button>
                 </div>
-                <div
-                  style="float: right; margin-top: -20px; margin-right: -15px"
-                >
+                <div style="float:right;margin-top:-20px;margin-right:-15px">
                   <h6>
                     Status
                     <b-badge
@@ -2340,13 +2156,13 @@
             <b-card
               bg-variant="light"
               align="center"
-              style="max-height: 100%"
+              style="max-height:100%"
               class="editTicket-bcard"
               id="client"
               v-if="editTicket.ticketType == '1'"
             >
               <center>
-                <div style="font-size: 12px" v-if="editChangeClient">
+                <div style="font-size:12px;" v-if="editChangeClient">
                   <b-row class="clientRow">
                     <p
                       class="textbtnedit"
@@ -2357,17 +2173,12 @@
                   </b-row>
                   <b-row class="clientRow">
                     <b-col class="clientCol">
-                      <label
-                        style="float: left; padding-left: 7px; margin-top: 3px"
+                      <label style="float:left;padding-left:7px;margin-top:3px"
                         >Account Name</label
                       >
                     </b-col>
                     <b-col
-                      style="
-                        margin-left: -4px;
-                        margin-top: -5px;
-                        max-width: 80%;
-                      "
+                      style="margin-left:-4px;margin-top:-5px;max-width:80%"
                     >
                       <b-form-group>
                         <b-input-group>
@@ -2403,18 +2214,14 @@
                     v-show="ref.includes(clientSelected.id)"
                   >
                     <b-col
-                      style="
-                        margin-left: -4px;
-                        margin-top: -4px;
-                        max-width: 100%;
-                      "
+                      style="margin-left:-4px;margin-top:-4px;max-width:100%"
                     >
                       <div
                         class="input-group"
-                        style="margin-top: -10px; width: 50%"
+                        style="margin-top:-10px;width:50%"
                       >
                         <label
-                          style="font-size: 12px; margin-top: 6px"
+                          style="font-size:12px;margin-top:6px"
                           class="input-group-addon"
                           >Input Client Name</label
                         >
@@ -2429,51 +2236,46 @@
                     </b-col>
                   </b-row>
                 </div>
-                <div style="display: flex; font-size: 12px" v-else>
-                  <div style="width: 50%; float: left">
+                <div style="display:flex;font-size:12px;" v-else>
+                  <div style="width:50%; float:left">
                     <label
-                      style="
-                        display: block;
-                        text-align: left;
-                        font-weight: bold;
-                        color: green;
-                      "
+                      style="display:block;text-align:left;font-weight:bold;color:green"
                       >Ticket No.: {{ editTicket.mTicket_id }}</label
                     >
                     <label
-                      style="display: block; text-align: left"
+                      style="display:block;text-align:left"
                       :hidden="clientRef.includes(editTicket.client.name)"
                       >Account Name: {{ editTicket.client.name }}</label
                     >
                     <label
-                      style="display: block; text-align: left"
+                      style="display:block;text-align:left"
                       v-show="clientRef.includes(editTicket.client.name)"
                       >Account Name: {{ editTicket.complain }}</label
                     >
 
-                    <label style="display: block; text-align: left"
+                    <label style="display:block;text-align:left"
                       >Address: {{ editTicket.client.location }}</label
                     >
-                    <label style="display: block; text-align: left"
+                    <label style="display:block;text-align:left"
                       >Contact No.: {{ editTicket.client.contact }}</label
                     >
                   </div>
-                  <div style="width: 50%">
-                    <label style="display: block; text-align: left"
+                  <div style="width:50%;">
+                    <label style="display:block;text-align:left"
                       >IP Assigned: {{ editTicket.ip_assigned }}</label
                     >
-                    <label style="display: block; text-align: left"
+                    <label style="display:block;text-align:left"
                       >VLAN: {{ editTicket.vlan }}</label
                     >
-                    <label style="display: block; text-align: left"
+                    <label style="display:block;text-align:left"
                       >OLT: {{ editTicket.ip }}</label
                     >
 
-                    <label style="display: block; text-align: left"
+                    <label style="display:block;text-align:left"
                       >PON: {{ editTicket.pon }} - {{ editTicket.onu }}</label
                     >
                   </div>
-                  <div style="float: right">
+                  <div style="float:right">
                     <p
                       class="textbtnedit"
                       @click="editChangeClient = !editChangeClient"
@@ -2491,20 +2293,15 @@
               class="b-card-ticket"
               v-else
             >
-              <div style="display: flex; font-size: 12px">
-                <div style="width: 50%; float: left">
+              <div style="display:flex;font-size:12px;">
+                <div style="width:50%; float:left">
                   <label
-                    style="
-                      display: block;
-                      text-align: left;
-                      font-weight: bold;
-                      color: green;
-                    "
+                    style="display:block;text-align:left;font-weight:bold;color:green"
                     >Ticket No.: {{ editTicket.mTicket_id }}</label
                   >
                 </div>
 
-                <div style="float: right">
+                <div style="float:right">
                   <p
                     class="textbtnedit"
                     @click="editChangeClient = !editChangeClient"
@@ -2514,7 +2311,7 @@
                 </div>
                 <br />
               </div>
-              <div style="float: right; margin-top: -10px" hidden>
+              <div style="float:right;margin-top:-10px" hidden>
                 <p
                   class="textbtnedit"
                   @click="editChangeClient = !editChangeClient"
@@ -2524,13 +2321,13 @@
               </div>
               <br />
               <center>
-                <div style="display: flex; width: 95%">
-                  <div style="width: 100%; height: 50%; margin-top: -15px">
+                <div style="display:flex;width:95%">
+                  <div style="width:100%;height:50%;margin-top:-15px">
                     <div
                       class="rowFields mx-auto row multipleClient"
                       v-show="editChangeClient"
                     >
-                      <div style="width: 100%; margin-left: 1.5px">
+                      <div style="width:100%;margin-left:1.5px;">
                         <multiselect
                           v-model="addedClients"
                           :options="clients"
@@ -2564,9 +2361,8 @@
                           v-b-tooltip.hover
                           title="Remove Client"
                           @click="removeClient(row.item.client_id)"
-                        >
-                          <i class="fas fa-trash-restore-alt"></i>
-                        </b-button>
+                          ><i class="fas fa-trash-restore-alt"></i
+                        ></b-button>
                       </template>
                     </b-table>
                   </div>
@@ -2582,30 +2378,22 @@
               id="editComplaint"
             >
               <center>
-                <div style="display: flex; width: 95%">
-                  <div style="width: 15%; height: 20%">
-                    <h6 style="text-align: left">Complaint Details</h6>
+                <div style="display:flex;width:95%">
+                  <div style="width:15%;height:20%">
+                    <h6 style="text-align:left">Complaint Details</h6>
                   </div>
                   <br />
 
-                  <div style="width: 85%; height: 80%">
+                  <div style="width:85%;height:80%">
                     <b-row class="findingsRow">
                       <b-col class="clientCol">
                         <label
-                          style="
-                            float: left;
-                            padding-left: 7px;
-                            margin-top: 5px;
-                          "
+                          style="float:left;padding-left:7px;margin-top:5px;"
                           >Complaint</label
                         >
                       </b-col>
                       <b-col
-                        style="
-                          margin-left: -4px;
-                          margin-top: -5px;
-                          max-width: 80%;
-                        "
+                        style="margin-left:-4px;margin-top:-5px;max-width:80%"
                       >
                         <b-form-group>
                           <b-input-group>
@@ -2631,20 +2419,12 @@
                     <b-row class="findingsRow">
                       <b-col class="clientCol">
                         <label
-                          style="
-                            float: left;
-                            padding-left: 7px;
-                            margin-top: 5px;
-                          "
+                          style="float:left;padding-left:7px;margin-top:5px;"
                           >Connection Status</label
                         >
                       </b-col>
                       <b-col
-                        style="
-                          margin-left: -4px;
-                          margin-top: -5px;
-                          max-width: 80%;
-                        "
+                        style="margin-left:-4px;margin-top:-5px;max-width:80%"
                       >
                         <b-form-group>
                           <b-input-group>
@@ -2670,20 +2450,12 @@
                     <b-row class="findingsRow">
                       <b-col class="clientCol">
                         <label
-                          style="
-                            float: left;
-                            padding-left: 7px;
-                            margin-top: 5px;
-                          "
+                          style="float:left;padding-left:7px;margin-top:5px;"
                           >Ticket Status</label
                         >
                       </b-col>
                       <b-col
-                        style="
-                          margin-left: -4px;
-                          margin-top: -5px;
-                          max-width: 80%;
-                        "
+                        style="margin-left:-4px;margin-top:-5px;max-width:80%"
                       >
                         <b-form-group>
                           <b-input-group>
@@ -2708,20 +2480,12 @@
                     <b-row class="findingsRow">
                       <b-col class="clientCol">
                         <label
-                          style="
-                            float: left;
-                            padding-left: 7px;
-                            margin-top: 3px;
-                          "
+                          style="float:left;padding-left:7px;margin-top:3px"
                           >Area</label
                         >
                       </b-col>
                       <b-col
-                        style="
-                          margin-left: -4px;
-                          margin-top: -5px;
-                          max-width: 80%;
-                        "
+                        style="margin-left:-4px;margin-top:-5px;max-width:80%"
                       >
                         <b-form-group>
                           <b-input-group>
@@ -2743,7 +2507,7 @@
                       </b-col>
                     </b-row>
                     <b-row class="findingsRow">
-                      <b-col style="float: left; margin-top: -5px; width: 100%">
+                      <b-col style="float:left;margin-top:-5px;width:100%">
                         <b>NOTE:</b>
                         <b-form-textarea
                           id="textarea-small"
@@ -2767,10 +2531,10 @@
                   <b-card align="center" class="trouble-bcard">
                     <div
                       id="bucket"
-                      style="display: flex; margin-top: 0; width: 100%"
+                      style="display:flex;margin-top:0; width: 100%"
                     >
-                      <div style="width: 30%">
-                        <b-form-group style="float: left; text-align: left">
+                      <div style="width:30%">
+                        <b-form-group style="float:left;text-align:left">
                           <label class="tsCheckboxes"
                             >BUCKET SERVER STATUS :</label
                           >
@@ -2804,7 +2568,7 @@
                           </div>
                         </b-form-group>
                       </div>-->
-                      <div style="width: 70%">
+                      <div style="width:70%;">
                         <div
                           class="pretty p-icon p-jelly p-bigger troubleCheckbox"
                         >
@@ -2833,7 +2597,7 @@
                         </div>
                         <div
                           class="input-group"
-                          style="width: 53%; margin-right: 30px; float: right"
+                          style="width:53%;margin-right:30px;float:right"
                         >
                           <label class="tsCheckboxes">Usage</label>
                           <input
@@ -2848,14 +2612,14 @@
                     </div>
                     <div
                       id="device"
-                      style="width: 100%; display: flex; margin-top: 0"
+                      style="width:100%;display:flex;margin-top:0"
                     >
-                      <div style="width: 30%">
-                        <b-form-group style="float: left; text-align: left">
+                      <div style="width:30%">
+                        <b-form-group style="float:left;text-align:left">
                           <label class="tsCheckboxes">DEVICE STATUS :</label>
                         </b-form-group>
                       </div>
-                      <div style="width: 70%">
+                      <div style="width:70%;">
                         <div
                           class="pretty p-icon p-jelly p-bigger troubleCheckbox"
                         >
@@ -2899,11 +2663,11 @@
                     </div>
                     <div
                       id="others"
-                      style="width: 100%; display: flex; margin-top: -15px"
+                      style="width:100%;display:flex;margin-top:-15px;"
                     >
-                      <div style="width: 30%"></div>
-                      <div style="width: 70%">
-                        <div class="input-group" style="width: 95%">
+                      <div style="width:30%"></div>
+                      <div style="width:70%">
+                        <div class="input-group" style="width:95%">
                           <label class="tsCheckboxes">Others</label>
                           <input
                             id="loss"
@@ -2917,15 +2681,15 @@
                     </div>
                     <div
                       id="loss"
-                      style="width: 100%; display: flex; margin-top: 5px"
+                      style="width:100%;display:flex;margin-top:5px"
                     >
-                      <div style="width: 30%">
-                        <b-form-group style="float: left; text-align: left">
+                      <div style="width:30%">
+                        <b-form-group style="float:left;text-align:left">
                           <label class="tsCheckboxes">OPTICAL POWER :</label>
                         </b-form-group>
                       </div>
-                      <div style="width: 70%">
-                        <div class="input-group" style="width: 95%">
+                      <div style="width:70%">
+                        <div class="input-group" style="width:95%">
                           <label class="tsCheckboxes">Loss</label>
                           <input
                             id="loss"
@@ -2939,17 +2703,17 @@
                     </div>
                     <div
                       id="downtime"
-                      style="width: 100%; display: flex; margin-top: 0"
+                      style="width:100%;display:flex;margin-top:0"
                     >
-                      <div style="width: 30%">
-                        <b-form-group style="float: left; text-align: left">
+                      <div style="width:30%">
+                        <b-form-group style="float:left;text-align:left">
                           <label class="tsCheckboxes"
                             >AFFECTED BY DOWNTIME :</label
                           >
                         </b-form-group>
                       </div>
-                      <div style="width: 70%">
-                        <div class="input-group" style="width: 95%">
+                      <div style="width:70%">
+                        <div class="input-group" style="width:95%">
                           <label class="tsCheckboxes">Details</label>
                           <input
                             id="downtime"
@@ -2961,18 +2725,15 @@
                         </div>
                       </div>
                     </div>
-                    <div
-                      id="ping"
-                      style="width: 100%; display: flex; margin-top: 0"
-                    >
-                      <div style="width: 30%">
-                        <b-form-group style="float: left; text-align: left">
+                    <div id="ping" style="width:100%;display:flex;margin-top:0">
+                      <div style="width:30%">
+                        <b-form-group style="float:left;text-align:left">
                           <label class="tsCheckboxes"
                             >PING & TRACEROUTE TEST :</label
                           >
                         </b-form-group>
                       </div>
-                      <div style="width: 70%">
+                      <div style="width:70%">
                         <div
                           class="pretty p-icon p-jelly p-bigger troubleCheckbox"
                         >
@@ -2990,14 +2751,14 @@
                     </div>
                     <div
                       id="speed"
-                      style="width: 100%; display: flex; margin-top: 0"
+                      style="width:100%;display:flex;margin-top:0"
                     >
-                      <div style="width: 30%">
-                        <b-form-group style="float: left; text-align: left">
+                      <div style="width:30%">
+                        <b-form-group style="float:left;text-align:left">
                           <label class="tsCheckboxes">SPEED TEST :</label>
                         </b-form-group>
                       </div>
-                      <div style="width: 70%">
+                      <div style="width:70%">
                         <div
                           class="pretty p-icon p-jelly p-bigger troubleCheckbox"
                         >
@@ -3025,29 +2786,24 @@
             <b-card
               bg-variant="light"
               align="center"
-              style="max-height: 100%"
+              style="max-height:100%"
               class="editTicket-bcard"
               id="client"
             >
               <center>
-                <div style="display: flex; font-size: 12px">
-                  <div style="float: left">
+                <div style="display:flex;font-size:12px;">
+                  <div style=" float:left">
                     <label
-                      style="
-                        display: block;
-                        text-align: left;
-                        font-weight: bold;
-                        color: green;
-                      "
+                      style="display:block;text-align:left;font-weight:bold;color:green"
                       >OLD TICKET FORM INFO</label
                     >
-                    <label style="display: block; text-align: left"
+                    <label style="display:block;text-align:left"
                       >Complaint: {{ editTicket.complain }}</label
                     >
-                    <label style="display: block; text-align: left"
+                    <label style="display:block;text-align:left"
                       >Findings: {{ editTicket.findings }}</label
                     >
-                    <label style="display: block; text-align: left"
+                    <label style="display:block;text-align:left"
                       >Action: {{ editTicket.action }}</label
                     >
                   </div>
@@ -3061,34 +2817,30 @@
               border-variant="dark"
               bg-variant="light"
               align="center"
-              style="max-height: 100%"
+              style="max-height:100%"
               v-if="editTicket.Status_Ticket_id == '3'"
             >
               <center>
-                <div style="display: flex; width: 95%">
-                  <div style="width: 15%; height: 20%">
-                    <h6 style="float: left">Report</h6>
+                <div style="display:flex;width:95%">
+                  <div style="width:15%;height:20%">
+                    <h6 style="float:left">Report</h6>
                   </div>
                   <br />
 
-                  <div style="width: 85%; height: 80%">
+                  <div style="width:85%;height:80%">
                     <b-row class="reportRow">
                       <b-col class="reportCol">
                         <label
-                          style="
-                            float: left;
-                            padding-left: 7px;
-                            margin-top: 3px;
-                          "
+                          style="float:left;padding-left:7px;margin-top:3px"
                           >Findings</label
                         >
                       </b-col>
-                      <b-col style="margin-left: -4px; margin-top: -5px">
+                      <b-col style="margin-left:-4px;margin-top:-5px">
                         <b-form-group>
                           <b-form-textarea
                             id="textarea-small"
                             size="sm"
-                            style="width: 100%"
+                            style="width:100%"
                             v-model="editTicket.rep_findings"
                             name="rep_findings"
                             v-validate="'required'"
@@ -3104,21 +2856,17 @@
                     <b-row class="reportRow">
                       <b-col class="reportCol">
                         <label
-                          style="
-                            float: left;
-                            padding-left: 7px;
-                            margin-top: 3px;
-                          "
+                          style="float:left;padding-left:7px;margin-top:3px"
                           >Action</label
                         >
                       </b-col>
-                      <b-col style="margin-left: -4px; margin-top: -5px">
+                      <b-col style="margin-left:-4px;margin-top:-5px">
                         <b-form-group>
                           <b-form-textarea
                             id="textarea-small"
                             size="sm"
                             v-model="editTicket.rep_action"
-                            style="width: 100%; height: 100%"
+                            style="width:100%;height:100%"
                             name="rep_action"
                             v-validate="'required'"
                           ></b-form-textarea>
@@ -3133,19 +2881,15 @@
                     <b-row class="clientRow">
                       <b-col class="clientCol">
                         <label
-                          style="
-                            float: left;
-                            padding-left: 7px;
-                            margin-top: 3px;
-                          "
+                          style="float:left;padding-left:7px;margin-top:3px"
                           >Consolidated Tech</label
                         >
                       </b-col>
-                      <b-col style="margin-left: -4px; margin-top: -5px">
+                      <b-col style="margin-left:-4px;margin-top:-5px;">
                         <b-form-group>
                           <b-form-input
                             id="input-default"
-                            style="max-width: 100%; height: 30px"
+                            style="max-width:100%;height:30px"
                             v-model.lazy="editTicket.technical_assigned"
                             name="consolidated_tech"
                             v-validate="'required'"
@@ -3161,22 +2905,18 @@
                     <b-row class="clientRow">
                       <b-col class="clientCol">
                         <label
-                          style="
-                            float: left;
-                            padding-left: 7px;
-                            margin-top: 3px;
-                          "
+                          style="float:left;padding-left:7px;margin-top:3px"
                           >Date Time Fixed</label
                         >
                       </b-col>
-                      <b-col style="margin-left: -4px; margin-top: -5px">
+                      <b-col style="margin-left:-4px;margin-top:-5px;">
                         <b-form-group>
                           <date-picker
                             v-model="editTicket.date_time_fixed"
                             :config="DateTimeOptions"
                             @input="datetimeChange"
                             autocomplete="off"
-                            style="max-width: 100%; height: 30px"
+                            style="max-width:100%;height:30px"
                             name="date_fixed"
                             v-validate="'required'"
                           ></date-picker>
@@ -3191,19 +2931,15 @@
                     <b-row class="clientRow">
                       <b-col class="clientCol">
                         <label
-                          style="
-                            float: left;
-                            padding-left: 7px;
-                            margin-top: 3px;
-                          "
+                          style="float:left;padding-left:7px;margin-top:3px"
                           >Hrs of Downtime</label
                         >
                       </b-col>
-                      <b-col style="margin-left: -4px; margin-top: -5px">
+                      <b-col style="margin-left:-4px;margin-top:-5px;">
                         <b-form-group>
                           <b-form-input
                             id="input-default"
-                            style="max-width: 100%; height: 30px"
+                            style="max-width:100%;height:30px"
                             placeholder="Hours"
                             v-model="editTicket.downtime_hours"
                           ></b-form-input>
@@ -3213,25 +2949,21 @@
                     <b-row class="clientRow">
                       <b-col class="clientCol">
                         <label
-                          style="
-                            float: left;
-                            padding-left: 7px;
-                            margin-top: 3px;
-                          "
+                          style="float:left;padding-left:7px;margin-top:3px"
                           >Rebatable</label
                         >
                       </b-col>
-                      <b-col style="margin-left: 10px; margin-top: -5px">
+                      <b-col style="margin-left:10px;margin-top:-5px;">
                         <b-form-group>
                           <b-form-checkbox
-                            style="float: left"
+                            style="float:left"
                             value="1"
                             v-model="editTicket.rebatable"
                           >
                             <label class="tsCheckboxes">Yes</label>
                           </b-form-checkbox>
                           <b-form-checkbox
-                            style="float: left"
+                            style="float:left"
                             value="2"
                             v-model="editTicket.rebatable"
                           >
@@ -3248,58 +2980,37 @@
             <b-card
               id="remarks"
               align="center"
-              style="max-height: 100%; border: none; background: none"
+              style="max-height:100%;border:none;background:none"
               :body-text-variant="' elClr'"
             >
               <center>
-                <div style="width: 100%">
+                <div style="width:100%">
                   <div
-                    style="
-                      width: 100%;
-                      float: left;
-                      font-size: 13px;
-                      font-weight: bold;
-                    "
+                    style="width:100%;float:left;font-size:13px;font-weight:bold"
                   >
-                    <label style="float: left">Remarks</label>
+                    <label style="float:left">Remarks</label>
                   </div>
                   <br />
                   <div
-                    style="
-                      width: 100%;
-                      float: left;
-                      margin-top: 2px;
-                      margin-bottom: 12px;
-                      display: flex;
-                    "
+                    style="width:100%;float:left;margin-top:2px;margin-bottom:12px;display:flex;"
                   >
-                    <div style="width: 80%; flex-grow: 1">
+                    <div style="width:80%;flex-grow:1">
                       <b-form-textarea
                         id="textarea-small"
                         size="sm"
                         v-model.lazy="remarksText"
-                        style="width: 100%; height: 90%"
+                        style="width:100%;height:90%"
                         placeholder="Type remarks here. . ."
                       ></b-form-textarea>
                     </div>
                     <div
-                      style="
-                        width: 12%;
-                        height: 100%;
-                        flex-grow: 1;
-                        margin-left: 15px;
-                      "
+                      style="width:12%;height:100%;flex-grow:1;margin-left:15px;"
                     >
                       <b-button
                         squared
                         variant="success"
                         @click="addRemarks_clicked"
-                        style="
-                          width: 100%;
-                          height: 32px;
-                          float: right;
-                          color: white;
-                        "
+                        style="width:100%;height:32px;float:right;color:white"
                         >ADD REMARKS</b-button
                       >
                     </div>
@@ -3307,36 +3018,25 @@
                   <br />
                   <!-- remarks display -->
                   <div
-                    style="margin-top: 20px"
+                    style="margin-top:20px;"
                     v-for="(remarks, index) in editTicket.remarks_log"
                     :key="index"
                     v-show="remarks.form_type == 'ticket'"
                   >
-                    <div id="title" style="display: flex; width: 100%">
+                    <div id="title" style="display:flex;width:100%">
                       <label
-                        style="
-                          float: left;
-                          text-align: left;
-                          font-size: 12px;
-                          font-weight: bold;
-                          width: 70%;
-                        "
+                        style="float:left;text-align:left;font-size:12px;font-weight:bold;width:70%"
                       >
                         <i
                           class="fa fa-user-circle"
                           aria-hidden="true"
-                          style="margin-right: 5px"
+                          style="margin-right:5px"
                         ></i>
                         {{ remarks.user.name }}
                       </label>
 
                       <label
-                        style="
-                          float: right;
-                          text-align: right;
-                          font-size: 10px;
-                          width: 30%;
-                        "
+                        style="float:right;text-align:right;font-size:10px;width:30%"
                         >{{ remarks.created_at }}</label
                       >
                     </div>
@@ -3344,9 +3044,9 @@
                     <br />
                     <div
                       id="body"
-                      style="display: flex; width: 100%; margin-top: -8px"
+                      style="display:flex;width:100%; margin-top:-8px"
                     >
-                      <div style="width: 82%; margin-left: 5px" class="wrapper">
+                      <div style="width:82%;margin-left:5px;" class="wrapper">
                         <!-- <label
                           style="float:left;text-align:left;"
                           role="textarea"
@@ -3363,9 +3063,9 @@
                           no-resize
                         ></b-form-textarea>
                       </div>
-                      <div style="width: 18%">
+                      <div style="width:18%;">
                         <label
-                          style="float: right; cursor: pointer; color: blue"
+                          style="float:right;cursor: pointer;color:blue"
                           @click="remarks.commentVisibility = 'show'"
                           v-show="remarks.commentVisibility == 'hide'"
                         >
@@ -3373,7 +3073,7 @@
                           <i class="fas fa-caret-down"></i>
                         </label>
                         <label
-                          style="float: right; cursor: pointer; color: blue"
+                          style="float:right;cursor: pointer;color:blue"
                           @click="remarks.commentVisibility = 'hide'"
                           v-show="remarks.commentVisibility == 'show'"
                         >
@@ -3386,40 +3086,24 @@
                     <!-- comments display -->
 
                     <div
-                      style="
-                        margin-top: 0;
-                        background: none;
-                        width: 95%;
-                        float: right;
-                      "
+                      style="margin-top:0;background:none;width:95%;float:right"
                       v-for="reply in remarks.replies"
                       :key="reply.id"
                     >
-                      <div id="title" style="display: flex; width: 100%">
+                      <div id="title" style="display:flex;width:100%">
                         <label
-                          style="
-                            float: left;
-                            text-align: left;
-                            font-size: 12px;
-                            font-weight: bold;
-                            width: 70%;
-                          "
+                          style="float:left;text-align:left;font-size:12px;font-weight:bold;width:70%"
                         >
                           <i
                             class="fa fa-user-circle"
                             aria-hidden="true"
-                            style="margin-right: 5px"
+                            style="margin-right:5px"
                           ></i>
                           {{ reply.user.name }}
                         </label>
 
                         <label
-                          style="
-                            float: right;
-                            text-align: right;
-                            font-size: 10px;
-                            width: 30%;
-                          "
+                          style="float:right;text-align:right;font-size:10px;width:30%"
                           >{{ reply.created_at }}</label
                         >
                       </div>
@@ -3427,41 +3111,30 @@
                       <br />
                       <div
                         id="body"
-                        style="display: flex; width: 95%; margin-top: -8px"
+                        style="display:flex;width:95%; margin-top:-8px"
                       >
-                        <label style="float: left; text-align: left">
-                          {{ reply.comments }}
-                        </label>
+                        <label style="float:left;text-align:left;">{{
+                          reply.comments
+                        }}</label>
                       </div>
                     </div>
 
                     <!-- new comment -->
                     <div
-                      style="
-                        width: 90%;
-                        float: right;
-                        margin-top: 2px;
-                        margin-bottom: 12px;
-                        display: flex;
-                      "
+                      style="width:90%;float:right;margin-top:2px;margin-bottom:12px;display:flex;"
                       v-show="remarks.commentVisibility == 'show'"
                     >
-                      <div style="width: 80%; flex-grow: 1">
+                      <div style="width:80%;flex-grow:1">
                         <b-form-textarea
                           id="textarea - small"
                           size="sm"
                           v-model="commentsText[index]"
-                          style="width: 100%; height: 90%"
+                          style="width:100%;height:90%"
                           placeholder="Type comment here. . ."
                         ></b-form-textarea>
                       </div>
                       <div
-                        style="
-                          width: 12%;
-                          height: 100%;
-                          flex-grow: 1;
-                          margin-left: 15px;
-                        "
+                        style="width:12%;height:100%;flex-grow:1;margin-left:15px;"
                       >
                         <b-button
                           squared
@@ -3473,12 +3146,7 @@
                               remarks.replies
                             )
                           "
-                          style="
-                            width: 100%;
-                            height: 32px;
-                            float: right;
-                            color: white;
-                          "
+                          style="width:100%;height:32px;float:right;color:white"
                           >ADD COMMENT</b-button
                         >
                       </div>
@@ -3533,7 +3201,7 @@
               variant="warning"
               @click="btnRebates()"
               >Calculate Rebates</b-button
-            >-->
+            > -->
 
             <b-button
               class="float-right margin-right-10"
@@ -3583,28 +3251,28 @@
           size="lg"
           title="ATTACHMENTS"
         >
-          <div style="float: right; margin-top: -10px; margin-bottom: 10px">
+          <div style="float:right;margin-top:-10px;margin-bottom:10px">
             <b-button squared variant="outline-dark" @click="isShowing ^= true">
               <i class="material-icons">add_photo_alternate</i>
             </b-button>
           </div>
-          <div style="width: 100%; display: flex" v-if="preview">
+          <div style="width:100%;display:flex" v-if="preview">
             <b-img
               thumbnail
               fluid
               :src="$attachment_path + preview"
-              style="width: 100%; height: 500px !important"
+              style="width:100%;height:500px!important"
             ></b-img>
           </div>
           <br />
-          <div style="width: 100%; display: flex">
+          <div style="width:100%;display:flex">
             <b-container class="bv-example-row">
               <b-row>
                 <b-col
                   cols="2"
                   v-for="(item, i) in editTicket.attachments"
                   :key="i"
-                  style="background: none"
+                  style="background:none"
                 >
                   <b-img
                     thumbnail
@@ -3613,11 +3281,7 @@
                     :v-for="(item, i) in editTicket.attachments"
                     :src="$attachment_path + item"
                     @click="previewImg(item)"
-                    style="
-                      height: 80px !important;
-                      width: 100px !important;
-                      cursor: pointer;
-                    "
+                    style="height:80px!important;width:100px!important;cursor: pointer;"
                   ></b-img>
                 </b-col>
               </b-row>
@@ -3648,7 +3312,7 @@
           title="Update Package"
         >
           <!--Form-------->
-          <div class="rowFields mx-auto row" style="display: none">
+          <div class="rowFields mx-auto row" style="display:none">
             <div class="col-lg-3">
               <p class="textLabel">Package:</p>
             </div>
@@ -3957,58 +3621,33 @@
           :footer-text-variant="' elClr'"
           size="xl"
         >
-          <div id="printSec" style="width: 90%; color: black">
+          <div id="printSec" style="width: 90%; color: black;">
             <table
-              style="
-                width: 100%;
-                border-collapse: collapse;
-                border: 1px solid black;
-                padding: 10px;
-              "
+              style="width:100%; border-collapse: collapse; border: 1px solid black; padding: 10px;"
             >
               <tr>
                 <th
-                  style="
-                    border: 1px solid black;
-                    padding: 10px;
-                    text-align: center;
-                  "
+                  style=" border: 1px solid black; padding: 10px; text-align: center;"
                 >
                   #
                 </th>
                 <th
-                  style="
-                    border: 1px solid black;
-                    padding: 10px;
-                    text-align: center;
-                  "
+                  style=" border: 1px solid black; padding: 10px; text-align: center;"
                 >
                   Ticket No.
                 </th>
                 <th
-                  style="
-                    border: 1px solid black;
-                    padding: 10px;
-                    text-align: center;
-                  "
+                  style=" border: 1px solid black; padding: 10px; text-align: center;"
                 >
                   Con. Status
                 </th>
                 <th
-                  style="
-                    border: 1px solid black;
-                    padding: 10px;
-                    text-align: center;
-                  "
+                  style=" border: 1px solid black; padding: 10px; text-align: center;"
                 >
                   Status
                 </th>
                 <th
-                  style="
-                    border: 1px solid black;
-                    padding: 10px;
-                    text-align: center;
-                  "
+                  style=" border: 1px solid black; padding: 10px; text-align: center;"
                 >
                   Aging
                 </th>
@@ -4017,13 +3656,13 @@
                 v-for="(data, index) in emailTicketItem"
                 :key="data.mTicket_id"
               >
-                <td style="border: 1px solid black; padding: 8px">
+                <td style="border: 1px solid black; padding: 8px;">
                   {{ index + 1 }}
                 </td>
-                <td style="border: 1px solid black; padding: 8px">
+                <td style="border: 1px solid black; padding: 8px;">
                   {{ data.mTicket_id }}
                 </td>
-                <td style="border: 1px solid black; padding: 8px">
+                <td style="border: 1px solid black; padding: 8px;">
                   <span v-if="data.connection_status == 'up'">UP</span>
                   <span v-else-if="data.connection_status == 'down'">DOWN</span>
                   <span v-else-if="data.connection_status == 'intermittent'"
@@ -4031,10 +3670,10 @@
                   >
                   <span v-else>{{ data.connection_status }}</span>
                 </td>
-                <td style="border: 1px solid black; padding: 8px">
+                <td style="border: 1px solid black; padding: 8px;">
                   {{ data.statname }}
                 </td>
-                <td style="border: 1px solid black; padding: 8px">
+                <td style="border: 1px solid black; padding: 8px;">
                   {{ data.aging }}
                 </td>
               </tr>
@@ -4061,7 +3700,7 @@
           :body-text-variant="' elClr'"
           :footer-bg-variant="' elBG'"
           :footer-text-variant="' elClr'"
-          style="width: 50px"
+          style="width:50px"
         >
           <div v-on:click="changeColDisplay('colConStatus')">
             <p-check
@@ -4145,13 +3784,13 @@
         >
           <div
             class="rowFields mx-auto row"
-            style="width: 100%; display: flex; margin-top: 10px"
+            style="width:100%;display:flex;margin-top:10px"
           >
-            <div style="width: 15%; display: flex">
-              <p class="textLabel" style="width: 60%">Ticket No. :</p>
+            <div style="width:15%;display:flex">
+              <p class="textLabel" style="width:60%;">Ticket No. :</p>
             </div>
-            <div style="width: 85%">
-              <p class="textLabel" style="width: 60%; font-weight: bold">
+            <div style="width:85%">
+              <p class="textLabel" style="width:60%;font-weight:bold">
                 {{ editTicket.mTicket_id }}
               </p>
             </div>
@@ -4159,19 +3798,19 @@
 
           <div
             class="rowFields mx-auto row"
-            style="width: 100%; display: flex; margin-top: 15px"
+            style="width:100%;display:flex;margin-top:15px"
           >
-            <div style="width: 15%; display: flex">
-              <p class="textLabel" style="width: 60%">Clients:</p>
+            <div style="width:15%;display:flex">
+              <p class="textLabel" style="width:60%;">Clients:</p>
               <b-button
                 variant="outline-dark"
-                style="width: 35%; float: right; height: 35px"
+                style="width:35%;float:right;height:35px"
                 v-b-tooltip="'Clear Recipients'"
                 @click="clearClients"
                 >X</b-button
               >
             </div>
-            <div style="width: 85%">
+            <div style="width:85%">
               <multiselect
                 v-model="selectedClientRebates"
                 :options="clients"
@@ -4191,13 +3830,13 @@
 
           <div
             class="rowFields mx-auto row"
-            style="width: 100%; display: flex; margin-top: 10px"
+            style="width:100%;display:flex;margin-top:10px"
           >
-            <div style="width: 15%; display: flex">
-              <p class="textLabel" style="width: 60%">Downtime Hour/s :</p>
+            <div style="width:15%;display:flex">
+              <p class="textLabel" style="width:60%;">Downtime Hour/s :</p>
             </div>
-            <div style="width: 85%">
-              <p class="textLabel" style="width: 60%; font-weight: bold">
+            <div style="width:85%">
+              <p class="textLabel" style="width:60%;font-weight:bold">
                 {{ editTicket.downtime_hours }}
               </p>
             </div>
@@ -4205,17 +3844,17 @@
 
           <div
             class="rowFields mx-auto row"
-            style="width: 100%; display: flex; margin-top: 10px"
+            style="width:100%;display:flex;margin-top:10px"
           >
-            <div style="width: 15%; display: flex">
-              <p class="textLabel" style="width: 60%">Date Effective :</p>
+            <div style="width:15%;display:flex">
+              <p class="textLabel" style="width:60%;">Date Effective :</p>
             </div>
-            <div style="width: 85%">
+            <div style="width:85%">
               <date-picker
                 v-model="date_effective"
                 :config="DateTimeOptions"
                 autocomplete="off"
-                style="max-width: 100%; height: 30px"
+                style="max-width:100%;height:30px"
                 name="date_effective"
                 v-validate="'required'"
               ></date-picker>

@@ -74,7 +74,7 @@
               class="form-control"
               v-model.trim="cbFilter.data.address"
               placeholder="Please type address . ."
-              style="height:35px;padding-left:13px"
+              style="height: 35px; padding-left: 13px"
             />
           </div>
         </div>
@@ -138,7 +138,7 @@
                 year: 'numeric',
                 month: 'short',
                 day: '2-digit',
-                weekday: 'short'
+                weekday: 'short',
               }"
               placeholder="Select date From"
               @input="select_date_change('from', $event)"
@@ -155,7 +155,7 @@
                 year: 'numeric',
                 month: 'short',
                 day: '2-digit',
-                weekday: 'short'
+                weekday: 'short',
               }"
               placeholder="Select date To"
               @input="select_date_change('to', $event)"
@@ -183,7 +183,7 @@
                 year: 'numeric',
                 month: 'short',
                 day: '2-digit',
-                weekday: 'short'
+                weekday: 'short',
               }"
               placeholder="Select date From"
               @input="select_date_change('foc_schedule', $event)"
@@ -211,7 +211,7 @@
                 year: 'numeric',
                 month: 'short',
                 day: '2-digit',
-                weekday: 'short'
+                weekday: 'short',
               }"
               placeholder="Select date From"
               @input="select_date_change('agingfrom', $event)"
@@ -229,7 +229,7 @@
                 year: 'numeric',
                 month: 'short',
                 day: '2-digit',
-                weekday: 'short'
+                weekday: 'short',
               }"
               placeholder="Select date To"
               @input="select_date_change('agingto', $event)"
@@ -356,7 +356,7 @@
                 year: 'numeric',
                 month: 'short',
                 day: '2-digit',
-                weekday: 'short'
+                weekday: 'short',
               }"
               placeholder="Select Date From"
               @input="select_date_change('date_activated_from', $event)"
@@ -374,7 +374,7 @@
                 year: 'numeric',
                 month: 'short',
                 day: '2-digit',
-                weekday: 'short'
+                weekday: 'short',
               }"
               placeholder="Select Date To"
               @input="select_date_change('date_activated_to', $event)"
@@ -388,11 +388,11 @@
         <p-check
           class="checkboxStyle p-switch p-slim"
           color="success"
-          v-model="cbFilter.created_at"
+          v-model="cbFilter.created"
         ></p-check
         >Date Created
-        <div class="rowFields mx-auto row" v-if="cbFilter.created_at">
-          <div class="col-lg-12">
+        <div class="rowFields mx-auto row" v-if="cbFilter.created">
+          <!-- <div class="col-lg-12">
             <b-form-datepicker
               id="datepickerFrom"
               today-button
@@ -405,7 +405,43 @@
                 weekday: 'short'
               }"
               placeholder="Select date From"
-              @input="select_date_change('created_at', $event)"
+              @input="select_date_change('created', $event)"
+              local="en"
+            ></b-form-datepicker>
+          </div> -->
+
+          <div class="col-lg-6">
+            <b-form-datepicker
+              id="datePickerFrom1"
+              today-button
+              reset-button
+              close-button
+              :date-format-options="{
+                year: 'numeric',
+                month: 'short',
+                day: '2-digit',
+                weekday: 'short',
+              }"
+              placeholder="Select Date From"
+              @input="select_date_change('date_created_from', $event)"
+              local="en"
+            ></b-form-datepicker>
+          </div>
+
+          <div class="col-lg-6">
+            <b-form-datepicker
+              id="datePickerTo1"
+              today-button
+              reset-button
+              close-button
+              :date-format-options="{
+                year: 'numeric',
+                month: 'short',
+                day: '2-digit',
+                weekday: 'short',
+              }"
+              placeholder="Select Date To"
+              @input="select_date_change('date_created_to', $event)"
               local="en"
             ></b-form-datepicker>
           </div>
@@ -436,7 +472,7 @@ export default {
     "rangedate-picker": VueRangedatePicker,
     "p-check": PrettyCheck,
     "p-radio": PrettyRadio,
-    multiselect: Multiselect
+    multiselect: Multiselect,
   },
   data() {
     return {
@@ -454,7 +490,7 @@ export default {
         layout_status: false,
         date_activated: false,
         date_activated_type: null,
-        created_at: false,
+        created: false,
         data: {
           region_id: 0,
           area_id: [],
@@ -463,55 +499,58 @@ export default {
           sales_id: 0,
           installation_date: {
             from: null,
-            to: null
+            to: null,
           },
           foc_schedule_date: null,
           aging: {
             from: null,
-            to: null
+            to: null,
           },
           contract: null,
           otc: null,
           layout_status: null,
           date_activated: {
             from: null,
-            to: null
+            to: null,
           },
-          created_at: null
-        }
+          created: {
+            from: null,
+            to: null,
+          },
+        },
       },
       contract_list: [
         {
           name: "Done",
-          id: "Done"
+          id: "Done",
         },
         {
           name: "Undone",
-          id: "Undone"
-        }
+          id: "Undone",
+        },
       ],
       otc_list: [
         {
           name: "Paid",
-          id: "Paid"
+          id: "Paid",
         },
         {
           name: "Unpaid",
-          id: "Unpaid"
-        }
+          id: "Unpaid",
+        },
       ],
       layoutStatOption: [
         { id: "M1", name: "M1" },
         { id: "M2", name: "M2" },
         { id: "MM2", name: "MM2" },
-        { id: "M3", name: "M3" }
+        { id: "M3", name: "M3" },
       ],
       packages: [],
       regions: [],
       sales_list: [],
       areas: [],
       user: [],
-      roles: []
+      roles: [],
     };
   },
   created() {
@@ -523,10 +562,10 @@ export default {
   },
   methods: {
     load() {
-      this.$http.get("api/area").then(response => {
+      this.$http.get("api/area").then((response) => {
         this.areas = response.body;
       });
-      this.$http.get("api/Package").then(function(response) {
+      this.$http.get("api/Package").then(function (response) {
         this.packages = response.body;
       });
     },
@@ -534,18 +573,18 @@ export default {
       this.$root.$emit("pageLoading");
       this.$http
         .post("api/clientDetail/multipleFilter", this.cbFilter)
-        .then(response => {
+        .then((response) => {
           this.$root.$emit("pageLoaded");
           console.log(response.body);
           this.$root.$emit("update_item", response.body, this.cbFilter);
           this.$bvModal.hide("modalMultipleFilter");
         })
-        .catch(response => {
+        .catch((response) => {
           swal({
             title: "Error",
             text: response.body.error,
             icon: "error",
-            dangerMode: true
+            dangerMode: true,
           });
           this.$root.$emit("pageLoaded");
         });
@@ -565,8 +604,10 @@ export default {
         this.cbFilter.data.date_activated.from = this.formatDateMDY(event);
       } else if (txt == "date_activated_to") {
         this.cbFilter.data.date_activated.to = this.formatDateMDY(event);
-      } else if (txt == "created_at") {
-        this.cbFilter.data.created_at = this.formatDateMDY(event);
+      } else if (txt == "date_created_from") {
+        this.cbFilter.data.created.from = this.formatDateMDY(event);
+      } else if (txt == "date_created_to") {
+        this.cbFilter.data.created.to = this.formatDateMDY(event);
       }
     },
     formatDateMDY(date) {
@@ -589,20 +630,20 @@ export default {
         "Sept.",
         "Oct.",
         "Nov.",
-        "Dec."
+        "Dec.",
       ];
       return [mstring[month - 1], day, year].join(" ");
     },
     checkAreas() {
       this.$http
         .get("api/checkAreas/" + this.cbFilter.data.region_id)
-        .then(response => {
+        .then((response) => {
           console.log(response.body);
           this.cbFilter.data.area_id = response.body;
           this.cbFilter.area = true;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

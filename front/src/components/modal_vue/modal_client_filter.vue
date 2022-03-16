@@ -12,7 +12,12 @@
     >
       <!-- regions -->
       <div class="cont-wrap">
-        <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="cbFilter.region"></p-check>Region
+        <p-check
+          class="checkboxStyle p-switch p-slim"
+          color="success"
+          v-model="cbFilter.region"
+        ></p-check
+        >Region
         <div class="rowFields mx-auto row" v-if="cbFilter.region">
           <div class="col-lg-12">
             <model-list-select
@@ -29,7 +34,12 @@
 
       <!-- area -->
       <div class="cont-wrap">
-        <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="cbFilter.area"></p-check>Area
+        <p-check
+          class="checkboxStyle p-switch p-slim"
+          color="success"
+          v-model="cbFilter.area"
+        ></p-check
+        >Area
         <div class="rowFields mx-auto row" v-if="cbFilter.area">
           <div class="col-lg-12">
             <multiselect
@@ -53,7 +63,12 @@
 
       <!-- address -->
       <div class="cont-wrap">
-        <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="cbFilter.address"></p-check>Address
+        <p-check
+          class="checkboxStyle p-switch p-slim"
+          color="success"
+          v-model="cbFilter.address"
+        ></p-check
+        >Address
         <div class="rowFields mx-auto row" v-if="cbFilter.address">
           <div class="col-lg-12">
             <input
@@ -72,7 +87,8 @@
           class="checkboxStyle p-switch p-slim"
           color="success"
           v-model="cbFilter.business_type"
-        ></p-check>Business Type
+        ></p-check
+        >Business Type
         <div class="rowFields mx-auto row" v-if="cbFilter.business_type">
           <div class="col-lg-12">
             <model-list-select
@@ -87,7 +103,12 @@
       </div>
       <!-- package -->
       <div class="cont-wrap">
-        <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="cbFilter.package"></p-check>Package
+        <p-check
+          class="checkboxStyle p-switch p-slim"
+          color="success"
+          v-model="cbFilter.package"
+        ></p-check
+        >Package
         <div class="rowFields mx-auto row" v-if="cbFilter.package">
           <div class="col-lg-12">
             <model-list-select
@@ -106,7 +127,8 @@
           class="checkboxStyle p-switch p-slim"
           color="success"
           v-model="cbFilter.package_type"
-        ></p-check>Package Type
+        ></p-check
+        >Package Type
         <div class="rowFields mx-auto row" v-if="cbFilter.package_type">
           <div class="col-lg-12">
             <model-list-select
@@ -121,7 +143,12 @@
       </div>
       <!-- sales -->
       <div class="cont-wrap">
-        <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="cbFilter.sales"></p-check>Sales
+        <p-check
+          class="checkboxStyle p-switch p-slim"
+          color="success"
+          v-model="cbFilter.sales"
+        ></p-check
+        >Sales
         <div class="rowFields mx-auto row" v-if="cbFilter.sales">
           <div class="col-lg-12">
             <model-list-select
@@ -151,7 +178,12 @@
       </div>
       <!-- sales tech in charge -->
       <div class="cont-wrap">
-        <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="cbFilter.engineer"></p-check>Tech in-charge
+        <p-check
+          class="checkboxStyle p-switch p-slim"
+          color="success"
+          v-model="cbFilter.engineer"
+        ></p-check
+        >Tech in-charge
         <div class="rowFields mx-auto row" v-if="cbFilter.engineer">
           <div class="col-lg-12">
             <model-list-select
@@ -166,7 +198,12 @@
       </div>
       <!-- term -->
       <div class="cont-wrap">
-        <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="cbFilter.term"></p-check>Term
+        <p-check
+          class="checkboxStyle p-switch p-slim"
+          color="success"
+          v-model="cbFilter.term"
+        ></p-check
+        >Term
         <div class="rowFields mx-auto row" v-if="cbFilter.term">
           <div class="col-lg-12">
             <input
@@ -180,7 +217,12 @@
       </div>
       <!-- contract status -->
       <div class="cont-wrap">
-        <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="cbFilter.contract"></p-check>Contract
+        <p-check
+          class="checkboxStyle p-switch p-slim"
+          color="success"
+          v-model="cbFilter.contract"
+        ></p-check
+        >Contract
         <div class="rowFields mx-auto row" v-if="cbFilter.contract">
           <div class="col-lg-12">
             <model-list-select
@@ -199,8 +241,12 @@
           class="checkboxStyle p-switch p-slim"
           color="success"
           v-model="cbFilter.communication_protocol"
-        ></p-check>Communication Protocol
-        <div class="rowFields mx-auto row" v-if="cbFilter.communication_protocol">
+        ></p-check
+        >Communication Protocol
+        <div
+          class="rowFields mx-auto row"
+          v-if="cbFilter.communication_protocol"
+        >
           <div class="col-lg-12">
             <model-list-select
               :list="communication_protocol_list"
@@ -214,7 +260,12 @@
       </div>
       <!-- client status -->
       <div class="cont-wrap">
-        <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="cbFilter.status"></p-check>Status
+        <p-check
+          class="checkboxStyle p-switch p-slim"
+          color="success"
+          v-model="cbFilter.status"
+        ></p-check
+        >Status
         <div class="rowFields mx-auto row" v-if="cbFilter.status">
           <div class="col-lg-12">
             <model-list-select
@@ -229,7 +280,12 @@
       </div>
       <!-- bucket -->
       <div class="cont-wrap">
-        <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="cbFilter.bucket"></p-check>Bucket IP
+        <p-check
+          class="checkboxStyle p-switch p-slim"
+          color="success"
+          v-model="cbFilter.bucket"
+        ></p-check
+        >Bucket IP
         <div class="rowFields mx-auto row" v-if="cbFilter.bucket">
           <div class="col-lg-12">
             <model-list-select
@@ -248,7 +304,8 @@
           class="checkboxStyle p-switch p-slim"
           color="success"
           v-model="cbFilter.date_activated"
-        ></p-check>Date Activated
+        ></p-check
+        >Date Activated
         <div class="rowFields mx-auto row" v-if="cbFilter.date_activated">
           <div class="col-lg-12">
             <center>
@@ -286,7 +343,10 @@
             </center>
           </div>
         </div>
-        <div class="rowFields mx-auto row" v-if="cbFilter.date_activated_type == 'range'">
+        <div
+          class="rowFields mx-auto row"
+          v-if="cbFilter.date_activated_type == 'range'"
+        >
           <div class="col-lg-6">
             <b-form-datepicker
               id="datePickerFrom1"
@@ -330,7 +390,8 @@
           class="checkboxStyle p-switch p-slim"
           color="success"
           v-model="cbFilter.created_at"
-        ></p-check>Date Created
+        ></p-check
+        >Date Created
         <div class="rowFields mx-auto row" v-if="cbFilter.created_at">
           <div class="col-lg-6">
             <b-form-datepicker
@@ -370,7 +431,12 @@
       </div>
       <!-- No Installation Sched. -->
       <div class="cont-wrap">
-        <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="cbFilter.has_sched"></p-check>Has Installation Sched.
+        <p-check
+          class="checkboxStyle p-switch p-slim"
+          color="success"
+          v-model="cbFilter.has_sched"
+        ></p-check
+        >Has Installation Sched.
       </div>
 
       <!-- Client ID -->

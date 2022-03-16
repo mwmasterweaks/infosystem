@@ -12,11 +12,6 @@ class Branch extends Model
         'name', 'area_id'
     ];
 
-    public const VALIDATION_RULES = [
-        'name' => ['required'],
-        'area_id' => ['required']
-    ];
-
     public function area()
     {
         return $this->hasOne(area::class, 'id', 'area_id');

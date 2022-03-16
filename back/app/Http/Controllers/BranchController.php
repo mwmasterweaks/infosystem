@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Branch;
-use App\Http\Requests\branchRequest;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -22,7 +21,7 @@ class BranchController extends Controller
         //
     }
 
-    public function store(branchRequest $request)
+    public function store(Request $request)
     {
         try {
             $data = Branch::create($request->all());

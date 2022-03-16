@@ -669,8 +669,42 @@ class TicketController extends Controller
                 if ($request->Status_Ticket_id == 2)
                     $tdate = null;
 
+            if ($request->ticketType == 1) {
+                $logFrom = Ticket::findOrFail($id);
 
-            if ($request->ticketType == 3) {
+                $data = Ticket::where('id', $id)
+                    ->update([
+                        'ticket_id' => $request->ticket_id,
+                        'client_id' => $request->client_id,
+                        'complaint_new' => $request->complaint_new,
+                        'bwmon' => $request->bwmon,
+                        'cacti' => $request->cacti,
+                        'device' => $request->device,
+                        'loss' => $request->loss,
+                        'downtime' => $request->downtime,
+                        'rep_findings' => $request->rep_findings,
+                        'rep_action' => $request->rep_action,
+                        'rebatable' => $request->rebatable,
+                        'complain' => $request->complain,
+                        'findings' => $request->findings,
+                        'action' => $request->action,
+                        'remarks' => $request->remarks,
+                        'report' => $request->report,
+                        'connection_status' => $request->connection_status,
+                        'prev_status' => $prev_status,
+                        'Status_Ticket_id' => $request->Status_Ticket_id,
+                        'area_id' => $request->area_id,
+                        'technical_assigned' => $request->technical_assigned,
+                        'downtime_hours' => $request->downtime_hours,
+                        'to_soa' => $request->to_soa,
+                        'date_time_fixed' => $request->date_time_fixed,
+                        'target_date' => $tdate,
+                        'team_assigned' => $request->team_assigned,
+                        'updated_by' => $request->updated_by,
+                        'updated_at' => Carbon::now()
+
+                    ]);
+            } elseif ($request->ticketType == 3) {
                 // return $request;
 
                 $logFrom = ticket_group::findOrFail($id);
@@ -721,41 +755,6 @@ class TicketController extends Controller
                         ]
                     );
                 }
-            } else {
-                $logFrom = Ticket::findOrFail($id);
-
-                $data = Ticket::where('id', $id)
-                    ->update([
-                        'ticket_id' => $request->ticket_id,
-                        'client_id' => $request->client_id,
-                        'complaint_new' => $request->complaint_new,
-                        'bwmon' => $request->bwmon,
-                        'cacti' => $request->cacti,
-                        'device' => $request->device,
-                        'loss' => $request->loss,
-                        'downtime' => $request->downtime,
-                        'rep_findings' => $request->rep_findings,
-                        'rep_action' => $request->rep_action,
-                        'rebatable' => $request->rebatable,
-                        'complain' => $request->complain,
-                        'findings' => $request->findings,
-                        'action' => $request->action,
-                        'remarks' => $request->remarks,
-                        'report' => $request->report,
-                        'connection_status' => $request->connection_status,
-                        'prev_status' => $prev_status,
-                        'Status_Ticket_id' => $request->Status_Ticket_id,
-                        'area_id' => $request->area_id,
-                        'technical_assigned' => $request->technical_assigned,
-                        'downtime_hours' => $request->downtime_hours,
-                        'to_soa' => $request->to_soa,
-                        'date_time_fixed' => $request->date_time_fixed,
-                        'target_date' => $tdate,
-                        'team_assigned' => $request->team_assigned,
-                        'updated_by' => $request->updated_by,
-                        'updated_at' => Carbon::now()
-
-                    ]);
             }
 
             if ($request->selected_trouble != "") {
@@ -1996,12 +1995,15 @@ class TicketController extends Controller
 
     public function sendText(Request $request)
     {
+
         try {
             $numArray = $request->number;
             $string = $request->msg;
             $msg = str_replace("\n", "%0a", $string);
             $number = implode(', ', array_column($numArray, 'contact'));
+
             $ret =  \Logger::instance()->send_text($number, $msg);
+
             $sendTo = [];
             $temp = new stdClass;
             // $temp->email = "pbismonte@dctechmicro.com";
@@ -2009,12 +2011,14 @@ class TicketController extends Controller
             $temp->email = "mdmorta@dctechmicro.com";
             $temp->name = "Mice Gwapa";
             array_push($sendTo, $temp);
+
             $CCTO = [];
             $temp1 = new stdClass;
             $temp1->email = "helpdesk@dctechmicro.com";
             $temp1->name = "Helpdesk";
             array_push($CCTO, $temp1);
-            \Logger::instance()->mailer(
+
+            \Logger::instance()->mailerZimbra(
                 "Auto Text Logger",
                 $ret,
                 "",
@@ -2022,6 +2026,7 @@ class TicketController extends Controller
                 $sendTo,
                 $CCTO
             );
+
 
             \Logger::instance()->logText(
                 Carbon::now(),

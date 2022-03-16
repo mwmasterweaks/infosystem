@@ -115,16 +115,17 @@ class SplitterController extends Controller
                 splitter_port::where("going", "splitter")
                     ->where("going_id", $id)
                     ->delete();
-                \Logger::instance()->log(
-                    Carbon::now(),
-                    "",
-                    "",
-                    $this->cname,
-                    "destroy",
-                    "message",
-                    "delete splitter id " . $id .
-                        "\nOld splitter: " . $tbl1
-                );
+                $this
+                    ->log(
+                        Carbon::now(),
+                        "",
+                        "",
+                        $this->cname,
+                        "destroy",
+                        "message",
+                        "delete splitter id " . $id .
+                            "\nOld splitter: " . $tbl1
+                    );
                 return "ok";
             }
         } catch (\Exception $ex) {

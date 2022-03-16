@@ -45,20 +45,27 @@ class RebateController extends Controller
         try {
             DB::beginTransaction();
 
+
             foreach ($request->clients as $client) {
+
+
                 $data = (object)$client;
                 $client_id = $data->id;
-                //Ticket::where("client_id", $client_id)->update(["to_soa" => "1"]);
+
+
+                // Ticket::where("client_id", $client_id)->update(["to_soa" => "1"]);
+
                 // if no mrr
                 if (empty($data->package_mrr)) {
+
                     $tbl = Client::with('package')->where("id", $client_id)->get();
                     foreach ($tbl as $mrr) {
                         $mrr = (object)$mrr->package;
-
                         $package_mrr = $mrr->mrr;
                     }
                 } else
                     $package_mrr = $data->package_mrr;
+
                 // calculation of rebates
                 $rate = 0;
                 $totalHr = $request->downtime;
@@ -137,15 +144,16 @@ class RebateController extends Controller
             return "saved";
         } catch (\Exception $ex) {
             DB::rollBack();
-            \Logger::instance()->log(
-                Carbon::now(),
-                $request->user_id,
-                $request->user_name,
-                $this->cname,
-                "store",
-                "Error",
-                $ex->getMessage()
-            );
+            $this
+                ->log(
+                    Carbon::now(),
+                    $request->user_id,
+                    $request->user_name,
+                    $this->cname,
+                    "store",
+                    "Error",
+                    $ex->getMessage()
+                );
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }

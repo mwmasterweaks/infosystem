@@ -1674,57 +1674,57 @@ export default {
     },
     testMail(mail) {
       this.$root.$emit("pageLoading");
-      // this.$http
-      //   .get("api/calendar_events/testAutoCommand")
-      //   .then(response => {
-      //     console.log(response.body);
-      //     this.$root.$emit("pageLoaded");
-      //   })
-      //   .catch(response => {
-      //     console.log(response);
-      //     this.$root.$emit("pageLoaded");
-      //   });
-      swal({
+      this.$http
+        .get("api/calendar_events/testAutoCommand")
+        .then((response) => {
+          console.log(response.body);
+          this.$root.$emit("pageLoaded");
+        })
+        .catch((response) => {
+          console.log(response);
+          this.$root.$emit("pageLoaded");
+        });
+      /*  swal({
         title: "Confirmation",
         text: "Do you really want to ACTIVATE this client?",
         icon: "warning",
-        buttons: ["No", "Yes"],
-      }).then((yes) => {
+        buttons: ["No", "Yes"]
+      }).then(yes => {
         if (yes) {
           this.$root.$emit("pageLoading");
 
           var sendTO = [
             {
               email: "mwmasterweaks@gmail.com",
-              name: "Masterweak",
+              name: "Masterweak"
             },
-            // {
-            //   email: "pbismonte@dctechmicro.com",
-            //   name: "Peter Pogi"
-            // }
+            {
+              email: "pbismonte@dctechmicro.com",
+              name: "Peter Pogi",
+            },
           ];
           var ccto = [
             {
               email: "rnd@dctechmicro.com",
-              name: "rnd",
-            },
+              name: "rnd"
+            }
           ];
           var data = {
             email: mail,
             user_email: this.user.email,
             user_name: this.user.name,
             sendTo: sendTO,
-            CCTO: ccto,
+            CCTO: ccto
           };
 
           this.$http
             .post("api/calendar_events/testEmail", data)
-            .then((response) => {
+            .then(response => {
               console.log(response.body);
               this.$root.$emit("pageLoaded");
             });
         }
-      });
+      }); */
     },
     test() {
       this.$root.$emit("pageLoading");

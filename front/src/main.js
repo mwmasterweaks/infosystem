@@ -32,9 +32,8 @@ Vue.use(Global);
 Vue.use(VeeValidate, {
   fieldsBagName: "veeFields"
 });
+console.log(window.location.host);
 var protocol = window.location.protocol;
-
-console.log(protocol);
 if (window.location.host == "inetinfosystem.dctechmicro.com") {
   Vue.http.options.root = protocol + "//inetinfosystem.dctechmicro.com/back/";
   Vue.prototype.$img_path =
