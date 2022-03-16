@@ -343,6 +343,20 @@
               <template v-slot:cell(action)="row">
                 <div class="action-col">
                   <b-button
+                    v-if="user.id == 1 && row.item.autoBill == 'No'"
+                    variant="info"
+                    size="sm"
+                    @click="autoBill(row.item.id)"
+                    >Automate Bill</b-button
+                  >
+                  <b-button
+                    v-if="user.id == 1 && row.item.autoBill == 'Yes'"
+                    variant="danger"
+                    size="sm"
+                    @click="stopAutoBill(row.item.id)"
+                    >Stop Auto-Bill</b-button
+                  >
+                  <b-button
                     v-if="user.id == 1"
                     variant="warning"
                     @click="verifiedClient(row.item)"
@@ -938,7 +952,7 @@
             <input
               type="text"
               name="name"
-              class="form-control"
+              class="form-control text-upper"
               v-b-tooltip.hover
               title="Input the account name"
               placeholder="Account name"
@@ -971,7 +985,7 @@
             <input
               type="text"
               name="owner_name"
-              class="form-control"
+              class="form-control text-upper"
               v-b-tooltip.hover
               title="Input the owner's name"
               placeholder="Owner's name"
@@ -1101,7 +1115,7 @@
             <input
               type="text"
               name="location"
-              class="form-control"
+              class="form-control text-upper"
               v-b-tooltip.hover
               title="Input the address"
               placeholder="Address"
@@ -1320,6 +1334,38 @@
                 class="buttonEdit"
                 v-if="updateClientList.agent"
                 @click="editPerRow.agent = true"
+              >
+                <i class="fas fa-pen"></i> Edit
+              </span>
+            </span>
+          </div>
+        </div>
+        <!-- Referral -->
+       <div class="rowFields mx-auto row stripe-modi">
+          <div class="col-lg-3">
+            <label class>Referred By:</label>
+          </div>
+          <div class="col-lg-9">
+            <input
+              type="text"
+              name="referral"
+              class="form-control"
+              v-b-tooltip.hover
+              title="Input the referral"
+              placeholder="Name of  the referral"
+              v-model.lazy="editClient.referral"
+              v-on:keyup.enter="
+                updateClientPerRow('referral', $event.target.value),
+                  (editPerRow.referral = false)
+              "
+              v-if="editPerRow.referral"
+            />
+            <span v-else>
+              {{ editClient.referral }}
+              <span
+                class="buttonEdit"
+                v-if="updateClientList.referral"
+                @click="editPerRow.referral = true"
               >
                 <i class="fas fa-pen"></i> Edit
               </span>
@@ -2119,7 +2165,7 @@
             <input
               type="text"
               name="name"
-              class="form-control"
+              class="form-control text-upper"
               v-b-tooltip.hover
               title="Input the account name"
               placeholder="Name of Client"
@@ -2140,7 +2186,7 @@
             <input
               type="text"
               name="owner_name"
-              class="form-control"
+              class="form-control text-upper"
               v-b-tooltip.hover
               title="Input the owner's name"
               placeholder="Owner's name"
@@ -2333,7 +2379,7 @@
             <input
               type="text"
               name="location"
-              class="form-control"
+              class="form-control text-upper"
               v-b-tooltip.hover
               title="Input the address"
               placeholder="Address"
@@ -2564,6 +2610,24 @@
               option-text="name"
               placeholder="Select sales agent if this client deal by agent..."
             ></model-list-select>
+          </div>
+        </div>
+                <!-- Referral -->
+          <div class="rowFields mx-auto row">
+          <div class="col-lg-3">
+            <p class="textLabel">Referred By:</p>
+          </div>
+          <div class="col-lg-9">
+            <input
+              type="text"
+              name="referral"
+              class="form-control"
+              v-b-tooltip.hover
+              title="Input the referral"
+              placeholder="Name of referral"
+              v-model.lazy="client.referral"
+            />
+
           </div>
         </div>
         <!-- Tech sales in charge -->
@@ -3809,6 +3873,7 @@ export default {
         contact_person: "",
         email_add: "",
         sales_id: {},
+        referral:"",
         engineers_id: {},
         location: "",
         contact: "",
@@ -3839,6 +3904,7 @@ export default {
         OTC: 0,
         foc_length: 0,
         sales_agent_id: 0,
+        referral:"",
         aging: null,
         term: "",
         sales_id: "",
@@ -4110,6 +4176,7 @@ export default {
         term: false,
         sales: false,
         agent: false,
+        referral:false,
         engineers: false,
         branch: false,
         bucket: false,
@@ -4452,6 +4519,7 @@ export default {
             term: true,
             sales: true,
             agent: true,
+            referral:true,
             engineers: true,
             modem: true,
             modem_mac_address: true,
@@ -4479,6 +4547,7 @@ export default {
           term: true,
           sales: true,
           agent: true,
+           referral:true,
           engineers: true,
           modem: true,
           modem_mac_address: true,
@@ -4592,6 +4661,9 @@ export default {
                     this.client.user_id = this.user.id;
                     this.client.user_name = this.user.name;
                     this.client.user_email = this.user.email;
+                    this.client.name = this.client.name.toUpperCase();
+                    this.client.owner_name = this.client.owner_name.toUpperCase();
+                    this.client.location = this.client.location.toUpperCase();
                     this.selectedEmails.push({
                       email: this.client.salesInCharge_email,
                       name: this.client.salesInCharge_name,
@@ -4622,6 +4694,8 @@ export default {
                     this.$http
                       .post("api/Client", this.client)
                       .then((response) => {
+
+                        // console.log(response.body);
                         swal("Created", "", "success");
                         this.salesInCharge = {
                           id: "",
@@ -4640,6 +4714,7 @@ export default {
                           OTC: 0,
                           foc_length: 0,
                           sales_agent_id: 0,
+                          referral:"",
                           aging: null,
                           term: "",
                           sales_id: "",
@@ -5905,6 +5980,18 @@ export default {
     updateClientPerRow(row, value) {
       console.log(value);
       var data = value;
+      if (row == 'name') {
+        data = value.toUpperCase();
+        this.editClient.name = data;
+      }
+      if (row == 'owner_name') {
+        data = value.toUpperCase();
+        this.editClient.owner_name = data;
+      }
+      if (row == 'location') {
+        data = value.toUpperCase();
+        this.editClient.location = data;
+      }
       if (row == "sales_id") {
         this.editClient.sales.user.name = value.name;
         data = value.id;
@@ -6271,6 +6358,7 @@ export default {
             var data = {
               ticket_type_id: type_id,
               client_id: item.id,
+              user_id:this.user.id,
               created_by: this.user.id,
               status: "Pending",
               state: "helpdesk",
@@ -6342,6 +6430,103 @@ export default {
                 dangerMode: true,
               });
             });
+        }
+      });
+    },
+    autoBill(id){
+
+        Swal2.fire({
+
+        title: "<strong>Auto-generate billing for this client?</strong>",
+        type: "info",
+        html: "",
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: '<i class="fa fa-thumbs-up"></i>',
+        confirmButtonAriaLabel: "Thumbs up, great!",
+        cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
+        cancelButtonAriaLabel: "Thumbs down",
+      }).then((update) => {
+        if (update.value) {
+           this.tblisBusy = true;
+          this.$root.$emit("pageLoading");
+          var item = {
+                user_region_id : this.user.region_id,
+                user_id : this.user.id,
+                user_name : this.user.name,
+                client_id : id,
+                filterIn: this.filterIn,
+                cbFilter: this.cbFilter,
+                searchby: this.searchby,
+                tblFilter: this.tblFilter_copy,
+
+          };
+
+          this.$http
+          .post("api/Client/updateAutoBill", item)
+          .then(response => {
+              console.log(response.body);
+
+               swal("Updated", "", "success");
+                this.items = response.body.items;
+                this.totalRows = response.body.items.length;
+                this.tblisBusy = false;
+                this.$root.$emit("pageLoaded");
+          })
+          .catch(response => {
+          console.log(response);
+
+          });
+
+        }
+      });
+    },
+    stopAutoBill(id){
+       Swal2.fire({
+
+        title: "<strong>Stop auto-generate billing for this client?</strong>",
+        type: "info",
+        html: "",
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: '<i class="fa fa-thumbs-up"></i>',
+        confirmButtonAriaLabel: "Thumbs up, great!",
+        cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
+        cancelButtonAriaLabel: "Thumbs down",
+      }).then((update) => {
+        if (update.value) {
+           this.tblisBusy = true;
+          this.$root.$emit("pageLoading");
+          var item = {
+                user_region_id : this.user.region_id,
+                user_id : this.user.id,
+                user_name : this.user.name,
+                client_id : id,
+                filterIn: this.filterIn,
+                cbFilter: this.cbFilter,
+                searchby: this.searchby,
+                tblFilter: this.tblFilter_copy,
+
+          };
+
+          this.$http
+          .post("api/Client/updateAutoBill", item)
+          .then(response => {
+              console.log(response.body);
+
+               swal("Updated", "", "success");
+                this.items = response.body.items;
+                this.totalRows = response.body.items.length;
+                this.tblisBusy = false;
+                this.$root.$emit("pageLoaded");
+          })
+          .catch(response => {
+          console.log(response);
+
+          });
+
         }
       });
     },
@@ -6619,6 +6804,11 @@ export default {
   flex: 1;
   margin-left: 5px;
 }
+
+.text-upper{
+  text-transform: uppercase;
+}
+
 </style>
 <style src="vue-multiselect/dist/vue-multiselect.min.css" />;
 

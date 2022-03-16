@@ -690,6 +690,7 @@ class BillingController extends Controller
     public function storeBillStatement(Request $request)
     {
         try {
+            // return $request;
             DB::beginTransaction();
             $client = (object) $request->client;
 

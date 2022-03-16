@@ -71,6 +71,7 @@ class TicketController extends Controller
                 "ticket_groups.Status_Ticket_id as current_status",
                 "complaint_lists.name as compname",
                 "ticket_groups.complaint_new as current_complaint",
+                "ticket_groups.downtime as group_name",
                 "complaint_lists.*",
                 "ticket_statuses.*",
                 "ticket_groups.*"
@@ -113,42 +114,60 @@ class TicketController extends Controller
     }
     public function search_data($by, $search)
     {
+        // this is for the meantime need to asap billing hehe
         try {
-            $tbl = Ticket::with(['remarks_log.user', 'remarks_log.replies.user', 'trouble_type.type', 'ticket_attachment'])
-                ->join("clients", "tickets.client_id", "clients.id")
-                ->join("ticket_statuses", "tickets.Status_Ticket_id", "ticket_statuses.id")
-                ->join("users", "tickets.user_id", "users.id")
-                ->leftJoin("complaint_lists", "tickets.complaint_new", "complaint_lists.id")
-                ->leftJoin("areas", "tickets.area_id", "areas.id")
-                ->leftJoin("pons", "clients.pon_id", "pons.id")
-                ->leftJoin("olts", "pons.olt_id", "olts.id")
-                ->select(
-                    "pons.*",
-                    "olts.*",
-                    "areas.id as area_id",
-                    "areas.name as area_name",
-                    "clients.name as cname",
-                    "clients.location as location",
-                    "clients.contact as contact",
-                    "clients.ip_assigned as ip_assigned",
-                    "clients.vlan as vlan",
-                    "clients.onu as onu",
-                    "ticket_statuses.name as statname",
-                    "tickets.Status_Ticket_id as current_status",
-                    "complaint_lists.name as compname",
-                    "tickets.complain as oldcomp",
-                    "tickets.complaint_new as current_complaint",
-                    "users.name as uname",
-                    "complaint_lists.*",
-                    "users.*",
-                    "ticket_statuses.*",
-                    "tickets.*"
-                )
-                ->where($by, 'like', '%' . $search . '%')
-                ->orderBy('tickets.updated_at', 'desc')
-                ->get();
+            if ($by == 'ticket_groups.downtime') {
+                $tbl2 = ticket_group::with(['ticket_group_client.client', 'remarks_log.user', 'remarks_log.replies.user', 'trouble_type.type', 'ticket_attachment'])
+                    ->leftJoin("complaint_lists", "ticket_groups.complaint_new", "complaint_lists.id")
+                    ->join("ticket_statuses", "ticket_groups.Status_Ticket_id", "ticket_statuses.id")
+                    ->select(
+                        "ticket_statuses.name as statname",
+                        "ticket_groups.Status_Ticket_id as current_status",
+                        "complaint_lists.name as compname",
+                        "ticket_groups.complaint_new as current_complaint",
+                        "ticket_groups.downtime as group_name",
+                        "complaint_lists.*",
+                        "ticket_statuses.*",
+                        "ticket_groups.*"
+                    )
+                    ->where($by, 'like', '%' . $search . '%')
+                    ->orderBy('ticket_groups.updated_at', 'desc')
+                    ->get();
 
-            return $this->ForQuery($tbl);
+                return $this->ForQuery($tbl2);
+            } else {
+                $tbl1 = Ticket::with(['remarks_log.user', 'remarks_log.replies.user', 'trouble_type.type', 'ticket_attachment'])
+                    ->join("clients", "tickets.client_id", "clients.id")
+                    ->join("ticket_statuses", "tickets.Status_Ticket_id", "ticket_statuses.id")
+                    ->join("users", "tickets.user_id", "users.id")
+                    ->leftJoin("complaint_lists", "tickets.complaint_new", "complaint_lists.id")
+                    ->leftJoin("areas", "tickets.area_id", "areas.id")
+                    ->select(
+                        "areas.id as area_id",
+                        "areas.name as area_name",
+                        "clients.name as cname",
+                        "clients.location as location",
+                        "clients.contact as contact",
+                        "clients.ip_assigned as ip_assigned",
+                        "ticket_statuses.name as statname",
+                        "tickets.Status_Ticket_id as current_status",
+                        "complaint_lists.name as compname",
+                        "tickets.complain as oldcomp",
+                        "tickets.complaint_new as current_complaint",
+                        "users.name as uname",
+                        "complaint_lists.*",
+                        "users.*",
+                        "ticket_statuses.*",
+                        "tickets.*"
+                    )
+                    ->where($by, 'like', '%' . $search . '%')
+                    ->orderBy('tickets.updated_at', 'desc')
+                    ->get();
+
+
+
+                return $this->ForQuery($tbl1);
+            }
         } catch (\Exception $ex) {
             return response()->json(['error' => $ex->getMessage()], 500);
         }

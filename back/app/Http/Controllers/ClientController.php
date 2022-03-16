@@ -294,6 +294,7 @@ class ClientController extends Controller
     }
     public function store(Request $request)
     {
+        // return $request;
         try {
             DB::beginTransaction();
             $dtnow = Carbon::now();
@@ -1252,6 +1253,8 @@ class ClientController extends Controller
                 $tbl->where("region_id", $data->region_id);
             if ($request->address)
                 $tbl->where("location", "like", "%" . $data->location . "%");
+            if ($request->referral)
+                $tbl->where("referral", "like", "%" . $data->referral . "%");
             if ($request->business_type)
                 $tbl->where("business_type", "like", "%" . $data->business_type . "%");
             if ($request->term)
@@ -1614,5 +1617,40 @@ class ClientController extends Controller
             );
             return response()->json(["error" => $ex->getMessage()], 500);
         }
+    }
+
+    public function updateAutoBill(Request $request)
+    {
+
+        $state = DB::table("clients")->select('autoBill')->where("id", $request->client_id)->value('autoBill');
+
+        if ($state == 'No') {
+            DB::table("clients")
+                ->where("id", $request->client_id)
+                ->update(["autoBill" => 'Yes']);
+        } else {
+            DB::table("clients")
+                ->where("id", $request->client_id)
+                ->update(["autoBill" => 'No']);
+        }
+
+        if (
+            $request->filterIn == "multi"
+        ) {
+            return $this->multipleFilter($request);
+        } elseif ($request->filterIn == "search") {
+            return $this->search_data($request->searchby, $request->tblFilter, $request->state);
+        } else
+            return $this->subIndex($request->region_id);
+
+        \Logger::instance()->log(
+            Carbon::now(),
+            $request->user_id,
+            $request->user_name,
+            $this->cname,
+            "updateAutoBill",
+            "message",
+            "update auto-bill of client id " . $request->client_id
+        );
     }
 }

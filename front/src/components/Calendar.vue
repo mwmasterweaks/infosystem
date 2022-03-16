@@ -31,6 +31,15 @@
             >
               TEST SSH
             </button>
+            <button
+              v-if="user.id == 1"
+              type="button"
+              style="margin-top: -20px"
+              class="btn btn-success btn-labeled pull-right margin-right-10"
+              @click="testAutoBill"
+            >
+              TEST AUTO-BILL
+            </button>
 
             <button
               v-if="user.id == 1"
@@ -1766,6 +1775,17 @@ export default {
           console.log(response);
           this.$root.$emit("pageLoaded");
         });
+    },
+    testAutoBill(){
+
+          this.$http
+          .post("api/calendar_events/automateBill")
+          .then(response => {
+          console.log(response.body);
+          })
+          .catch(response => {
+          console.log(response);
+          });
     },
     download_database() {
       swal({

@@ -134,6 +134,21 @@
           </div>
         </div>
       </div>
+      <!-- referral -->
+      <div class="cont-wrap">
+        <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="cbFilter.referral"></p-check>Referral
+        <div class="rowFields mx-auto row" v-if="cbFilter.referral">
+          <div class="col-lg-12">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Please type referral name . ."
+              style="height:35px;padding-left:13px"
+              v-model.trim="cbFilter.data.referral"
+            />
+          </div>
+        </div>
+      </div>
       <!-- sales tech in charge -->
       <div class="cont-wrap">
         <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="cbFilter.engineer"></p-check>Tech in-charge
@@ -426,6 +441,7 @@ export default {
         term: false,
         contract: false,
         sales: false,
+        referral:false,
         engineer: false,
         package: false,
         package_type: false,
@@ -446,6 +462,7 @@ export default {
           term: 0,
           contract: null,
           sales_id: 0,
+          referral:"",
           engineers_id: 0,
           package_id: 0,
           package_type_id: 0,

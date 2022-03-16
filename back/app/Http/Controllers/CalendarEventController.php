@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\calendar_event;
+use App\Client;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use App\billing;
+use App\bill_state_list;
 use App\bucket;
 use App\Region;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\SSH2;
+use App\Package;
+use App\Package_type;
 use stdClass;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
@@ -511,6 +516,189 @@ class CalendarEventController extends Controller
         } catch (\Exception $ex) {
             return response()->json(["error" => $ex, "message" => $MailMessage], 500);
         }
+    }
+    public function automateBill()
+    {
+        set_time_limit(0);
+        $MailMessage = [];
+
+        try {
+
+
+            $clientsToEmail = Client::where('autoBill', '=', 'Yes')->get();
+
+
+            foreach ($clientsToEmail as $client) {
+                $datebill = billing::where('client_id', $client->id)->latest('date')->value('date');
+                $package_mrr = Package::where('id', $client->package_id)->value('mrr');
+                $package_type_name = Package_type::where('id', $client->package_type_id)->value('name');
+
+
+
+                $datebill = new Carbon($datebill);
+                $contain = [];
+
+                $dateCoverFrom = $datebill->addDay();
+                $dateCoverTo = $datebill->copy()->addMonthsNoOverflow();
+                $dateCoverTo =  $dateCoverTo->subDay();
+
+                $datebill_copy = $datebill->copy()->addMonthsNoOverflow();
+                $dateCoverFrom_copy = $dateCoverFrom->copy()->addMonthsNoOverflow();
+                $dateCoverTo_copy = $dateCoverTo->copy()->addMonthsNoOverflow();
+
+                $data = [
+                    "client_id" => $client->id,
+                    "date" => $datebill_copy->subDay()->toDateString(),
+                    "item" => "MRR - Internet (" . $package_type_name . ")",
+                    "description" => "MRR - " . $package_type_name . " " .
+                        $dateCoverFrom_copy->toFormattedDateString() . " - " .
+                        $dateCoverTo_copy->toFormattedDateString(),
+                    "price" => $package_mrr,
+                    "balance" => $package_mrr,
+                    "created_at" => Carbon::now(),
+                    "updated_at" => Carbon::now(),
+
+                ];
+                array_push($contain, $data);
+                billing::insert($contain);
+            }
+
+            return $contain;
+        } catch (\Exception $ex) {
+            return response()->json(["error" => $ex, "message" => $MailMessage], 500);
+        }
+    }
+
+    public function automateEmail()
+    {
+
+        $dateNow = Carbon::now();
+        $date5daysBefore = $dateNow->copy()->addDays(5);
+
+        $bills = billing::with(['client'])
+            ->where('date', $date5daysBefore->toDateString())
+            ->whereHas("client", function ($query) {
+                $query->where("autoBill", '=', 'Yes');
+            })
+            ->get();
+
+        foreach ($bills as $bill) {
+            $bill = (object) $bill;
+            $client = (object) $bill->client;
+            $date = Carbon::parse($bill->date)->format('M. d Y');
+            $priceFormatted = number_format($bill->price, 2);
+            $balanceFormatted = number_format($bill->balance, 2);
+
+            //store bill statement
+            $statement_id = DB::table('bill_statements')->insertGetId([
+                'client_id' => $bill->client_id,
+                'date' => date("Y-m-d"),
+                'due_date' => $date,
+                'amount_due' => $balanceFormatted
+            ]);
+
+            // store bill state list
+            $billList = [];
+
+            $temp = [
+                "bill_statement_id" => $statement_id,
+                'date' => $date,
+                'description' => $bill->description,
+                'priceFormated' => $priceFormatted,
+                'balanceFormated' => $balanceFormatted
+            ];
+
+            array_push($billList, $temp);
+
+
+            bill_state_list::insert($billList);
+
+
+            //email
+            $email =
+                "<div>
+                <table>
+                    <tr>
+                        <td>
+
+                        </td>
+                    </tr>
+                </table>
+                </div>
+                <style>
+                table {
+                border-collapse: collapse;
+                 background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: 800px;
+                    background:'https://i.ibb.co/7WS6qS7/dctech-logo.png';
+
+                }
+
+                table,
+                th,
+                td {
+                border: 1px solid black;
+                padding: 10px;
+                }
+
+                table {
+                width: 100%;
+                }
+                th {
+                color: black;
+                text-align: center;
+                }
+
+                td {
+                color: black;
+                text-align: left;
+                }
+                .center {
+                margin-left: auto;
+                margin-right: auto;
+                }
+                p {
+                font-style: arial;
+                text-align: left;
+                font-size: 13px;
+                }
+                .normalTbl {
+                border-style: none;
+                }
+                .bottomfet {
+                background-color: green;
+                }
+                .watermarkImg {
+                position: absolute;
+                width: 800px;
+                opacity: 0.2;
+                z-index: -1;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                }
+                </style>
+            ";
+
+            $subject = "Billing Statement No. " . $statement_id;
+            $sendTo = "mdmorta@dctechmicro.com";
+            $CCTO = "mdmorta@dctechmicro.com";
+
+
+            return \Logger::instance()->mailer(
+                $subject,
+                $email,
+                "",
+                "",
+                $sendTo,
+                $CCTO
+            );
+        }
+
+        return 'AYY OKAY!';
+        // return $clientBills;
+        // return $id;
     }
     function numberOnly($string)
     {

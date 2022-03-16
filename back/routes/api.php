@@ -182,6 +182,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('calendar_events/testEmail', 'CalendarEventController@testEmail');
     Route::post('calendar_events/download_database', 'CalendarEventController@download_database');
     Route::post('calendar_events/testfunction', 'CalendarEventController@testfunction');
+    Route::post('calendar_events/automateBill', 'CalendarEventController@automateEmail');
 
     Route::post('Client/filterByDate', 'ClientController@filterByDate');
     Route::get('Client/subIndex/{region_id}', 'ClientController@subIndex');
@@ -209,6 +210,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('Client/cancelClient', 'ClientController@cancelClient');
     Route::post('Client/retrieveClient', 'ClientController@retrieveClient');
     Route::post('Client/updateRows', 'ClientController@updateRows');
+    Route::post('Client/updateAutoBill', 'ClientController@updateAutoBill');
 
 
 

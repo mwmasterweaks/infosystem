@@ -40,3 +40,110 @@ To: 1
 
 2022-03-09 22:37:01	--	1	--	Import Payment	--	CustomerPaymentController	--	storePayment	--	message	--	Import payment : [{"Create Date":44626.29195601852,"Date":"2022-03-07","OR":"BTIUX754","Merchant Txn Id":1235147,"Ccy":"PHP","Amount":1200,"Fee":20,"Settlement":1180,"Proc":"ECPY","Statement_id":91168,"Account_name":"Lolet M. Morta","Remarks":"AAAAAAAAAAAaAA"},{"Create Date":44627.36417824074,"Date":"2022-03-07","OR":"J3NHJEW5","Merchant Txn Id":1236217,"Ccy":"PHP","Amount":1460,"Fee":10,"Settlement":1450,"Proc":"MBTC","Statement_id":92749,"Account_name":"Wilma Hinlog","Remarks":"BBBBBBBBBBB","Account_no":"RES-202108-26102"}]
 
+2022-03-11 08:04:01	--	2078	--	Peter R. Bismonte	--	TicketController	--	update	--	message	--	update Ticket id 23173
+From: {"id":23173,"ticket_id":"SME20220310","client_id":30697,"user_id":2078,"updated_by":"Angelica Canteros","complain":null,"findings":null,"action":null,"complaint_new":1,"bwmon":null,"device":null,"loss":null,"downtime":null,"cacti":"bucket 16\n- can't check mac address kay sa bajada office siya nagtawag.","rep_findings":null,"rep_action":null,"rebatable":null,"remarks":null,"report":null,"prev_status":null,"Status_Ticket_id":2,"area_id":12,"connection_status":"down","technical_assigned":null,"target_date":null,"team_assigned":null,"downtime_hours":null,"date_time_fixed":null,"to_soa":0,"created_at":"2022-03-10 15:39:48","updated_at":"2022-03-10 15:41:30"}
+To: 1
+
+2022-03-11 09:00:51	--	1	--	Peter R. Bismonte	--	ClientController	--	updateAutoBill	--	message	--	update auto-bill of client id 11627
+
+2022-03-11 09:45:23	--	1	--	Peter R. Bismonte	--	ClientController	--	updateAutoBill	--	message	--	update auto-bill of client id 28040
+
+2022-03-11 19:10:35	--	1	--	Peter R. Bismonte	--	BillingController	--	storeBillStatement	--	message	--	Create new bill statement id: 112385
+
+2022-03-14 08:55:21	--		--		--	BillingController	--	deleteMultiSOA	--	message	--	delete deleteSOA id 122314
+Old deleteSOA: {"id":122314,"client_id":34763,"user_id":2007,"payment_method_id":444,"banking_payment_code_id":null,"amount":1299,"date":"2022-02-18","or_number":"4425","remarks":"Cash Advance - 0221 - cash - OTC Excess 50% & Advance payment","tbl_name":"customer_payment","created_at":"2022-02-18 14:47:44","updated_at":"2022-02-18 14:47:44"}
+
+2022-03-14 08:55:21	--		--		--	BillingController	--	deleteMultiSOA	--	message	--	delete deleteSOA id 523748
+Old deleteSOA: {"id":523748,"client_id":34763,"date":"2022-03-19","item":"MRR - Internet (RES)","description":"MRR - RES Mar 19, 2022 - Apr 18, 2022","price":1299,"balance":1299,"tbl_name":"bill","created_at":"2022-03-14 08:51:22","updated_at":"2022-03-14 08:51:22"}
+
+2022-03-15 08:55:38	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28040
+Row: referral
+From: 
+To: test referral
+
+2022-03-15 09:46:52	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28033
+Row: name
+From: (711)HB1 Ecoland
+To: (711)HB1 Ecoland
+
+2022-03-15 09:47:36	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28033
+Row: name
+From: (711)HB1 Ecoland
+To: (711)HB1 ecoland uppercase
+
+2022-03-15 09:47:43	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28033
+Row: name
+From: (711)HB1 ecoland uppercase
+To: (711)HB1 ecoland
+
+2022-03-15 09:53:50	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28033
+Row: name
+From: (711)HB1 ecoland
+To: (711)HB1 ECOLAND
+
+2022-03-15 09:54:11	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28040
+Row: name
+From: (711)Jacinto Boulevard
+To: (711)Jacinto Boulevard
+
+2022-03-15 09:56:13	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28040
+Row: name
+From: (711)Jacinto Boulevard
+To: (711)Jacinto Boulevard
+
+2022-03-15 14:00:21	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28040
+Row: name
+From: (711)Jacinto Boulevard
+To: (711)Jacinto Boulevard
+
+2022-03-15 14:22:08	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28033
+Row: owner_name
+From: HB1 Ecoland
+To: HB1 Ecoland
+
+2022-03-15 14:28:10	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28040
+Row: owner_name
+From: Jacinto Boulevard
+To: Jacinto Boulevard
+
+2022-03-15 14:28:57	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28040
+Row: owner_name
+From: Jacinto Boulevard
+To: Jacinto Boulevard
+
+2022-03-15 14:30:10	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28040
+Row: owner_name
+From: Jacinto Boulevard
+To: JACINTO BOULEVARD
+
+2022-03-15 14:31:33	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28040
+Row: name
+From: (711)Jacinto Boulevard
+To: (711)JACINTO BOULEVARD
+
+2022-03-15 14:33:27	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28047
+Row: name
+From: (711)Landmark
+To: (711)LANDMARK
+
+2022-03-15 14:33:29	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28047
+Row: owner_name
+From: Landmark
+To: LANDMARK
+
+2022-03-15 14:33:34	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28047
+Row: location
+From: Diversion Rd., Bo. Panacan, Davao City
+To: DIVERSION RD., BO. PANACAN, DAVAO CITY
+
+2022-03-16 16:47:13	--	1	--	Peter R. Bismonte	--	BillingController	--	updateSOA	--	message	--	update soa id 523750
+From: {"client_id":34763,"date":"2022-03-15","item":"MRR - Internet (RES)","description":"MRR - RES Mar 18, 2022 - Apr 17, 2022","price":1299,"balance":1299,"tbl_name":"bill"}
+To: {"id":523750,"client_id":34763,"date":"2022-03-21","item":"MRR - Internet (RES)","description":"MRR - RES Mar 18, 2022 - Apr 17, 2022","price":1299,"balance":1299,"tbl_name":"bill","created_at":"2022-03-16 16:46:21","updated_at":"2022-03-16 16:47:13"}
+
+2022-03-16 17:13:39	--	1	--	Peter R. Bismonte	--	BillingController	--	storeBillStatement	--	message	--	Create new bill statement id: 112403
+
+2022-03-16 19:20:59	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 28033
+Row: referral
+From: 
+To: Test Again
+

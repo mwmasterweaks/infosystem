@@ -26,7 +26,7 @@ class Client extends Model
 {
     protected $fillable = [
         'id', 'account_no', 'acc_no', 'region_id', 'area_id', 'branch_id', 'name', 'owner_name', 'location', 'contact_person', 'business_type',
-        'contact', 'email_add', 'contract', 'remarks', 'term', 'OTC', 'sales_id', 'sales_agent_id',
+        'contact', 'email_add', 'contract', 'remarks', 'term', 'OTC', 'sales_id', 'sales_agent_id', 'referral',
         'engineers_id', 'package_id', 'modem_id', 'communication_protocol', 'package_type_id',
         'pon_id', 'onu', 'modem_mac_address', 'vlan', 'ip_assigned', 'date_assigned',
         'date_activated', 'wfs', 'lat', 'lng', 'bucket_id', 'subscription_name', 'status'

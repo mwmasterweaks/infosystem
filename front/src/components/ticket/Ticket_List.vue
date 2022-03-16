@@ -422,10 +422,10 @@
                 v-show="
                   (row.item.statname == 'Urgent' &&
                     row.item.target_date == null) ||
-                  (row.item.statname == 'For Tech Visit' &&
-                    row.item.target_date == null) ||
-                  (row.item.statname == 'Modem/Line Transfer' &&
-                    row.item.target_date == null)
+                    (row.item.statname == 'For Tech Visit' &&
+                      row.item.target_date == null) ||
+                    (row.item.statname == 'Modem/Line Transfer' &&
+                      row.item.target_date == null)
                 "
                 variant="info"
                 @click="openModalUpdateTargetDate(row.item)"
@@ -438,10 +438,10 @@
                 style="width: 100%"
                 v-if="
                   row.item.target_date != null &&
-                  row.item.target_date != datenow &&
-                  row.item.target_date != dateTomorrow &&
-                  row.item.target_date != dateYesterday &&
-                  1 > dateDiffInDays(datenow, row.item.target_date)
+                    row.item.target_date != datenow &&
+                    row.item.target_date != dateTomorrow &&
+                    row.item.target_date != dateYesterday &&
+                    1 > dateDiffInDays(datenow, row.item.target_date)
                 "
                 :disabled="
                   row.item.statname != 'Urgent' || !roles.create_client_details
@@ -487,7 +487,7 @@
                 style="width: 100%"
                 v-if="
                   1 < dateDiffInDays(datenow, row.item.target_date) &&
-                  row.item.target_date != null
+                    row.item.target_date != null
                 "
                 :disabled="
                   row.item.statname != 'Urgent' || !roles.create_client_details
@@ -1348,7 +1348,8 @@
           @ok="handleOk"
         >
           <!-- form -->
-          <form @submit.prevent>
+          <div id='toPDF'>
+  <form @submit.prevent>
             <div id="new ticket">
               <b-card align="center" style="height: 20px; border: none">
                 <center>
@@ -2227,6 +2228,8 @@
               </b-card>
             </div>
           </form>
+          </div>
+
           <!-- /form -->
           <template slot="modal-footer" slot-scope="{}">
             <b-button
@@ -3705,7 +3708,7 @@
             class="rowFields mx-auto row"
             v-if="
               roles.operator &&
-              ticket_update_target_date.current_target_date != null
+                ticket_update_target_date.current_target_date != null
             "
           >
             <div class="col-lg-3">
@@ -3733,7 +3736,7 @@
             class="rowFields mx-auto row"
             v-if="
               roles.operator &&
-              ticket_update_target_date.current_target_date != null
+                ticket_update_target_date.current_target_date != null
             "
           >
             <div class="col-lg-3">
@@ -4277,7 +4280,7 @@ export default {
     "rangedate-picker": VueRangedatePicker,
     UploadImages,
     Swal2: Swal2,
-    modal_fsr: modal_fsr,
+    modal_fsr: modal_fsr
   },
   data() {
     return {
@@ -4290,27 +4293,27 @@ export default {
       sortDesc: true,
       statfield: [
         { key: "name", label: "Status", sortable: true },
-        { key: "actions", label: "Actions" },
+        { key: "actions", label: "Actions" }
       ],
       compField: [
         { key: "name", label: "Complaint", sortable: true },
-        { key: "actions", label: "Actions" },
+        { key: "actions", label: "Actions" }
       ],
       advField: [
         { key: "name", label: "Template", sortable: true },
-        { key: "actions", label: "Actions" },
+        { key: "actions", label: "Actions" }
       ],
       Status_Ticket: [],
       areas: [],
       ticketStat: {
-        name: "",
+        name: ""
       },
       ticketComp: {
-        name: "",
+        name: ""
       },
       manageAdv: {
         name: "",
-        content: "",
+        content: ""
       },
       StattotalRows: 1,
       ComptotalRows: 1,
@@ -4324,10 +4327,10 @@ export default {
         {
           key: "technical_assigned",
           label: "Consolidated Tech",
-          sortable: true,
+          sortable: true
         },
         { key: "created_at", sortable: true },
-        { key: "updated_at", sortable: true },
+        { key: "updated_at", sortable: true }
       ],
       datenow: new Date(),
       dateTomorrow: new Date(),
@@ -4365,7 +4368,7 @@ export default {
         loss: "",
         downtime: "",
         multipleClients: [],
-        clientRegion: null,
+        clientRegion: null
       },
       editTicket: {
         client_id: "",
@@ -4380,10 +4383,10 @@ export default {
         client: {
           name: "",
           location: "",
-          contact: "",
+          contact: ""
         },
         user: {
-          name: "",
+          name: ""
         },
         selected_trouble: [],
         attachments: [],
@@ -4395,7 +4398,7 @@ export default {
         downtime: "",
         rep_findings: "",
         rep_action: "",
-        rebatable: "",
+        rebatable: ""
       },
       ticketGroup: {
         client_id: "",
@@ -4410,10 +4413,10 @@ export default {
         client: {
           name: "",
           location: "",
-          contact: "",
+          contact: ""
         },
         user: {
-          name: "",
+          name: ""
         },
         selected_trouble: [],
         attachments: [],
@@ -4425,7 +4428,7 @@ export default {
         downtime: "",
         rep_findings: "",
         rep_action: "",
-        rebatable: "",
+        rebatable: ""
       },
       status_id_update: "",
       comp_id_update: "",
@@ -4444,19 +4447,19 @@ export default {
         id: "",
         region_id: "",
         package_type: {
-          name: "",
+          name: ""
         },
-        area_id: "",
+        area_id: ""
       },
       AppliedDateoptions: {
         format: "YYYY-MM-DD",
-        useCurrent: false,
+        useCurrent: false
       },
       DateTimeOptions: {
         format: "YYYY-MM-DD HH:mm",
         useCurrent: false,
         showClear: true,
-        showClose: true,
+        showClose: true
       },
       user: [],
       totalPendings: 0,
@@ -4468,12 +4471,12 @@ export default {
       totalRebates: 0,
       packEdit: {
         package_id: "",
-        package_type_id: "",
+        package_type_id: ""
       },
       editClient: {
         id: "",
         package_id: "",
-        package_type_id: "",
+        package_type_id: ""
       },
       teams: [],
       packages: [],
@@ -4488,7 +4491,7 @@ export default {
         region_id: "",
         team_id: "",
         type: "ticket",
-        name: "",
+        name: ""
       },
       rebate: {
         from: "",
@@ -4498,56 +4501,60 @@ export default {
         rate: 0,
         downtimeRate: 0,
         payable: 0,
-        totalHour: 0,
+        totalHour: 0
       },
       Addrebate: {
         from: "",
         to: "",
-        totalHour: 0,
+        totalHour: 0
       },
       reloader_counter: 0,
       reloader_interval: [],
       searchby_list: [
         {
           name: "Ticket ID(last 4 digit)",
-          id: "tickets.id",
+          id: "tickets.id"
         },
 
         {
           name: "Account Name",
-          id: "clients.name",
+          id: "clients.name"
+        },
+        {
+          name: "Ticket Group",
+          id: "ticket_groups.downtime"
         },
         {
           name: "Complaint",
-          id: "complaint_lists.name",
+          id: "complaint_lists.name"
         },
         {
           name: "Findings",
-          id: "findings",
+          id: "findings"
         },
         {
           name: "Consolidated Tech",
-          id: "technical_assigned",
+          id: "technical_assigned"
         },
         {
           name: "Others",
-          id: "tickets.complain",
-        },
+          id: "tickets.complain"
+        }
       ],
       time: [
         {
           name: "24 Hours",
-          id: "1",
+          id: "1"
         },
 
         {
           name: "48 Hours",
-          id: "2",
+          id: "2"
         },
         {
           name: "All",
-          id: "3",
-        },
+          id: "3"
+        }
       ],
       searchby: "clients.name",
       trendTime: "",
@@ -4559,20 +4566,20 @@ export default {
       connection_status_list: [
         {
           id: "up",
-          name: "Up",
+          name: "Up"
         },
         {
           id: "down",
-          name: "Down",
+          name: "Down"
         },
         {
           id: "slow",
-          name: "Slow",
+          name: "Slow"
         },
         {
           id: "intermittent",
-          name: "Intermittent",
-        },
+          name: "Intermittent"
+        }
       ],
       complaints_new: [],
       emailTicketItem: [],
@@ -4599,7 +4606,7 @@ export default {
         "Gensan Client",
         "Butuan Client",
         "Valencia Client",
-        "SanFranz Client",
+        "SanFranz Client"
       ],
       clientRegions: [
         { id: "108", name: "Davao Clients" },
@@ -4609,7 +4616,7 @@ export default {
         { id: "11766", name: "Gensan Clients" },
         { id: "11767", name: "Butuan Clients" },
         { id: "11768", name: "Valencia Clients" },
-        { id: "11769", name: "San Franz Clients" },
+        { id: "11769", name: "San Franz Clients" }
       ],
       progressBar: false,
       templates: [],
@@ -4626,15 +4633,15 @@ export default {
       date_effective: "",
       fsr_data: {
         user: {
-          email: "",
-        },
+          email: ""
+        }
       },
       addedClients: [],
       editChangeClient: false,
       clientField: [
         { key: "client.name", label: "Name", sortable: true },
-        { key: "actions", label: "Actions" },
-      ],
+        { key: "actions", label: "Actions" }
+      ]
     };
   },
   beforeCreate() {
@@ -4680,17 +4687,17 @@ export default {
       this.filterIn = "multi";
       this.cbFilter = filt;
     });
-    this.$root.$on("add_data_to_recipient", (item) => {
+    this.$root.$on("add_data_to_recipient", item => {
       var items = item.items;
-      items.forEach((item) => {
+      items.forEach(item => {
         if (item.contact != null) {
           var temp = item.contact.split(",");
-          temp.forEach((contact) => {
+          temp.forEach(contact => {
             contact = contact.replace(/\/-/g, "");
             if (contact.length == 11) {
               var data = {
                 contact: contact,
-                name: item.name,
+                name: item.name
               };
 
               this.selectedContacts.push(data);
@@ -4699,12 +4706,12 @@ export default {
         }
       });
     });
-    this.$root.$on("add_data_to_client_ticket", (item) => {
+    this.$root.$on("add_data_to_client_ticket", item => {
       var items = item.items;
-      items.forEach((item) => {
+      items.forEach(item => {
         var data = {
           id: item.id,
-          name: item.name,
+          name: item.name
         };
 
         this.ticket.multipleClients.push(data);
@@ -4716,8 +4723,8 @@ export default {
   updated() {},
   methods: {
     load() {
-      this.$nextTick(function () {
-        setTimeout(function () {
+      this.$nextTick(function() {
+        setTimeout(function() {
           document.getElementById("componentMenu").className =
             "customeDropDown dropdown-menu";
 
@@ -4733,25 +4740,25 @@ export default {
         }, 100);
       });
 
-      this.$http.post("api/getComplaint").then((response) => {
+      this.$http.post("api/getComplaint").then(response => {
         this.complaint_list = response.body;
       });
 
-      this.$http.get("api/area").then((response) => {
+      this.$http.get("api/area").then(response => {
         this.areas = response.body;
       });
 
-      this.$http.get("api/getContacts").then((response) => {
+      this.$http.get("api/getContacts").then(response => {
         this.contacts = response.body;
         //   console.log(response.body);
       });
-      this.$http.get("api/Package").then(function (response) {
+      this.$http.get("api/Package").then(function(response) {
         this.packages = response.body;
       });
 
       this.$http
         .get("api/Ticket/subIndex/" + this.user.region_id)
-        .then(function (response) {
+        .then(function(response) {
           this.items = response.body.items;
           this.items_copy = response.body.items;
           this.totalPendings = response.body.pendingCount;
@@ -4767,7 +4774,7 @@ export default {
     },
 
     loadComplaints() {
-      this.$http.get("api/ComplaintList").then((response) => {
+      this.$http.get("api/ComplaintList").then(response => {
         this.complaints_new = response.body;
         this.ComptotalRows = this.complaints_new.length;
       });
@@ -4775,12 +4782,12 @@ export default {
     loadClients() {
       this.$http
         .get("api/getClients/" + this.user.region_id)
-        .then(function (response) {
+        .then(function(response) {
           this.clients = response.body;
         });
     },
     loadTemplates() {
-      this.$http.get("api/Advisory").then((response) => {
+      this.$http.get("api/Advisory").then(response => {
         this.templates = response.body;
         this.AdvtotalRows = this.templates.length;
       });
@@ -4792,18 +4799,18 @@ export default {
       if (this.tblisBusy == false) {
         this.tblisBusy = true;
         this.reloader_counter = 0;
-        this.$http.get("api/Package").then(function (response) {
+        this.$http.get("api/Package").then(function(response) {
           this.packages = response.body;
           this.reloader_counter++;
         });
 
-        this.$http.get("api/PackageType").then(function (response) {
+        this.$http.get("api/PackageType").then(function(response) {
           this.$global.setPackageTypes(response.body);
           this.packageTypes = response.body;
           this.reloader_counter++;
         });
 
-        this.$http.get("api/TicketStatus").then(function (response) {
+        this.$http.get("api/TicketStatus").then(function(response) {
           this.$global.setTicketStatus(response.body);
           this.Status_Ticket = response.body;
           this.reloader_counter++;
@@ -4811,7 +4818,7 @@ export default {
 
         this.$http
           .get("api/Ticket/subIndex/" + this.user.region_id)
-          .then(function (response) {
+          .then(function(response) {
             this.items = response.body.items;
             this.totalPendings = response.body.pendingCount;
             this.totalUrgents = response.body.urgentCount;
@@ -4823,7 +4830,7 @@ export default {
           });
         this.$http
           .get("api/getClients/" + this.user.region_id)
-          .then(function (response) {
+          .then(function(response) {
             this.clients = response.body;
             this.reloader_counter++;
           });
@@ -4843,27 +4850,27 @@ export default {
         text: "Do you really want to delete this Status",
         icon: "warning",
         buttons: ["No", "Yes"],
-        dangerMode: true,
-      }).then((willDelete) => {
+        dangerMode: true
+      }).then(willDelete => {
         if (willDelete) {
           this.tblisBusy = true;
           this.$http
             .delete("api/TicketStatus/" + item.id)
-            .then((response) => {
+            .then(response => {
               this.$global.setTicketStatus(response.body);
-              swal("Deleted!", "", "success").then((value) => {
+              swal("Deleted!", "", "success").then(value => {
                 this.Status_Ticket = response.body;
                 this.StattotalRows = this.Status_Ticket.length;
                 this.tblisBusy = false;
               });
             })
-            .catch((response) => {
+            .catch(response => {
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true,
-              }).then((value) => {
+                dangerMode: true
+              }).then(value => {
                 if (value) {
                   this.tblisBusy = false;
                 }
@@ -4944,17 +4951,17 @@ export default {
       var client = {
         id: item.client_id,
         name: item.client.name,
-        package_mrr: null,
+        package_mrr: null
       };
 
       this.selectedClientRebates.push(client);
     },
     addClientGroup() {
-      this.addedClients.forEach((item) => {
+      this.addedClients.forEach(item => {
         const data = {
           ticket_group_id: this.editTicket.id,
           client_id: item.id,
-          client: item,
+          client: item
         };
         swal("Client Added", "success");
 
@@ -4980,13 +4987,13 @@ export default {
       this.ticket.user_id = this.user.id;
       this.ticket.user_name = this.user.name;
 
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then(result => {
         if (result) {
           this.tblisBusy = true;
           this.$root.$emit("pageLoading");
           this.$http
             .post("api/Ticket", this.ticket)
-            .then((response) => {
+            .then(response => {
               this.ticket = {
                 ticketType: "1",
                 client_id: "",
@@ -5012,7 +5019,7 @@ export default {
                 selected_trouble: [],
                 attachments: [],
                 multipleClients: [],
-                clientRegion: null,
+                clientRegion: null
               };
               this.items = response.body.items;
               this.items_copy = response.body.items;
@@ -5031,18 +5038,18 @@ export default {
                 area_id: "",
                 region_id: "",
                 package_type: {
-                  name: "",
-                },
+                  name: ""
+                }
               };
 
               swal("Ticket", "Added successfully", "success");
             })
-            .catch((response) => {
+            .catch(response => {
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true,
+                dangerMode: true
               });
               this.tblisBusy = false;
               this.$root.$emit("pageLoaded");
@@ -5057,8 +5064,8 @@ export default {
         text: "Do you really want to delete this Ticket permanently",
         icon: "warning",
         buttons: ["No", "Yes"],
-        dangerMode: true,
-      }).then((willDelete) => {
+        dangerMode: true
+      }).then(willDelete => {
         if (willDelete) {
           this.items = [];
           this.tblisBusy = true;
@@ -5074,12 +5081,12 @@ export default {
             end: this.daterange.end,
             ticketType: this.editTicket.ticketType,
             user_id: this.user.id,
-            user_name: this.user.name,
+            user_name: this.user.name
           };
 
           this.$http
             .post("api/Ticket/deleteTicket", data)
-            .then((response) => {
+            .then(response => {
               // console.log(response.body);
               this.$bvModal.hide("modalEditTicket");
               this.items_copy = response.body.items;
@@ -5089,20 +5096,20 @@ export default {
               this.totalITND = response.body.itndCount;
               this.totalTransfer = response.body.transferCount;
               this.data = response.body.data;
-              swal("Deleted!", "", "success").then((value) => {
+              swal("Deleted!", "", "success").then(value => {
                 this.items = response.body.items;
                 this.totalRows = this.items.length;
                 this.tblisBusy = false;
                 this.$root.$emit("pageLoaded");
               });
             })
-            .catch((response) => {
+            .catch(response => {
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true,
-              }).then((value) => {
+                dangerMode: true
+              }).then(value => {
                 if (value) {
                 }
               });
@@ -5113,15 +5120,15 @@ export default {
     btnUpdate() {
       this.editTicket.updated_by = this.user.name;
 
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then(result => {
         if (result) {
           swal({
             title: "Are you sure?",
             text: "Do you want to Update this Ticket?",
             icon: "warning",
             buttons: ["No", "Yes"],
-            dangerMode: true,
-          }).then((update) => {
+            dangerMode: true
+          }).then(update => {
             if (update) {
               this.$root.$emit("pageLoading");
               this.editTicket.region_id = this.user.region_id;
@@ -5136,7 +5143,7 @@ export default {
 
               this.$http
                 .put("api/Ticket/" + this.editTicket.id, this.editTicket)
-                .then((response) => {
+                .then(response => {
                   this.items = response.body.items;
                   this.items_copy = response.body.items;
                   // this.filterIn = null;
@@ -5150,12 +5157,12 @@ export default {
                   this.data = response.body.data;
                   this.$root.$emit("pageLoaded");
                 })
-                .catch((response) => {
+                .catch(response => {
                   swal({
                     title: "Error",
                     text: response.body.error,
                     icon: "error",
-                    dangerMode: true,
+                    dangerMode: true
                   });
                   this.$root.$emit("pageLoaded");
                 });
@@ -5202,8 +5209,8 @@ export default {
         title: "Are you sure?",
         text: "",
         icon: "info",
-        buttons: ["No", "Yes"],
-      }).then((yes) => {
+        buttons: ["No", "Yes"]
+      }).then(yes => {
         if (yes) {
           this.tblisBusy = true;
           this.$root.$emit("pageLoading");
@@ -5215,23 +5222,23 @@ export default {
           this.ticket_update_target_date.tblFilter = this.tblFilter_copy;
           this.$http
             .post("api/Ticket/updateTargetDate", this.ticket_update_target_date)
-            .then((response) => {
+            .then(response => {
               this.$bvModal.hide("modal-update-target-date");
               this.items_copy = response.body.items;
               this.tblisBusy = false;
               this.$root.$emit("pageLoaded");
-              swal("Updated", "", "success").then((value) => {
+              swal("Updated", "", "success").then(value => {
                 this.items = response.body.items;
                 this.totalRows = this.items.length;
               });
             })
-            .catch((response) => {
+            .catch(response => {
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true,
-              }).then((value) => {
+                dangerMode: true
+              }).then(value => {
                 if (value) {
                 }
               });
@@ -5243,20 +5250,20 @@ export default {
     OpenModalEmailTicket() {
       this.$http
         .post("api/Ticket/emailTicket")
-        .then((response) => {
+        .then(response => {
           console.log(response.body);
           this.emailTicketItem = response.body.items;
 
           this.$bvModal.show("modalEmailTicket");
         })
-        .catch((response) => {
+        .catch(response => {
           console.log(response);
           swal({
             title: "Error",
             text: response.body.error,
             icon: "error",
-            dangerMode: true,
-          }).then((value) => {
+            dangerMode: true
+          }).then(value => {
             if (value) {
             }
           });
@@ -5281,13 +5288,13 @@ export default {
     },
 
     btnAddStat() {
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then(result => {
         if (result) {
           this.ticketStat.user_id = this.user.id;
           this.ticketStat.user_name = this.user.name;
           this.$http
             .post("api/TicketStatus", this.ticketStat)
-            .then((response) => {
+            .then(response => {
               this.Status_Ticket = response.body;
               swal("Status", "Added successfully", "success");
               this.ticketStat.name = "";
@@ -5295,27 +5302,27 @@ export default {
               this.StattotalRows = this.Status_Ticket.length;
               this.$bvModal.hide("modalAddStat");
             })
-            .catch((response) => {
+            .catch(response => {
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true,
+                dangerMode: true
               });
             });
         }
       });
     },
     StatbtnUpdate() {
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then(result => {
         if (result) {
           swal({
             title: "Are you sure?",
             text: "Do you want to Update this status?",
             icon: "warning",
             buttons: ["No", "Yes"],
-            dangerMode: true,
-          }).then((update) => {
+            dangerMode: true
+          }).then(update => {
             if (update) {
               this.tblisBusy = true;
               this.ticketStat.user_id = this.user.id;
@@ -5325,20 +5332,20 @@ export default {
                   "api/TicketStatus/" + this.status_id_update,
                   this.ticketStat
                 )
-                .then((response) => {
+                .then(response => {
                   this.Status_Ticket = response.body;
                   this.$global.setTicketStatus(response.body);
                   swal("Update!", "", "success");
                   this.$bvModal.hide("editStatmodal");
                   this.tblisBusy = false;
                 })
-                .catch((response) => {
+                .catch(response => {
                   swal({
                     title: "Error",
                     text: response.body.error,
                     icon: "error",
-                    dangerMode: true,
-                  }).then((value) => {
+                    dangerMode: true
+                  }).then(value => {
                     if (value) {
                     }
                   });
@@ -5355,15 +5362,15 @@ export default {
           key: "mTicket_id",
           label: "Ticket No.",
           sortable: true,
-          formatter: (value) => {
+          formatter: value => {
             return "<i><b>" + value + "</b></i>";
-          },
+          }
         },
         {
           key: "statname",
           label: "Status",
           sortable: true,
-          formatter: (value) => {
+          formatter: value => {
             if (value == "Close")
               return '<span class="btn btn-success disabled" style="width:100%;"> Fixed </span>';
             else if (value == "For Rebates")
@@ -5379,88 +5386,89 @@ export default {
             else if (value == "Modem/Line Transfer")
               return '<span class="btn btn-dark disabled" style="width:100%;"> Modem/Line Transfer </span>';
             else return value;
-          },
+          }
         },
         {
           key: "target_date",
           label: "Target Date",
-          sortable: true,
+          sortable: true
         },
         {
           key: "aging",
           label: "Aging",
-          sortable: true,
+          sortable: true
         },
         {
           key: "diffHuman",
           label: "Downtime",
-          sortable: true,
+          sortable: true
         },
+        { key: "group_name", label: "Ticket Group", sortable: true },
         { key: "client.name", label: "Account Name", sortable: true },
         {
           key: "client.location",
           label: "Address",
-          formatter: (value) => {
+          formatter: value => {
             var temp = "";
             if (value != null) {
               if (value.length > 50) temp = "...";
               return value.slice(0, 50) + temp;
             } else return "";
-          },
-        },
+          }
+        }
       ];
 
       if ("forExport" == check) {
         var temp = {
           key: "compname",
-          label: "Complaint",
+          label: "Complaint"
         };
         this.fields.push(temp);
 
         var temp4 = {
           key: "technical_assigned",
           label: "Consolidated Tech",
-          sortable: true,
+          sortable: true
         };
         this.fields.push(temp4);
 
         var findings = {
           key: "rep_findings",
           label: "Findings",
-          sortable: true,
+          sortable: true
         };
         this.fields.push(findings);
 
         var action = {
           key: "rep_action",
           label: "Action",
-          sortable: true,
+          sortable: true
         };
         this.fields.push(action);
 
         var date_time_fixed = {
           key: "date_time_fixed",
           label: "Date Time Fixed",
-          sortable: true,
+          sortable: true
         };
         this.fields.push(date_time_fixed);
 
         var downtime_hours = {
           key: "downtime_hours",
           label: "Downtime Hours",
-          sortable: true,
+          sortable: true
         };
         this.fields.push(downtime_hours);
 
         var created_at = {
           key: "created_at",
-          sortable: true,
+          sortable: true
         };
         this.fields.push(created_at);
 
         var updated_at = {
           key: "updated_at",
-          sortable: true,
+          sortable: true
         };
         this.fields.push(updated_at);
       } else {
@@ -5472,7 +5480,7 @@ export default {
             key: "connection_status",
             label: "Con. Status",
             sortable: true,
-            formatter: (value) => {
+            formatter: value => {
               if (value == "up")
                 return '<span class="btn btn-success disabled" style="width:100%;"> UP </span>';
               else if (value == "down")
@@ -5480,12 +5488,12 @@ export default {
               else if (value == "intermittent")
                 return '<span class="btn btn-warning disabled" style="width:100%;"> INTERMITTENT </span>';
               else return value;
-            },
+            }
           });
 
         var temp = {
           key: "compname",
-          label: "Complaint",
+          label: "Complaint"
         };
         this.fields.push(temp);
 
@@ -5496,13 +5504,13 @@ export default {
           var temp = {
             key: "action",
             label: "Action",
-            formatter: (value) => {
+            formatter: value => {
               var temp = "";
               if (value != null) {
                 if (value.length > 50) temp = "...";
                 return value.slice(0, 50) + temp;
               } else return "";
-            },
+            }
           };
           this.fields.push(temp);
         }
@@ -5514,13 +5522,13 @@ export default {
           var temp = {
             key: "remarks",
             label: "Remarks",
-            formatter: (value) => {
+            formatter: value => {
               var temp = "";
               if (value != null) {
                 if (value.length > 50) temp = "...";
                 return value.slice(0, 50) + temp;
               } else return "";
-            },
+            }
           };
           this.fields.push(temp);
         }
@@ -5532,7 +5540,7 @@ export default {
           var temp = {
             key: "technical_assigned",
             label: "Consolidated Tech",
-            sortable: true,
+            sortable: true
           };
           this.fields.push(temp);
         }
@@ -5544,7 +5552,7 @@ export default {
           var temp = {
             key: "user.name",
             label: "Created By",
-            sortable: true,
+            sortable: true
           };
           this.fields.push(temp);
         }
@@ -5557,7 +5565,7 @@ export default {
           var temp = {
             key: "created_at",
             label: "Created At",
-            sortable: true,
+            sortable: true
           };
           this.fields.push(temp);
         }
@@ -5569,7 +5577,7 @@ export default {
           var temp = {
             key: "updated_at",
             label: "Updated At",
-            sortable: true,
+            sortable: true
           };
           this.fields.push(temp);
         }
@@ -5579,7 +5587,7 @@ export default {
         var temp = {
           key: "id",
           label: "ID",
-          sortable: true,
+          sortable: true
         };
         this.fields.push(temp);
       }
@@ -5588,7 +5596,7 @@ export default {
       if (this.clientSelected.id != null) {
         this.$http
           .get("api/checkTicket/" + this.clientSelected.id)
-          .then((response) => {
+          .then(response => {
             console.log(response.body);
             var except = [108, 11767, 11765, 57, 11766, 11769, 1136, 11768];
             if (response.body.ticket == null) {
@@ -5619,10 +5627,11 @@ export default {
       if (this.clientSelected.package_type_name == null) {
         swal({
           title: "Warning",
-          text: "This account has no package type, Do you want to add package type to this account?",
+          text:
+            "This account has no package type, Do you want to add package type to this account?",
           icon: "warning",
-          buttons: ["No", "Yes"],
-        }).then((value) => {
+          buttons: ["No", "Yes"]
+        }).then(value => {
           if (value) {
             this.editClient.id = this.clientSelected.id;
             this.$bvModal.show("modalUpdatePackage");
@@ -5630,16 +5639,16 @@ export default {
               id: "",
               region_id: "",
               package_type: {
-                name: "",
-              },
+                name: ""
+              }
             };
           } else {
             this.clientSelected = {
               id: "",
               region_id: "",
               package_type: {
-                name: "",
-              },
+                name: ""
+              }
             };
           }
         });
@@ -5659,7 +5668,7 @@ export default {
       if (this.clientSelected.id != null) {
         this.$http
           .get("api/checkTicket/" + this.clientSelected.id)
-          .then((response) => {
+          .then(response => {
             console.log(response.body);
 
             var except = [108, 11767, 11765, 57, 11766, 11769, 1136, 11768];
@@ -5691,10 +5700,11 @@ export default {
       if (this.clientSelected.package_type_name == null) {
         swal({
           title: "Warning",
-          text: "This account has no package type, Do you want to add package type to this account?",
+          text:
+            "This account has no package type, Do you want to add package type to this account?",
           icon: "warning",
-          buttons: ["No", "Yes"],
-        }).then((value) => {
+          buttons: ["No", "Yes"]
+        }).then(value => {
           if (value) {
             this.editClient.id = this.clientSelected.id;
             this.$bvModal.show("modalUpdatePackage");
@@ -5702,16 +5712,16 @@ export default {
               id: "",
               region_id: "",
               package_type: {
-                name: "",
-              },
+                name: ""
+              }
             };
           } else {
             this.clientSelected = {
               id: "",
               region_id: "",
               package_type: {
-                name: "",
-              },
+                name: ""
+              }
             };
           }
         });
@@ -5732,7 +5742,7 @@ export default {
       this.$root.$emit("pageLoading");
       daterange.region_id = this.user.region_id;
       // this.tblisBusy = true;
-      this.$http.post("api/Ticket/filterByDate", daterange).then((response) => {
+      this.$http.post("api/Ticket/filterByDate", daterange).then(response => {
         this.filterIn = "date";
 
         this.items = response.body.items;
@@ -5768,7 +5778,7 @@ export default {
       this.$root.$emit("pageLoading");
       this.$http
         .get("api/Ticket/search_data/Status_Ticket_id/" + txt)
-        .then((response) => {
+        .then(response => {
           this.filterIn = "badge";
           this.tblFilter_copy = txt;
           this.items = response.body.items;
@@ -5795,9 +5805,9 @@ export default {
       this.changeColDisplay("forExport");
       this.currentPage = 1;
       this.perPage = this.totalRows;
-      this.$nextTick(function () {
+      this.$nextTick(function() {
         setTimeout(
-          function () {
+          function() {
             var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
             var textRange;
             var j = 0;
@@ -5851,15 +5861,13 @@ export default {
     btnUpdatePackage(element) {
       if (this.editClient.package_type_id != "") {
         element.target.disabled = true;
-        this.$http
-          .post("api/updatePackage", this.editClient)
-          .then((response) => {
-            swal("Updated!", "Please re select account", "success");
-            element.target.disabled = false;
-            this.clients = response.body;
+        this.$http.post("api/updatePackage", this.editClient).then(response => {
+          swal("Updated!", "Please re select account", "success");
+          element.target.disabled = false;
+          this.clients = response.body;
 
-            this.$bvModal.hide("modalUpdatePackage");
-          });
+          this.$bvModal.hide("modalUpdatePackage");
+        });
       } else {
         swal("", "Please select a package first", "info");
       }
@@ -5868,7 +5876,7 @@ export default {
       var currentFocus;
       /*execute a function when someone writes in the text field:*/
       var thisisthis = this;
-      inp.addEventListener("input", function (e) {
+      inp.addEventListener("input", function(e) {
         var a,
           b,
           i,
@@ -5897,15 +5905,17 @@ export default {
             b.innerHTML += arr[i].substr(val.length);
             /*insert a input field that will hold the current array item's value:*/
             b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-            b.addEventListener("click", function (e) {
+            b.addEventListener("click", function(e) {
               /*insert the value for the autocomplete text field:*/
               inp.value = this.getElementsByTagName("input")[0].value;
               if (dat == "createticket")
-                thisisthis.ticket.complain =
-                  this.getElementsByTagName("input")[0].value;
+                thisisthis.ticket.complain = this.getElementsByTagName(
+                  "input"
+                )[0].value;
               if (dat == "editticket")
-                thisisthis.editTicket.complain =
-                  this.getElementsByTagName("input")[0].value;
+                thisisthis.editTicket.complain = this.getElementsByTagName(
+                  "input"
+                )[0].value;
               closeAllLists();
             });
             a.appendChild(b);
@@ -5913,7 +5923,7 @@ export default {
         }
       });
 
-      inp.addEventListener("keydown", function (e) {
+      inp.addEventListener("keydown", function(e) {
         var x = document.getElementById(this.id + "autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
         if (e.keyCode == 40) {
@@ -5958,7 +5968,7 @@ export default {
         }
       }
 
-      document.addEventListener("click", function (e) {
+      document.addEventListener("click", function(e) {
         closeAllLists(e.target);
       });
     },
@@ -6039,7 +6049,7 @@ export default {
     AddRebates_ok() {
       this.tblisBusy = true;
       this.Addrebate.region_id = this.user.region_id;
-      this.$http.post("api/updateRebates", this.Addrebate).then((response) => {
+      this.$http.post("api/updateRebates", this.Addrebate).then(response => {
         this.items = response.body.items;
         this.items_copy = response.body.items;
         this.totalPendings = response.body.pendingCount;
@@ -6074,11 +6084,12 @@ export default {
         .get(
           "api/Ticket/search_data/" + this.searchby + "/" + this.tblFilter_copy
         )
-        .then((response) => {
+        .then(response => {
+          console.log(response.body);
           this.filterIn = "search";
           this.items = response.body.items;
           this.totalRows = this.items.length;
-          // this.tblisBusy = false;
+          this.tblisBusy = false;
         });
     },
     addRemarks_clicked() {
@@ -6087,10 +6098,10 @@ export default {
           ticket_id: this.editTicket.id,
           user_id: this.user.id,
           remarks: this.remarksText,
-          form_type: "ticket",
+          form_type: "ticket"
         };
 
-        this.$http.post("api/TicketRemarksLog", data).then((response) => {
+        this.$http.post("api/TicketRemarksLog", data).then(response => {
           this.remarksText = "";
           this.editTicket.remarks_log = response.body;
           console.log(response.body);
@@ -6106,11 +6117,11 @@ export default {
           remarks_id: id,
           user_id: this.user.id,
           user: this.user,
-          comments: this.commentsText[i],
+          comments: this.commentsText[i]
         };
         stor.push(data);
         // console.log(data);
-        this.$http.post("api/TicketCommentsLog", data).then((response) => {
+        this.$http.post("api/TicketCommentsLog", data).then(response => {
           this.commentsText[i] = "";
           console.log(response.body);
         });
@@ -6122,7 +6133,7 @@ export default {
       this.$root.$emit("pageLoading");
       this.$http
         .post("api/TicketRemarksLog/moveTicketRemarks")
-        .then((response) => {
+        .then(response => {
           console.log(response.body);
           this.$root.$emit("pageLoaded");
         });
@@ -6141,8 +6152,8 @@ export default {
         text: "Do you want to Add rebated to SOA?",
         icon: "warning",
         buttons: ["No", "Yes"],
-        dangerMode: true,
-      }).then((update) => {
+        dangerMode: true
+      }).then(update => {
         if (update) {
           this.$root.$emit("pageLoading");
           this.editTicket.region_id = this.user.region_id;
@@ -6150,19 +6161,19 @@ export default {
           this.editTicket.to_soa = 1;
           this.$http
             .put("api/Ticket/" + this.editTicket.id, this.editTicket)
-            .then((response) => {
+            .then(response => {
               this.items = response.body.items;
               this.items_copy = response.body.items;
               swal("Update!", "", "success");
               this.$bvModal.hide("modalEditTicket");
               this.$root.$emit("pageLoaded");
             })
-            .catch((response) => {
+            .catch(response => {
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true,
+                dangerMode: true
               });
               this.$root.$emit("pageLoaded");
             });
@@ -6178,8 +6189,8 @@ export default {
         title: "Enter passcode to send",
         input: "password",
         showCancelButton: true,
-        confirmButtonText: "Ok",
-      }).then((value) => {
+        confirmButtonText: "Ok"
+      }).then(value => {
         console.log(value);
         if (value.value == "send") {
           var data = {
@@ -6190,37 +6201,37 @@ export default {
             sendTo: [
               {
                 email: "gquisido@dctechmicro.com",
-                name: "Glenn T. Quisido",
-              },
+                name: "Glenn T. Quisido"
+              }
             ],
             CCTO: [
               {
                 email: this.user.email,
-                name: this.user.name,
+                name: this.user.name
               },
               {
                 email: "egdoromal@dctechmicro.com",
-                name: "Elric Guy Doromal",
+                name: "Elric Guy Doromal"
               },
               {
                 email: "earawiran@dctechmicro.com",
-                name: "Edward Ellie V. Arawiran",
-              },
-            ],
+                name: "Edward Ellie V. Arawiran"
+              }
+            ]
           };
           console.log(data);
           this.$http
             .post("api/Billing/emailSOA", data)
-            .then((response) => {
+            .then(response => {
               if (response.body == "ok") swal("Email Sent!");
               else swal("Send Failed");
             })
-            .catch((response) => {
+            .catch(response => {
               swal({
                 title: "Error",
                 text: response.body.error + " " + response.body.message,
                 icon: "error",
-                dangerMode: true,
+                dangerMode: true
               });
               this.tblisBusy = false;
             });
@@ -6235,11 +6246,11 @@ export default {
       this.$bvModal.hide("modalSendText");
       var data = {
         number: this.selectedContacts,
-        msg: this.msg,
+        msg: this.msg
       };
       this.$http
         .post("api/Ticket/sendText", data)
-        .then((response) => {
+        .then(response => {
           console.log(response.body);
           if (response.body.message == "sent successfully") {
             swal("Message Sent Successfully!");
@@ -6250,12 +6261,12 @@ export default {
             swal("Sending Failed!");
           }
         })
-        .catch((response) => {
+        .catch(response => {
           swal({
             title: "Error",
             text: response.body.error,
             icon: "error",
-            dangerMode: true,
+            dangerMode: true
           });
           this.showFailed = true;
         });
@@ -6263,18 +6274,18 @@ export default {
     addTag(newTag) {
       const tag = {
         name: newTag,
-        contact: newTag,
+        contact: newTag
       };
       this.contacts.push(tag);
       this.selectedContacts.push(tag);
     },
     handleImages(e) {
       this.ticket.attachments = [];
-      e.forEach((item) => {
+      e.forEach(item => {
         var fileReader = new FileReader();
         fileReader.readAsDataURL(item);
 
-        fileReader.onload = (item) => {
+        fileReader.onload = item => {
           this.ticket.attachments.push(item.target.result);
           console.log(this.ticket.attachments);
         };
@@ -6284,9 +6295,9 @@ export default {
       console.log(this.trendTime);
       var trend = {
         trendTime: this.trendTime,
-        trendregion: this.trendregion,
+        trendregion: this.trendregion
       };
-      this.$http.post("api/getTrend", trend).then((response) => {
+      this.$http.post("api/getTrend", trend).then(response => {
         console.log(response.body);
         this.data = response.body.data;
       });
@@ -6297,19 +6308,19 @@ export default {
 
       this.$http
         .get("api/Ticket/subIndex/" + this.user.region_id)
-        .then(function (response) {
+        .then(function(response) {
           console.log(response.body.data);
           this.data = response.body.data;
         });
     },
     btnAddComp() {
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then(result => {
         if (result) {
           this.ticketComp.user_id = this.user.id;
           this.ticketComp.user_name = this.user.name;
           this.$http
             .post("api/ComplaintList", this.ticketComp)
-            .then((response) => {
+            .then(response => {
               this.complaints_new = response.body;
               swal("Complaint", "Added successfully", "success");
               this.ticketComp.name = "";
@@ -6318,27 +6329,27 @@ export default {
 
               this.$bvModal.hide("modalAddComp");
             })
-            .catch((response) => {
+            .catch(response => {
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true,
+                dangerMode: true
               });
             });
         }
       });
     },
     CompbtnUpdate() {
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then(result => {
         if (result) {
           swal({
             title: "Are you sure?",
             text: "Do you want to Update this complaint?",
             icon: "warning",
             buttons: ["No", "Yes"],
-            dangerMode: true,
-          }).then((update) => {
+            dangerMode: true
+          }).then(update => {
             if (update) {
               this.tblisBusy = true;
               this.ticketComp.user_id = this.user.id;
@@ -6348,20 +6359,20 @@ export default {
                   "api/ComplaintList/" + this.comp_id_update,
                   this.ticketComp
                 )
-                .then((response) => {
+                .then(response => {
                   this.complaints_new = response.body;
 
                   swal("Update!", "", "success");
                   this.$bvModal.hide("editCompmodal");
                   this.tblisBusy = false;
                 })
-                .catch((response) => {
+                .catch(response => {
                   swal({
                     title: "Error",
                     text: response.body.error,
                     icon: "error",
-                    dangerMode: true,
-                  }).then((value) => {
+                    dangerMode: true
+                  }).then(value => {
                     if (value) {
                     }
                   });
@@ -6377,27 +6388,27 @@ export default {
         text: "Do you really want to delete this complaint",
         icon: "warning",
         buttons: ["No", "Yes"],
-        dangerMode: true,
-      }).then((willDelete) => {
+        dangerMode: true
+      }).then(willDelete => {
         if (willDelete) {
           this.tblisBusy = true;
           this.$http
             .delete("api/ComplaintList/" + item.id)
-            .then((response) => {
+            .then(response => {
               this.complaints_new = response.body;
-              swal("Deleted!", "", "success").then((value) => {
+              swal("Deleted!", "", "success").then(value => {
                 this.complaints_new = response.body;
                 this.ComptotalRows = this.complaints_new.length;
                 this.tblisBusy = false;
               });
             })
-            .catch((response) => {
+            .catch(response => {
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true,
-              }).then((value) => {
+                dangerMode: true
+              }).then(value => {
                 if (value) {
                   this.tblisBusy = false;
                 }
@@ -6407,25 +6418,25 @@ export default {
       });
     },
     btnAddAdv() {
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then(result => {
         if (result) {
           this.manageAdv.user_id = this.user.id;
           this.manageAdv.user_name = this.user.name;
           this.$http
             .post("api/Advisory", this.manageAdv)
-            .then((response) => {
+            .then(response => {
               this.templates = response.body;
 
               swal("Template", "Added successfully", "success");
 
               this.AdvtotalRows = this.templates.length;
             })
-            .catch((response) => {
+            .catch(response => {
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true,
+                dangerMode: true
               });
             });
         }
@@ -6434,22 +6445,22 @@ export default {
       });
     },
     AdvbtnUpdate() {
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then(result => {
         if (result) {
           swal({
             title: "Are you sure?",
             text: "Do you want to Update this template?",
             icon: "warning",
             buttons: ["No", "Yes"],
-            dangerMode: true,
-          }).then((update) => {
+            dangerMode: true
+          }).then(update => {
             if (update) {
               this.tblisBusy = true;
               this.manageAdv.user_id = this.user.id;
               this.manageAdv.user_name = this.user.name;
               this.$http
                 .put("api/Advisory/" + this.adv_id_update, this.manageAdv)
-                .then((response) => {
+                .then(response => {
                   this.templates = response.body;
                   this.manageAdv.name = "";
                   this.manageAdv.content = "";
@@ -6459,13 +6470,13 @@ export default {
 
                   this.tblisBusy = false;
                 })
-                .catch((response) => {
+                .catch(response => {
                   swal({
                     title: "Error",
                     text: response.body.error,
                     icon: "error",
-                    dangerMode: true,
-                  }).then((value) => {
+                    dangerMode: true
+                  }).then(value => {
                     if (value) {
                     }
                   });
@@ -6481,27 +6492,27 @@ export default {
         text: "Do you really want to delete this template",
         icon: "warning",
         buttons: ["No", "Yes"],
-        dangerMode: true,
-      }).then((willDelete) => {
+        dangerMode: true
+      }).then(willDelete => {
         if (willDelete) {
           this.tblisBusy = true;
           this.$http
             .delete("api/Advisory/" + item.id)
-            .then((response) => {
+            .then(response => {
               this.templates = response.body;
-              swal("Deleted!", "", "success").then((value) => {
+              swal("Deleted!", "", "success").then(value => {
                 this.templates = response.body;
                 this.AdvtotalRows = this.templates.length;
                 this.tblisBusy = false;
               });
             })
-            .catch((response) => {
+            .catch(response => {
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true,
-              }).then((value) => {
+                dangerMode: true
+              }).then(value => {
                 if (value) {
                   this.tblisBusy = false;
                 }
@@ -6513,11 +6524,11 @@ export default {
     selectTemp() {
       if (this.selectedTemp != null) {
         var temp = {
-          template: this.selectedTemp,
+          template: this.selectedTemp
         };
 
         console.log(temp);
-        this.$http.post("api/getTemplate", temp).then((response) => {
+        this.$http.post("api/getTemplate", temp).then(response => {
           console.log(response.body);
           if (response.body.length > 1) {
             this.msg = response.body;
@@ -6558,9 +6569,9 @@ export default {
           "\n" +
           "DATE FIXED:" +
           this.editTicket.date_time_fixed +
-          "\n",
+          "\n"
       };
-      this.$http.post("api/TicketRemarksLog", data).then((response) => {
+      this.$http.post("api/TicketRemarksLog", data).then(response => {
         this.remarksText = "";
         this.editTicket.rep_findings = " ";
         this.editTicket.rep_action = " ";
@@ -6574,8 +6585,8 @@ export default {
     },
     checkClients() {
       console.log(this.ticket.multipleClients);
-      this.ticket.multipleClients.forEach((item) => {
-        this.$http.get("api/checkTicket/" + item.id).then((response) => {
+      this.ticket.multipleClients.forEach(item => {
+        this.$http.get("api/checkTicket/" + item.id).then(response => {
           console.log(response.body);
 
           var except = [108, 11767, 11765, 57, 11766, 11769, 1136, 11768];
@@ -6611,7 +6622,7 @@ export default {
       const tag = {
         name: newTag,
         id: this.ticket.clientRegion,
-        package_type_name: "RES",
+        package_type_name: "RES"
       };
       this.clients.push(tag);
       this.ticket.multipleClients.push(tag);
@@ -6636,7 +6647,7 @@ export default {
       this.selected = [];
     },
     saveRebates() {
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then(result => {
         if (result) {
           var data = {
             user_id: this.user.id,
@@ -6644,23 +6655,23 @@ export default {
             ticket_no: this.editTicket.id,
             clients: this.selectedClientRebates,
             downtime: this.editTicket.downtime_hours,
-            date_effective: this.date_effective,
+            date_effective: this.date_effective
           };
           this.$http
             .post("api/Rebates", data)
-            .then((response) => {
+            .then(response => {
               console.log(response.body);
               swal("Rebates", "Added successfully", "success");
               this.$bvModal.hide("modalRebates");
               this.date_effective = "";
             })
 
-            .catch((response) => {
+            .catch(response => {
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true,
+                dangerMode: true
               });
             });
         }
@@ -6673,11 +6684,12 @@ export default {
         contact_person: this.editTicket.client.contact_person,
         location: this.editTicket.client.location,
         contact: this.editTicket.client.contact,
-        complaint: this.editTicket.compname,
+        complaint: this.editTicket.compname
       };
       this.$bvModal.show("modalFSRPrintPreview");
     },
-  },
+
+  }
 };
 </script>
 <style scoped>
