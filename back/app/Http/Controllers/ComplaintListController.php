@@ -34,7 +34,8 @@ class ComplaintListController extends Controller
             );
             return $this->index();
         } catch (\Exception $ex) {
-            //    \Logger::instance()->log(
+            // $this
+            //     ->log(
             //         Carbon::now(),
             //         $request->user_id,
             //         $request->user_name,

@@ -229,14 +229,14 @@ class JobOrderController extends Controller
                     'location' => $request->location,
                     'cable_category' => $request->cable_category,
                     'foc_length' => $request->foc_length,
-                    //'region_id' => $request->region_id,  TEMP COMMENT KUNG E UPDATE NIMO NI MALAHI ANG JO_NUM sa pag GET
+                    'region_id' => $request->region_id,
                     'project_description' => $request->project_description,
                     'started' => $request->started,
                     'finished' => $request->finished,
-                    'engineer_in_charge' => $request->engineer_in_charge,
-                    'prepare' => $request->prepare,
-                    'approve' => $request->approve,
-                    'note' => $request->note
+                    'engineer_in_charge' => $engineer->id,
+                    'prepare' => $prepare->id,
+                    'approve' => $approve->id,
+                    'note' => $note->id
                 ]);
             $logTo  = Job_order::findOrFail($id);
 
@@ -247,7 +247,7 @@ class JobOrderController extends Controller
                 $this->cname,
                 "update",
                 "message",
-                "update Job_order id " . $id . "\nFrom: " . $logFrom . "\nTo: " . $logTo
+                "update region id " . $id . "\nFrom: " . $logFrom . "\nTo: " . $logTo
             );
 
             if ($request->update_in == "schedule")

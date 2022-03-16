@@ -18,16 +18,20 @@ class BankingPaymentCodeController extends Controller
 
         return response()->json($tbl);
     }
+
     public function getall()
     {
         $tbl = banking_payment_code::all();
 
         return response()->json($tbl);
     }
+
+
     public function create()
     {
         //
     }
+
     public function store(Request $request)
     {
         try {
@@ -102,13 +106,18 @@ class BankingPaymentCodeController extends Controller
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }
+
     public function show($id)
     {
     }
+
+
     public function edit(banking_payment_code $banking_payment_code)
     {
         //
     }
+
+
     public function update(Request $request, $id)
     {
         try {
@@ -142,6 +151,7 @@ class BankingPaymentCodeController extends Controller
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }
+
     public function destroy($id)
     {
         try {
@@ -152,6 +162,7 @@ class BankingPaymentCodeController extends Controller
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }
+
     public function destroy1($id, $olt_id)
     {
         try {

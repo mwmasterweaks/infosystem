@@ -519,16 +519,17 @@ class BillingController extends Controller
                     rebate::destroy($id);
                 }
 
-                \Logger::instance()->log(
-                    Carbon::now(),
-                    $request->user_id,
-                    $request->user_name,
-                    $this->cname,
-                    "deleteMultiSOA",
-                    "message",
-                    "delete deleteSOA id " . $id .
-                        "\nOld deleteSOA: " . $tbl1
-                );
+                $this
+                    ->log(
+                        Carbon::now(),
+                        $request->user_id,
+                        $request->user_name,
+                        $this->cname,
+                        "deleteMultiSOA",
+                        "message",
+                        "delete deleteSOA id " . $id .
+                            "\nOld deleteSOA: " . $tbl1
+                    );
             }
 
 
@@ -566,16 +567,17 @@ class BillingController extends Controller
                 $tbl1 = bill_statement::findOrFail($request->id);
                 bill_statement::destroy($request->id);
 
-                \Logger::instance()->log(
-                    Carbon::now(),
-                    $request->user_id,
-                    $request->user_name,
-                    $this->cname,
-                    "deleteBillState",
-                    "message",
-                    "delete deleteSOA id " . $request->id .
-                        "\nOld deleteSOA: " . $tbl1
-                );
+                $this
+                    ->log(
+                        Carbon::now(),
+                        $request->user_id,
+                        $request->user_name,
+                        $this->cname,
+                        "deleteBillState",
+                        "message",
+                        "delete deleteSOA id " . $request->id .
+                            "\nOld deleteSOA: " . $tbl1
+                    );
             }
 
             return "ok";
@@ -653,7 +655,7 @@ class BillingController extends Controller
             ";
 
             if ($request->emailSender == "default") {
-                return \Logger::instance()->mailer(
+                \Logger::instance()->mailer(
                     $request->subject,
                     $msg,
                     $request->user_email,
@@ -662,7 +664,7 @@ class BillingController extends Controller
                     $request->CCTO
                 );
             } else {
-                return \Logger::instance()->mailerUser(
+                \Logger::instance()->mailerUser(
                     $request->subject,
                     $msg,
                     $request->emailSenderDataE,
@@ -690,6 +692,7 @@ class BillingController extends Controller
     public function storeBillStatement(Request $request)
     {
         try {
+            // return $request;
             DB::beginTransaction();
             $client = (object) $request->client;
 

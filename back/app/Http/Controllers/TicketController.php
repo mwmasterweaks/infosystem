@@ -71,6 +71,7 @@ class TicketController extends Controller
                 "ticket_groups.Status_Ticket_id as current_status",
                 "complaint_lists.name as compname",
                 "ticket_groups.complaint_new as current_complaint",
+                "ticket_groups.downtime as group_name",
                 "complaint_lists.*",
                 "ticket_statuses.*",
                 "ticket_groups.*"
@@ -113,42 +114,60 @@ class TicketController extends Controller
     }
     public function search_data($by, $search)
     {
+        // this is for the meantime need to asap billing hehe
         try {
-            $tbl = Ticket::with(['remarks_log.user', 'remarks_log.replies.user', 'trouble_type.type', 'ticket_attachment'])
-                ->join("clients", "tickets.client_id", "clients.id")
-                ->join("ticket_statuses", "tickets.Status_Ticket_id", "ticket_statuses.id")
-                ->join("users", "tickets.user_id", "users.id")
-                ->leftJoin("complaint_lists", "tickets.complaint_new", "complaint_lists.id")
-                ->leftJoin("areas", "tickets.area_id", "areas.id")
-                ->leftJoin("pons", "clients.pon_id", "pons.id")
-                ->leftJoin("olts", "pons.olt_id", "olts.id")
-                ->select(
-                    "pons.*",
-                    "olts.*",
-                    "areas.id as area_id",
-                    "areas.name as area_name",
-                    "clients.name as cname",
-                    "clients.location as location",
-                    "clients.contact as contact",
-                    "clients.ip_assigned as ip_assigned",
-                    "clients.vlan as vlan",
-                    "clients.onu as onu",
-                    "ticket_statuses.name as statname",
-                    "tickets.Status_Ticket_id as current_status",
-                    "complaint_lists.name as compname",
-                    "tickets.complain as oldcomp",
-                    "tickets.complaint_new as current_complaint",
-                    "users.name as uname",
-                    "complaint_lists.*",
-                    "users.*",
-                    "ticket_statuses.*",
-                    "tickets.*"
-                )
-                ->where($by, 'like', '%' . $search . '%')
-                ->orderBy('tickets.updated_at', 'desc')
-                ->get();
+            if ($by == 'ticket_groups.downtime') {
+                $tbl2 = ticket_group::with(['ticket_group_client.client', 'remarks_log.user', 'remarks_log.replies.user', 'trouble_type.type', 'ticket_attachment'])
+                    ->leftJoin("complaint_lists", "ticket_groups.complaint_new", "complaint_lists.id")
+                    ->join("ticket_statuses", "ticket_groups.Status_Ticket_id", "ticket_statuses.id")
+                    ->select(
+                        "ticket_statuses.name as statname",
+                        "ticket_groups.Status_Ticket_id as current_status",
+                        "complaint_lists.name as compname",
+                        "ticket_groups.complaint_new as current_complaint",
+                        "ticket_groups.downtime as group_name",
+                        "complaint_lists.*",
+                        "ticket_statuses.*",
+                        "ticket_groups.*"
+                    )
+                    ->where($by, 'like', '%' . $search . '%')
+                    ->orderBy('ticket_groups.updated_at', 'desc')
+                    ->get();
 
-            return $this->ForQuery($tbl);
+                return $this->ForQuery($tbl2);
+            } else {
+                $tbl1 = Ticket::with(['remarks_log.user', 'remarks_log.replies.user', 'trouble_type.type', 'ticket_attachment'])
+                    ->join("clients", "tickets.client_id", "clients.id")
+                    ->join("ticket_statuses", "tickets.Status_Ticket_id", "ticket_statuses.id")
+                    ->join("users", "tickets.user_id", "users.id")
+                    ->leftJoin("complaint_lists", "tickets.complaint_new", "complaint_lists.id")
+                    ->leftJoin("areas", "tickets.area_id", "areas.id")
+                    ->select(
+                        "areas.id as area_id",
+                        "areas.name as area_name",
+                        "clients.name as cname",
+                        "clients.location as location",
+                        "clients.contact as contact",
+                        "clients.ip_assigned as ip_assigned",
+                        "ticket_statuses.name as statname",
+                        "tickets.Status_Ticket_id as current_status",
+                        "complaint_lists.name as compname",
+                        "tickets.complain as oldcomp",
+                        "tickets.complaint_new as current_complaint",
+                        "users.name as uname",
+                        "complaint_lists.*",
+                        "users.*",
+                        "ticket_statuses.*",
+                        "tickets.*"
+                    )
+                    ->where($by, 'like', '%' . $search . '%')
+                    ->orderBy('tickets.updated_at', 'desc')
+                    ->get();
+
+
+
+                return $this->ForQuery($tbl1);
+            }
         } catch (\Exception $ex) {
             return response()->json(['error' => $ex->getMessage()], 500);
         }
@@ -650,8 +669,42 @@ class TicketController extends Controller
                 if ($request->Status_Ticket_id == 2)
                     $tdate = null;
 
+            if ($request->ticketType == 1) {
+                $logFrom = Ticket::findOrFail($id);
 
-            if ($request->ticketType == 3) {
+                $data = Ticket::where('id', $id)
+                    ->update([
+                        'ticket_id' => $request->ticket_id,
+                        'client_id' => $request->client_id,
+                        'complaint_new' => $request->complaint_new,
+                        'bwmon' => $request->bwmon,
+                        'cacti' => $request->cacti,
+                        'device' => $request->device,
+                        'loss' => $request->loss,
+                        'downtime' => $request->downtime,
+                        'rep_findings' => $request->rep_findings,
+                        'rep_action' => $request->rep_action,
+                        'rebatable' => $request->rebatable,
+                        'complain' => $request->complain,
+                        'findings' => $request->findings,
+                        'action' => $request->action,
+                        'remarks' => $request->remarks,
+                        'report' => $request->report,
+                        'connection_status' => $request->connection_status,
+                        'prev_status' => $prev_status,
+                        'Status_Ticket_id' => $request->Status_Ticket_id,
+                        'area_id' => $request->area_id,
+                        'technical_assigned' => $request->technical_assigned,
+                        'downtime_hours' => $request->downtime_hours,
+                        'to_soa' => $request->to_soa,
+                        'date_time_fixed' => $request->date_time_fixed,
+                        'target_date' => $tdate,
+                        'team_assigned' => $request->team_assigned,
+                        'updated_by' => $request->updated_by,
+                        'updated_at' => Carbon::now()
+
+                    ]);
+            } elseif ($request->ticketType == 3) {
                 // return $request;
 
                 $logFrom = ticket_group::findOrFail($id);
@@ -702,41 +755,6 @@ class TicketController extends Controller
                         ]
                     );
                 }
-            } else {
-                $logFrom = Ticket::findOrFail($id);
-
-                $data = Ticket::where('id', $id)
-                    ->update([
-                        'ticket_id' => $request->ticket_id,
-                        'client_id' => $request->client_id,
-                        'complaint_new' => $request->complaint_new,
-                        'bwmon' => $request->bwmon,
-                        'cacti' => $request->cacti,
-                        'device' => $request->device,
-                        'loss' => $request->loss,
-                        'downtime' => $request->downtime,
-                        'rep_findings' => $request->rep_findings,
-                        'rep_action' => $request->rep_action,
-                        'rebatable' => $request->rebatable,
-                        'complain' => $request->complain,
-                        'findings' => $request->findings,
-                        'action' => $request->action,
-                        'remarks' => $request->remarks,
-                        'report' => $request->report,
-                        'connection_status' => $request->connection_status,
-                        'prev_status' => $prev_status,
-                        'Status_Ticket_id' => $request->Status_Ticket_id,
-                        'area_id' => $request->area_id,
-                        'technical_assigned' => $request->technical_assigned,
-                        'downtime_hours' => $request->downtime_hours,
-                        'to_soa' => $request->to_soa,
-                        'date_time_fixed' => $request->date_time_fixed,
-                        'target_date' => $tdate,
-                        'team_assigned' => $request->team_assigned,
-                        'updated_by' => $request->updated_by,
-                        'updated_at' => Carbon::now()
-
-                    ]);
             }
 
             if ($request->selected_trouble != "") {
@@ -1977,12 +1995,15 @@ class TicketController extends Controller
 
     public function sendText(Request $request)
     {
+
         try {
             $numArray = $request->number;
             $string = $request->msg;
             $msg = str_replace("\n", "%0a", $string);
             $number = implode(', ', array_column($numArray, 'contact'));
+
             $ret =  \Logger::instance()->send_text($number, $msg);
+
             $sendTo = [];
             $temp = new stdClass;
             // $temp->email = "pbismonte@dctechmicro.com";
@@ -1990,12 +2011,14 @@ class TicketController extends Controller
             $temp->email = "mdmorta@dctechmicro.com";
             $temp->name = "Mice Gwapa";
             array_push($sendTo, $temp);
+
             $CCTO = [];
             $temp1 = new stdClass;
             $temp1->email = "helpdesk@dctechmicro.com";
             $temp1->name = "Helpdesk";
             array_push($CCTO, $temp1);
-            \Logger::instance()->mailer(
+
+            \Logger::instance()->mailerZimbra(
                 "Auto Text Logger",
                 $ret,
                 "",
@@ -2003,6 +2026,7 @@ class TicketController extends Controller
                 $sendTo,
                 $CCTO
             );
+
 
             \Logger::instance()->logText(
                 Carbon::now(),

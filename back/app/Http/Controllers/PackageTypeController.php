@@ -102,16 +102,17 @@ class PackageTypeController extends Controller
             if (empty($tbl)) {
                 $tbl1 = Package_type::findOrFail($id);
                 Package_type::destroy($id);
-                \Logger::instance()->log(
-                    Carbon::now(),
-                    "",
-                    "",
-                    $this->cname,
-                    "destroy",
-                    "message",
-                    "delete Package_type id " . $id .
-                        "\nOld Package_type: " . $tbl1
-                );
+                $this
+                    ->log(
+                        Carbon::now(),
+                        "",
+                        "",
+                        $this->cname,
+                        "destroy",
+                        "message",
+                        "delete Package_type id " . $id .
+                            "\nOld Package_type: " . $tbl1
+                    );
 
                 return $this->index();
             } else {

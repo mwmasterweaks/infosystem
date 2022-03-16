@@ -1,0 +1,50 @@
+automate email
+        //get the 5day before bills condition kung naka check ang client na autobill and naa siya billing
+        //create bill_statement
+        //create bill_state_list
+        //create html SOA here in php
+        //$email = "<div></div>";
+        //e sent ang soa - loop
+        //mag email sa user kung kinsa ang mga na emailan na client - jezah ug ako
+        //naay status kung walay email si client.
+
+          foreach ($clientsToEmail as $client) {
+            $bills = billing::where('client_id', $client->id)->where('date', $date5daysBefore->toDateString())->first();
+            // $date = Carbon::parse($bills->date)->format('M. d Y');
+            // $priceFormatted = number_format($bills->price, 2);
+            // $balanceFormatted = number_format($bills->balance, 2);
+
+            // store bill statement
+            // $statement_id = DB::table('bill_statements')->insertGetId([
+            //     'client_id' => $client->id,
+            //     'date' => date("Y-m-d"),
+            //     'due_date' => $date,
+            //     'amount_due' => $balanceFormatted
+            // ]);
+            $billState = [];
+            $temp = [
+                'client_id' => $client->id,
+                'date' => date("Y-m-d"),
+                // 'due_date' => $date,
+                // 'amount_due' => $balanceFormatted
+            ];
+
+            // store bill state list
+            // $billList = [];
+
+            // $temp = [
+            //     "bill_statement_id" => $statement_id,
+            //     'date' => $bills->date,
+            //     'description' => $bills->description,
+            //     'priceFormated' => $priceFormatted,
+            //     'balanceFormated' => $balanceFormatted
+            // ];
+
+            // array_push($billState, $temp);
+
+
+            // bill_state_list::insert($billList);
+
+
+            array_push($ret, $bills);
+        }

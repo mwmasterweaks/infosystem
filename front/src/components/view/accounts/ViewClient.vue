@@ -294,7 +294,19 @@
               </div>
               <template slot="table-caption"></template>
 
+              <span slot="olt" slot-scope="data" v-html="data.value"></span>
+              <span slot="pon" slot-scope="data" v-html="data.value"></span>
               <span slot="status" slot-scope="data" v-html="data.value"></span>
+
+              <template slot="olt" slot-scope="row">
+                <span>{{ row.item.olt.ip }}</span>
+              </template>
+
+              <template slot="pon" slot-scope="row">
+                <span v-if="row.item.pon1.pon != null"
+                  >PON:{{ row.item.pon1.pon }} - {{ row.item.onu }}</span
+                >
+              </template>
 
               <template v-slot:cell(status)="row">
                 <b-button
@@ -343,6 +355,20 @@
               <template v-slot:cell(action)="row">
                 <div class="action-col">
                   <b-button
+                    v-if="user.id == 1 && row.item.autoBill == 'No'"
+                    variant="info"
+                    size="sm"
+                    @click="autoBill(row.item.id)"
+                    >Automate Bill</b-button
+                  >
+                  <b-button
+                    v-if="user.id == 1 && row.item.autoBill == 'Yes'"
+                    variant="danger"
+                    size="sm"
+                    @click="stopAutoBill(row.item.id)"
+                    >Stop Auto-Bill</b-button
+                  >
+                  <b-button
                     v-if="user.id == 1"
                     variant="warning"
                     @click="verifiedClient(row.item)"
@@ -360,83 +386,83 @@
                     >CP</b-button
                   >
 
-                  <b-button
-                    v-if="
-                      (roles.accounting || roles.account_management) &&
-                      row.item.status != 'Temp Discon'
-                    "
-                    variant="warning"
-                    @click="RequestActivity(row.item, 'Temp Discon')"
-                    size="sm"
-                    >TD</b-button
-                  >
+                <b-button
+                  v-if="
+                    (roles.accounting || roles.account_management) &&
+                    row.item.status != 'Temp Discon'
+                  "
+                  variant="warning"
+                  @click="RequestActivity(row.item, 'Temp Discon')"
+                  size="sm"
+                  >Temp Discon</b-button
+                >
 
-                  <b-button
-                    v-if="
-                      (roles.accounting || roles.account_management) &&
-                      row.item.status != 'Active'
-                    "
-                    variant="info"
-                    @click="RequestActivity(row.item, 'Activate')"
-                    size="sm"
-                    >Re-Activate</b-button
-                  >
+                <b-button
+                  v-if="
+                    (roles.accounting || roles.account_management) &&
+                    row.item.status != 'Active'
+                  "
+                  variant="info"
+                  @click="RequestActivity(row.item, 'Activate')"
+                  size="sm"
+                  >Re-Activate</b-button
+                >
 
-                  <b-button
-                    v-if="
-                      (roles.accounting || roles.account_management) &&
-                      row.item.status != 'Disconnected'
-                    "
-                    variant="danger"
-                    @click="RequestActivity(row.item, 'Discon')"
-                    size="sm"
-                    >Discon</b-button
-                  >
+                <b-button
+                  v-if="
+                    (roles.accounting || roles.account_management) &&
+                    row.item.status != 'Disconnected'
+                  "
+                  variant="danger"
+                  @click="RequestActivity(row.item, 'Discon')"
+                  size="sm"
+                  >Discon</b-button
+                >
 
-                  <b-button
-                    v-if="
-                      row.item.aging == null &&
-                      roles.accounting &&
-                      row.item.client_detail != null
-                    "
-                    variant="success"
-                    @click="openModalDOP(row.item)"
-                    size="sm"
-                    >update DOP</b-button
-                  >
+                <b-button
+                  v-if="
+                    row.item.aging == null &&
+                    roles.accounting &&
+                    row.item.client_detail != null
+                  "
+                  variant="success"
+                  @click="openModalDOP(row.item)"
+                  size="sm"
+                  >update DOP</b-button
+                >
 
-                  <b-button
-                    v-if="
-                      (row.item.aging != null && roles.receive_payment) ||
-                      (roles.receive_payment && row.item.client_detail == null)
-                    "
-                    variant="success"
-                    @click="openModalReceivePayment(row.item)"
-                    size="sm"
-                    >RP</b-button
-                  >
+                <b-button
+                  v-if="
+                    (row.item.aging != null && roles.receive_payment) ||
+                    (roles.receive_payment && row.item.client_detail == null)
+                  "
+                  variant="success"
+                  @click="openModalReceivePayment(row.item)"
+                  size="sm"
+                  >RP</b-button
+                >
 
-                  <b-button
-                    v-if="
-                      (row.item.aging != null && roles.create_wht) ||
-                      (roles.receive_payment && row.item.client_detail == null)
-                    "
-                    variant="success"
-                    @click="openModalWHT(row.item)"
-                    size="sm"
-                    >WHT</b-button
-                  >
+                <b-button
+                  v-if="
+                    (row.item.aging != null && roles.create_wht) ||
+                    (roles.receive_payment && row.item.client_detail == null)
+                  "
+                  variant="success"
+                  @click="openModalWHT(row.item)"
+                  size="sm"
+                  >WHT</b-button
+                >
 
-                  <b-button
-                    v-if="
-                      row.item.contract_status == false &&
-                      roles.account_management
-                    "
-                    variant="success"
-                    @click="updateContract(row.item)"
-                    size="sm"
-                    >Contract</b-button
-                  >
+                <b-button
+                  v-if="
+                    row.item.contract_status == false &&
+                    roles.account_management
+                  "
+                  variant="success"
+                  @click="updateContract(row.item)"
+                  size="sm"
+                  >Contract</b-button
+                >
                 </div>
               </template>
             </b-table>
@@ -810,42 +836,8 @@
         :header-bg-variant="' modal-modi-bg'"
         :footer-bg-variant="' modal-modi-bg'"
         size="lg"
+        title="Manage Client"
       >
-        <div slot="modal-header" style="width: 100%">
-          <h5 style="float: left">Manage Client</h5>
-          <p style="float: right">
-            <i
-              class="fas fa-chevron-right"
-              style="font-size: 22px; color: silver"
-            ></i>
-          </p>
-          <!-- <div class="rowFields mx-auto row">
-            <div class="col-lg-6">
-              <h5>Manage Client</h5>
-            </div>
-            <div class="col-lg-2">
-              <p-radio
-                class="textLabel p-default p-curve"
-                v-model="client.isNew"
-                value="0"
-                name="isNew"
-                color="success-o"
-                >New</p-radio
-              >
-            </div>
-            <div class="col-lg-2">
-              <p-radio
-                class="textLabel p-default p-curve"
-                v-model="client.isNew"
-                value="1"
-                name="isNew"
-                color="success-o"
-                >Existing</p-radio
-              >
-            </div>
-          </div> -->
-        </div>
-
         <!-- <div class="rowFields mx-auto row" v-if="updateClientList.re_email">
           <div class="col-lg-3">
             <p class>Re-Email:</p>
@@ -938,7 +930,7 @@
             <input
               type="text"
               name="name"
-              class="form-control"
+              class="form-control text-upper"
               v-b-tooltip.hover
               title="Input the account name"
               placeholder="Account name"
@@ -971,7 +963,7 @@
             <input
               type="text"
               name="owner_name"
-              class="form-control"
+              class="form-control text-upper"
               v-b-tooltip.hover
               title="Input the owner's name"
               placeholder="Owner's name"
@@ -1101,7 +1093,7 @@
             <input
               type="text"
               name="location"
-              class="form-control"
+              class="form-control text-upper"
               v-b-tooltip.hover
               title="Input the address"
               placeholder="Address"
@@ -1320,6 +1312,38 @@
                 class="buttonEdit"
                 v-if="updateClientList.agent"
                 @click="editPerRow.agent = true"
+              >
+                <i class="fas fa-pen"></i> Edit
+              </span>
+            </span>
+          </div>
+        </div>
+        <!-- Referral -->
+       <div class="rowFields mx-auto row stripe-modi">
+          <div class="col-lg-3">
+            <label class>Referred By:</label>
+          </div>
+          <div class="col-lg-9">
+            <input
+              type="text"
+              name="referral"
+              class="form-control"
+              v-b-tooltip.hover
+              title="Input the referral"
+              placeholder="Name of  the referral"
+              v-model.lazy="editClient.referral"
+              v-on:keyup.enter="
+                updateClientPerRow('referral', $event.target.value),
+                  (editPerRow.referral = false)
+              "
+              v-if="editPerRow.referral"
+            />
+            <span v-else>
+              {{ editClient.referral }}
+              <span
+                class="buttonEdit"
+                v-if="updateClientList.referral"
+                @click="editPerRow.referral = true"
               >
                 <i class="fas fa-pen"></i> Edit
               </span>
@@ -1689,7 +1713,7 @@
           </div>-->
         </div>
 
-        <!-- <div class="rowFields mx-auto row">
+        <div class="rowFields mx-auto row">
           <div class="col-lg-1"></div>
           <div class="col-lg-10">
             <GmapMap
@@ -1712,7 +1736,7 @@
             </GmapMap>
           </div>
           <div class="col-lg-1"></div>
-        </div>-->
+        </div>
 
         <b-card
           id="remarks"
@@ -1957,15 +1981,7 @@
           <b-button
             size="sm"
             variant="warning"
-            v-if="roles.account_management && !deletedAcc"
-            v-b-modal="'modalAddAttachment'"
-            >Attach File</b-button
-          >
-
-          <b-button
-            size="sm"
-            variant="warning"
-            v-if="roles.rm && editClient.date_activated != null && !deletedAcc"
+            v-if="roles.rm && !deletedAcc"
             v-b-modal="'modalChangeDateActivated'"
             >Change Date Activated</b-button
           >
@@ -2119,7 +2135,7 @@
             <input
               type="text"
               name="name"
-              class="form-control"
+              class="form-control text-upper"
               v-b-tooltip.hover
               title="Input the account name"
               placeholder="Name of Client"
@@ -2140,7 +2156,7 @@
             <input
               type="text"
               name="owner_name"
-              class="form-control"
+              class="form-control text-upper"
               v-b-tooltip.hover
               title="Input the owner's name"
               placeholder="Owner's name"
@@ -2333,7 +2349,7 @@
             <input
               type="text"
               name="location"
-              class="form-control"
+              class="form-control text-upper"
               v-b-tooltip.hover
               title="Input the address"
               placeholder="Address"
@@ -2564,6 +2580,24 @@
               option-text="name"
               placeholder="Select sales agent if this client deal by agent..."
             ></model-list-select>
+          </div>
+        </div>
+                <!-- Referral -->
+          <div class="rowFields mx-auto row">
+          <div class="col-lg-3">
+            <p class="textLabel">Referred By:</p>
+          </div>
+          <div class="col-lg-9">
+            <input
+              type="text"
+              name="referral"
+              class="form-control"
+              v-b-tooltip.hover
+              title="Input the referral"
+              placeholder="Name of referral"
+              v-model.lazy="client.referral"
+            />
+
           </div>
         </div>
         <!-- Tech sales in charge -->
@@ -2805,7 +2839,7 @@
           </div>
         </div>
 
-        <!-- <div class="rowFields mx-auto row">
+        <div class="rowFields mx-auto row">
           <div class="col-lg-1"></div>
           <div class="col-lg-10">
             <GmapMap
@@ -2828,7 +2862,7 @@
             </GmapMap>
           </div>
           <div class="col-lg-1"></div>
-        </div>-->
+        </div>
 
         <!--Form-------->
         <template slot="modal-footer" slot-scope="{}">
@@ -3570,6 +3604,24 @@
           >Old Account No.
         </div>
         <br />
+        <div v-on:click="changeColDisplay('colOLT')">
+          <p-check
+            class="checkboxStyle p-switch p-slim"
+            color="success"
+            v-model="colOLT"
+          ></p-check
+          >OLT
+        </div>
+        <br />
+        <div v-on:click="changeColDisplay('colPON')">
+          <p-check
+            class="checkboxStyle p-switch p-slim"
+            color="success"
+            v-model="colPON"
+          ></p-check
+          >PON
+        </div>
+        <br />
         <div v-on:click="changeColDisplay('colModem')">
           <p-check
             class="checkboxStyle p-switch p-slim"
@@ -3586,6 +3638,15 @@
             v-model="colMacAdd"
           ></p-check
           >Mac add.
+        </div>
+        <br />
+        <div v-on:click="changeColDisplay('colVlan')">
+          <p-check
+            class="checkboxStyle p-switch p-slim"
+            color="success"
+            v-model="colVlan"
+          ></p-check
+          >VLAN
         </div>
         <br />
         <div v-on:click="changeColDisplay('colIpAssigned')">
@@ -3712,6 +3773,7 @@ export default {
       fields: [],
       items: [],
       items_copy: [],
+      ponItems: "",
       tblFilter: null,
       tblFilter_copy: null,
       totalRows: "",
@@ -3809,6 +3871,7 @@ export default {
         contact_person: "",
         email_add: "",
         sales_id: {},
+        referral:"",
         engineers_id: {},
         location: "",
         contact: "",
@@ -3839,6 +3902,7 @@ export default {
         OTC: 0,
         foc_length: 0,
         sales_agent_id: 0,
+        referral:"",
         aging: null,
         term: "",
         sales_id: "",
@@ -3897,6 +3961,10 @@ export default {
         modem: false,
         modem_mac_address: false,
         branch: false,
+        olt: false,
+        pon: false,
+        onu: false,
+        vlan: false,
         ip: false,
         date_assign: false,
         status: false,
@@ -4110,6 +4178,7 @@ export default {
         term: false,
         sales: false,
         agent: false,
+        referral:false,
         engineers: false,
         branch: false,
         bucket: false,
@@ -4211,18 +4280,18 @@ export default {
   },
   updated() {},
   computed: {
-    // mapCoordinates() {
-    //   if (!this.map) {
-    //     return {
-    //       lat: 0,
-    //       lng: 0
-    //     };
-    //   }
-    //   return {
-    //     lat: this.map.getCenter().lat(),
-    //     lng: this.map.getCenter().lng()
-    //   };
-    // },
+    mapCoordinates() {
+      if (!this.map) {
+        return {
+          lat: 0,
+          lng: 0,
+        };
+      }
+      return {
+        lat: this.map.getCenter().lat(),
+        lng: this.map.getCenter().lng(),
+      };
+    },
     OTCPay() {
       this.editClient.OTCPay =
         this.editClient.amount_pay - this.editClient.cashBond;
@@ -4268,7 +4337,6 @@ export default {
       this.$http
         .get("api/Client/subIndex/" + this.user.region_id)
         .then(function (response) {
-          // console.log(response.body);
           this.items = response.body.items;
           this.billings_to_export = response.body.billings;
           this.items_copy = this.items;
@@ -4312,6 +4380,7 @@ export default {
     getBankCode(code) {
       return `${code.code} - ${code.date} - ${code.amount}`;
     },
+
     onChangeBankCode() {
       this.editClient.amount_pay = this.bank_code_selected.amount;
       this.editClient.banking_payment_code_id = this.bank_code_selected.id;
@@ -4396,6 +4465,7 @@ export default {
 
       this.setEditClient(item);
 
+      this.ponItems = "";
       if (item.lat != null) {
         this.markers_edit[0].position.lat = parseFloat(item.lat);
         this.markers_edit[0].position.lng = parseFloat(item.lng);
@@ -4403,18 +4473,21 @@ export default {
         this.lnglat = this.editClient.lng + "," + this.editClient.lat;
       }
 
-      if (!this.roles.admin) {
+      if (this.roles.admin) {
         if (this.roles.helpdesk) {
           this.updateClientList.location = true;
           this.updateClientList.modem = true;
           this.updateClientList.modem_mac_address = true;
           this.updateClientList.package = true;
+          this.updateClientList.olt = true;
+          this.updateClientList.pon = true;
+          this.updateClientList.onu = true;
+          this.updateClientList.vlan = true;
           this.updateClientList.subscription = true;
           this.updateClientList.ip = true;
           this.updateClientList.date_assign = true;
           this.updateClientList.status = true;
           this.updateClientList.branch = true;
-          this.updateClientList.coordinates = true;
         }
         if (this.roles.accounting) {
           this.updateClientList.account_no = true;
@@ -4452,6 +4525,7 @@ export default {
             term: true,
             sales: true,
             agent: true,
+            referral:true,
             engineers: true,
             modem: true,
             modem_mac_address: true,
@@ -4462,6 +4536,7 @@ export default {
             remarks: true,
             coordinates: true,
             wfc: true,
+            coordinates: true,
           };
         }
       } else {
@@ -4479,6 +4554,7 @@ export default {
           term: true,
           sales: true,
           agent: true,
+           referral:true,
           engineers: true,
           modem: true,
           modem_mac_address: true,
@@ -4492,6 +4568,7 @@ export default {
           coordinates: true,
         };
       }
+      this.onChangeOLT();
       this.selectedEmails = [];
 
       this.selectedEmails.push({
@@ -4516,6 +4593,8 @@ export default {
       if (item.sales_agent == null) item.sales_agent = {};
 
       this.editClient = item;
+      this.editClient.olt_id = item.olt.id;
+      this.editClient.pon_id = item.pon1.id;
       this.editClient.rm_remarks = "";
       if (item.sales != null) this.editClient._sales = item.sales;
       else this.editClient._sales = {};
@@ -4592,6 +4671,9 @@ export default {
                     this.client.user_id = this.user.id;
                     this.client.user_name = this.user.name;
                     this.client.user_email = this.user.email;
+                    this.client.name = this.client.name.toUpperCase();
+                    this.client.owner_name = this.client.owner_name.toUpperCase();
+                    this.client.location = this.client.location.toUpperCase();
                     this.selectedEmails.push({
                       email: this.client.salesInCharge_email,
                       name: this.client.salesInCharge_name,
@@ -4622,6 +4704,8 @@ export default {
                     this.$http
                       .post("api/Client", this.client)
                       .then((response) => {
+
+                        // console.log(response.body);
                         swal("Created", "", "success");
                         this.salesInCharge = {
                           id: "",
@@ -4640,6 +4724,7 @@ export default {
                           OTC: 0,
                           foc_length: 0,
                           sales_agent_id: 0,
+                          referral:"",
                           aging: null,
                           term: "",
                           sales_id: "",
@@ -5140,8 +5225,24 @@ export default {
         }
       });
     },
+    getOLTDesc(olt) {
+      return `${olt.name} - ${olt.ip}`;
+    },
     getBucketDesc(bucket) {
       return `${bucket.name} - ${bucket.IP}`;
+    },
+    getPonDesc(item) {
+      return `PON:${item.pon} - Area:${item.area}`;
+    },
+    onChangeOLT() {
+      //
+      if (this.editClient.olt_id != null) this.loadPONS();
+      else this.ponItems = "";
+    },
+    loadPONS() {
+      this.$http.get("api/pon/" + this.editClient.olt_id).then((response) => {
+        this.ponItems = response.body;
+      });
     },
     onChangeAddclient() {
       this.client.package_id = this.packAdd.id;
@@ -5211,6 +5312,13 @@ export default {
         };
         this.fields.unshift(temp);
       }
+      if ("colOLT" == check) {
+        this.colOLT = !this.colOLT;
+      }
+      if (this.colOLT) {
+        var temp = { key: "olt", label: "OLT", sortable: true };
+        this.fields.push(temp);
+      }
 
       if ("colSales" == check) {
         this.colSales = !this.colSales;
@@ -5231,6 +5339,14 @@ export default {
         this.fields.push(temp);
       }
 
+      if ("colPON" == check) {
+        this.colPON = !this.colPON;
+      }
+      if (this.colPON) {
+        var temp = { key: "pon", label: "PON", sortable: true };
+        this.fields.push(temp);
+      }
+
       if ("colModem" == check) {
         this.colModem = !this.colModem;
       }
@@ -5248,6 +5364,14 @@ export default {
           label: "Mac Add.",
           sortable: true,
         };
+        this.fields.push(temp);
+      }
+
+      if ("colVlan" == check) {
+        this.colVlan = !this.colVlan;
+      }
+      if (this.colVlan) {
+        var temp = { key: "vlan", label: "VLAN", sortable: true };
         this.fields.push(temp);
       }
 
@@ -5914,6 +6038,18 @@ export default {
     updateClientPerRow(row, value) {
       console.log(value);
       var data = value;
+      if (row == 'name') {
+        data = value.toUpperCase();
+        this.editClient.name = data;
+      }
+      if (row == 'owner_name') {
+        data = value.toUpperCase();
+        this.editClient.owner_name = data;
+      }
+      if (row == 'location') {
+        data = value.toUpperCase();
+        this.editClient.location = data;
+      }
       if (row == "sales_id") {
         this.editClient.sales.user.name = value.name;
         data = value.id;
@@ -6280,7 +6416,7 @@ export default {
             var data = {
               ticket_type_id: type_id,
               client_id: item.id,
-              user_id: this.user.id,
+              user_id:this.user.id,
               created_by: this.user.id,
               status: "Pending",
               state: "helpdesk",
@@ -6352,6 +6488,103 @@ export default {
                 dangerMode: true,
               });
             });
+        }
+      });
+    },
+    autoBill(id){
+
+        Swal2.fire({
+
+        title: "<strong>Auto-generate billing for this client?</strong>",
+        type: "info",
+        html: "",
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: '<i class="fa fa-thumbs-up"></i>',
+        confirmButtonAriaLabel: "Thumbs up, great!",
+        cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
+        cancelButtonAriaLabel: "Thumbs down",
+      }).then((update) => {
+        if (update.value) {
+           this.tblisBusy = true;
+          this.$root.$emit("pageLoading");
+          var item = {
+                user_region_id : this.user.region_id,
+                user_id : this.user.id,
+                user_name : this.user.name,
+                client_id : id,
+                filterIn: this.filterIn,
+                cbFilter: this.cbFilter,
+                searchby: this.searchby,
+                tblFilter: this.tblFilter_copy,
+
+          };
+
+          this.$http
+          .post("api/Client/updateAutoBill", item)
+          .then(response => {
+              console.log(response.body);
+
+               swal("Updated", "", "success");
+                this.items = response.body.items;
+                this.totalRows = response.body.items.length;
+                this.tblisBusy = false;
+                this.$root.$emit("pageLoaded");
+          })
+          .catch(response => {
+          console.log(response);
+
+          });
+
+        }
+      });
+    },
+    stopAutoBill(id){
+       Swal2.fire({
+
+        title: "<strong>Stop auto-generate billing for this client?</strong>",
+        type: "info",
+        html: "",
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: '<i class="fa fa-thumbs-up"></i>',
+        confirmButtonAriaLabel: "Thumbs up, great!",
+        cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
+        cancelButtonAriaLabel: "Thumbs down",
+      }).then((update) => {
+        if (update.value) {
+           this.tblisBusy = true;
+          this.$root.$emit("pageLoading");
+          var item = {
+                user_region_id : this.user.region_id,
+                user_id : this.user.id,
+                user_name : this.user.name,
+                client_id : id,
+                filterIn: this.filterIn,
+                cbFilter: this.cbFilter,
+                searchby: this.searchby,
+                tblFilter: this.tblFilter_copy,
+
+          };
+
+          this.$http
+          .post("api/Client/updateAutoBill", item)
+          .then(response => {
+              console.log(response.body);
+
+               swal("Updated", "", "success");
+                this.items = response.body.items;
+                this.totalRows = response.body.items.length;
+                this.tblisBusy = false;
+                this.$root.$emit("pageLoaded");
+          })
+          .catch(response => {
+          console.log(response);
+
+          });
+
         }
       });
     },
@@ -6629,6 +6862,11 @@ export default {
   flex: 1;
   margin-left: 5px;
 }
+
+.text-upper{
+  text-transform: uppercase;
+}
+
 </style>
 <style src="vue-multiselect/dist/vue-multiselect.min.css" />;
 

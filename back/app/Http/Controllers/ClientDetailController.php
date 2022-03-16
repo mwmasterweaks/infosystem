@@ -39,7 +39,9 @@ class ClientDetailController extends Controller
                 $tbl = Client_detail::with(['remarks_log.user'])
                     ->join("clients", "client_details.client_id", "clients.id")
                     ->leftJoin("schedules", function ($join) {
+
                         $join->on('client_details.id', '=', 'schedules.client_detail_id');
+
                         $join->on('client_details.target_date', '=', 'schedules.target_date');
                     })
                     ->leftJoin('teams', "schedules.team_id", "teams.id")
@@ -121,9 +123,16 @@ class ClientDetailController extends Controller
             $Client = Client::with([
                 'package', 'modem', 'package_type', 'region', 'area', 'branch', 'sales.user', 'engineer.user',
                 'splitter_port.belongs_to_splitter_nap.belongs_to_splitter_lcp.belongs_to_olt.belongs_to_node'
+
             ])
+
                 ->where('id', $id)
+
                 ->get();
+
+
+
+
 
             $foc_check_red = 0;
             $item->foc_check_red = null;
@@ -137,12 +146,19 @@ class ClientDetailController extends Controller
             }
             $created_dt = new Carbon($item->created_at);
             $foc_duration = $foc_dt->diffForHumans(
+
                 $created_dt,
+
                 [
+
                     'parts' => 3,
+
                     //'short' => true,
+
                     'syntax' => CarbonInterface::DIFF_ABSOLUTE
+
                 ]
+
             );
             $item->foc_duration = $foc_duration;
             $foc_check_red = $foc_dt->diffInHours($created_dt);
@@ -453,7 +469,7 @@ class ClientDetailController extends Controller
                 $this->cname,
                 "update",
                 "message",
-                "update Client_detail id " . $id . "\nFrom: " . $logFrom . "\nTo: " . $logTo
+                "update region id " . $id . "\nFrom: " . $logFrom . "\nTo: " . $logTo
             );
             //return $cmd; return $str;
             if ($request->filterIn == "multi") {
@@ -478,11 +494,17 @@ class ClientDetailController extends Controller
     }
     public function update_per_row(Request $request)
     {
+
         DB::beginTransaction();
+
         try {
+
             $id = $request->id;
+
             if ($request->row == "wfc") {
+
                 //FOR WFC/STATUS
+
                 $tbll =  DB::table("client_details")
 
                     ->where("id", $id)
@@ -590,6 +612,7 @@ class ClientDetailController extends Controller
                     }
                 }
             } else {
+
                 $oldData = Client_detail::where("id", $id)
 
                     ->select($request->row . " as data")
@@ -599,10 +622,17 @@ class ClientDetailController extends Controller
 
 
                 DB::table("client_details")
+
                     ->where("id", $id)
+
                     ->update([
+
                         $request->row => $request->data,
+
                     ]);
+
+
+
                 $newData = Client_detail::where("id", $id)
 
                     ->select($request->row . " as data")
@@ -612,19 +642,30 @@ class ClientDetailController extends Controller
 
 
                 \Logger::instance()->log(
+
                     Carbon::now(),
+
                     $request->user_id,
+
                     $request->user_name,
+
                     $this->cname,
+
                     "update_per_row",
+
                     "message",
+
                     "update client_detail id " . $id . "\nRow: " . $request->row .
 
                         "\nFrom: " . $oldData->data . "\nTo: " . $newData->data
 
                 );
             }
+
+
+
             DB::commit();
+
             return "ok";
         } catch (\Exception $ex) {
 
@@ -668,23 +709,49 @@ class ClientDetailController extends Controller
     }
     public function destroy1(Request $request)
     {
+
+
+
         try {
+
+
+
             $tbl = Job_order::where('client_detail_id', $request->id)->first();
+
+
+
             if (empty($tbl)) {
+
                 $tbl1 = Client_detail::findOrFail($request->id);
+
                 DB::table('client_details')->where('id', $request->id)->delete();
-                \Logger::instance()->log(
-                    Carbon::now(),
-                    $request->user_id,
-                    $request->user_name,
-                    $this->cname,
-                    "destroy1",
-                    "message",
-                    "delete client_details id " . $request->id .
 
-                        "\nOld client_details: " . $tbl1
 
-                );
+
+                $this
+
+                    ->log(
+
+                        Carbon::now(),
+
+                        $request->user_id,
+
+                        $request->user_name,
+
+                        $this->cname,
+
+                        "destroy1",
+
+                        "message",
+
+                        "delete client_details id " . $request->id .
+
+                            "\nOld client_details: " . $tbl1
+
+                    );
+
+
+
                 if ($request->filterIn == "multi") {
 
                     return $this->multipleFilter($request);
@@ -886,90 +953,180 @@ class ClientDetailController extends Controller
     }
     public function updateTargetDate(Request $request)
     {
+
         try {
+
             DB::beginTransaction();
+
             $extraMsg = "";
 
+
+
             $logFrom = Client_detail::where('id', $request->client_detail_id)
+
                 ->select("target_date")->first();
+
             if ($request->team_only == true) {
+
                 DB::table('schedules')
+
                     ->where('client_detail_id', $request->client_detail_id)
+
                     ->where('target_date', $request->current_target_date)
+
                     ->update(['team_id' => $request->team_id]);
 
+
+
                 Client_detail::where('id', $request->client_detail_id)
+
                     ->update([
+
                         'inst_remarks' => $request->inst_remarks,
+
                     ]);
+
                 $extraMsg = "(team_only)";
             } else if ($request->date_only == true) {
+
                 DB::table('schedules')
+
                     ->where('client_detail_id', $request->client_detail_id)
+
                     ->where('target_date', $request->current_target_date)
+
                     ->update(['target_date' => $request->target_date]);
+
+
+
                 Client_detail::where('id', $request->client_detail_id)
+
                     ->update([
+
                         'target_date' => $request->target_date,
+
                         'inst_remarks' => $request->inst_remarks,
+
                     ]);
 
                 $extraMsg = "(date_only)";
             } else {
+
                 if ($logFrom->target_date == null) {
+
                     schedule::create($request->all());
                 }
 
+
+
                 Client_detail::where('id', $request->client_detail_id)
+
                     ->update([
+
                         'target_date' => $request->target_date,
+
                         'inst_remarks' => $request->inst_remarks,
+
                     ]);
+
+
+
+
 
                 // store job order
 
+
+
                 $chk_JO = Job_order::where('client_detail_id', $request->client_detail_id)->first();
+
                 if ($chk_JO == null) {
+
                     $jo_details = (object)$request->item;
+
                     $client = (object)$jo_details->client1;
+
                     $region = (object)$client->region;
+
                     $project_desc = "Installation";
-                    $jo_num = Job_order::where('region_id', $client->branch_id)
+
+                    $jo_num = Job_order::where('region_id', $client->region_id)
+
                         ->max('jo_num');
 
+
+
                     $prepare_id = Engineer::where("user_id", $region->user_id_visor)->first();
+
                     $approve_id = Engineer::where("user_id", $region->user_id_rm)->first();
 
+
+
+
+
                     $jo = DB::table('job_orders')->insert([
+
                         'jo_num' => $jo_num + 1,
+
                         'client_id' => $jo_details->client_id,
+
                         'client_detail_id' => $request->client_detail_id,
-                        'region_id' => $client->branch_id,
+
+                        'region_id' => $client->region_id,
+
                         'project_description' => $project_desc,
+
                         'cable_category' => $jo_details->cable_category,
+
                         'foc_length' => $jo_details->foc_length,
+
                         'started' => $request->target_date,
+
                         'finished' => null,
+
                         'engineer_in_charge' => $jo_details->engineers_id,
+
                         'prepare' => $prepare_id->id,
+
                         'approve' => $approve_id->id,
+
                         'note' => '1',
+
                         'created_at' => Carbon::now(),
+
                         'updated_at' => Carbon::now()
+
                     ]);
 
-                    \Logger::instance()->log(
-                        Carbon::now(),
-                        $request->user_id,
-                        $request->user_name,
-                        $this->cname,
-                        "storeJobOrder",
-                        "message",
-                        "Create new job order: " . $jo
-                    );
+                    $this
+
+                        ->log(
+
+                            Carbon::now(),
+
+                            $request->user_id,
+
+                            $request->user_name,
+
+                            $this->cname,
+
+                            "storeJobOrder",
+
+                            "message",
+
+                            "Create new job order: " . $jo
+
+                        );
                 }
             }
+
+
+
+
+
+
+
             // logger
+
             $logTo = Client_detail::where('id', $request->client_detail_id)
 
                 ->select("target_date")->first();
@@ -979,15 +1136,25 @@ class ClientDetailController extends Controller
                 $extraMsg . " of client_detail ID: " . $request->client_detail_id;
 
             \Logger::instance()->log(
+
                 Carbon::now(),
+
                 $request->user_id,
+
                 $request->user_name,
+
                 $this->cname,
+
                 "updateTargetDate",
+
                 "message",
+
                 $msg
+
             );
+
             DB::commit();
+
             if ($request->filterIn == "multi") {
 
                 //$request1 = new Illuminate\Http\Request($request->cbFilter);
@@ -1079,7 +1246,13 @@ class ClientDetailController extends Controller
     }
     public function multipleFilter(Request $request)
     {
+
+
+
+
+
         try {
+
             if ($request->cbFilter != null) {
                 $temp = (object) $request->cbFilter;
                 unset($request);
@@ -1177,221 +1350,484 @@ class ClientDetailController extends Controller
     }
     public function activateClient(Request $request)
     {
+
         // return $request;
         try {
+
+
+
             $stat = "";
+
             $bucket = (object) $request->bucket;
+
             $exist = Client::where('bucket_id', $bucket->id)->where('subscription_name', $request->subscription_name)->first();
+
             if (empty($exist)) {
+
                 if ($bucket->name != "Dole") {
+
                     $ssh = new SSH2($bucket->IP);
+
                     if ($ssh->auth($bucket->username, $bucket->password)) {
+
                         $ssh->exec("export BASS_RDIR='/usr/local/foxbuckv3';/bin/bash /usr/local/foxbuckv3/commands/cbs " .
+
                             $bucket->user_id . " 10 0 1 subscription --show " .
+
                             $request->subscription_name);
+
                         //Valeroso_Rex_bw1
+
                         $ssh_table =  $ssh->getTable();
+
                         if (count($ssh_table) > 0) {
+
+
+
                             foreach ($ssh_table as $item) {
+
                                 if ($item['name'] == $request->subscription_name) {
+
                                     if ($item['statusName'] == "activated")
+
                                         $stat = "ok";
+
                                     else {
+
                                         $ssh->exec("sudo /bin/bash /usr/local/foxbuckv3/commands/cbs " .
+
                                             $bucket->user_id . " 10 0 1 subscription --act " .
+
                                             $request->subscription_name);
+
                                         //return response()->json(['error' => 'This client is still deactivated in the bucket server'], 500);
+
+
+
                                         $stat = "ok";
                                     }
                                 }
                             }
                         }
                     } else {
+
                         return response()->json(['error' => 'There are some problem connecting in the bucket server please try again'], 500);
                     }
+
                     if ($stat != "ok")
+
                         return response()->json(['error' => 'There are some problem connecting in the bucket server please try again'], 500);
                 }
+
                 //$ssh->disconnect();
+
                 DB::beginTransaction();
+
+                //$dtnow = new Carbon($request->dt);
+
+                // $chk = cvc::where('client_detail_id', $request->id)
+
+                //     ->where('cvc', $request->otp_input)->first();
+
+                // $dtnow = new Carbon();
+
+                // if ($chk != null || $request->user_id == 1) {
+
+                // if ($chk != null)
+
+                //     $cvcCreated = new Carbon($chk->created_at);
+
+                // if ($request->user_id == 1)
+
+                //     $cvcCreated = new Carbon();
+
+                // $chk_hours = $cvcCreated->diffInHours($dtnow, false);
+
+                // if ($chk_hours <= 24 && $chk_hours >= 0) {
+
                 $client = (object) $request->client1;
+
                 $dtnow = new Carbon($request->activated_date);
+
                 $dtdtdt = new Carbon($request->activated_date);
+
                 Client_detail::where('id', $request->id)
+
                     ->update([
+
                         'status' => 'finished',
+
                         'inst_remarks' => $request->inst_remarks,
+
                         'date_activated' => $dtnow
+
                     ]);
+
+
+
                 // CHANGE THE TARGET DATE NOT NULL WHEN ACTIVATE
+
                 //IF BUG AQUIRE SET THE TARGET DATE TO NULL AND ADD COLUMN TARGETDATE2
+
                 // Client_detail::where('id', $id)
+
                 //     ->update([
+
                 //         'status' => 'finished',
+
                 //         'date_activated' => $dtnow,
+
                 //         'target_date' => null, //why set null?
+
                 //     ]);
 
+
+
                 schedule::where('client_detail_id', $request->id)
+
                     ->where('target_date', $dtnow->toDateString())
+
                     ->update([
+
                         'status' => 'ok'
+
+
+
                     ]);
+
+
+
                 if ($request->line_transfer != 1) {
+
                     Client::where('id', $request->client_id)
+
                         ->whereNull('date_activated')
+
                         ->update([
+
                             'date_activated' => $dtnow,
+
                             'status' => 'Active',
+
                             'bucket_id' => $bucket->id,
+
                             'subscription_name' => $request->subscription_name
+
                         ]);
+
+
+
                     //BILLINGS--------------
+
                     if (true) {
+
+
+
                         $package_type = (object) $client->package_type;
+
                         $package = (object) $client->package;
+
                         //$mrr =  $package->mrr;
+
                         $datebill = null;
+
                         $dateCoverFrom = null;
+
                         $dateCoverTo = null;
+
                         $bill = 0;
+
                         $balance = 0;
+
                         $tempbal = 0;
+
                         //DARI KAY FIRST BILL INSERT
+
                         if (true) {
+
+
+
+
+
                             if ($package_type->name != "RES") {
+
                                 $dateCoverFrom = $dtdtdt->copy()->addDay();
+
                                 $dateCoverTo = $dtdtdt->copy()->addMonthsNoOverflow();
+
                                 $datebill = $dtdtdt->copy()->addMonthsNoOverflow();
+
                                 if ($dtdtdt->day >= 23  && $dtdtdt->day <= 31) {
+
                                     $datebill->day = 1;
+
                                     $datebill = $datebill->addMonthsNoOverflow();
                                 } elseif ($dtdtdt->day >= 1  && $dtdtdt->day <= 7) {
+
                                     $datebill->day = 8;
                                 } elseif ($dtdtdt->day >= 8  && $dtdtdt->day <= 15) {
+
                                     $datebill->day = 16;
                                 } elseif ($dtdtdt->day >= 16  && $dtdtdt->day <= 22) {
+
                                     $datebill->day = 23;
                                 } else {
+
                                     $datebill->day = 1;
+
                                     $datebill->day = $datebill->daysInMonth;
                                 }
+
                                 $bill = $package->mrr;
+
                                 $balance = $bill;
                             } else {
+
                                 $datebill = $dtdtdt->copy();
+
                                 if ($dtdtdt->day >= 1  && $dtdtdt->day <= 15)
+
                                     $datebill->day = 15;
+
                                 else
+
                                     $datebill = $datebill->endOfMonth();
+
+
+
                                 $datebill = $datebill->addMonthsNoOverflow();
+
                                 $dateCoverFrom = $dtdtdt->copy()->addDay();
+
                                 // $difday = $dtdtdt->diffInDays($datebill);
+
                                 // $bill = ($package->mrr / 30) * $difday;
+
                                 $dateCoverTo = $dtdtdt->copy()->addMonthsNoOverflow();
+
                                 $bill = $package->mrr;
+
                                 // $tempbal =  $bill - $package->mrr;
+
                                 // if ($tempbal < 0)
+
                                 $balance = 0;
+
                                 // else
+
                                 //     $balance = $tempbal;
+
                             }
+
+
+
                             $bil1 = new billing;
+
                             $bil1->client_id = $request->client_id;
+
                             $bil1->date = $datebill;
+
                             $bil1->item = "MRR - Internet (" . $package_type->name . ")";
+
                             $bil1->description =
+
                                 "MRR - " . $package_type->name . " " .
+
                                 $dateCoverFrom->toFormattedDateString() . " - " .
+
                                 $dateCoverTo->toFormattedDateString();
+
                             $bil1->price =  round($bill);
+
                             $bil1->balance =  round($balance);
+
                             $bil1->created_at = Carbon::now();
+
                             $bil1->updated_at = Carbon::now();
+
                             $bil1->save();
+
                             $dddddttttt = $datebill->copy();
 
+
+
+
+
                             //set date to res
+
                             //client name test LYDA BORRAL-LUMINGKIT
+
                             if ($package_type->name == "RES") {
+
                                 $datebill = $datebill->copy()->subMonthNoOverflow();
+
                                 // $dateCoverFrom->day = 15;
+
                                 $balance = $package->mrr;
                             }
+
+
+
                             //generate whole bill
+
                             $contain = [];
+
                             for ($x = 1; $x < $client->term - 1; $x++) { //if condition change - change here too - refCashbondPayment
+
+
+
                                 $datebill_copy = $datebill->copy()->addMonthsNoOverflow($x);
+
                                 $dateCoverFrom_copy = $dateCoverFrom->copy()->addMonthsNoOverflow($x);
+
                                 $dateCoverTo_copy = $dateCoverTo->copy()->addMonthsNoOverflow($x);
+
+
+
                                 if ($tempbal < 0) {
+
                                     $tempbal = $package->mrr + $tempbal;
+
                                     if ($tempbal < 0)
+
                                         $balance = 0;
+
                                     else
+
                                         $balance = $tempbal;
                                 } else
+
                                     $balance = $package->mrr;
+
+
+
                                 $data = [
+
                                     "client_id" => $request->client_id,
+
                                     "date" => $datebill_copy,
+
                                     "item" => "MRR - Internet (" . $package_type->name . ")",
+
                                     "description" => "MRR - " . $package_type->name . " " .
+
                                         $dateCoverFrom_copy->toFormattedDateString() . " - " .
+
                                         $dateCoverTo_copy->toFormattedDateString(),
+
                                     "price" => $package->mrr,
+
                                     "balance" => round($balance),
+
                                     "created_at" => Carbon::now(),
+
                                     "updated_at" => Carbon::now(),
+
                                 ];
+
                                 array_push($contain, $data);
+
+
+
                                 //insert cashbond to payment
+
                                 if ($x == ($client->term - 2)) { // refCashbondPayment
+
                                     if ($package_type->name != "RES") {
+
                                         $tbl = billing::where('client_id', $request->client_id)
+
                                             ->where('item', 'CashBond Bill')->first();
+
                                         if (!empty($tbl)) {
+
                                             $ddaattaa = [
+
                                                 [
+
                                                     "client_id" => $request->client_id,
+
                                                     "user_id" => $request->user_id,
+
                                                     "remarks" => "Cash Bond payment",
+
                                                     "amount" => $tbl->price,
+
                                                     "date" => $datebill_copy,
+
                                                     "created_at" => Carbon::now(),
+
                                                     "updated_at" => Carbon::now(),
+
                                                 ]
+
                                             ];
+
                                             customer_payment::insert($ddaattaa);
                                         }
                                     } else {
+
                                         // fix ang last paydate sa RES----------FIX-------------------------------------FIX
+
                                     }
                                 }
                             }
+
                             billing::insert($contain);
                         }
+
+
+
+
+
                         //DARI KAY OTC KUNG STAGGERED
+
                         $tbl = billing::where('client_id', $request->client_id)
+
                             ->where('item', 'OTC Staggered')->first(); // refOTCStaggered
+
                         if (!empty($tbl)) {
+
                             $temp = explode("-", $tbl->description);
+
                             $amount = $temp[1];
+
                             $months = $temp[3];
+
                             $permonth = $amount / $months;
+
+
+
                             //DARI KAY OTC BILL INSERT
+
                             for ($x = 0; $x < $months; $x++) {
+
+
+
                                 $bil2 = new billing;
+
                                 $bil2->client_id = $request->client_id;
+
                                 $bil2->date = $dddddttttt;
+
                                 $bil2->item = "OTC - Internet";
+
                                 $bil2->description =
+
                                     "OTC - Installation Fee: Staggered " . $months . " months -" . ($x + 1) . "/" . $months;
+
+
+
                                 $bil2->price =  round($permonth);
+
                                 $bil2->balance =  round($permonth);
+
                                 $bil2->created_at = Carbon::now();
+
                                 $bil2->updated_at = Carbon::now();
+
                                 $bil2->save();
+
                                 $dddddttttt = $dddddttttt->addMonthsNoOverflow();
                             }
                         }
@@ -1407,43 +1843,86 @@ class ClientDetailController extends Controller
                 //         $text
                 //     );
                 // }
+
+
+
                 //email dari
+
                 if (true) {
+
                     $message = "
-                    <html>
-                    <head>
-                    </head>
-                    <body>
-                    <p>Hi Team,</p>
-                    <p>Good day!</p>
-                    <p>
-                    <br />
-                    This is only to inform you all that this client had been activated.
-                    <br />
-                    <table>
-                    <tr>
-                    <td>Name:</td>
-                    <td>" . $request->name . "</td>
-                    </tr>
-                    <tr>
-                    <td>Date Activated: </td>
-                    <td>" . $dtnow->toFormattedDateString() . "</td>
-                    </tr>
-                    </table>
-                    <br />
-                    Thank you and God Bless.</p>
-                    </body>
-                    </html>";
+
+                <html>
+
+                <head>
+
+                </head>
+
+                <body>
+
+                <p>Hi Team,</p>
+
+                <p>Good day!</p>
+
+                <p>
+
+                <br />
+
+                This is only to inform you all that this client had been activated.
+
+                <br />
+
+                <table>
+
+                <tr>
+
+                <td>Name:</td>
+
+                <td>" . $request->name . "</td>
+
+                </tr>
+
+                 <tr>
+
+                <td>Date Activated: </td>
+
+                <td>" . $dtnow->toFormattedDateString() . "</td>
+
+                </tr>
+
+                </table>
+
+                <br />
+
+                Thank you and God Bless.</p>
+
+                </body>
+
+                </html>";
                 }
+
+
+
                 //remove comment in production
+
                 \Logger::instance()->mailer(
+
                     "ACTIVATED CLIENT",
+
                     $message,
+
                     $request->user_email,
+
                     $request->user_name,
+
                     $request->sendTo,
+
                     $request->CCTO
+
                 );
+
+
+
                 \Logger::instance()->log(
                     Carbon::now(),
                     $request->user_id,
@@ -1452,32 +1931,57 @@ class ClientDetailController extends Controller
                     "activateClient",
                     "message",
                     "Activate client ID: " . $request->client_id . " date activated " . $dtnow
+
                 );
+
+
+
                 DB::commit();
+
                 if ($request->filterIn == "multi") {
+
                     return $this->multipleFilter($request);
                 } elseif ($request->filterIn == "search") {
+
                     return $this->search_data($request->searchby, $request->tblFilter);
                 } else
+
                     return $this->subIndex($request->region_id);
+
                 // } else
+
                 //     return response()->json(['error' => 'CVC Expired!' .  $chk_hours], 500);
+
                 // } else
+
                 //     return response()->json(['error' => 'Wrong! CVC'], 500);
+
+
             } else {
                 return response()->json(['error' => 'Subscription name already exists!'], 500);
             }
         } catch (\Exception $ex) {
+
             DB::rollBack();
+
             \Logger::instance()->log(
+
                 Carbon::now(),
+
                 $request->user_id,
+
                 $request->user_name,
+
                 $this->cname,
+
                 "activateClient",
+
                 "Error",
+
                 $ex->getMessage()
+
             );
+
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }
@@ -1485,6 +1989,7 @@ class ClientDetailController extends Controller
     {
 
         try {
+
             $month = [
 
                 'January', 'February', 'March', 'April', 'May', 'June',
@@ -1492,12 +1997,19 @@ class ClientDetailController extends Controller
                 'July', 'August', 'September', 'October', 'November', 'December'
 
             ];
+
             $countAll = [];
+
             $countSME = [];
+
             $countCORP = [];
+
             $countENT = [];
+
             $countRES = [];
+
             $datasets = [];
+
             for ($x = 0; $x < 12; $x++) {
 
                 $from = new Carbon('first day of ' . $month[$x] . ' ' . $year);
@@ -1604,9 +2116,14 @@ class ClientDetailController extends Controller
 
             }
 
+
+
             $dataSME = new stdClass;
+
             $dataSME->label = "SME";
+
             $dataSME->data = $countSME;
+
             $dataSME->borderColor = [
 
                 "rgba(255, 99, 132, 1)",
@@ -1638,12 +2155,19 @@ class ClientDetailController extends Controller
 
 
             ];
+
             $dataSME->borderWidth = 1;
+
             $datasets[0] = $dataSME;
 
+
+
             $dataCORP = new stdClass;
+
             $dataCORP->label = "CORP";
+
             $dataCORP->data = $countCORP;
+
             $dataCORP->borderColor = [
 
 
@@ -1677,12 +2201,19 @@ class ClientDetailController extends Controller
 
 
             ];
+
             $dataCORP->borderWidth = 1;
+
             $datasets[1] = $dataCORP;
 
+
+
             $dataENT = new stdClass;
+
             $dataENT->label = "ENT";
+
             $dataENT->data = $countENT;
+
             $dataENT->borderColor = [
 
 
@@ -1716,12 +2247,19 @@ class ClientDetailController extends Controller
 
 
             ];
+
             $dataENT->borderWidth = 1;
+
             $datasets[2] = $dataENT;
 
+
+
             $dataRES = new stdClass;
+
             $dataRES->label = "RES";
+
             $dataRES->data = $countRES;
+
             $dataRES->borderColor = [
 
 
@@ -1755,12 +2293,19 @@ class ClientDetailController extends Controller
 
 
             ];
+
             $dataRES->borderWidth = 1;
+
             $datasets[3] = $dataRES;
 
+
+
             $dataAll = new stdClass;
+
             $dataAll->label = "All";
+
             $dataAll->data = $countAll;
+
             $dataAll->borderColor = [
 
                 "rgba(153, 102, 255, 1)",
@@ -1790,19 +2335,33 @@ class ClientDetailController extends Controller
                 "rgba(75, 192, 192, 1)",
 
             ];
+
             $dataAll->borderWidth = 1;
+
             $datasets[4] = $dataAll;
 
+
+
             //second graph
+
             $datenow = Carbon::now();
+
             $baseDate = Carbon::now();
+
             $baseDate = $baseDate->subDays(6);
+
             $datenow = $datenow->addDay();
+
             $weekly_label = [];
+
             $weekly_data_plan = [];
+
             $weekly_data_done = [];
+
             $weekly_percent_done = [];
+
             $weekly_percent_pending = [];
+
             while ($baseDate <= $datenow) {
 
                 array_push($weekly_label, $baseDate->toFormattedDateString());
@@ -1890,13 +2449,22 @@ class ClientDetailController extends Controller
                 $baseDate->addDay();
             }
 
+
+
             $c1 = collect();
+
             $c1->put("yearDataset", $datasets);
+
             $c1->put("weekLabel", $weekly_label);
+
             $c1->put("weekDataPlan", $weekly_data_plan);
+
             $c1->put("weekDataDone", $weekly_data_done);
+
             $c1->put("weekPercentPending", $weekly_percent_pending);
+
             $c1->put("weekPercentDone", $weekly_percent_done);
+
             return response()->json($c1);
         } catch (\Exception $ex) {
 
@@ -1927,10 +2495,14 @@ class ClientDetailController extends Controller
     {
 
         try {
+
             $tbl = Client_detail::where('client_id', $id)->first();
+
             if (empty($tbl)) {
+
                 return response()->json(0);
             } else {
+
                 return response()->json($tbl);
             }
         } catch (\Exception $ex) {
@@ -1960,10 +2532,15 @@ class ClientDetailController extends Controller
     {
 
         try {
+
             $dtnow = Carbon::now();
+
             $c1 = collect();
 
+
+
             if ($region_id == 0) {
+
                 $tbl = DB::table('client_details')
 
                     ->join("clients", "client_details.client_id", "clients.id")
@@ -1987,7 +2564,12 @@ class ClientDetailController extends Controller
                     ->get();
 
                 $c1->put('today', $tbl);
+
+
+
                 $dtnow = $dtnow->addDay();
+
+
 
                 $tbl1 = DB::table('client_details')
 
@@ -2013,6 +2595,8 @@ class ClientDetailController extends Controller
 
                 $c1->put('tomorrow', $tbl1);
 
+
+
                 $tbl2 = DB::table('client_details')
 
                     ->join("clients", "client_details.client_id", "clients.id")
@@ -2036,6 +2620,8 @@ class ClientDetailController extends Controller
                     ->get();
 
                 $c1->put('week', $tbl2);
+
+
 
                 $tbl3 = DB::table('schedules')
 
@@ -2067,6 +2653,8 @@ class ClientDetailController extends Controller
 
                 $c1->put('teama_prev', $tbl3);
 
+
+
                 $tbl4 = DB::table('schedules')
 
                     ->join("client_details", "schedules.client_detail_id", "client_details.id")
@@ -2096,6 +2684,8 @@ class ClientDetailController extends Controller
                     ->get();
 
                 $c1->put('teama_today', $tbl4);
+
+
 
                 $tbl5 = DB::table('schedules')
 
@@ -2127,6 +2717,8 @@ class ClientDetailController extends Controller
 
                 $c1->put('teama_tom', $tbl5);
 
+
+
                 $tbl6 = DB::table('schedules')
 
                     ->join("client_details", "schedules.client_detail_id", "client_details.id")
@@ -2157,6 +2749,8 @@ class ClientDetailController extends Controller
 
                 $c1->put('teamb_prev', $tbl6);
 
+
+
                 $tbl7 = DB::table('schedules')
 
                     ->join("client_details", "schedules.client_detail_id", "client_details.id")
@@ -2186,6 +2780,8 @@ class ClientDetailController extends Controller
                     ->get();
 
                 $c1->put('teamb_today', $tbl7);
+
+
 
                 $tbl8 = DB::table('schedules')
 
@@ -2216,8 +2812,12 @@ class ClientDetailController extends Controller
                     ->get();
 
                 $c1->put('teamb_tom', $tbl8);
+
                 //ELSE ----------------------------------------by Regionssssssssssssssssssssssssssssssssssssssssssssssssssss
+
             } else {
+
+
 
                 $tbl = DB::table('client_details')
 
@@ -2244,7 +2844,13 @@ class ClientDetailController extends Controller
                     ->get();
 
                 $c1->put('today', $tbl);
+
+
+
                 $dtnow = $dtnow->addDay();
+
+
+
                 $tbl1 = DB::table('client_details')
 
                     ->join("clients", "client_details.client_id", "clients.id")
@@ -2270,6 +2876,9 @@ class ClientDetailController extends Controller
                     ->get();
 
                 $c1->put('tomorrow', $tbl1);
+
+
+
                 $tbl2 = DB::table('client_details')
 
                     ->join("clients", "client_details.client_id", "clients.id")
@@ -2295,6 +2904,9 @@ class ClientDetailController extends Controller
                     ->get();
 
                 $c1->put('week', $tbl2);
+
+
+
                 $tbl3 = DB::table('schedules')
 
                     ->join("client_details", "schedules.client_detail_id", "client_details.id")
@@ -2326,6 +2938,9 @@ class ClientDetailController extends Controller
                     ->get();
 
                 $c1->put('teama_prev', $tbl3);
+
+
+
                 $tbl4 = DB::table('schedules')
 
                     ->join("client_details", "schedules.client_detail_id", "client_details.id")
@@ -2356,6 +2971,9 @@ class ClientDetailController extends Controller
                     ->get();
 
                 $c1->put('teama_today', $tbl4);
+
+
+
                 $tbl5 = DB::table('schedules')
 
                     ->join("client_details", "schedules.client_detail_id", "client_details.id")
@@ -2387,6 +3005,9 @@ class ClientDetailController extends Controller
                     ->get();
 
                 $c1->put('teama_tom', $tbl5);
+
+
+
                 $tbl6 = DB::table('schedules')
 
                     ->join("client_details", "schedules.client_detail_id", "client_details.id")
@@ -2418,6 +3039,9 @@ class ClientDetailController extends Controller
                     ->get();
 
                 $c1->put('teamb_prev', $tbl6);
+
+
+
                 $tbl7 = DB::table('schedules')
 
                     ->join("client_details", "schedules.client_detail_id", "client_details.id")
@@ -2449,6 +3073,9 @@ class ClientDetailController extends Controller
                     ->get();
 
                 $c1->put('teamb_today', $tbl7);
+
+
+
                 $tbl8 = DB::table('schedules')
 
                     ->join("client_details", "schedules.client_detail_id", "client_details.id")
@@ -2481,6 +3108,17 @@ class ClientDetailController extends Controller
 
                 $c1->put('teamb_tom', $tbl8);
             }
+
+
+
+
+
+
+
+
+
+
+
             return $c1;
         } catch (\Exception $ex) {
 
@@ -2508,6 +3146,7 @@ class ClientDetailController extends Controller
         }
     }
     public function performance_sheet(Request $request)
+
     {
 
         if ($request->end == null)
@@ -3326,6 +3965,7 @@ class ClientDetailController extends Controller
 
         return response()->json($c1);
     }
+
     public function sales_graph(Request $request)
     {
 
@@ -3621,6 +4261,7 @@ class ClientDetailController extends Controller
         $c->put("overall_hit_rate", round($overall_hit_rate, 1) . "%");
         return response()->json($c);
     }
+
     public function log($date, $userID, $userName, $ControllerName, $functionName, $logType, $message)
     {
         $filenameDate = date("mY");
