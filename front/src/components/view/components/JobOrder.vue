@@ -9,20 +9,22 @@
             v-if="roles.create_job_order"
             type="button"
             class="btn btn-success btn-labeled pull-right margin-right-10"
-          >Create Job Order</button>
+          >
+            Create Job Order
+          </button>
         </p>
       </div>
 
       <div class="elClr panel-body">
-        <div style="display:flex;">
-          <div style="width:60%;">
+        <div style="display: flex">
+          <div style="width: 60%">
             <!-- search -->
             <b-row class="searchRow">
               <b-col>
                 <b-form-group>
                   <b-input-group>
                     <model-list-select
-                      style="width:25%"
+                      style="width: 25%"
                       :list="searchby_list"
                       v-model="searchby"
                       option-value="id"
@@ -32,7 +34,11 @@
 
                     <b-form-input
                       id="txtbox_filter"
-                      style="height:30px; margin-left:5px; border-radius:5px 0 0 5px"
+                      style="
+                        height: 30px;
+                        margin-left: 5px;
+                        border-radius: 5px 0 0 5px;
+                      "
                       v-model="tblFilter_copy"
                       v-on:keyup.enter="search_data"
                       placeholder="Search"
@@ -41,8 +47,13 @@
                     <b-input-group-append>
                       <b-button
                         @click="filterClear"
-                        style="width:100px;color:white;border-radius:0 5px 5px 0"
-                      >Clear</b-button>
+                        style="
+                          width: 100px;
+                          color: white;
+                          border-radius: 0 5px 5px 0;
+                        "
+                        >Clear</b-button
+                      >
                     </b-input-group-append>
                   </b-input-group>
                 </b-form-group>
@@ -50,38 +61,49 @@
             </b-row>
             <b-row class="searchRow">
               <b-col class="clientCol">
-                <label style="float:left;padding-left:7px;margin-top:3px">Filter by Date Finished</label>
+                <label style="float: left; padding-left: 7px; margin-top: 3px"
+                  >Filter by Date Finished</label
+                >
               </b-col>
-              <b-col style="margin-left:1px;margin-top:-4px;">
+              <b-col style="margin-left: 1px; margin-top: -4px">
                 <b-form-group>
                   <b-input-group>
-                    <rangedate-picker @selected="onDateSelected"></rangedate-picker>
+                    <rangedate-picker
+                      @selected="onDateSelected"
+                    ></rangedate-picker>
                     <button
                       @click="fnExcelReport('JobOrderTable')"
                       type="button"
                       class="btn btn-success"
-                      style="width:100px;color:white;border-radius:0 5px 5px 0;margin-left:-1px"
-                    >Export</button>
+                      style="
+                        width: 100px;
+                        color: white;
+                        border-radius: 0 5px 5px 0;
+                        margin-left: -1px;
+                      "
+                    >
+                      Export
+                    </button>
                   </b-input-group>
                 </b-form-group>
               </b-col>
             </b-row>
           </div>
           <!-- forecast -->
-          <div style="width:40%;">
+          <div style="width: 40%">
             <b-card
               border-variant="default"
               align="center"
-              style="width:100%;float:right;margin-right:15px"
+              style="width: 100%; float: right; margin-right: 15px"
               class="trend-bcard"
               bg-variant="light"
             >
               <header>
-                <p style="font-weight:bold">INSTALLATION FORECAST FOR TODAY</p>
+                <p style="font-weight: bold">INSTALLATION FORECAST FOR TODAY</p>
               </header>
 
-              <div class="top-records" style="display:flex;width:100%">
-                <div style="width:50%">
+              <div class="top-records" style="display: flex; width: 100%">
+                <div style="width: 50%">
                   <b-card no-body class="text-center">
                     <div class="text font-weight-bold">
                       <h5>{{ pendingTrend }}</h5>
@@ -90,7 +112,7 @@
                     </div>
                   </b-card>
                 </div>
-                <div style="width:50%">
+                <div style="width: 50%">
                   <b-card no-body class="text-center">
                     <div class="text font-weight-bold">
                       <h5>{{ activatedTrend }}</h5>
@@ -107,18 +129,21 @@
         </div>
 
         <!-- page options -->
-        <div class="row marginice" style="width:20%;float:left;margin-left:0">
+        <div
+          class="row marginice"
+          style="width: 20%; float: left; margin-left: 0"
+        >
           <b>Showing {{ perPage }} out of {{ totalRows }} entries</b>
         </div>
-        <div class="row marginice" style="width:10%;float:right">
+        <div class="row marginice" style="width: 10%; float: right">
           <b-row>
             <b-col>
-              <label style="float:right;margin-top:10px">Show</label>
+              <label style="float: right; margin-top: 10px">Show</label>
             </b-col>
-            <b-col style="width:80%">
+            <b-col style="width: 80%">
               <b-form-group class="mb-0">
                 <b-form-select
-                  style="height:30px;font-size:12px"
+                  style="height: 30px; font-size: 12px"
                   v-model="perPage"
                   :options="pageOptions"
                 ></b-form-select>
@@ -129,7 +154,7 @@
 
         <!-- Scheduler table -->
 
-        <div style="margin-top:10px">
+        <div style="margin-top: 10px">
           <b-table
             id="JobOrderTable"
             class="elClr"
@@ -193,7 +218,10 @@
           </div>
         </div>
 
-        <div class="rowFields mx-auto row stripe client" v-if="Job_Order.client_id != '0'">
+        <div
+          class="rowFields mx-auto row stripe client"
+          v-if="Job_Order.client_id != '0'"
+        >
           <div class="col-lg-3">
             <p class="textLabel">Account name:</p>
           </div>
@@ -202,14 +230,19 @@
               <b>
                 {{ Job_Order.client.name }}
                 <span v-if="Job_Order.client_details != null">
-                  <span v-if="Job_Order.client_details.line_transfer == 1">- Line Transfer</span>
+                  <span v-if="Job_Order.client_details.line_transfer == 1"
+                    >- Line Transfer</span
+                  >
                 </span>
               </b>
             </p>
           </div>
         </div>
 
-        <div class="rowFields mx-auto row client" v-if="Job_Order.client_id != '0'">
+        <div
+          class="rowFields mx-auto row client"
+          v-if="Job_Order.client_id != '0'"
+        >
           <div class="col-lg-3">
             <p class="textLabel">Address:</p>
           </div>
@@ -234,7 +267,10 @@
           </div>
         </div>
 
-        <div class="rowFields mx-auto row client" v-if="Job_Order.client_id == '0'">
+        <div
+          class="rowFields mx-auto row client"
+          v-if="Job_Order.client_id == '0'"
+        >
           <div class="col-lg-3">
             <p class="textLabel">Details :</p>
           </div>
@@ -251,7 +287,10 @@
           </div>
         </div>
 
-        <div class="rowFields mx-auto row stripe client" v-if="Job_Order.client_id == '0'">
+        <div
+          class="rowFields mx-auto row stripe client"
+          v-if="Job_Order.client_id == '0'"
+        >
           <div class="col-lg-3">
             <p class="textLabel">Location :</p>
           </div>
@@ -303,7 +342,8 @@
             <small
               class="text-danger pull-left"
               v-show="errors.has('foc_length')"
-            >Input valid number.</small>
+              >Input valid number.</small
+            >
           </div>
         </div>
 
@@ -418,20 +458,24 @@
         </div>
         <!-- /form -->
         <template slot="modal-footer" slot-scope="{}">
-          <b-button size="sm" variant="info" @click="printPreview">Print Preview</b-button>
+          <b-button size="sm" variant="info" @click="printPreview"
+            >Print Preview</b-button
+          >
 
           <b-button
             size="sm"
             variant="success"
             v-if="roles.update_job_order"
             @click="btnUpdate()"
-          >Update</b-button>
+            >Update</b-button
+          >
           <b-button
             size="sm"
             variant="danger"
             v-if="roles.delete_job_order"
             @click="btnDelete()"
-          >Delete</b-button>
+            >Delete</b-button
+          >
         </template>
       </b-modal>
       <!-- End modalEdit -->
@@ -453,7 +497,7 @@
           <div class="col-lg-3">
             <p class="textLabel">Project Description:</p>
           </div>
-          <div class="col-lg-9" style="margin-top:5px">
+          <div class="col-lg-9" style="margin-top: 5px">
             <p-radio
               class="p-icon p-curve p-jelly"
               name="radio11"
@@ -497,7 +541,7 @@
           <div class="col-lg-3">
             <p class="textLabel">Type:</p>
           </div>
-          <div class="col-lg-9" style="margin-top:5px">
+          <div class="col-lg-9" style="margin-top: 5px">
             <p-radio
               class="p-icon p-curve p-jelly"
               name="radio66"
@@ -539,7 +583,10 @@
           </div>
         </div>
 
-        <div class="rowFields mx-auto row client" v-if="Job_Order.job_order_type == 'Area'">
+        <div
+          class="rowFields mx-auto row client"
+          v-if="Job_Order.job_order_type == 'Area'"
+        >
           <div class="col-lg-3">
             <p class="textLabel">Details :</p>
           </div>
@@ -555,7 +602,10 @@
           </div>
         </div>
 
-        <div class="rowFields mx-auto row stripe client" v-if="Job_Order.job_order_type == 'Area'">
+        <div
+          class="rowFields mx-auto row stripe client"
+          v-if="Job_Order.job_order_type == 'Area'"
+        >
           <div class="col-lg-3">
             <p class="textLabel">Location :</p>
           </div>
@@ -604,7 +654,8 @@
             <small
               class="text-danger pull-left"
               v-show="errors.has('foc_length')"
-            >Input valid number.</small>
+              >Input valid number.</small
+            >
           </div>
         </div>
 
@@ -714,18 +765,20 @@
         </div>
         <!--Form-------->
         <template slot="modal-footer" slot-scope="{}">
-          <b-button size="sm" variant="success" @click="btnCreate()">Create</b-button>
+          <b-button size="sm" variant="success" @click="btnCreate()"
+            >Create</b-button
+          >
         </template>
       </b-modal>
       <!--modalAdd-------->
       <!-- scheduler table footer -->
       <div class="elClr panel-footer">
-        <div class="row" style="background-color:; padding:15px;">
-          <div class="col-md-8" style="background-color:;">
+        <div class="row" style="background-color: ; padding: 15px">
+          <div class="col-md-8" style="background-color: ">
             <span class="elClr">{{ totalRows }} item/s found.</span>
           </div>
 
-          <div class="col-md-4" style="background-color:;">
+          <div class="col-md-4" style="background-color: ">
             <b-pagination
               v-model="currentPage"
               :total-rows="totalRows"
@@ -753,7 +806,7 @@ export default {
     "model-list-select": ModelListSelect,
     "p-check": PrettyCheck,
     "p-radio": PrettyRadio,
-    "rangedate-picker": VueRangedatePicker
+    "rangedate-picker": VueRangedatePicker,
   },
   data() {
     return {
@@ -765,7 +818,7 @@ export default {
         {
           key: "client_id",
           label: "Client ID",
-          sortable: true
+          sortable: true,
         },
         { key: "client_detail_id", sortable: true },
         { key: "project_description", label: "Description", sortable: true },
@@ -774,14 +827,14 @@ export default {
         {
           key: "client.location",
           label: "Address",
-          formatter: value => {
+          formatter: (value) => {
             var temp = "";
             if (value != null) {
               if (value.length > 50) temp = "...";
               return value.slice(0, 50) + temp;
             } else return "";
           },
-          sortable: true
+          sortable: true,
         },
 
         { key: "client.contact", label: "Contact", sortable: true },
@@ -790,8 +843,8 @@ export default {
         { key: "engineer_in_charge.name", label: "In-charge", sortable: true },
         {
           key: "date_finished_formated",
-          label: "Date Finished"
-        }
+          label: "Date Finished",
+        },
       ],
       items: [],
       base_items: [],
@@ -811,7 +864,7 @@ export default {
       focLayoutOption: [
         { id: "Completed", name: "Completed" },
         { id: "Outdoor layout done", name: "Outdoor layout done" },
-        { id: "Indoor layout done", name: "Indoor layout done" }
+        { id: "Indoor layout done", name: "Indoor layout done" },
       ],
       otcOption: [
         { id: "Paid", name: "Paid" },
@@ -819,24 +872,24 @@ export default {
         { id: "Billing", name: "Billing" },
         { id: "Waived", name: "Waived" },
         { id: "Waiting for C&C advisory", name: "Waiting for C&C advisory" },
-        { id: "NTP", name: "NTP" }
+        { id: "NTP", name: "NTP" },
       ],
       cableCategoryOption: [
         { id: "Drop Fiber", name: "Drop Fiber" },
         { id: "Hard Fiber", name: "Hard Fiber" },
-        { id: "UTP", name: "Unshielded twisted pair (UTP)" }
+        { id: "UTP", name: "Unshielded twisted pair (UTP)" },
       ],
       AppliedDateoptions: {
         format: "YYYY-MM-DD",
-        useCurrent: false
+        useCurrent: false,
       },
       Job_Order: {
         client: {
           name: "",
-          location: ""
+          location: "",
         },
         client_details: {
-          line_transfer: null
+          line_transfer: null,
         },
         id: null,
         jo_num: null,
@@ -853,33 +906,33 @@ export default {
         engineer_in_charge: "",
         prepare: 3,
         approve: 2,
-        note: 1
+        note: 1,
       },
       roles: [],
 
       searchby_list: [
         {
           name: "Account Name(by account)",
-          id: "clients.name"
+          id: "clients.name",
         },
         {
           name: "Account Name(by area)",
-          id: "details"
+          id: "details",
         },
         {
           name: "Address (by account)",
-          id: "clients.location"
+          id: "clients.location",
         },
         {
           name: "Address (by area)",
-          id: "job_orders.location"
+          id: "job_orders.location",
         },
         {
           name: "J.O num (last 4 digit)",
-          id: "job_orders.jo_num"
-        }
+          id: "job_orders.jo_num",
+        },
       ],
-      searchby: "clients.name"
+      searchby: "clients.name",
     };
   },
   beforeCreate() {
@@ -901,7 +954,7 @@ export default {
     load_item() {
       this.$http
         .get("api/JobOrder/subIndex/" + this.user.region_id)
-        .then(function(response) {
+        .then(function (response) {
           console.log(response.body);
 
           this.items = response.body;
@@ -912,8 +965,8 @@ export default {
         });
     },
     load() {
-      this.$nextTick(function() {
-        setTimeout(function() {
+      this.$nextTick(function () {
+        setTimeout(function () {
           document.getElementById("accountsMenu").className =
             "customeDropDown dropdown-menu";
 
@@ -930,13 +983,13 @@ export default {
 
       this.$http
         .get("api/getClients/" + this.user.region_id)
-        .then(function(response) {
+        .then(function (response) {
           this.clients = response.body;
         });
 
       this.$http
         .post("api/clientDetail/getTrend/" + this.user.region_id)
-        .then(response => {
+        .then((response) => {
           console.log(response.body);
           this.pendingTrend = response.body.pendingTrend;
           this.activatedTrend = response.body.activatedTrend;
@@ -982,10 +1035,10 @@ export default {
       this.Job_Order = {
         client: {
           name: "",
-          location: ""
+          location: "",
         },
         client_details: {
-          line_transfer: null
+          line_transfer: null,
         },
         id: null,
         jo_num: null,
@@ -1002,12 +1055,12 @@ export default {
         engineer_in_charge: "",
         prepare: 3,
         approve: 2,
-        note: 1
+        note: 1,
       };
 
       this.$http
         .get("api/JobOrder/getMaxID/" + this.user.region_id)
-        .then(response => {
+        .then((response) => {
           var a = Number(response.body);
           this.Job_Order.jo_num = a + 1;
           // console.log(this.Job_Order.jo_num);
@@ -1025,78 +1078,83 @@ export default {
       return [year, month, day].join("-");
     },
     btnCreate() {
+      swal("not available right not");
+
       this.Job_Order.started = this.formatDate(this.Job_Order.started);
       this.Job_Order.finished = this.formatDate(this.Job_Order.finished);
-      if (this.Job_Order.engineer_in_charge != "") {
-        swal({
-          title: "Are you sure?",
-          text: "Do you really want to create job order?",
-          icon: "info",
-          buttons: ["No", "Yes"]
-        }).then(yes => {
-          if (yes) {
-            this.tblisBusy = true;
-            this.Job_Order.user_id = this.user.id;
-            this.Job_Order.user_name = this.user.name;
-            this.Job_Order.region_id1 = this.user.region_id;
-            this.$http.post("api/JobOrder", this.Job_Order).then(response => {
-              console.log(response.body);
-              this.tblisBusy = false;
-              this.$bvModal.hide("modalAdd");
-              this.items = response.body;
-              swal("Created", "", "success");
-              this.Job_Order = {
-                client: {
-                  name: "",
-                  location: ""
-                },
-                client_details: {
-                  line_transfer: null
-                },
-                id: null,
-                client_id: 0,
-                details: null,
-                location: null,
-                cable_category: "",
-                foc_length: "",
-                region_id: 1,
-                project_description: "Restoration",
-                job_order_type: "Account",
-                started: null,
-                finished: new Date(),
-                engineer_in_charge: "",
-                prepare: 3,
-                approve: 2,
-                note: 1
-              };
+      if (false)
+        if (this.Job_Order.engineer_in_charge != "") {
+          swal({
+            title: "Are you sure?",
+            text: "Do you really want to create job order?",
+            icon: "info",
+            buttons: ["No", "Yes"],
+          }).then((yes) => {
+            if (yes) {
+              this.tblisBusy = true;
+              this.Job_Order.user_id = this.user.id;
+              this.Job_Order.user_name = this.user.name;
+              this.Job_Order.region_id1 = this.user.region_id;
+              this.$http
+                .post("api/JobOrder", this.Job_Order)
+                .then((response) => {
+                  console.log(response.body);
+                  this.tblisBusy = false;
+                  this.$bvModal.hide("modalAdd");
+                  this.items = response.body;
+                  swal("Created", "", "success");
+                  this.Job_Order = {
+                    client: {
+                      name: "",
+                      location: "",
+                    },
+                    client_details: {
+                      line_transfer: null,
+                    },
+                    id: null,
+                    client_id: 0,
+                    details: null,
+                    location: null,
+                    cable_category: "",
+                    foc_length: "",
+                    region_id: 1,
+                    project_description: "Restoration",
+                    job_order_type: "Account",
+                    started: null,
+                    finished: new Date(),
+                    engineer_in_charge: "",
+                    prepare: 3,
+                    approve: 2,
+                    note: 1,
+                  };
 
-              this.base_items = this.items;
-            });
-          }
-        });
-      } else {
-        swal({
-          title: "Info",
-          text: "Please select Engineer in-charge",
-          icon: "info",
-          dangerMode: true
-        }).then(value => {
-          if (value) {
-          }
-        });
-      }
+                  this.base_items = this.items;
+                });
+            }
+          });
+        } else {
+          swal({
+            title: "Info",
+            text: "Please select Engineer in-charge",
+            icon: "info",
+            dangerMode: true,
+          }).then((value) => {
+            if (value) {
+            }
+          });
+        }
     },
     btnUpdate() {
       console.log(this.Job_Order);
-      this.$validator.validateAll().then(result => {
+      this.$validator.validateAll().then((result) => {
         if (result) {
           swal({
             title: "Are you sure?",
             text: "",
             icon: "warning",
             buttons: ["No", "Yes"],
-            dangerMode: true
-          }).then(update => {
+            dangerMode: true,
+          }).then((update) => {
             this.Job_Order.started = this.formatDate(this.Job_Order.started);
             if (this.Job_Order.finished != null)
               this.Job_Order.finished = this.formatDate(
@@ -1108,7 +1166,7 @@ export default {
               this.Job_Order.update_in = "jo";
               this.$http
                 .put("api/JobOrder/" + this.Job_Order.id, this.Job_Order)
-                .then(response => {
+                .then((response) => {
                   swal("Updated", "", "success");
                   this.$bvModal.hide("modalEdit");
                   this.base_items = this.items;
@@ -1126,8 +1184,8 @@ export default {
           text: "",
           icon: "warning",
           buttons: ["No", "Yes"],
-          dangerMode: true
-        }).then(willDelete => {
+          dangerMode: true,
+        }).then((willDelete) => {
           if (willDelete) {
             this.items = [];
             this.tblisBusy = true;
@@ -1136,20 +1194,20 @@ export default {
             this.Job_Order.region_id = this.user.region_id;
             this.$http
               .post("api/jobOrder/destroy1", this.Job_Order)
-              .then(response => {
+              .then((response) => {
                 this.$bvModal.hide("modalEdit");
                 swal("Deleted", "", "success");
                 this.items = response.body;
                 this.totalRows = this.items.length;
                 this.tblisBusy = false;
               })
-              .catch(response => {
+              .catch((response) => {
                 swal({
                   title: "Error",
                   text: response.body.error,
                   icon: "error",
-                  dangerMode: true
-                }).then(value => {
+                  dangerMode: true,
+                }).then((value) => {
                   if (value) {
                   }
                 });
@@ -1162,17 +1220,19 @@ export default {
           text: "You are not allow to delete a Sales",
           icon: "warning",
           buttons: true,
-          dangerMode: true
+          dangerMode: true,
         });
       }
     },
     onDateSelected(daterange) {
       this.tblisBusy = true;
-      this.$http.post("api/JobOrder/filterByDate", daterange).then(response => {
-        this.items = response.body;
-        this.totalRows = this.items.length;
-        this.tblisBusy = false;
-      });
+      this.$http
+        .post("api/JobOrder/filterByDate", daterange)
+        .then((response) => {
+          this.items = response.body;
+          this.totalRows = this.items.length;
+          this.tblisBusy = false;
+        });
     },
     changeColDisplay(check) {
       this.fields = [
@@ -1189,20 +1249,20 @@ export default {
               else return item.client.name;
             } else return item.client.name;
           },
-          sortable: true
+          sortable: true,
         },
 
         {
           key: "client.location",
           label: "Address",
-          formatter: value => {
+          formatter: (value) => {
             var temp = "";
             if (value != null) {
               if (value.length > 30) temp = "...";
               return value.slice(0, 30) + temp;
             } else return "";
           },
-          sortable: true
+          sortable: true,
         },
 
         { key: "client.contact", label: "Contact", sortable: true },
@@ -1211,15 +1271,15 @@ export default {
         { key: "engineer_in_charge.name", label: "In-charge", sortable: true },
         {
           key: "date_finished_formated",
-          label: "Date Finished"
-        }
+          label: "Date Finished",
+        },
       ];
 
       if (this.user.id == 1) {
         var temp = {
           key: "client_id",
           label: "Client ID",
-          sortable: true
+          sortable: true,
         };
         var temp1 = { key: "client_detail_id", sortable: true };
         this.fields.splice(2, 0, temp, temp1);
@@ -1245,13 +1305,13 @@ export default {
             "/" +
             this.tblFilter_copy
         )
-        .then(response => {
+        .then((response) => {
           console.log(response.body);
           this.items = response.body;
 
           this.totalRows = this.items.length;
         })
-        .catch(response => {
+        .catch((response) => {
           console.log(response);
         });
     },
@@ -1337,447 +1397,447 @@ export default {
       newWin.document.write("</head><body>");
       newWin.document.write(
         "<div>" +
-        '<div class="row">' +
-        '<div class="col-md-6">' + // first col
-        '<div style="text-align: center;" >' +
-        "<b>Dctech Micro Services Inc.</b>" +
-        "<br>Dctech Bldg. Ponciano Reyes St. Davao City" +
-        "<br>Tel. #: 082-221-2380 / Fax #: 082-221-2382" +
-        "</div>" +
-        "<br>" +
-        // "<br>" +
-        '<div class="borderbot-1 bordertop-2" style="text-align: center;">' +
-        "<span><b>SERVICE ORDER FORM</b></span>" +
-        "</div>" +
-        "<br>" +
-        '<div class="row">' + //row1
-        '<div class="col-md-5">' +
-        "Project Description: <span class='borderbot-05'>" +
-        this.Job_Order.project_description +
-        "</span>" +
-        "</div>" +
-        '<div class="col-md-5" style="text-align: right;">' +
-        "Control #: <span class='borderbot-05'>" +
-        this.Job_Order.jo_num +
-        "</span>" +
-        "</div>" +
-        "</div>" + //end row1
-        "<br>" +
-        '<div class="borderbot-1 bordertop-1" style="text-align: center;">' +
-        "<span><b>CLIENT INFORMATION</b></span>" +
-        "</div>" +
-        "<br>" +
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-2">' +
-        "Account Name:" +
-        "</div>" +
-        '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
-        this.Job_Order.client.name +
-        linetransfer +
-        "," +
-        this.Job_Order.client.contact +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-2">' +
-        "Address:" +
-        "</div>" +
-        '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
-        location +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-2">' +
-        "Date Started:" +
-        "</div>" +
-        '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
-        this.Job_Order.date_started_formated +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-2">' +
-        "Date Finished:" +
-        "</div>" +
-        '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
-        this.Job_Order.date_finished_formated +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        "<br>" +
-        '<div class="borderbot-1 bordertop-1"  style="text-align: center;">' +
-        "<span><b>SERVICE REPORT</b></span>" +
-        "</div>" +
-        "<br>" +
-        //SERVICE REPORT ----- SERVICE REPORT ----- SERVICE REPORT----- SERVICE REPORT
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Dctech Region:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        this.Job_Order.region.name +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Cable Category:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        this.Job_Order.cable_category +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Estimated Distance(m):" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        this.Job_Order.foc_length +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Actual Distance(m):" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        "" +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Rx Power:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        "" +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        "<br>" +
-        '<div class="borderbot-1" style="text-align: center;">' +
-        "</div>" +
-        "<br>" +
-        // "<br>" +
-        //Engineer In-Charge:
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Engineer In-Charge:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: center;">' +
-        engineer_in_charge_sign +
-        this.Job_Order.engineer.user.name +
-        "</div>" +
-        "</div>" +
-        '<div class="row">' +
-        '<div class="col-md-3">' +
-        "" +
-        "</div>" +
-        '<div class="col-md-7"  style="text-align: center;">' +
-        "Signature over Printed Name" +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        "<br>" +
-        // "<br>" +
-        //Contractor/Lineman:
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Contractor/Lineman:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: center;">' +
-        "" +
-        "</div>" +
-        "</div>" +
-        '<div class="row">' +
-        '<div class="col-md-3">' +
-        "" +
-        "</div>" +
-        '<div class="col-md-7"  style="text-align: center;">' +
-        "Signature over Printed Name" +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        "<br>" +
-        '<div class="row">' + //row1
-        '<div class="col-md-5" style="text-align: center;">' +
-        "<div>Prepared by:</div>" +
-        prepare_sign +
-        "</div>" +
-        '<div class="col-md-5" style="text-align: center;">' +
-        "<div>Approved by:</div>" +
-        approve_sign +
-        "</div>" +
-        "</div>" + //end row1
-        //
-        "<br>" +
-        '<div class="row">' + //row1
-        '<div class="col-md-5" style="text-align: center;">' +
-        '<span class="borderbot-1" >' +
-        this.Job_Order.prepare_engineer.user.name +
-        "</span>" +
-        "</div>" +
-        '<div class="col-md-5" style="text-align: center;">' +
-        '<span class="borderbot-1">' +
-        this.Job_Order.approve_engineer.user.name +
-        "</span>" +
-        "</div>" +
-        "</div>" + //end row1
-        //
-        '<div class="row">' + //row1
-        '<div class="col-md-5" style="text-align: center;">' +
-        this.Job_Order.prepare_engineer.position +
-        "</div>" +
-        '<div class="col-md-5" style="text-align: center;">' +
-        this.Job_Order.approve_engineer.position +
-        "</div>" +
-        "</div>" + //end row1
-        //
-        "<br>" +
-        '<div class=""  style="text-align: center;">' +
-        "<div>Noted by:</div>" +
-        note_sign +
-        "</div>" +
-        //
-        //
-        "<br>" +
-        '<div   style="text-align: center;">' +
-        '<span class="borderbot-1" >' +
-        this.Job_Order.note_engineer.user.name +
-        "</span>" +
-        "</div>" +
-        '<div class=""  style="text-align: center;">' +
-        "<span>" +
-        this.Job_Order.note_engineer.position +
-        "</span>" +
-        "</div>" +
-        "</div>" + // end first col
-        //
-        //
-        //
-        //
-        //second
-        '<div class="col-md-6 borderleft-2">' + // second col
-        '<div style="text-align: center;" >' +
-        "<b>Dctech Micro Services Inc.</b>" +
-        "<br>Dctech Bldg. Ponciano Reyes St. Davao City" +
-        "<br>Tel. #: 082-221-2380 / Fax #: 082-221-2382" +
-        "</div>" +
-        "<br>" +
-        '<div class="borderbot-1 bordertop-2" style="text-align: center;">' +
-        "<span><b>SERVICE ORDER FORM</b></span>" +
-        "</div>" +
-        "<br>" +
-        '<div class="row">' + //row1
-        '<div class="col-md-5">' +
-        "Project Description: <span class='borderbot-05'>" +
-        this.Job_Order.project_description +
-        "</span>" +
-        "</div>" +
-        '<div class="col-md-5" style="text-align: right;">' +
-        "Control #: <span class='borderbot-05'>" +
-        this.Job_Order.jo_num +
-        "</span>" +
-        "</div>" +
-        "</div>" + //end row1
-        "<br>" +
-        '<div class="borderbot-1 bordertop-1" style="text-align: center;">' +
-        "<span><b>CLIENT INFORMATION</b></span>" +
-        "</div>" +
-        "<br>" +
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-2">' +
-        "Account Name:" +
-        "</div>" +
-        '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
-        this.Job_Order.client.name +
-        linetransfer +
-        "," +
-        this.Job_Order.client.contact +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-2">' +
-        "Address:" +
-        "</div>" +
-        '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
-        location +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-2">' +
-        "Date Started:" +
-        "</div>" +
-        '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
-        this.Job_Order.date_started_formated +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-2">' +
-        "Date Finished:" +
-        "</div>" +
-        '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
-        this.Job_Order.date_finished_formated +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        "<br>" +
-        '<div class="borderbot-1 bordertop-1"  style="text-align: center;">' +
-        "<span><b>SERVICE REPORT</b></span>" +
-        "</div>" +
-        "<br>" +
-        //SERVICE REPORT ----- SERVICE REPORT ----- SERVICE REPORT----- SERVICE REPORT
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Dctech Region:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        this.Job_Order.region.name +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Cable Category:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        this.Job_Order.cable_category +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Estimated Distance (m)" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        this.Job_Order.foc_length +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Actual Distance (m)" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        "" +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Rx Power:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        "" +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        "<br>" +
-        '<div class="borderbot-1" style="text-align: center;">' +
-        "</div>" +
-        "<br>" +
-        // "<br>" +
-        //Engineer In-Charge:
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Engineer In-Charge:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: center;">' +
-        engineer_in_charge_sign +
-        this.Job_Order.engineer.user.name +
-        "</div>" +
-        "</div>" +
-        '<div class="row">' +
-        '<div class="col-md-3">' +
-        "" +
-        "</div>" +
-        '<div class="col-md-7"  style="text-align: center;">' +
-        "Signature over Printed Name" +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        "<br>" +
-        // "<br>" +
-        //Contractor/Lineman:
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Contractor/Lineman:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: center;">' +
-        "" +
-        "</div>" +
-        "</div>" +
-        '<div class="row">' +
-        '<div class="col-md-3">' +
-        "" +
-        "</div>" +
-        '<div class="col-md-7"  style="text-align: center;">' +
-        "Signature over Printed Name" +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        "<br>" +
-        '<div class="row">' + //row1
-        '<div class="col-md-5" style="text-align: center;">' +
-        "Prepared by:" +
-        prepare_sign +
-        "</div>" +
-        '<div class="col-md-5" style="text-align: center;">' +
-        "Approved by:" +
-        approve_sign +
-        "</div>" +
-        "</div>" + //end row1
-        //
-        "<br>" +
-        '<div class="row">' + //row1
-        '<div class="col-md-5" style="text-align: center;">' +
-        '<span class="borderbot-1" >' +
-        this.Job_Order.prepare_engineer.user.name +
-        "</span>" +
-        "</div>" +
-        '<div class="col-md-5" style="text-align: center;">' +
-        '<span class="borderbot-1" >' +
-        this.Job_Order.approve_engineer.user.name +
-        "</span>" +
-        "</div>" +
-        "</div>" + //end row1
-        //
-        '<div class="row">' + //row1
-        '<div class="col-md-5" style="text-align: center;">' +
-        this.Job_Order.prepare_engineer.position +
-        "</div>" +
-        '<div class="col-md-5" style="text-align: center;">' +
-        this.Job_Order.approve_engineer.position +
-        "</div>" +
-        "</div>" + //end row1
-        //
-        "<br>" +
-        '<div class=""  style="text-align: center;">' +
-        "<span>Noted by:</span>" +
-        note_sign +
-        "</div>" +
-        //
-        //
-        "<br>" +
-        '<div   style="text-align: center;">' +
-        '<span class="borderbot-1" >' +
-        this.Job_Order.note_engineer.user.name +
-        "</span>" +
-        "</div>" +
-        '<div class=""  style="text-align: center;">' +
-        "<span>" +
-        this.Job_Order.note_engineer.position +
-        "</span>" +
-        "</div>" +
-        "</div>" + // end second col
+          '<div class="row">' +
+          '<div class="col-md-6">' + // first col
+          '<div style="text-align: center;" >' +
+          "<b>Dctech Micro Services Inc.</b>" +
+          "<br>Dctech Bldg. Ponciano Reyes St. Davao City" +
+          "<br>Tel. #: 082-221-2380 / Fax #: 082-221-2382" +
+          "</div>" +
+          "<br>" +
+          // "<br>" +
+          '<div class="borderbot-1 bordertop-2" style="text-align: center;">' +
+          "<span><b>SERVICE ORDER FORM</b></span>" +
+          "</div>" +
+          "<br>" +
+          '<div class="row">' + //row1
+          '<div class="col-md-5">' +
+          "Project Description: <span class='borderbot-05'>" +
+          this.Job_Order.project_description +
+          "</span>" +
+          "</div>" +
+          '<div class="col-md-5" style="text-align: right;">' +
+          "Control #: <span class='borderbot-05'>" +
+          this.Job_Order.jo_num +
+          "</span>" +
+          "</div>" +
+          "</div>" + //end row1
+          "<br>" +
+          '<div class="borderbot-1 bordertop-1" style="text-align: center;">' +
+          "<span><b>CLIENT INFORMATION</b></span>" +
+          "</div>" +
+          "<br>" +
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-2">' +
+          "Account Name:" +
+          "</div>" +
+          '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
+          this.Job_Order.client.name +
+          linetransfer +
+          "," +
+          this.Job_Order.client.contact +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-2">' +
+          "Address:" +
+          "</div>" +
+          '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
+          location +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-2">' +
+          "Date Started:" +
+          "</div>" +
+          '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
+          this.Job_Order.date_started_formated +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-2">' +
+          "Date Finished:" +
+          "</div>" +
+          '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
+          this.Job_Order.date_finished_formated +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          "<br>" +
+          '<div class="borderbot-1 bordertop-1"  style="text-align: center;">' +
+          "<span><b>SERVICE REPORT</b></span>" +
+          "</div>" +
+          "<br>" +
+          //SERVICE REPORT ----- SERVICE REPORT ----- SERVICE REPORT----- SERVICE REPORT
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Dctech Region:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          this.Job_Order.region.name +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Cable Category:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          this.Job_Order.cable_category +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Estimated Distance(m):" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          this.Job_Order.foc_length +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Actual Distance(m):" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          "" +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Rx Power:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          "" +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          "<br>" +
+          '<div class="borderbot-1" style="text-align: center;">' +
+          "</div>" +
+          "<br>" +
+          // "<br>" +
+          //Engineer In-Charge:
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Engineer In-Charge:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: center;">' +
+          engineer_in_charge_sign +
+          this.Job_Order.engineer.user.name +
+          "</div>" +
+          "</div>" +
+          '<div class="row">' +
+          '<div class="col-md-3">' +
+          "" +
+          "</div>" +
+          '<div class="col-md-7"  style="text-align: center;">' +
+          "Signature over Printed Name" +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          "<br>" +
+          // "<br>" +
+          //Contractor/Lineman:
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Contractor/Lineman:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: center;">' +
+          "" +
+          "</div>" +
+          "</div>" +
+          '<div class="row">' +
+          '<div class="col-md-3">' +
+          "" +
+          "</div>" +
+          '<div class="col-md-7"  style="text-align: center;">' +
+          "Signature over Printed Name" +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          "<br>" +
+          '<div class="row">' + //row1
+          '<div class="col-md-5" style="text-align: center;">' +
+          "<div>Prepared by:</div>" +
+          prepare_sign +
+          "</div>" +
+          '<div class="col-md-5" style="text-align: center;">' +
+          "<div>Approved by:</div>" +
+          approve_sign +
+          "</div>" +
+          "</div>" + //end row1
+          //
+          "<br>" +
+          '<div class="row">' + //row1
+          '<div class="col-md-5" style="text-align: center;">' +
+          '<span class="borderbot-1" >' +
+          this.Job_Order.prepare_engineer.user.name +
+          "</span>" +
+          "</div>" +
+          '<div class="col-md-5" style="text-align: center;">' +
+          '<span class="borderbot-1">' +
+          this.Job_Order.approve_engineer.user.name +
+          "</span>" +
+          "</div>" +
+          "</div>" + //end row1
+          //
+          '<div class="row">' + //row1
+          '<div class="col-md-5" style="text-align: center;">' +
+          this.Job_Order.prepare_engineer.position +
+          "</div>" +
+          '<div class="col-md-5" style="text-align: center;">' +
+          this.Job_Order.approve_engineer.position +
+          "</div>" +
+          "</div>" + //end row1
+          //
+          "<br>" +
+          '<div class=""  style="text-align: center;">' +
+          "<div>Noted by:</div>" +
+          note_sign +
+          "</div>" +
+          //
+          //
+          "<br>" +
+          '<div   style="text-align: center;">' +
+          '<span class="borderbot-1" >' +
+          this.Job_Order.note_engineer.user.name +
+          "</span>" +
+          "</div>" +
+          '<div class=""  style="text-align: center;">' +
+          "<span>" +
+          this.Job_Order.note_engineer.position +
+          "</span>" +
+          "</div>" +
+          "</div>" + // end first col
+          //
+          //
+          //
+          //
+          //second
+          '<div class="col-md-6 borderleft-2">' + // second col
+          '<div style="text-align: center;" >' +
+          "<b>Dctech Micro Services Inc.</b>" +
+          "<br>Dctech Bldg. Ponciano Reyes St. Davao City" +
+          "<br>Tel. #: 082-221-2380 / Fax #: 082-221-2382" +
+          "</div>" +
+          "<br>" +
+          '<div class="borderbot-1 bordertop-2" style="text-align: center;">' +
+          "<span><b>SERVICE ORDER FORM</b></span>" +
+          "</div>" +
+          "<br>" +
+          '<div class="row">' + //row1
+          '<div class="col-md-5">' +
+          "Project Description: <span class='borderbot-05'>" +
+          this.Job_Order.project_description +
+          "</span>" +
+          "</div>" +
+          '<div class="col-md-5" style="text-align: right;">' +
+          "Control #: <span class='borderbot-05'>" +
+          this.Job_Order.jo_num +
+          "</span>" +
+          "</div>" +
+          "</div>" + //end row1
+          "<br>" +
+          '<div class="borderbot-1 bordertop-1" style="text-align: center;">' +
+          "<span><b>CLIENT INFORMATION</b></span>" +
+          "</div>" +
+          "<br>" +
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-2">' +
+          "Account Name:" +
+          "</div>" +
+          '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
+          this.Job_Order.client.name +
+          linetransfer +
+          "," +
+          this.Job_Order.client.contact +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-2">' +
+          "Address:" +
+          "</div>" +
+          '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
+          location +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-2">' +
+          "Date Started:" +
+          "</div>" +
+          '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
+          this.Job_Order.date_started_formated +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-2">' +
+          "Date Finished:" +
+          "</div>" +
+          '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
+          this.Job_Order.date_finished_formated +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          "<br>" +
+          '<div class="borderbot-1 bordertop-1"  style="text-align: center;">' +
+          "<span><b>SERVICE REPORT</b></span>" +
+          "</div>" +
+          "<br>" +
+          //SERVICE REPORT ----- SERVICE REPORT ----- SERVICE REPORT----- SERVICE REPORT
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Dctech Region:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          this.Job_Order.region.name +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Cable Category:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          this.Job_Order.cable_category +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Estimated Distance (m)" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          this.Job_Order.foc_length +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Actual Distance (m)" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          "" +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Rx Power:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          "" +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          "<br>" +
+          '<div class="borderbot-1" style="text-align: center;">' +
+          "</div>" +
+          "<br>" +
+          // "<br>" +
+          //Engineer In-Charge:
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Engineer In-Charge:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: center;">' +
+          engineer_in_charge_sign +
+          this.Job_Order.engineer.user.name +
+          "</div>" +
+          "</div>" +
+          '<div class="row">' +
+          '<div class="col-md-3">' +
+          "" +
+          "</div>" +
+          '<div class="col-md-7"  style="text-align: center;">' +
+          "Signature over Printed Name" +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          "<br>" +
+          // "<br>" +
+          //Contractor/Lineman:
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Contractor/Lineman:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: center;">' +
+          "" +
+          "</div>" +
+          "</div>" +
+          '<div class="row">' +
+          '<div class="col-md-3">' +
+          "" +
+          "</div>" +
+          '<div class="col-md-7"  style="text-align: center;">' +
+          "Signature over Printed Name" +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          "<br>" +
+          '<div class="row">' + //row1
+          '<div class="col-md-5" style="text-align: center;">' +
+          "Prepared by:" +
+          prepare_sign +
+          "</div>" +
+          '<div class="col-md-5" style="text-align: center;">' +
+          "Approved by:" +
+          approve_sign +
+          "</div>" +
+          "</div>" + //end row1
+          //
+          "<br>" +
+          '<div class="row">' + //row1
+          '<div class="col-md-5" style="text-align: center;">' +
+          '<span class="borderbot-1" >' +
+          this.Job_Order.prepare_engineer.user.name +
+          "</span>" +
+          "</div>" +
+          '<div class="col-md-5" style="text-align: center;">' +
+          '<span class="borderbot-1" >' +
+          this.Job_Order.approve_engineer.user.name +
+          "</span>" +
+          "</div>" +
+          "</div>" + //end row1
+          //
+          '<div class="row">' + //row1
+          '<div class="col-md-5" style="text-align: center;">' +
+          this.Job_Order.prepare_engineer.position +
+          "</div>" +
+          '<div class="col-md-5" style="text-align: center;">' +
+          this.Job_Order.approve_engineer.position +
+          "</div>" +
+          "</div>" + //end row1
+          //
+          "<br>" +
+          '<div class=""  style="text-align: center;">' +
+          "<span>Noted by:</span>" +
+          note_sign +
+          "</div>" +
+          //
+          //
+          "<br>" +
+          '<div   style="text-align: center;">' +
+          '<span class="borderbot-1" >' +
+          this.Job_Order.note_engineer.user.name +
+          "</span>" +
+          "</div>" +
+          '<div class=""  style="text-align: center;">' +
+          "<span>" +
+          this.Job_Order.note_engineer.position +
+          "</span>" +
+          "</div>" +
+          "</div>" + // end second col
           //
           "</div>" +
           "</div>"
@@ -1792,9 +1852,9 @@ export default {
     fnExcelReport(tbl) {
       this.currentPage = 1;
       this.perPage = this.totalRows;
-      this.$nextTick(function() {
+      this.$nextTick(function () {
         setTimeout(
-          function() {
+          function () {
             var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
             var textRange;
             var j = 0;
@@ -1835,8 +1895,8 @@ export default {
           1000
         );
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

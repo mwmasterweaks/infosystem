@@ -1940,7 +1940,11 @@
         v-bind:data="window_details"
       ></scheduler_closure_marker>
     </div>
-
+    <client_modals
+      v-bind:data="cModalData"
+      v-bind:packages="packages"
+      v-bind:client="editClient"
+    ></client_modals>
     <modal_fsr v-bind:data="fsr_data"></modal_fsr>
   </div>
 </template>
@@ -1953,6 +1957,7 @@ import datePicker from "vue-bootstrap-datetimepicker";
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 import modal_inst_filter from "../../modal_vue/modal_inst_filter.vue";
 import scheduler_closure_marker from "../../modal_vue/scheduler_closure_marker.vue";
+import client_modals from "../../modal_vue/client_modals.vue";
 
 import modal_fsr from "../../modal_vue/modal_fsr.vue";
 
@@ -1964,10 +1969,17 @@ export default {
     modal_inst_filter: modal_inst_filter,
     "p-check": PrettyCheck,
     "p-radio": PrettyRadio,
+    client_modals: client_modals,
     modal_fsr: modal_fsr,
   },
   data() {
     return {
+      cModalData: {
+        field: 0,
+        items: [],
+      },
+      packages: [],
+      editClient: {},
       user: [],
       teams: [],
       doneLoad: true,
@@ -2640,36 +2652,39 @@ export default {
       });
     },
     updateDateClicked(bvModalEvt) {
-      bvModalEvt.preventDefault();
-      this.$validator.validateAll().then((result) => {
-        if (result) {
-          if (
-            this.client_update_target_date.target_date != "" ||
-            this.client_update_target_date.team_only != ""
-          ) {
-            // if (
-            //   this.formatDate(this.client_update_target_date.target_date) >=
-            //   this.datenow
-            // )
+      swal("not available right not");
+      if (false) {
+        bvModalEvt.preventDefault();
+        this.$validator.validateAll().then((result) => {
+          if (result) {
             if (
-              this.client_update_target_date.team_id != "" ||
-              this.client_update_target_date.date_only == true
+              this.client_update_target_date.target_date != "" ||
+              this.client_update_target_date.team_only != ""
             ) {
-              if (this.client_update_target_date.inst_remarks_temp != "") {
-                if (this.client_update_target_date.inst_remarks != "")
-                  this.client_update_target_date.inst_remarks += ",\n";
-                this.client_update_target_date.inst_remarks +=
-                  "-Change schedule remarks: " +
-                  this.client_update_target_date.inst_remarks_temp;
-              }
+              // if (
+              //   this.formatDate(this.client_update_target_date.target_date) >=
+              //   this.datenow
+              // )
+              if (
+                this.client_update_target_date.team_id != "" ||
+                this.client_update_target_date.date_only == true
+              ) {
+                if (this.client_update_target_date.inst_remarks_temp != "") {
+                  if (this.client_update_target_date.inst_remarks != "")
+                    this.client_update_target_date.inst_remarks += ",\n";
+                  this.client_update_target_date.inst_remarks +=
+                    "-Change schedule remarks: " +
+                    this.client_update_target_date.inst_remarks_temp;
+                }
 
-              this.updateTargetDate();
-            } else swal("Ops.", "Please select team", "warning");
-            // else
-            //   swal("Ops.", "Please select present or future dates only", "warning");
-          } else swal("Ops.", "Please select date first", "warning");
-        }
-      });
+                this.updateTargetDate();
+              } else swal("Ops.", "Please select team", "warning");
+              // else
+              //   swal("Ops.", "Please select present or future dates only", "warning");
+            } else swal("Ops.", "Please select date first", "warning");
+          }
+        });
+      }
     },
     updateTargetDate() {
       console.log(this.client_update_target_date);
@@ -2894,70 +2909,71 @@ export default {
       return [year, month, day].join("-");
     },
     btnCreateJO() {
-      console.log(this.Job_Order);
-      if (this.Job_Order.engineer_in_charge != "") {
-        if (this.Job_Order.region_id != null) {
-          swal({
-            title: "Are you sure?",
-            text: "",
-            icon: "info",
-            buttons: ["No", "Yes"],
-          }).then((yes) => {
-            if (yes) {
-              this.tblisBusy = true;
-              this.$root.$emit("pageLoading");
-              this.Job_Order.user_id = this.user.id;
-              this.Job_Order.user_name = this.user.name;
-              this.Job_Order.region_id1 = this.user.region_id;
-              this.$http
-                .post("api/clientDetail/storeJobOrder", this.Job_Order)
-                .then((response) => {
-                  this.tblisBusy = false;
-                  this.$root.$emit("pageLoaded");
-                  this.$bvModal.hide("modal-create-job-order");
-                  this.items = response.body;
-                  swal("Created", "", "success");
-                  this.Job_Order = {
-                    id: null,
-                    client_id: null,
-                    region_id: null,
-                    region_id1: null,
-                    project_description: "Installation",
-                    started: null,
-                    engineer_in_charge: "",
-                    prepare: 3,
-                    approve: 2,
-                    note: 1,
-                  };
-                })
-                .catch((response) => {
-                  this.tblisBusy = false;
-                  this.$root.$emit("pageLoaded");
-                  swal({
-                    title: "Error",
-                    text: response.body.error,
-                    icon: "error",
-                    dangerMode: true,
+      swal("not available right not");
+      if (false)
+        if (this.Job_Order.engineer_in_charge != "") {
+          if (this.Job_Order.region_id != null) {
+            swal({
+              title: "Are you sure?",
+              text: "",
+              icon: "info",
+              buttons: ["No", "Yes"],
+            }).then((yes) => {
+              if (yes) {
+                this.tblisBusy = true;
+                this.$root.$emit("pageLoading");
+                this.Job_Order.user_id = this.user.id;
+                this.Job_Order.user_name = this.user.name;
+                this.Job_Order.region_id1 = this.user.region_id;
+                this.$http
+                  .post("api/clientDetail/storeJobOrder", this.Job_Order)
+                  .then((response) => {
+                    this.tblisBusy = false;
+                    this.$root.$emit("pageLoaded");
+                    this.$bvModal.hide("modal-create-job-order");
+                    this.items = response.body;
+                    swal("Created", "", "success");
+                    this.Job_Order = {
+                      id: null,
+                      client_id: null,
+                      region_id: null,
+                      region_id1: null,
+                      project_description: "Installation",
+                      started: null,
+                      engineer_in_charge: "",
+                      prepare: 3,
+                      approve: 2,
+                      note: 1,
+                    };
+                  })
+                  .catch((response) => {
+                    this.tblisBusy = false;
+                    this.$root.$emit("pageLoaded");
+                    swal({
+                      title: "Error",
+                      text: response.body.error,
+                      icon: "error",
+                      dangerMode: true,
+                    });
                   });
-                });
-            }
-          });
+              }
+            });
+          } else {
+            swal({
+              title: "Info",
+              text: "Please select region",
+              icon: "info",
+              dangerMode: true,
+            });
+          }
         } else {
           swal({
             title: "Info",
-            text: "Please select region",
+            text: "This client has no Engineer incharge",
             icon: "info",
             dangerMode: true,
           });
         }
-      } else {
-        swal({
-          title: "Info",
-          text: "This client has no Engineer incharge",
-          icon: "info",
-          dangerMode: true,
-        });
-      }
     },
     btnDeleteJO() {
       swal({
@@ -3045,11 +3061,6 @@ export default {
           },
         },
         {
-          key: "client1.region.name",
-          label: "Region",
-          sortable: true,
-        },
-        {
           key: "client1.area.name",
           label: "Area",
           sortable: true,
@@ -3060,8 +3071,6 @@ export default {
           sortable: true,
         },
       ];
-
-      this.fields.push(temp);
 
       if ("colLocation" == check) {
         this.colLocation = !this.colLocation;
@@ -3797,59 +3806,10 @@ export default {
       }
     },
     fnExcelReport(tbl) {
-      this.changeColDisplay("export");
-      this.currentPage = 1;
-      this.perPage = this.totalRows;
-      this.$global.excelReportCSV(tbl, "client installation");
-      /*
-      this.$nextTick(function () {
-        setTimeout(
-          function () {
-            var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
-            var textRange;
-            var j = 0;
-            var tab = document.getElementById(tbl); // id of table
-
-            for (j = 0; j < tab.rows.length; j++) {
-              tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
-              //tab_text=tab_text+"</tr>";
-            }
-
-            tab_text = tab_text + "</table>";
-            tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, ""); //remove if u want links in your table
-            tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
-            tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
-
-            var ua = window.navigator.userAgent;
-            var msie = ua.indexOf("MSIE ");
-
-            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
-              // If Internet Explorer
-              txtArea1.document.open("txt/html", "replace");
-              txtArea1.document.write(tab_text);
-              txtArea1.document.close();
-              txtArea1.focus();
-              var sa = txtArea1.document.execCommand(
-                "SaveAs",
-                true,
-                "Say Thanks to Sumit.xls"
-              );
-            } //other browser not tested on IE 11
-            else
-              var sa = window.open(
-                "data:application/vnd.ms-excel," + encodeURIComponent(tab_text)
-              );
-            this.perPage = 6;
-            this.changeColDisplay("");
-            return sa;
-          }.bind(this),
-          1000
-        );
-      });
-*/
-      // this.$nextTick(function() {
-      //   setTimeout(this.changeColDisplay(""), 3000);
-      // });
+      this.cModalData.field = 5;
+      this.cModalData.items = this.items;
+      this.$global.excelReportCSV("genTable1", "client installation",this);
+      //this.excelReportCSV("genTable1", "client installation");
     },
     mousemove(e) {
       var scrol = document.getElementById("scrollmenuContainer");

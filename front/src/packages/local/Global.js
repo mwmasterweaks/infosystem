@@ -207,8 +207,8 @@ export default function(Vue) {
       var converted_date = date.toISOString().split("T")[0];
       return converted_date;
     },
-    excelReportCSV(tbl, name) {
-      this.$nextTick(function() {
+    excelReportCSV(tbl, name, thiscall) {
+      thiscall.$nextTick(function() {
         setTimeout(
           function() {
             var csv_data = [];
@@ -237,15 +237,35 @@ export default function(Vue) {
             }
             // combine each row data with new line character
             csv_data = csv_data.join("\n");
-            this.downloadCSVFile(csv_data, name);
-            /* We will use this function later to download
+            // Create CSV file object and feed our
+            // csv_data into it
+            var CSVFile = new Blob([csv_data], { type: "text/csv" });
+
+            // Create to temporary link to initiate
+            // download process
+            var temp_link = document.createElement("a");
+
+            // Download csv file
+            temp_link.download = name + ".csv";
+            var url = window.URL.createObjectURL(CSVFile);
+            temp_link.href = url;
+
+            // This link should not be displayed
+            temp_link.style.display = "none";
+            document.body.appendChild(temp_link);
+
+            // Automatically click the link to trigger download
+            temp_link.click();
+            document.body.removeChild(temp_link);
+            /* We will use thiscall function later to download
             the data in a csv file downloadCSVFile(csv_data);
             */
-          }.bind(this),
+          }.bind(thiscall),
           1000
         );
       });
-    }
+    },
+    downloadCSVFile(csv_data, name) {}
   };
 
   Object.defineProperties(Vue.prototype, {

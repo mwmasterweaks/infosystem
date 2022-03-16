@@ -309,6 +309,28 @@ export default {
           { key: "info_client.mrr", label: "is_mrr" },
           { key: "info_client.status", label: "is_status" },
         ],
+        [
+          { key: "JobOrder.jo_num", label: "Job #" },
+          { key: "status1.target_date", label: "Installation Date" },
+          {
+            key: "account_name",
+            label: "Account Name",
+            formatter: (value, key, item) => {
+              if (item.line_transfer)
+                return item.client1.name + " - Line Transfer";
+              else return item.client1.name;
+            },
+          },
+          { key: "client1.region.name", label: "Region" },
+          { key: "client1.area.name", label: "Area" },
+          { key: "client1.branch.name", label: "Branch" },
+          { key: "client1.contract", label: "Contract" },
+          { key: "aging", label: "OTC" },
+          { key: "agingCount", label: "Aging" },
+          { key: "created_at" },
+          { key: "date_activated" },
+          { key: "id" },
+        ],
       ],
       user: [],
       cp: {
