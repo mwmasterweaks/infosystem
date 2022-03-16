@@ -8,14 +8,18 @@
             @click="reload_data"
             type="button"
             class="btn btn-success btn-labeled pull-right margin-right-10"
-          >Reload data</button>
+          >
+            Reload data
+          </button>
 
           <button
             @click="OpenModalAdd"
             v-if="roles.create_client_details"
             type="button"
             class="btn btn-success btn-labeled pull-right margin-right-10"
-          >Create schedule</button>
+          >
+            Create schedule
+          </button>
 
           <router-link tag="span" to="/JobOrder" v-if="roles.create_job_order">
             <button
@@ -23,21 +27,23 @@
               v-if="roles.create_job_order"
               type="button"
               class="btn btn-success btn-labeled pull-right margin-right-10"
-            >Job order</button>
+            >
+              Job order
+            </button>
           </router-link>
         </p>
       </div>
 
       <div class="elClr panel-body">
-        <div style="display:flex;">
-          <div style="width:60%;">
+        <div style="display: flex">
+          <div style="width: 60%">
             <!-- search -->
             <b-row class="searchRow">
               <b-col>
                 <b-form-group>
                   <b-input-group>
                     <model-list-select
-                      style="min-width: 150px; max-width: 50px;"
+                      style="min-width: 150px; max-width: 50px"
                       :list="searchby_list"
                       v-model="searchby"
                       option-value="id"
@@ -47,7 +53,11 @@
 
                     <b-form-input
                       id="txtbox_filter"
-                      style="height:30px; margin-left:5px; border-radius:5px 0 0 5px"
+                      style="
+                        height: 30px;
+                        margin-left: 5px;
+                        border-radius: 5px 0 0 5px;
+                      "
                       v-model="tblFilter_copy"
                       v-on:keyup.enter="search_data"
                       placeholder="Search"
@@ -56,15 +66,22 @@
                     <b-input-group-append>
                       <b-button
                         @click="clearFilter"
-                        style="width:100px;color:white;border-radius:0 5px 5px 0"
-                      >Clear</b-button>
+                        style="
+                          width: 100px;
+                          color: white;
+                          border-radius: 0 5px 5px 0;
+                        "
+                        >Clear</b-button
+                      >
                     </b-input-group-append>
                     <button
                       @click="fnExcelReport('scheduleTable')"
                       type="button"
                       class="btn btn-success"
-                      style="width:100px;color:white;margin-left:10px"
-                    >Export</button>
+                      style="width: 100px; color: white; margin-left: 10px"
+                    >
+                      Export
+                    </button>
                   </b-input-group>
                 </b-form-group>
               </b-col>
@@ -74,41 +91,70 @@
               <button
                 @click="filterChange('Filter: no_foc_layout_sched')"
                 type="button"
-                class="btn btn-warning btn-labeled pull-right margin-left-10 statusBtn"
+                class="
+                  btn btn-warning btn-labeled
+                  pull-right
+                  margin-left-10
+                  statusBtn
+                "
               >
                 No FOC Layout Sched.
                 <b-badge v-if="total_no_foc_layout_sched > 0" variant="info">
-                  {{
-                  total_no_foc_layout_sched
-                  }}
+                  {{ total_no_foc_layout_sched }}
                 </b-badge>
               </button>
               <button
                 @click="filterChange('Filter: assign')"
                 type="button"
-                class="btn btn-info btn-labeled pull-right margin-left-10 statusBtn"
+                class="
+                  btn btn-info btn-labeled
+                  pull-right
+                  margin-left-10
+                  statusBtn
+                "
               >
                 Assign
-                <b-badge v-if="totalNeedAssign > 0" variant="info">{{ totalNeedAssign }}</b-badge>
+                <b-badge v-if="totalNeedAssign > 0" variant="info">{{
+                  totalNeedAssign
+                }}</b-badge>
               </button>
               <button
                 @click="filterChange('Filter: wfc')"
                 type="button"
-                class="btn btn-danger btn-labeled pull-right margin-left-10 statusBtn"
+                class="
+                  btn btn-danger btn-labeled
+                  pull-right
+                  margin-left-10
+                  statusBtn
+                "
               >
                 WFC
-                <b-badge v-if="totalWFC > 0" variant="info">{{ totalWFC }}</b-badge>
+                <b-badge v-if="totalWFC > 0" variant="info">{{
+                  totalWFC
+                }}</b-badge>
               </button>
 
               <button
                 v-b-modal="'modalMultipleFilter'"
                 type="button"
-                class="btn btn-success btn-labeled pull-right margin-left-10 statusBtn"
-              >Multiple Filter</button>
+                class="
+                  btn btn-success btn-labeled
+                  pull-right
+                  margin-left-10
+                  statusBtn
+                "
+              >
+                Multiple Filter
+              </button>
               <button
                 @click="loadTable"
                 type="button"
-                class="btn btn-success btn-labeled pull-right margin-left-10 statusBtn"
+                class="
+                  btn btn-success btn-labeled
+                  pull-right
+                  margin-left-10
+                  statusBtn
+                "
                 v-if="!showTable"
               >
                 <i class="fa fa-eye" aria-hidden="true"></i> Display Table
@@ -116,7 +162,12 @@
               <button
                 @click="hideTable"
                 type="button"
-                class="btn btn-success btn-labeled pull-right margin-left-10 statusBtn"
+                class="
+                  btn btn-success btn-labeled
+                  pull-right
+                  margin-left-10
+                  statusBtn
+                "
                 v-else
               >
                 <i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Table
@@ -124,20 +175,20 @@
             </b-row>
           </div>
           <!-- forecast -->
-          <div style="width:40%;">
+          <div style="width: 40%">
             <b-card
               border-variant="default"
               align="center"
-              style="width:100%;float:right;margin-right:15px"
+              style="width: 100%; float: right; margin-right: 15px"
               class="trend-bcard"
               bg-variant="light"
             >
               <header>
-                <p style="font-weight:bold">INSTALLATION FORECAST FOR TODAY</p>
+                <p style="font-weight: bold">INSTALLATION FORECAST FOR TODAY</p>
               </header>
 
-              <div class="top-records" style="display:flex;width:100%">
-                <div style="width:50%">
+              <div class="top-records" style="display: flex; width: 100%">
+                <div style="width: 50%">
                   <b-card no-body class="text-center">
                     <div class="text font-weight-bold">
                       <h5>{{ pendingTrend }}</h5>
@@ -146,7 +197,7 @@
                     </div>
                   </b-card>
                 </div>
-                <div style="width:50%">
+                <div style="width: 50%">
                   <b-card no-body class="text-center">
                     <div class="text font-weight-bold">
                       <h5>{{ activatedTrend }}</h5>
@@ -162,28 +213,34 @@
           </div>
         </div>
 
-        <div style="display:flex" v-if="showTable">
-          <div class="row marginice" style="margin-left:1px;float:left;width:80%">
+        <div style="display: flex" v-if="showTable">
+          <div
+            class="row marginice"
+            style="margin-left: 1px; float: left; width: 80%"
+          >
             <b>Showing {{ perPage }} out of {{ totalRows }} entries</b>
           </div>
-          <div class="row marginice" style="width:8%">
+          <div class="row marginice" style="width: 8%">
             <b-row>
-              <b-col style="float:right;padding-right:0">
+              <b-col style="float: right; padding-right: 0">
                 <button
                   class="btn btn-labeled btn-set"
                   v-b-tooltip.hover
                   title="Show Columns"
                   @click="openColumnSettings"
                 >
-                  <i class="fas fa-columns" style="font-size:15px;margin-top:5px;"></i>
+                  <i
+                    class="fas fa-columns"
+                    style="font-size: 15px; margin-top: 5px"
+                  ></i>
                 </button>
               </b-col>
-              <b-col style="float:right">
+              <b-col style="float: right">
                 <b-form-group class="mb-0">
                   <b-form-select
                     v-b-tooltip.hover
                     title="Show Pages"
-                    style="height:30px;font-size:12px"
+                    style="height: 30px; font-size: 12px"
                     v-model="perPage"
                     :options="pageOptions"
                   ></b-form-select>
@@ -193,7 +250,12 @@
           </div>
         </div>
         <!-- Scheduler table -->
-        <div class="scrollmenu" id="scrollmenuContainer" @mousemove="mousemove" v-if="showTable">
+        <div
+          class="scrollmenu"
+          id="scrollmenuContainer"
+          @mousemove="mousemove"
+          v-if="showTable"
+        >
           <div class>
             <b-table
               id="scheduleTable"
@@ -210,7 +272,6 @@
               :per-page="perPage"
               :tbody-tr-class="tblRowClass"
               thead-tr-class="tblheadtrclass"
-              tbody-class="bodyClass"
               head-variant=" elClr"
               thead-class="cursorPointer-th tblheadtrclass"
               @filtered="onFiltered"
@@ -241,13 +302,15 @@
                   @click="openModalCreateJobOrder(row.item)"
                   size="sm"
                   v-if="row.item.JobOrder == null && roles.create_job_order"
-                >Create</b-button>
+                  >Create</b-button
+                >
                 <b-button
                   class="jobButton"
                   variant="success"
                   @click="openModalViewJobOrder(row.item)"
                   v-if="row.item.JobOrder != null && roles.create_job_order"
-                >{{ row.item.JobOrder.jo_num }}</b-button>
+                  >{{ row.item.JobOrder.jo_num }}</b-button
+                >
               </template>
 
               <!-- <template slot="date_activated" slot-scope="row"> -->
@@ -270,18 +333,20 @@
                     @click="openModalUpdateActivatedDate(row.item)"
                     v-if="
                       row.item.date_activated == null &&
-                        row.item.status == 'done' &&
-                        row.item.otc != null &&
-                        row.item.target_date <= datenow &&
-                        row.item.contract != null
+                      row.item.status == 'done' &&
+                      row.item.otc != null &&
+                      row.item.target_date <= datenow &&
+                      row.item.contract != null
                     "
-                  >Activate</b-button>
+                    >Activate</b-button
+                  >
                 </span>
                 <b-button
                   variant="info"
                   v-if="row.item.status == 'finished'"
                   :disabled="!roles.update_client_details"
-                >{{ row.item.date_activated }}</b-button>
+                  >{{ row.item.date_activated }}</b-button
+                >
               </template>
               <template v-slot:cell(status1.target_date)="row">
                 <b-button
@@ -289,7 +354,8 @@
                   v-if="row.item.status == 'acknowledge'"
                   variant="warning"
                   :disabled="!roles.update_client_details"
-                >acknowledge</b-button>
+                  >acknowledge</b-button
+                >
 
                 <b-button
                   class="instButton"
@@ -297,7 +363,8 @@
                   variant="danger"
                   :disabled="!roles.update_client_details"
                   @click="wfcClicked(row.item, row.index, $event.target)"
-                >WFC</b-button>
+                  >WFC</b-button
+                >
 
                 <!-- <span v-if="row.item.status == 'Confirmed'">N/A</span> -->
                 <span v-if="row.item.status == 'finished'">
@@ -310,7 +377,8 @@
                   variant="info"
                   @click="openModalUpdateTargetDate(row.item)"
                   :disabled="!roles.update_client_details"
-                >Assign</b-button>
+                  >Assign</b-button
+                >
 
                 <b-button
                   class="instButton"
@@ -318,13 +386,14 @@
                   variant="success"
                   v-if="
                     row.item.target_date != null &&
-                      row.item.target_date != datenow &&
-                      row.item.target_date != dateTomorrow &&
-                      row.item.target_date != dateYesterday &&
-                      1 > dateDiffInDays(datenow, row.item.target_date)
+                    row.item.target_date != datenow &&
+                    row.item.target_date != dateTomorrow &&
+                    row.item.target_date != dateYesterday &&
+                    1 > dateDiffInDays(datenow, row.item.target_date)
                   "
                   :disabled="!roles.rm"
-                >{{ row.item.status1.target_date }}</b-button>
+                  >{{ row.item.status1.target_date }}</b-button
+                >
 
                 <b-button
                   class="instButton"
@@ -332,10 +401,11 @@
                   variant="success"
                   v-if="
                     row.item.target_date == datenow &&
-                      row.item.status != 'finished'
+                    row.item.status != 'finished'
                   "
                   :disabled="!roles.rm"
-                >Today</b-button>
+                  >Today</b-button
+                >
 
                 <b-button
                   class="instButton"
@@ -343,34 +413,35 @@
                   variant="success"
                   v-if="
                     row.item.target_date == dateTomorrow &&
-                      row.item.status != 'finished'
+                    row.item.status != 'finished'
                   "
                   :disabled="!roles.rm"
-                >Tomorrow</b-button>
+                  >Tomorrow</b-button
+                >
                 <b-button
                   class="instButton"
                   @click="openModalUpdateTargetDate(row.item)"
                   variant="danger"
                   v-if="
                     row.item.target_date == dateYesterday &&
-                      row.item.target_date != null &&
-                      row.item.status != 'finished'
+                    row.item.target_date != null &&
+                    row.item.status != 'finished'
                   "
                   :disabled="!roles.rm"
-                >Yesterday</b-button>
+                  >Yesterday</b-button
+                >
                 <b-button
                   class="instButton"
                   @click="openModalUpdateTargetDate(row.item)"
                   variant="danger"
                   v-if="
                     1 < dateDiffInDays(datenow, row.item.target_date) &&
-                      row.item.target_date != null &&
-                      row.item.status != 'finished'
+                    row.item.target_date != null &&
+                    row.item.status != 'finished'
                   "
                   :disabled="!roles.rm"
                 >
-                  {{ dateDiffInDays(datenow, row.item.target_date) }} Days
-                  delay
+                  {{ dateDiffInDays(datenow, row.item.target_date) }} Days delay
                 </b-button>
               </template>
 
@@ -391,12 +462,12 @@
       </div>
       <!-- scheduler table footer -->
       <div class="elClr panel-footer" v-if="showTable">
-        <div class="row" style="background-color:; padding:15px;">
-          <div class="col-md-8" style="background-color:;">
+        <div class="row" style="background-color: ; padding: 15px">
+          <div class="col-md-8" style="background-color: ">
             <span class="elClr">{{ totalRows }} item/s found.</span>
           </div>
 
-          <div class="col-md-4" style="background-color:;">
+          <div class="col-md-4" style="background-color: ">
             <b-pagination
               v-model="currentPage"
               :total-rows="totalRows"
@@ -430,7 +501,8 @@
                 value="0"
                 name="instFormType"
                 color="success-o"
-              >New</p-radio>
+                >New</p-radio
+              >
             </div>
             <div class="col-lg-2">
               <p-radio
@@ -439,7 +511,8 @@
                 value="1"
                 name="instFormType"
                 color="success-o"
-              >Line Transfer</p-radio>
+                >Line Transfer</p-radio
+              >
             </div>
           </div>
         </div>
@@ -463,7 +536,8 @@
             <small
               class="text-danger pull-left"
               v-show="errors.has('client_id')"
-            >Please select / search a account name or location.</small>
+              >Please select / search a account name or location.</small
+            >
           </div>
         </div>
 
@@ -482,7 +556,7 @@
           </div>
         </div>
 
-        <div class="rowFields mx-auto row" style="display:none">
+        <div class="rowFields mx-auto row" style="display: none">
           <div class="col-lg-3">
             <p class="textLabel">Mapping Status:</p>
           </div>
@@ -517,7 +591,8 @@
             <small
               class="text-danger pull-left"
               v-show="errors.has('foc_length')"
-            >Input valid number.</small>
+              >Input valid number.</small
+            >
           </div>
         </div>
 
@@ -553,7 +628,10 @@
           </div>
         </div>
 
-        <div class="rowFields mx-auto row" v-if="client_details.foc_layout != 'Completed'">
+        <div
+          class="rowFields mx-auto row"
+          v-if="client_details.foc_layout != 'Completed'"
+        >
           <div class="col-lg-3">
             <p class="textLabel">Layout Remarks:</p>
           </div>
@@ -589,10 +667,10 @@
           class="rowFields mx-auto row"
           v-if="
             client_details.otc == 'Paid' ||
-              client_details.otc == 'Promo' ||
-              client_details.otc == 'Billing' ||
-              client_details.otc == 'Waived' ||
-              client_details.otc == 'NTP'
+            client_details.otc == 'Promo' ||
+            client_details.otc == 'Billing' ||
+            client_details.otc == 'Waived' ||
+            client_details.otc == 'NTP'
           "
         >
           <div class="col-lg-3">
@@ -625,7 +703,7 @@
           </div>
         </div>-->
 
-        <div class="rowFields mx-auto row" style="display:none">
+        <div class="rowFields mx-auto row" style="display: none">
           <div class="col-lg-3">
             <p class="textLabel">Applied date:</p>
           </div>
@@ -659,7 +737,9 @@
 
         <!--Form-------->
         <div slot="modal-footer" slot-scope="{}">
-          <b-button size="sm" variant="success" @click="btnCreate()">Create</b-button>
+          <b-button size="sm" variant="success" @click="btnCreate()"
+            >Create</b-button
+          >
         </div>
       </b-modal>
       <!--modalAdd-------->
@@ -711,7 +791,9 @@
           </div>
           <div class="col-lg-9">
             <b>
-              <p class="text-success textLabel">{{ client_details.client1.name }}</p>
+              <p class="text-success textLabel">
+                {{ client_details.client1.name }}
+              </p>
             </b>
           </div>
         </div>
@@ -747,7 +829,7 @@
           </div>
         </div>
         <!-- Mapping Status -->
-        <div class="rowFields mx-auto row" style="display:none">
+        <div class="rowFields mx-auto row" style="display: none">
           <div class="col-lg-3">
             <p class="textLabel">Mapping Status:</p>
           </div>
@@ -831,7 +913,10 @@
           </div>
         </div>
 
-        <div class="rowFields mx-auto row client" v-if="client_details.foc_layout != 'Completed'">
+        <div
+          class="rowFields mx-auto row client"
+          v-if="client_details.foc_layout != 'Completed'"
+        >
           <div class="col-lg-3">
             <p class="textLabel">Layout Remarks:</p>
           </div>
@@ -868,7 +953,9 @@
             <p class="textLabel">Contract:</p>
           </div>
           <div class="col-lg-9">
-            <p class="textLabel" v-if="client_details.contract != null">Completed</p>
+            <p class="textLabel" v-if="client_details.contract != null">
+              Completed
+            </p>
             <p class="textLabel" v-else>Pending</p>
           </div>
         </div>
@@ -877,10 +964,10 @@
           class="rowFields mx-auto row stripe client"
           v-if="
             client_details.otc == 'Paid' ||
-              client_details.otc == 'Promo' ||
-              client_details.otc == 'Billing' ||
-              client_details.otc == 'Waived' ||
-              client_details.otc == 'NTP'
+            client_details.otc == 'Promo' ||
+            client_details.otc == 'Billing' ||
+            client_details.otc == 'Waived' ||
+            client_details.otc == 'NTP'
           "
         >
           <div class="col-lg-3">
@@ -997,7 +1084,9 @@
               @click="addRemarks_clicked"
               type="button"
               class="btn btn-success btn-labeled pull-right margin-right-10"
-            >Add Remarks</button>
+            >
+              Add Remarks
+            </button>
             <br />
             <div
               class="elClr panel"
@@ -1006,7 +1095,9 @@
             >
               <div class="panel-heading">
                 <p class="elClr panel-title">Marked by: {{ item.user.name }}</p>
-                <p class="pull-right margin-right-10">Marked On: {{ item.created_at }}</p>
+                <p class="pull-right margin-right-10">
+                  Marked On: {{ item.created_at }}
+                </p>
               </div>
               <div class="elClr panel-body">
                 <p class="pre-formatted">{{ item.remarks }}</p>
@@ -1017,7 +1108,9 @@
 
         <!-- /form -->
         <template slot="modal-footer" slot-scope="{}">
-          <b-button size="sm" variant="info" v-if="roles.rm" @click="btnFSR()">Print Preview FSR</b-button>
+          <b-button size="sm" variant="info" v-if="roles.rm" @click="btnFSR()"
+            >Print Preview FSR</b-button
+          >
 
           <b-button
             size="sm"
@@ -1026,7 +1119,8 @@
               client_details.status != 'finished' && roles.update_client_details
             "
             @click="btnUpdate()"
-          >Update</b-button>
+            >Update</b-button
+          >
           <b-button
             size="sm"
             variant="danger"
@@ -1034,7 +1128,8 @@
               client_details.status != 'finished' && roles.delete_client_details
             "
             @click="btnDelete()"
-          >Delete</b-button>
+            >Delete</b-button
+          >
         </template>
       </b-modal>
       <!-- End modalEdit -->
@@ -1056,7 +1151,7 @@
           class="rowFields mx-auto row"
           v-if="
             roles.create_client_details &&
-              client_update_target_date.current_target_date != null
+            client_update_target_date.current_target_date != null
           "
         >
           <div class="col-lg-3">
@@ -1068,8 +1163,14 @@
               color="success"
               v-model="client_update_target_date.date_only"
             >
-              <i class="fas fa-check" v-show="client_update_target_date.date_only" />
-              <i class="fas fa-times" v-show="!client_update_target_date.date_only" />
+              <i
+                class="fas fa-check"
+                v-show="client_update_target_date.date_only"
+              />
+              <i
+                class="fas fa-times"
+                v-show="!client_update_target_date.date_only"
+              />
             </p-check>
           </div>
         </div>
@@ -1078,7 +1179,7 @@
           class="rowFields mx-auto row"
           v-if="
             roles.create_client_details &&
-              client_update_target_date.current_target_date != null
+            client_update_target_date.current_target_date != null
           "
         >
           <div class="col-lg-3">
@@ -1090,8 +1191,14 @@
               color="success"
               v-model="client_update_target_date.team_only"
             >
-              <i class="fas fa-check" v-show="client_update_target_date.team_only" />
-              <i class="fas fa-times" v-show="!client_update_target_date.team_only" />
+              <i
+                class="fas fa-check"
+                v-show="client_update_target_date.team_only"
+              />
+              <i
+                class="fas fa-times"
+                v-show="!client_update_target_date.team_only"
+              />
             </p-check>
           </div>
         </div>
@@ -1105,7 +1212,10 @@
           </div>
         </div>
 
-        <div class="rowFields mx-auto row" v-if="!client_update_target_date.team_only">
+        <div
+          class="rowFields mx-auto row"
+          v-if="!client_update_target_date.team_only"
+        >
           <div class="col-lg-3">
             <p class="textLabel">Select date:</p>
           </div>
@@ -1120,7 +1230,10 @@
           </div>
         </div>
 
-        <div class="rowFields mx-auto row" v-if="!client_update_target_date.date_only">
+        <div
+          class="rowFields mx-auto row"
+          v-if="!client_update_target_date.date_only"
+        >
           <div class="col-lg-3">
             <p class="textLabel">Assigned Team:</p>
           </div>
@@ -1140,24 +1253,23 @@
           class="rowFields mx-auto row"
           v-if="
             roles.create_client_details &&
-              client_update_target_date.current_target_date != null &&
-              client_update_target_date.inst_remarks != ''
+            client_update_target_date.current_target_date != null &&
+            client_update_target_date.inst_remarks != ''
           "
         >
           <div class="col-lg-3">
             <p class="textLabel">Installation Remarks:</p>
           </div>
-          <div
-            class="col-lg-9"
-            style="white-space: pre-wrap;"
-          >{{ client_update_target_date.inst_remarks }}</div>
+          <div class="col-lg-9" style="white-space: pre-wrap">
+            {{ client_update_target_date.inst_remarks }}
+          </div>
         </div>
 
         <div
           class="rowFields mx-auto row"
           v-if="
             roles.create_client_details &&
-              client_update_target_date.current_target_date != null
+            client_update_target_date.current_target_date != null
           "
         >
           <div class="col-lg-3">
@@ -1177,7 +1289,8 @@
             <small
               class="text-danger pull-left"
               v-show="errors.has('changeschedremarks')"
-            >Remarks is required.</small>
+              >Remarks is required.</small
+            >
           </div>
         </div>
       </b-modal>
@@ -1221,14 +1334,16 @@
           </div>
         </div>-->
 
-        <div class="rowFields mx-auto row" v-if="client_update_activated_date.inst_remarks != ''">
+        <div
+          class="rowFields mx-auto row"
+          v-if="client_update_activated_date.inst_remarks != ''"
+        >
           <div class="col-lg-3">
             <p class="textLabel">Installation Remarks:</p>
           </div>
-          <div
-            class="col-lg-9"
-            style="white-space: pre-wrap;"
-          >{{ client_update_activated_date.inst_remarks }}</div>
+          <div class="col-lg-9" style="white-space: pre-wrap">
+            {{ client_update_activated_date.inst_remarks }}
+          </div>
         </div>
 
         <div class="rowFields mx-auto row">
@@ -1263,7 +1378,9 @@
               <p
                 class="text-danger pull-left"
                 v-if="client_update_activated_date_chkdate == true"
-              >Future date selected.</p>
+              >
+                Future date selected.
+              </p>
             </div>
           </div>
         </div>
@@ -1285,7 +1402,10 @@
           </div>
         </div>
 
-        <div class="rowFields mx-auto row" v-if="bucket_selected.name != 'Dole'">
+        <div
+          class="rowFields mx-auto row"
+          v-if="bucket_selected.name != 'Dole'"
+        >
           <div class="col-lg-3">
             <p class="textLabel">Subscription Name:</p>
           </div>
@@ -1341,7 +1461,7 @@
           </div>
         </div>
 
-        <div class="rowFields mx-auto row" style="display:none">
+        <div class="rowFields mx-auto row" style="display: none">
           <div class="col-lg-3">
             <p class="textLabel">Job Order #:</p>
           </div>
@@ -1357,7 +1477,9 @@
               v-model.trim="Job_Order.jo_num"
               v-validate="'required'"
             />
-            <small class="text-danger pull-left" v-show="errors.has('jo_num')">JO# is required.</small>
+            <small class="text-danger pull-left" v-show="errors.has('jo_num')"
+              >JO# is required.</small
+            >
           </div>
         </div>
 
@@ -1413,7 +1535,8 @@
             <small
               class="text-danger pull-left"
               v-show="errors.has('jo_foc_length')"
-            >Input valid number.</small>
+              >Input valid number.</small
+            >
           </div>
         </div>
 
@@ -1505,7 +1628,9 @@
         </div>
 
         <template slot="modal-footer" slot-scope="{}">
-          <b-button size="sm" variant="success" @click="btnCreateJO()">Create</b-button>
+          <b-button size="sm" variant="success" @click="btnCreateJO()"
+            >Create</b-button
+          >
         </template>
       </b-modal>
       <!-- End modalCreateJobOrder -->
@@ -1534,9 +1659,9 @@
             <p class>
               <b>
                 {{ View_Job_Order_All.client1.name }}
-                <span
-                  v-if="View_Job_Order_All.line_transfer == 1"
-                >- Line Transfer</span>
+                <span v-if="View_Job_Order_All.line_transfer == 1"
+                  >- Line Transfer</span
+                >
               </b>
             </p>
           </div>
@@ -1564,7 +1689,10 @@
           </div>
         </div>
 
-        <div class="ViewJobOrder" v-if="View_Job_Order_All.JobOrder.client_id != null">
+        <div
+          class="ViewJobOrder"
+          v-if="View_Job_Order_All.JobOrder.client_id != null"
+        >
           <div class="rowFields mx-auto row">
             <div class="col-lg-3">
               <p class="textLabel">Date Started:</p>
@@ -1581,7 +1709,10 @@
           </div>
         </div>
 
-        <div class="ViewJobOrder" v-if="View_Job_Order_All.JobOrder.client_id != null">
+        <div
+          class="ViewJobOrder"
+          v-if="View_Job_Order_All.JobOrder.client_id != null"
+        >
           <div class="rowFields mx-auto row">
             <div class="col-lg-3">
               <p class="textLabel">Date Finished:</p>
@@ -1674,7 +1805,8 @@
             variant="info"
             @click="printPreview"
             v-if="View_Job_Order_All.JobOrder.client_id != null"
-          >Print Preview</b-button>
+            >Print Preview</b-button
+          >
 
           <b-button
             size="sm"
@@ -1682,9 +1814,10 @@
             @click="btnUpdateJO()"
             v-if="
               View_Job_Order_All.JobOrder.client_id != null &&
-                roles.update_job_order
+              roles.update_job_order
             "
-          >Update</b-button>
+            >Update</b-button
+          >
 
           <b-button
             size="sm"
@@ -1692,9 +1825,10 @@
             @click="btnDeleteJO()"
             v-if="
               View_Job_Order_All.JobOrder.client_id != null &&
-                roles.delete_job_order
+              roles.delete_job_order
             "
-          >Delete</b-button>
+            >Delete</b-button
+          >
         </template>
       </b-modal>
 
@@ -1707,52 +1841,104 @@
         :body-text-variant="' elClr'"
         :footer-bg-variant="' elBG'"
         :footer-text-variant="' elClr'"
-        style="width:50px"
+        style="width: 50px"
       >
         <div v-on:click="changeColDisplay('colLocation')">
-          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colLocation"></p-check>Location
+          <p-check
+            class="checkboxStyle p-switch p-slim"
+            color="success"
+            v-model="colLocation"
+          ></p-check
+          >Location
         </div>
         <br />
         <div v-on:click="changeColDisplay('colPackage')">
-          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colPackage"></p-check>Package
+          <p-check
+            class="checkboxStyle p-switch p-slim"
+            color="success"
+            v-model="colPackage"
+          ></p-check
+          >Package
         </div>
         <br />
         <div v-on:click="changeColDisplay('colRegion')">
-          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colRegion"></p-check>Region
+          <p-check
+            class="checkboxStyle p-switch p-slim"
+            color="success"
+            v-model="colRegion"
+          ></p-check
+          >Region
         </div>
         <br />
         <div v-on:click="changeColDisplay('colModem')">
-          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colModem"></p-check>Modem
+          <p-check
+            class="checkboxStyle p-switch p-slim"
+            color="success"
+            v-model="colModem"
+          ></p-check
+          >Modem
         </div>
         <br />
         <div v-on:click="changeColDisplay('colProtocol')">
-          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colProtocol"></p-check>Protocol
+          <p-check
+            class="checkboxStyle p-switch p-slim"
+            color="success"
+            v-model="colProtocol"
+          ></p-check
+          >Protocol
         </div>
         <br />
         <div v-on:click="changeColDisplay('colCableCat')" style>
-          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colCableCat"></p-check>FOC
+          <p-check
+            class="checkboxStyle p-switch p-slim"
+            color="success"
+            v-model="colCableCat"
+          ></p-check
+          >FOC
         </div>
         <br />
         <div v-on:click="changeColDisplay('colFOCLength')">
-          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colFOCLength"></p-check>Length
+          <p-check
+            class="checkboxStyle p-switch p-slim"
+            color="success"
+            v-model="colFOCLength"
+          ></p-check
+          >Length
         </div>
         <br />
         <div v-on:click="changeColDisplay('colSales')">
-          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colSales"></p-check>Sales in-charge
+          <p-check
+            class="checkboxStyle p-switch p-slim"
+            color="success"
+            v-model="colSales"
+          ></p-check
+          >Sales in-charge
         </div>
         <br />
         <div v-on:click="changeColDisplay('colTech')">
-          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colTech"></p-check>Tech in-charge
+          <p-check
+            class="checkboxStyle p-switch p-slim"
+            color="success"
+            v-model="colTech"
+          ></p-check
+          >Tech in-charge
         </div>
         <br />
         <div v-on:click="changeColDisplay('colAppliedDate')">
-          <p-check class="checkboxStyle p-switch p-slim" color="success" v-model="colAppliedDate"></p-check>Applied Date
+          <p-check
+            class="checkboxStyle p-switch p-slim"
+            color="success"
+            v-model="colAppliedDate"
+          ></p-check
+          >Applied Date
         </div>
         <br />
         <div slot="modal-footer" slot-scope="{}"></div>
       </b-modal>
       <modal_inst_filter></modal_inst_filter>
-      <scheduler_closure_marker v-bind:data="window_details"></scheduler_closure_marker>
+      <scheduler_closure_marker
+        v-bind:data="window_details"
+      ></scheduler_closure_marker>
     </div>
 
     <modal_fsr v-bind:data="fsr_data"></modal_fsr>
@@ -1778,7 +1964,7 @@ export default {
     modal_inst_filter: modal_inst_filter,
     "p-check": PrettyCheck,
     "p-radio": PrettyRadio,
-    modal_fsr: modal_fsr
+    modal_fsr: modal_fsr,
   },
   data() {
     return {
@@ -1820,12 +2006,12 @@ export default {
         client1: {
           name: "",
           location: "",
-          contact: ""
-        }
+          contact: "",
+        },
       },
       clientSelected: {
         id: "",
-        region_id: ""
+        region_id: "",
       },
       client_update_target_date: {
         date_only: false,
@@ -1835,17 +2021,17 @@ export default {
         region_id: "",
         team_id: "",
         type: "installation",
-        name: ""
+        name: "",
       },
       client_update_activated_date_chkdate: false,
       client_update_activated_date: {
         client_id: "",
         activated_date: "",
-        name: ""
+        name: "",
       },
       bucket_selected: {
         id: "",
-        name: ""
+        name: "",
       },
       clients: [],
       sales: [],
@@ -1855,13 +2041,13 @@ export default {
         { id: "Completed", name: "Completed" },
         { id: "Outdoor layout done", name: "Outdoor layout done" },
         { id: "Indoor layout done", name: "Indoor layout done" },
-        { id: "Pending", name: "Pending" }
+        { id: "Pending", name: "Pending" },
       ],
       layoutStatOption: [
         { id: "M1", name: "M1" },
         { id: "M2", name: "M2" },
         { id: "MM2", name: "MM2" },
-        { id: "M3", name: "M3" }
+        { id: "M3", name: "M3" },
       ],
       otcOption: [
         { id: "Paid", name: "Paid" },
@@ -1869,16 +2055,16 @@ export default {
         { id: "Billing", name: "Billing" },
         { id: "Waived", name: "Waived" },
         { id: "NTP", name: "NTP" },
-        { id: "Waiting for C&C advisory", name: "Waiting for C&C advisory" }
+        { id: "Waiting for C&C advisory", name: "Waiting for C&C advisory" },
       ],
       cableCategoryOption: [
         { id: "Drop Fiber", name: "Drop Fiber" },
         { id: "Hard Fiber", name: "Hard Fiber" },
-        { id: "UTP", name: "Unshielded twisted pair (UTP)" }
+        { id: "UTP", name: "Unshielded twisted pair (UTP)" },
       ],
       AppliedDateoptions: {
         format: "YYYY-MM-DD",
-        useCurrent: false
+        useCurrent: false,
       },
       datenow: new Date(),
       dateTomorrow: new Date(),
@@ -1909,7 +2095,7 @@ export default {
         engineer_in_charge: "",
         prepare: 3,
         approve: 2,
-        note: 1
+        note: 1,
       },
       View_Job_Order_Id_selected: "",
       View_Job_Order_Id: "",
@@ -1917,13 +2103,13 @@ export default {
       View_Job_Order: {},
       View_Job_Order_All: {
         client1: {
-          name: ""
+          name: "",
         },
         JobOrder: {
           client_id: null,
           region: {
             id: "",
-            name: ""
+            name: "",
           },
           region_id: null,
           project_description: null,
@@ -1933,8 +2119,8 @@ export default {
           approve: null,
           note: null,
           finished: null,
-          copy_finished: ""
-        }
+          copy_finished: "",
+        },
       },
       otp: "",
       otp_input: "",
@@ -1947,34 +2133,34 @@ export default {
       searchby_list: [
         {
           name: "Account Name",
-          id: "clients.name"
+          id: "clients.name",
         },
         {
           name: "Address",
-          id: "clients.location"
+          id: "clients.location",
         },
         {
           name: "Contact",
-          id: "clients.contact"
+          id: "clients.contact",
         },
         {
           name: "ID",
-          id: "client_details.id"
-        }
+          id: "client_details.id",
+        },
       ],
       searchby: "clients.name",
       closures: [],
       coordinates: {
         lat: 0,
-        lng: 0
+        lng: 0,
       },
       markers: [
         {
           position: {
             lat: 0,
-            lng: 0
-          }
-        }
+            lng: 0,
+          },
+        },
       ],
       markers_edit: [],
       remarksText: "",
@@ -1985,25 +2171,25 @@ export default {
       activatedTrend: 0,
       window_position: {
         lat: 0,
-        lng: 0
+        lng: 0,
       },
       window_details: {
         name: "",
         type: "",
-        closure_type_id: 0
+        closure_type_id: 0,
       },
       marker: {
         position: {
           lat: 7.0688182,
-          lng: 125.59859859999999
+          lng: 125.59859859999999,
         },
-        client: ""
+        client: "",
       },
       fsr_data: {
         user: {
-          email: ""
-        }
-      }
+          email: "",
+        },
+      },
     };
   },
   beforeCreate() {
@@ -2027,13 +2213,13 @@ export default {
     this.loadClients();
 
     this.$getLocation({})
-      .then(coordinates => {
+      .then((coordinates) => {
         this.coordinates = coordinates;
       })
-      .catch(error => {
+      .catch((error) => {
         var coor = {
           lat: 7.040641,
-          lng: 125.577053
+          lng: 125.577053,
         };
         this.coordinates = coor;
       });
@@ -2047,7 +2233,7 @@ export default {
       this.items = item;
       this.cbFilter = filt;
       this.filterIn = "multi";
-      if (this.items != null) this.totalRows = this.items.length;
+      if (this.items != null) this.totalRows = item.length;
     });
   },
   updated() {},
@@ -2055,7 +2241,7 @@ export default {
     nearClosure() {
       if (this.markers_edit.length > 0) {
         var retVal = [];
-        this.closures.forEach(item => {
+        this.closures.forEach((item) => {
           var latMax = this.markers_edit[0].position.lat + 0.005;
           var latMin = this.markers_edit[0].position.lat - 0.005;
           var lngMax = this.markers_edit[0].position.lng + 0.005;
@@ -2068,7 +2254,7 @@ export default {
           ) {
             item.position = {
               lat: parseFloat(item.lat),
-              lng: parseFloat(item.lng)
+              lng: parseFloat(item.lng),
             };
             item.marker_type = "closure";
             retVal.push(item);
@@ -2076,12 +2262,12 @@ export default {
         });
         return retVal;
       } else return [];
-    }
+    },
   },
   methods: {
     load() {
-      this.$nextTick(function() {
-        setTimeout(function() {
+      this.$nextTick(function () {
+        setTimeout(function () {
           document.getElementById("componentMenu").className =
             "customeDropDown dropdown-menu";
 
@@ -2095,12 +2281,12 @@ export default {
           document.getElementById("navbarAccounts").style.backgroundColor = "";
         }, 100);
       });
-      this.$http.get("api/Bucket").then(response => {
+      this.$http.get("api/Bucket").then((response) => {
         this.buckets = response.body;
       });
       this.$http
         .post("api/clientDetail/getTrend/" + this.user.region_id)
-        .then(response => {
+        .then((response) => {
           console.log(response.body);
           this.pendingTrend = response.body.pendingTrend;
           this.activatedTrend = response.body.activatedTrend;
@@ -2111,18 +2297,18 @@ export default {
       if (this.tblisBusy == false) {
         this.tblisBusy = true;
         this.reloader_counter = 0;
-        this.$http.get("api/Engineer").then(function(response) {
+        this.$http.get("api/Engineer").then(function (response) {
           this.$global.setEngineer(response.body);
           this.engineers = response.body;
           this.reloader_counter++;
         });
-        this.$http.get("api/Region").then(function(response) {
+        this.$http.get("api/Region").then(function (response) {
           this.$global.setRegion(response.body);
           this.regions = response.body;
           this.reloader_counter++;
         });
 
-        this.$http.get("api/team").then(function(response) {
+        this.$http.get("api/team").then(function (response) {
           this.$global.setTeam(response.body);
           this.teams = response.body;
           this.reloader_counter++;
@@ -2130,7 +2316,7 @@ export default {
 
         this.$http
           .get("api/clientDetail/subIndex/" + this.user.region_id)
-          .then(function(response) {
+          .then(function (response) {
             this.items = response.body;
             this.totalRows = this.items.length;
             this.items_copy = this.items;
@@ -2139,7 +2325,7 @@ export default {
           });
         this.$http
           .post("api/clientDetail/getTrend/" + this.user.region_id)
-          .then(response => {
+          .then((response) => {
             console.log(response.body);
             this.pendingTrend = response.body.pendingTrend;
             this.activatedTrend = response.body.activatedTrend;
@@ -2157,11 +2343,11 @@ export default {
     loadClients() {
       this.$http
         .get("api/getClients/" + this.user.region_id)
-        .then(function(response) {
+        .then(function (response) {
           this.clients = response.body;
         });
 
-      this.$http.get("api/Closure").then(response => {
+      this.$http.get("api/Closure").then((response) => {
         this.closures = response.body;
       });
     },
@@ -2172,7 +2358,7 @@ export default {
     },
     tblRowClass(item, type) {
       if (!item) return;
-      else return "elClr cursorPointer align-center";
+      else return "elClr cursorPointer";
     },
     tblHeadClass(item, type) {
       if (!item) return;
@@ -2199,8 +2385,8 @@ export default {
         var coor = {
           position: {
             lat: parseFloat(item.client1.lat),
-            lng: parseFloat(item.client1.lng)
-          }
+            lng: parseFloat(item.client1.lng),
+          },
         };
         this.coordinates = coor.position;
         this.markers_edit.push(coor);
@@ -2249,14 +2435,14 @@ export default {
         client1: {
           name: "",
           location: "",
-          contact: ""
-        }
+          contact: "",
+        },
       };
 
       this.$bvModal.show("modalAdd");
     },
     btnCreate() {
-      this.$validator.validateAll().then(result => {
+      this.$validator.validateAll().then((result) => {
         if (result) {
           this.$root.$emit("pageLoading");
           this.tblisBusy = true;
@@ -2275,7 +2461,7 @@ export default {
           this.client_details.line_transfer = this.instFormType;
           this.$http
             .post("api/ClientDetail", this.client_details)
-            .then(response => {
+            .then((response) => {
               swal("Created", "", "success");
               this.client_details.client_id = "";
               this.client_details.otc = "";
@@ -2297,14 +2483,14 @@ export default {
               this.getCountNoti();
               this.$bvModal.hide("modalAdd");
             })
-            .catch(response => {
+            .catch((response) => {
               this.tblisBusy = false;
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true
-              }).then(value => {
+                dangerMode: true,
+              }).then((value) => {
                 if (value) {
                 }
               });
@@ -2313,15 +2499,15 @@ export default {
       });
     },
     btnUpdate() {
-      this.$validator.validateAll().then(result => {
+      this.$validator.validateAll().then((result) => {
         if (result) {
           swal({
             title: "Are you sure?",
             text: "",
             icon: "warning",
             buttons: ["No", "Yes"],
-            dangerMode: true
-          }).then(update => {
+            dangerMode: true,
+          }).then((update) => {
             if (update) {
               this.$root.$emit("pageLoading");
 
@@ -2343,7 +2529,7 @@ export default {
                   "api/ClientDetail/" + this.client_details.id,
                   this.client_details
                 )
-                .then(response => {
+                .then((response) => {
                   this.items = response.body;
                   // this.filterIn = null;
                   swal("Updated", "", "success");
@@ -2363,8 +2549,8 @@ export default {
           text: "",
           icon: "warning",
           buttons: ["No", "Yes"],
-          dangerMode: true
-        }).then(willDelete => {
+          dangerMode: true,
+        }).then((willDelete) => {
           if (willDelete) {
             this.tblisBusy = true;
             this.$root.$emit("pageLoading");
@@ -2376,12 +2562,12 @@ export default {
               filterIn: this.filterIn,
               cbFilter: this.cbFilter,
               searchby: this.searchby,
-              tblFilter: this.tblFilter_copy
+              tblFilter: this.tblFilter_copy,
             };
 
             this.$http
               .post("api/clientDetail/destroy1", data)
-              .then(response => {
+              .then((response) => {
                 console.log(response.body);
                 this.$bvModal.hide("modalEdit");
                 this.items = response.body;
@@ -2391,15 +2577,15 @@ export default {
                 this.getCountNoti();
                 swal("Deleted", "", "success");
               })
-              .catch(response => {
+              .catch((response) => {
                 this.tblisBusy = false;
                 this.$root.$emit("pageLoaded");
                 swal({
                   title: "Error",
                   text: response.body.error,
                   icon: "error",
-                  dangerMode: true
-                }).then(value => {
+                  dangerMode: true,
+                }).then((value) => {
                   if (value) {
                   }
                 });
@@ -2412,7 +2598,7 @@ export default {
           text: "You are not allow to delete a Schedule",
           icon: "warning",
           buttons: true,
-          dangerMode: true
+          dangerMode: true,
         });
       }
     },
@@ -2421,8 +2607,8 @@ export default {
         title: "",
         text: "Confirmed for schedule?",
         icon: "info",
-        buttons: ["No", "Yes"]
-      }).then(yes => {
+        buttons: ["No", "Yes"],
+      }).then((yes) => {
         if (yes) {
           this.tblisBusy = true;
           item.user_id = this.user.id;
@@ -2430,22 +2616,22 @@ export default {
           item.user_region_id = this.user.region_id;
           this.$http
             .put("api/clientDetail/clientConfirm/" + item.id, item)
-            .then(response => {
-              swal("Confirmed", "", "success").then(value => {
+            .then((response) => {
+              swal("Confirmed", "", "success").then((value) => {
                 this.items = response.body;
                 this.totalRows = this.items.length;
                 this.tblisBusy = false;
                 this.getCountNoti();
               });
             })
-            .catch(response => {
+            .catch((response) => {
               this.tblisBusy = false;
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true
-              }).then(value => {
+                dangerMode: true,
+              }).then((value) => {
                 if (value) {
                 }
               });
@@ -2455,7 +2641,7 @@ export default {
     },
     updateDateClicked(bvModalEvt) {
       bvModalEvt.preventDefault();
-      this.$validator.validateAll().then(result => {
+      this.$validator.validateAll().then((result) => {
         if (result) {
           if (
             this.client_update_target_date.target_date != "" ||
@@ -2491,8 +2677,8 @@ export default {
         title: "Are you sure?",
         text: "",
         icon: "info",
-        buttons: ["No", "Yes"]
-      }).then(yes => {
+        buttons: ["No", "Yes"],
+      }).then((yes) => {
         if (yes) {
           this.tblisBusy = true;
           this.$root.$emit("pageLoading");
@@ -2508,12 +2694,12 @@ export default {
               "api/clientDetail/updateTargetDate",
               this.client_update_target_date
             )
-            .then(response => {
+            .then((response) => {
               this.$bvModal.hide("modal-update-target-date");
               this.tblisBusy = false;
               // this.filterIn = null;
               this.$root.$emit("pageLoaded");
-              swal("Updated", "", "success").then(value => {
+              swal("Updated", "", "success").then((value) => {
                 this.items = response.body;
                 this.totalRows = this.items.length;
                 this.getCountNoti();
@@ -2538,8 +2724,8 @@ export default {
         title: "Are you sure?",
         text: "",
         icon: "warning",
-        buttons: ["No", "Yes"]
-      }).then(yes => {
+        buttons: ["No", "Yes"],
+      }).then((yes) => {
         if (yes) {
           this.$root.$emit("pageLoading");
           if (this.client_update_activated_date.inst_remarks_temp != "") {
@@ -2562,18 +2748,18 @@ export default {
           this.client_update_activated_date.sendTo = [
             {
               email: "amgt@dctechmicro.com",
-              name: "Account Management"
-            }
+              name: "Account Management",
+            },
           ];
           this.client_update_activated_date.CCTO = [
             {
               email: "cnc@dctechmicro.com",
-              name: "Credits and Collection"
+              name: "Credits and Collection",
             },
             {
               email: this.user.email,
-              name: this.user.name
-            }
+              name: this.user.name,
+            },
           ];
 
           this.$http
@@ -2581,7 +2767,7 @@ export default {
               "api/clientDetail/activateClient",
               this.client_update_activated_date
             )
-            .then(response => {
+            .then((response) => {
               this.$root.$emit("pageLoaded");
               swal("Activated!", "", "success");
               this.items = response.body;
@@ -2590,14 +2776,14 @@ export default {
               this.$bvModal.hide("modal-update-activated-date");
               this.getCountNoti();
             })
-            .catch(response => {
+            .catch((response) => {
               this.tblisBusy = false;
               this.$root.$emit("pageLoaded");
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true
+                dangerMode: true,
               });
             });
         }
@@ -2657,7 +2843,7 @@ export default {
         engineer_in_charge: "",
         prepare: 3,
         approve: 2,
-        note: 1
+        note: 1,
       };
       if (item.client1.engineer == null) {
         swal("Info", "This account has no tech in-charge", "info");
@@ -2674,7 +2860,7 @@ export default {
 
       this.$http
         .get("api/JobOrder/getMaxID/" + this.user.region_id)
-        .then(response => {
+        .then((response) => {
           var a = Number(response.body);
           this.Job_Order.jo_num = a + 1;
           //console.log(response.body);
@@ -2715,8 +2901,8 @@ export default {
             title: "Are you sure?",
             text: "",
             icon: "info",
-            buttons: ["No", "Yes"]
-          }).then(yes => {
+            buttons: ["No", "Yes"],
+          }).then((yes) => {
             if (yes) {
               this.tblisBusy = true;
               this.$root.$emit("pageLoading");
@@ -2725,7 +2911,7 @@ export default {
               this.Job_Order.region_id1 = this.user.region_id;
               this.$http
                 .post("api/clientDetail/storeJobOrder", this.Job_Order)
-                .then(response => {
+                .then((response) => {
                   this.tblisBusy = false;
                   this.$root.$emit("pageLoaded");
                   this.$bvModal.hide("modal-create-job-order");
@@ -2741,17 +2927,17 @@ export default {
                     engineer_in_charge: "",
                     prepare: 3,
                     approve: 2,
-                    note: 1
+                    note: 1,
                   };
                 })
-                .catch(response => {
+                .catch((response) => {
                   this.tblisBusy = false;
                   this.$root.$emit("pageLoaded");
                   swal({
                     title: "Error",
                     text: response.body.error,
                     icon: "error",
-                    dangerMode: true
+                    dangerMode: true,
                   });
                 });
             }
@@ -2761,7 +2947,7 @@ export default {
             title: "Info",
             text: "Please select region",
             icon: "info",
-            dangerMode: true
+            dangerMode: true,
           });
         }
       } else {
@@ -2769,7 +2955,7 @@ export default {
           title: "Info",
           text: "This client has no Engineer incharge",
           icon: "info",
-          dangerMode: true
+          dangerMode: true,
         });
       }
     },
@@ -2779,8 +2965,8 @@ export default {
         text: "",
         icon: "warning",
         buttons: ["No", "Yes"],
-        dangerMode: true
-      }).then(willDelete => {
+        dangerMode: true,
+      }).then((willDelete) => {
         if (willDelete) {
           this.items = [];
           this.tblisBusy = true;
@@ -2788,26 +2974,26 @@ export default {
             id: this.View_Job_Order_Id,
             region_id: this.user.region_id,
             user_id: this.user.id,
-            user_name: this.user.name
+            user_name: this.user.name,
           };
           this.$http
             .post("api/clientDetail/destroyJobOrder", data)
-            .then(response => {
+            .then((response) => {
               this.$bvModal.hide("modal-view-job-order");
-              swal("Deleted", "", "success").then(value => {
+              swal("Deleted", "", "success").then((value) => {
                 this.items = response.body;
                 this.totalRows = this.items.length;
                 this.tblisBusy = false;
               });
             })
-            .catch(response => {
+            .catch((response) => {
               this.tblisBusy = false;
               swal({
                 title: "Error",
                 text: response.body.error,
                 icon: "error",
-                dangerMode: true
-              }).then(value => {
+                dangerMode: true,
+              }).then((value) => {
                 if (value) {
                 }
               });
@@ -2821,8 +3007,8 @@ export default {
         title: "Are you sure?",
         text: "",
         icon: "info",
-        buttons: ["No", "Yes"]
-      }).then(yes => {
+        buttons: ["No", "Yes"],
+      }).then((yes) => {
         if (yes) {
           this.View_Job_Order_All.JobOrder.update_in = "schedule";
           this.$http
@@ -2830,7 +3016,7 @@ export default {
               "api/JobOrder/" + this.View_Job_Order_Id,
               this.View_Job_Order_All.JobOrder
             )
-            .then(response => {
+            .then((response) => {
               swal("Updated", "", "success");
               this.$bvModal.hide("modal-view-job-order");
             });
@@ -2843,56 +3029,38 @@ export default {
         {
           key: "JobOrder.id",
           label: "Job #",
-          sortable: true
+          sortable: true,
         },
         {
           key: "status1.target_date",
-          label: "Installation Date"
+          label: "Installation Date",
         },
         {
-          key: "node",
-          label: "NODE - OLT",
+          key: "account_name",
+          label: "Account Name",
           formatter: (value, key, item) => {
-            var name = "";
-            var chk = 0;
-            if (item.client1.splitter_port != null) {
-              var tt = item.client1.splitter_port;
-              if (tt.belongs_to_splitter_nap != null) {
-                var tt = tt.belongs_to_splitter_nap;
-                if (tt.belongs_to_splitter_lcp != null) {
-                  var tt = tt.belongs_to_splitter_lcp;
-                  if (tt.belongs_to_olt != null) {
-                    var tt = tt.belongs_to_olt;
-                    name = tt.belongs_to_node.name + " - " + tt.name;
-                    chk = 1;
-                  }
-                }
-              }
-            }
-
-            if (chk == 0) return "N/A";
-            else return name;
-          }
-        }
+            if (item.line_transfer)
+              return item.client1.name + " - Line Transfer";
+            else return item.client1.name;
+          },
+        },
+        {
+          key: "client1.region.name",
+          label: "Region",
+          sortable: true,
+        },
+        {
+          key: "client1.area.name",
+          label: "Area",
+          sortable: true,
+        },
+        {
+          key: "client1.branch.name",
+          label: "Branch",
+          sortable: true,
+        },
       ];
 
-      if (this.user.id == 1) {
-        var temp = {
-          key: "id",
-          label: "ID",
-          sortable: true
-        };
-        this.fields.push(temp);
-      }
-
-      var temp = {
-        key: "account_name",
-        label: "Account Name",
-        formatter: (value, key, item) => {
-          if (item.line_transfer) return item.client1.name + " - Line Transfer";
-          else return item.client1.name;
-        }
-      };
       this.fields.push(temp);
 
       if ("colLocation" == check) {
@@ -2902,7 +3070,7 @@ export default {
         var temp = {
           key: "client1.location",
           label: "Location",
-          sortable: true
+          sortable: true,
         };
         this.fields.push(temp);
       }
@@ -2914,7 +3082,7 @@ export default {
         var temp = {
           key: "client1.package.name",
           label: "Package",
-          sortable: true
+          sortable: true,
         };
         this.fields.push(temp);
       }
@@ -2926,7 +3094,7 @@ export default {
         var temp = {
           key: "client1.region.name",
           label: "Region",
-          sortable: true
+          sortable: true,
         };
         this.fields.push(temp);
       }
@@ -2938,7 +3106,7 @@ export default {
         var temp = {
           key: "client1.modem.name",
           label: "Modem",
-          sortable: true
+          sortable: true,
         };
         this.fields.push(temp);
       }
@@ -2950,7 +3118,7 @@ export default {
         var temp = {
           key: "client1.communication_protocol",
           label: "Protocol",
-          sortable: true
+          sortable: true,
         };
         this.fields.push(temp);
       }
@@ -2962,7 +3130,7 @@ export default {
         var temp = {
           key: "foc_length",
           label: "Length",
-          sortable: true
+          sortable: true,
         };
         this.fields.push(temp);
       }
@@ -2974,7 +3142,7 @@ export default {
         var temp = {
           key: "client1.sales.user.name",
           label: "Sales",
-          sortable: true
+          sortable: true,
         };
         this.fields.push(temp);
       }
@@ -2986,7 +3154,7 @@ export default {
         var temp = {
           key: "client1.engineer.user.name",
           label: "Tech Sales",
-          sortable: true
+          sortable: true,
         };
         this.fields.push(temp);
       }
@@ -2994,26 +3162,26 @@ export default {
       extra = {
         key: "client1.contract",
         label: "Contract",
-        formatter: value => {
-          if (check == "export") {
-            if (value != null) return "O";
-            else return "X";
-          } else {
-            if (value != null) return '<i class="fas fa-check" />';
-            else return '<i class="fas fa-times" />';
-          }
-        },
-        sortable: true
+        // formatter: (value) => {
+        //   if (check == "export") {
+        //     if (value != null) return "O";
+        //     else return "X";
+        //   } else {
+        //     if (value != null) return '<i class="fas fa-check" />';
+        //     else return '<i class="fas fa-times" />';
+        //   }
+        // },
+        sortable: true,
       };
       this.fields.push(extra);
 
-      var extra = { key: "otc", label: "OTC", sortable: true };
+      var extra = { key: "aging", label: "OTC", sortable: true };
       this.fields.push(extra);
 
       extra = {
         key: "mapping_status",
         label: "Mapping",
-        formatter: value => {
+        formatter: (value) => {
           if (check == "export") {
             if (value == 1) return "O";
             else return "X";
@@ -3022,7 +3190,7 @@ export default {
             else return '<i class="fas fa-times" />';
           }
         },
-        sortable: true
+        sortable: true,
       };
       this.fields.push(extra);
 
@@ -3033,17 +3201,17 @@ export default {
         var temp = {
           key: "cable_category",
           label: "FOC.",
-          sortable: true
+          sortable: true,
         };
         this.fields.push(temp);
       }
 
-      extra = { key: "foc_schedule", label: "FOC Schedule", sortable: true };
-      this.fields.push(extra);
+      // extra = { key: "foc_schedule", label: "FOC Schedule", sortable: true };
+      // this.fields.push(extra);
 
-      extra = { key: "foc_layout", label: "Contractor stat.", sortable: true };
-      extra = { key: "layout_status", label: "layout stat.", sortable: true };
-      this.fields.push(extra);
+      // extra = { key: "foc_layout", label: "Contractor stat.", sortable: true };
+      // extra = { key: "layout_status", label: "layout stat.", sortable: true };
+      // this.fields.push(extra);
       // extra = {
       //   key: "modem_status",
       //   label: "Modem",
@@ -3063,14 +3231,14 @@ export default {
       extra = { key: "agingCount", label: "Aging", sortable: true };
       this.fields.push(extra);
 
-      if (this.roles.admin) {
-        var temp = {
-          key: "foc_duration",
-          label: "FOC Planning Duration",
-          sortable: true
-        };
-        this.fields.push(temp);
-      }
+      // if (this.roles.admin) {
+      //   var temp = {
+      //     key: "foc_duration",
+      //     label: "FOC Planning Duration",
+      //     sortable: true,
+      //   };
+      //   this.fields.push(temp);
+      // }
 
       //extra = { key: "foc_check_red", label: "foc_check_red", sortable: true };
       //this.fields.push(extra);
@@ -3081,24 +3249,32 @@ export default {
       if (this.colAppliedDate) {
         var temp = {
           key: "applied_date_formated",
-          label: "Applied Date"
+          label: "Applied Date",
         };
         this.fields.push(temp);
       }
 
       extra = {
-        key: "date_activated",
-        label: "Action",
-        sortable: true
+        key: "created_at",
+        sortable: true,
       };
       this.fields.push(extra);
 
-      // extra = {
-      //   key: "applied_date_sort",
-      //   label: "applied_date_sort",
-      //   sortable: true
-      // };
+      extra = {
+        key: "date_activated",
+        label: "Action",
+        sortable: true,
+      };
       this.fields.push(extra);
+
+      if (this.user.id == 1) {
+        var temp = {
+          key: "id",
+          label: "ID",
+          sortable: true,
+        };
+        this.fields.push(temp);
+      }
     },
     printPreview() {
       var newWin = window.open("");
@@ -3136,440 +3312,440 @@ export default {
       newWin.document.write("</head><body>");
       newWin.document.write(
         "<div>" +
-        '<div class="row">' +
-        '<div class="col-md-6">' + // first col
-        '<div style="text-align: center;" >' +
-        "<b>Dctech Micro Services Inc.</b>" +
-        "<br>Dctech Bldg. Ponciano Reyes St. Davao City" +
-        "<br>Tel. #: 082-221-2380 / Fax #: 082-221-2382" +
-        "</div>" +
-        "<br>" +
-        "<br>" +
-        '<div class="borderbot-1 bordertop-2" style="text-align: center;">' +
-        "<span><b>SERVICE ORDER FORM</b></span>" +
-        "</div>" +
-        "<br>" +
-        '<div class="row">' + //row1
-        '<div class="col-md-5">' +
-        "Project Description: <span class='borderbot-05'>" +
-        this.View_Job_Order_All.JobOrder.project_description +
-        "</span>" +
-        "</div>" +
-        '<div class="col-md-5" style="text-align: right;">' +
-        "Control #: <span class='borderbot-05'>" +
-        this.View_Job_Order_Id_selected +
-        "</span>" +
-        "</div>" +
-        "</div>" + //end row1
-        "<br>" +
-        '<div class="borderbot-1 bordertop-1" style="text-align: center;">' +
-        "<span><b>CLIENT INFORMATION</b></span>" +
-        "</div>" +
-        "<br>" +
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-2">' +
-        "Account Name:" +
-        "</div>" +
-        '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
-        this.View_Job_Order_All.client1.name +
-        linetransfer +
-        "," +
-        this.View_Job_Order_All.client1.contact +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-2">' +
-        "Address:" +
-        "</div>" +
-        '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
-        this.View_Job_Order_All.client1.location +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-2">' +
-        "Date Started:" +
-        "</div>" +
-        '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
-        this.View_Job_Order_All.JobOrder_started +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-2">' +
-        "Date Finished:" +
-        "</div>" +
-        '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
-        this.View_Job_Order_All.JobOrder_finished +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        "<br>" +
-        '<div class="borderbot-1 bordertop-1"  style="text-align: center;">' +
-        "<span><b>SERVICE REPORT</b></span>" +
-        "</div>" +
-        "<br>" +
-        //SERVICE REPORT ----- SERVICE REPORT ----- SERVICE REPORT----- SERVICE REPORT
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Dctech Region:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        this.View_Job_Order_All.JobOrder.region.name +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Cable Category:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        this.View_Job_Order_All.JobOrder.cable_category +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Estimated Distance(m):" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        this.View_Job_Order_All.JobOrder.foc_length +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Actual Distance(m):" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        "" +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Rx Power:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        "" +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        "<br>" +
-        '<div class="borderbot-1" style="text-align: center;">' +
-        "</div>" +
-        "<br>" +
-        "<br>" +
-        //Engineer In-Charge:
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Engineer In-Charge:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: center;">' +
-        this.View_Job_Order_All.JobOrder.engineer.user.name +
-        "</div>" +
-        "</div>" +
-        '<div class="row">' +
-        '<div class="col-md-3">' +
-        "" +
-        "</div>" +
-        '<div class="col-md-7"  style="text-align: center;">' +
-        "Signature over Printed Name" +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        "<br>" +
-        "<br>" +
-        //Contractor/Lineman:
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Contractor/Lineman:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: center;">' +
-        "" +
-        "</div>" +
-        "</div>" +
-        '<div class="row">' +
-        '<div class="col-md-3">' +
-        "" +
-        "</div>" +
-        '<div class="col-md-7"  style="text-align: center;">' +
-        "Signature over Printed Name" +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        "<br>" +
-        '<div class="row">' + //row1
-        '<div class="col-md-5" style="text-align: center;">' +
-        "Prepared by:" +
-        "</div>" +
-        '<div class="col-md-5" style="text-align: center;">' +
-        "Approved by:" +
-        "</div>" +
-        "</div>" + //end row1
-        //
-        "<br>" +
-        '<div class="row">' + //row1
-        '<div class="col-md-5" style="text-align: center;">' +
-        '<span class="borderbot-1" >' +
-        this.View_Job_Order_All.JobOrder.prepare_engineer.name +
-        "</span>" +
-        "</div>" +
-        '<div class="col-md-5" style="text-align: center;">' +
-        '<span class="borderbot-1" >' +
-        this.View_Job_Order_All.JobOrder.approve_engineer.name +
-        "</span>" +
-        "</div>" +
-        "</div>" + //end row1
-        //
-        '<div class="row">' + //row1
-        '<div class="col-md-5" style="text-align: center;">' +
-        this.View_Job_Order_All.JobOrder.prepare_engineer.position +
-        "</div>" +
-        '<div class="col-md-5" style="text-align: center;">' +
-        this.View_Job_Order_All.JobOrder.approve_engineer.position +
-        "</div>" +
-        "</div>" + //end row1
-        //
-        "<br>" +
-        '<div class=""  style="text-align: center;">' +
-        "<span>Noted by:</span>" +
-        "</div>" +
-        //
-        //
-        "<br>" +
-        '<div   style="text-align: center;">' +
-        '<span class="borderbot-1" >' +
-        this.View_Job_Order_All.JobOrder.note_engineer.name +
-        "</span>" +
-        "</div>" +
-        '<div class=""  style="text-align: center;">' +
-        "<span>" +
-        this.View_Job_Order_All.JobOrder.note_engineer.position +
-        "</span>" +
-        "</div>" +
-        "</div>" + // end first col
-        //
-        //
-        //
-        //
-        //second
-        '<div class="col-md-6 borderleft-2">' + // second col
-        '<div style="text-align: center;" >' +
-        "<b>Dctech Micro Services Inc.</b>" +
-        "<br>Dctech Bldg. Ponciano Reyes St. Davao City" +
-        "<br>Tel. #: 082-221-2380 / Fax #: 082-221-2382" +
-        "</div>" +
-        "<br>" +
-        "<br>" +
-        '<div class="borderbot-1 bordertop-2" style="text-align: center;">' +
-        "<span><b>SERVICE ORDER FORM</b></span>" +
-        "</div>" +
-        "<br>" +
-        '<div class="row">' + //row1
-        '<div class="col-md-5">' +
-        "Project Description: <span class='borderbot-05'>" +
-        this.View_Job_Order_All.JobOrder.project_description +
-        "</span>" +
-        "</div>" +
-        '<div class="col-md-5" style="text-align: right;">' +
-        "Control #: <span class='borderbot-05'>" +
-        this.View_Job_Order_Id_selected +
-        "</span>" +
-        "</div>" +
-        "</div>" + //end row1
-        "<br>" +
-        '<div class="borderbot-1 bordertop-1" style="text-align: center;">' +
-        "<span><b>CLIENT INFORMATION</b></span>" +
-        "</div>" +
-        "<br>" +
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-2">' +
-        "Account Name:" +
-        "</div>" +
-        '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
-        this.View_Job_Order_All.client1.name +
-        linetransfer +
-        "," +
-        this.View_Job_Order_All.client1.contact +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-2">' +
-        "Address:" +
-        "</div>" +
-        '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
-        this.View_Job_Order_All.client1.location +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-2">' +
-        "Date Started:" +
-        "</div>" +
-        '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
-        this.View_Job_Order_All.JobOrder_started +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-2">' +
-        "Date Finished:" +
-        "</div>" +
-        '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
-        this.View_Job_Order_All.JobOrder_finished +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        "<br>" +
-        '<div class="borderbot-1 bordertop-1"  style="text-align: center;">' +
-        "<span><b>SERVICE REPORT</b></span>" +
-        "</div>" +
-        "<br>" +
-        //SERVICE REPORT ----- SERVICE REPORT ----- SERVICE REPORT----- SERVICE REPORT
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Dctech Region:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        this.View_Job_Order_All.JobOrder.region.name +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Cable Category:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        this.View_Job_Order_All.JobOrder.cable_category +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Estimated Distance(m)" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        this.View_Job_Order_All.JobOrder.foc_length +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Actual Distance(m)" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        "" +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Rx Power:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
-        "" +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        "<br>" +
-        '<div class="borderbot-1" style="text-align: center;">' +
-        "</div>" +
-        "<br>" +
-        "<br>" +
-        //Engineer In-Charge:
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Engineer In-Charge:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: center;">' +
-        this.View_Job_Order_All.JobOrder.engineer.user.name +
-        "</div>" +
-        "</div>" +
-        '<div class="row">' +
-        '<div class="col-md-3">' +
-        "" +
-        "</div>" +
-        '<div class="col-md-7"  style="text-align: center;">' +
-        "Signature over Printed Name" +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        "<br>" +
-        "<br>" +
-        //Contractor/Lineman:
-        '<div class="row">' + //row2
-        '<div class="col-md-3">' +
-        "Contractor/Lineman:" +
-        "</div>" +
-        '<div class="col-md-7 borderbot-05"  style="text-align: center;">' +
-        "" +
-        "</div>" +
-        "</div>" +
-        '<div class="row">' +
-        '<div class="col-md-3">' +
-        "" +
-        "</div>" +
-        '<div class="col-md-7"  style="text-align: center;">' +
-        "Signature over Printed Name" +
-        "</div>" +
-        "</div>" + //end row2
-        //
-        "<br>" +
-        '<div class="row">' + //row1
-        '<div class="col-md-5" style="text-align: center;">' +
-        "Prepared by:" +
-        "</div>" +
-        '<div class="col-md-5" style="text-align: center;">' +
-        "Approved by:" +
-        "</div>" +
-        "</div>" + //end row1
-        //
-        "<br>" +
-        '<div class="row">' + //row1
-        '<div class="col-md-5" style="text-align: center;">' +
-        '<span class="borderbot-1" >' +
-        this.View_Job_Order_All.JobOrder.prepare_engineer.name +
-        "</span>" +
-        "</div>" +
-        '<div class="col-md-5" style="text-align: center;">' +
-        '<span class="borderbot-1" >' +
-        this.View_Job_Order_All.JobOrder.approve_engineer.name +
-        "</span>" +
-        "</div>" +
-        "</div>" + //end row1
-        //
-        '<div class="row">' + //row1
-        '<div class="col-md-5" style="text-align: center;">' +
-        this.View_Job_Order_All.JobOrder.prepare_engineer.position +
-        "</div>" +
-        '<div class="col-md-5" style="text-align: center;">' +
-        this.View_Job_Order_All.JobOrder.approve_engineer.position +
-        "</div>" +
-        "</div>" + //end row1
-        //
-        "<br>" +
-        '<div class=""  style="text-align: center;">' +
-        "<span>Noted by:</span>" +
-        "</div>" +
-        //
-        //
-        "<br>" +
-        '<div   style="text-align: center;">' +
-        '<span class="borderbot-1" >' +
-        this.View_Job_Order_All.JobOrder.note_engineer.name +
-        "</span>" +
-        "</div>" +
-        '<div class=""  style="text-align: center;">' +
-        "<span>" +
-        this.View_Job_Order_All.JobOrder.note_engineer.position +
-        "</span>" +
-        "</div>" +
-        "</div>" + // end second col
+          '<div class="row">' +
+          '<div class="col-md-6">' + // first col
+          '<div style="text-align: center;" >' +
+          "<b>Dctech Micro Services Inc.</b>" +
+          "<br>Dctech Bldg. Ponciano Reyes St. Davao City" +
+          "<br>Tel. #: 082-221-2380 / Fax #: 082-221-2382" +
+          "</div>" +
+          "<br>" +
+          "<br>" +
+          '<div class="borderbot-1 bordertop-2" style="text-align: center;">' +
+          "<span><b>SERVICE ORDER FORM</b></span>" +
+          "</div>" +
+          "<br>" +
+          '<div class="row">' + //row1
+          '<div class="col-md-5">' +
+          "Project Description: <span class='borderbot-05'>" +
+          this.View_Job_Order_All.JobOrder.project_description +
+          "</span>" +
+          "</div>" +
+          '<div class="col-md-5" style="text-align: right;">' +
+          "Control #: <span class='borderbot-05'>" +
+          this.View_Job_Order_Id_selected +
+          "</span>" +
+          "</div>" +
+          "</div>" + //end row1
+          "<br>" +
+          '<div class="borderbot-1 bordertop-1" style="text-align: center;">' +
+          "<span><b>CLIENT INFORMATION</b></span>" +
+          "</div>" +
+          "<br>" +
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-2">' +
+          "Account Name:" +
+          "</div>" +
+          '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
+          this.View_Job_Order_All.client1.name +
+          linetransfer +
+          "," +
+          this.View_Job_Order_All.client1.contact +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-2">' +
+          "Address:" +
+          "</div>" +
+          '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
+          this.View_Job_Order_All.client1.location +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-2">' +
+          "Date Started:" +
+          "</div>" +
+          '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
+          this.View_Job_Order_All.JobOrder_started +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-2">' +
+          "Date Finished:" +
+          "</div>" +
+          '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
+          this.View_Job_Order_All.JobOrder_finished +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          "<br>" +
+          '<div class="borderbot-1 bordertop-1"  style="text-align: center;">' +
+          "<span><b>SERVICE REPORT</b></span>" +
+          "</div>" +
+          "<br>" +
+          //SERVICE REPORT ----- SERVICE REPORT ----- SERVICE REPORT----- SERVICE REPORT
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Dctech Region:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          this.View_Job_Order_All.JobOrder.region.name +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Cable Category:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          this.View_Job_Order_All.JobOrder.cable_category +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Estimated Distance(m):" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          this.View_Job_Order_All.JobOrder.foc_length +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Actual Distance(m):" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          "" +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Rx Power:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          "" +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          "<br>" +
+          '<div class="borderbot-1" style="text-align: center;">' +
+          "</div>" +
+          "<br>" +
+          "<br>" +
+          //Engineer In-Charge:
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Engineer In-Charge:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: center;">' +
+          this.View_Job_Order_All.JobOrder.engineer.user.name +
+          "</div>" +
+          "</div>" +
+          '<div class="row">' +
+          '<div class="col-md-3">' +
+          "" +
+          "</div>" +
+          '<div class="col-md-7"  style="text-align: center;">' +
+          "Signature over Printed Name" +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          "<br>" +
+          "<br>" +
+          //Contractor/Lineman:
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Contractor/Lineman:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: center;">' +
+          "" +
+          "</div>" +
+          "</div>" +
+          '<div class="row">' +
+          '<div class="col-md-3">' +
+          "" +
+          "</div>" +
+          '<div class="col-md-7"  style="text-align: center;">' +
+          "Signature over Printed Name" +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          "<br>" +
+          '<div class="row">' + //row1
+          '<div class="col-md-5" style="text-align: center;">' +
+          "Prepared by:" +
+          "</div>" +
+          '<div class="col-md-5" style="text-align: center;">' +
+          "Approved by:" +
+          "</div>" +
+          "</div>" + //end row1
+          //
+          "<br>" +
+          '<div class="row">' + //row1
+          '<div class="col-md-5" style="text-align: center;">' +
+          '<span class="borderbot-1" >' +
+          this.View_Job_Order_All.JobOrder.prepare_engineer.name +
+          "</span>" +
+          "</div>" +
+          '<div class="col-md-5" style="text-align: center;">' +
+          '<span class="borderbot-1" >' +
+          this.View_Job_Order_All.JobOrder.approve_engineer.name +
+          "</span>" +
+          "</div>" +
+          "</div>" + //end row1
+          //
+          '<div class="row">' + //row1
+          '<div class="col-md-5" style="text-align: center;">' +
+          this.View_Job_Order_All.JobOrder.prepare_engineer.position +
+          "</div>" +
+          '<div class="col-md-5" style="text-align: center;">' +
+          this.View_Job_Order_All.JobOrder.approve_engineer.position +
+          "</div>" +
+          "</div>" + //end row1
+          //
+          "<br>" +
+          '<div class=""  style="text-align: center;">' +
+          "<span>Noted by:</span>" +
+          "</div>" +
+          //
+          //
+          "<br>" +
+          '<div   style="text-align: center;">' +
+          '<span class="borderbot-1" >' +
+          this.View_Job_Order_All.JobOrder.note_engineer.name +
+          "</span>" +
+          "</div>" +
+          '<div class=""  style="text-align: center;">' +
+          "<span>" +
+          this.View_Job_Order_All.JobOrder.note_engineer.position +
+          "</span>" +
+          "</div>" +
+          "</div>" + // end first col
+          //
+          //
+          //
+          //
+          //second
+          '<div class="col-md-6 borderleft-2">' + // second col
+          '<div style="text-align: center;" >' +
+          "<b>Dctech Micro Services Inc.</b>" +
+          "<br>Dctech Bldg. Ponciano Reyes St. Davao City" +
+          "<br>Tel. #: 082-221-2380 / Fax #: 082-221-2382" +
+          "</div>" +
+          "<br>" +
+          "<br>" +
+          '<div class="borderbot-1 bordertop-2" style="text-align: center;">' +
+          "<span><b>SERVICE ORDER FORM</b></span>" +
+          "</div>" +
+          "<br>" +
+          '<div class="row">' + //row1
+          '<div class="col-md-5">' +
+          "Project Description: <span class='borderbot-05'>" +
+          this.View_Job_Order_All.JobOrder.project_description +
+          "</span>" +
+          "</div>" +
+          '<div class="col-md-5" style="text-align: right;">' +
+          "Control #: <span class='borderbot-05'>" +
+          this.View_Job_Order_Id_selected +
+          "</span>" +
+          "</div>" +
+          "</div>" + //end row1
+          "<br>" +
+          '<div class="borderbot-1 bordertop-1" style="text-align: center;">' +
+          "<span><b>CLIENT INFORMATION</b></span>" +
+          "</div>" +
+          "<br>" +
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-2">' +
+          "Account Name:" +
+          "</div>" +
+          '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
+          this.View_Job_Order_All.client1.name +
+          linetransfer +
+          "," +
+          this.View_Job_Order_All.client1.contact +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-2">' +
+          "Address:" +
+          "</div>" +
+          '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
+          this.View_Job_Order_All.client1.location +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-2">' +
+          "Date Started:" +
+          "</div>" +
+          '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
+          this.View_Job_Order_All.JobOrder_started +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-2">' +
+          "Date Finished:" +
+          "</div>" +
+          '<div class="col-md-8 borderbot-05"  style="text-align: left;">' +
+          this.View_Job_Order_All.JobOrder_finished +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          "<br>" +
+          '<div class="borderbot-1 bordertop-1"  style="text-align: center;">' +
+          "<span><b>SERVICE REPORT</b></span>" +
+          "</div>" +
+          "<br>" +
+          //SERVICE REPORT ----- SERVICE REPORT ----- SERVICE REPORT----- SERVICE REPORT
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Dctech Region:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          this.View_Job_Order_All.JobOrder.region.name +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Cable Category:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          this.View_Job_Order_All.JobOrder.cable_category +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Estimated Distance(m)" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          this.View_Job_Order_All.JobOrder.foc_length +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Actual Distance(m)" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          "" +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Rx Power:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: left;">' +
+          "" +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          "<br>" +
+          '<div class="borderbot-1" style="text-align: center;">' +
+          "</div>" +
+          "<br>" +
+          "<br>" +
+          //Engineer In-Charge:
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Engineer In-Charge:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: center;">' +
+          this.View_Job_Order_All.JobOrder.engineer.user.name +
+          "</div>" +
+          "</div>" +
+          '<div class="row">' +
+          '<div class="col-md-3">' +
+          "" +
+          "</div>" +
+          '<div class="col-md-7"  style="text-align: center;">' +
+          "Signature over Printed Name" +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          "<br>" +
+          "<br>" +
+          //Contractor/Lineman:
+          '<div class="row">' + //row2
+          '<div class="col-md-3">' +
+          "Contractor/Lineman:" +
+          "</div>" +
+          '<div class="col-md-7 borderbot-05"  style="text-align: center;">' +
+          "" +
+          "</div>" +
+          "</div>" +
+          '<div class="row">' +
+          '<div class="col-md-3">' +
+          "" +
+          "</div>" +
+          '<div class="col-md-7"  style="text-align: center;">' +
+          "Signature over Printed Name" +
+          "</div>" +
+          "</div>" + //end row2
+          //
+          "<br>" +
+          '<div class="row">' + //row1
+          '<div class="col-md-5" style="text-align: center;">' +
+          "Prepared by:" +
+          "</div>" +
+          '<div class="col-md-5" style="text-align: center;">' +
+          "Approved by:" +
+          "</div>" +
+          "</div>" + //end row1
+          //
+          "<br>" +
+          '<div class="row">' + //row1
+          '<div class="col-md-5" style="text-align: center;">' +
+          '<span class="borderbot-1" >' +
+          this.View_Job_Order_All.JobOrder.prepare_engineer.name +
+          "</span>" +
+          "</div>" +
+          '<div class="col-md-5" style="text-align: center;">' +
+          '<span class="borderbot-1" >' +
+          this.View_Job_Order_All.JobOrder.approve_engineer.name +
+          "</span>" +
+          "</div>" +
+          "</div>" + //end row1
+          //
+          '<div class="row">' + //row1
+          '<div class="col-md-5" style="text-align: center;">' +
+          this.View_Job_Order_All.JobOrder.prepare_engineer.position +
+          "</div>" +
+          '<div class="col-md-5" style="text-align: center;">' +
+          this.View_Job_Order_All.JobOrder.approve_engineer.position +
+          "</div>" +
+          "</div>" + //end row1
+          //
+          "<br>" +
+          '<div class=""  style="text-align: center;">' +
+          "<span>Noted by:</span>" +
+          "</div>" +
+          //
+          //
+          "<br>" +
+          '<div   style="text-align: center;">' +
+          '<span class="borderbot-1" >' +
+          this.View_Job_Order_All.JobOrder.note_engineer.name +
+          "</span>" +
+          "</div>" +
+          '<div class=""  style="text-align: center;">' +
+          "<span>" +
+          this.View_Job_Order_All.JobOrder.note_engineer.position +
+          "</span>" +
+          "</div>" +
+          "</div>" + // end second col
           //
           "</div>" +
           "</div>"
@@ -3599,7 +3775,7 @@ export default {
       } else {
         this.$http
           .get("api/client_has_sched/" + this.clientSelected.id)
-          .then(response => {
+          .then((response) => {
             if (response.body != 0) {
               if (response.body.status == "finished")
                 swal('"' + this.clientSelected.name + '" is already activated');
@@ -3611,7 +3787,7 @@ export default {
                 );
               this.clientSelected = {
                 id: "",
-                region_id: ""
+                region_id: "",
               };
             } else {
               this.client_details.client_id = this.clientSelected.id;
@@ -3624,9 +3800,11 @@ export default {
       this.changeColDisplay("export");
       this.currentPage = 1;
       this.perPage = this.totalRows;
-      this.$nextTick(function() {
+      this.$global.excelReportCSV(tbl, "client installation");
+      /*
+      this.$nextTick(function () {
         setTimeout(
-          function() {
+          function () {
             var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
             var textRange;
             var j = 0;
@@ -3668,7 +3846,7 @@ export default {
           1000
         );
       });
-
+*/
       // this.$nextTick(function() {
       //   setTimeout(this.changeColDisplay(""), 3000);
       // });
@@ -3703,12 +3881,12 @@ export default {
         id: item.id,
         email: item.email_add,
         client_name: item.name,
-        contact: item.contact
+        contact: item.contact,
       };
       this.$root.$emit("pageLoading");
       this.$http
         .post("api/send_mail_otp", data)
-        .then(response => {
+        .then((response) => {
           console.log(response.body);
           this.$root.$emit("pageLoaded");
           if (response.body.error_string == null)
@@ -3720,13 +3898,13 @@ export default {
               "error"
             );
         })
-        .catch(response => {
+        .catch((response) => {
           console.log(response.body);
           swal({
             title: response.body,
             text: "",
             icon: "error",
-            dangerMode: true
+            dangerMode: true,
           });
         });
     },
@@ -3740,7 +3918,7 @@ export default {
       this.totalWFC = 0;
       this.totalNeedAssign = 0;
       this.total_no_foc_layout_sched = 0;
-      this.items.forEach(item => {
+      this.items.forEach((item) => {
         if (item.status == null) this.totalWFC += 1;
         if (item.target_date == null && item.status != null)
           this.totalNeedAssign += 1;
@@ -3768,13 +3946,13 @@ export default {
             "/" +
             this.tblFilter_copy
         )
-        .then(response => {
+        .then((response) => {
           this.filterIn = "search";
           this.items = response.body;
           this.totalRows = this.items.length;
           console.log(response);
         })
-        .catch(response => {
+        .catch((response) => {
           console.log(response);
         });
     },
@@ -3783,9 +3961,9 @@ export default {
         var data = {
           client_detail_id: this.client_details.id,
           user_id: this.user.id,
-          remarks: this.remarksText
+          remarks: this.remarksText,
         };
-        this.$http.post("api/InstallationRemarksLog", data).then(response => {
+        this.$http.post("api/InstallationRemarksLog", data).then((response) => {
           this.remarksText = "";
           this.client_details.remarks_log = response.body;
           console.log(response.body);
@@ -3804,14 +3982,14 @@ export default {
       //
       var coor = {
         lat: event.latLng.lat(),
-        lng: event.latLng.lng()
+        lng: event.latLng.lng(),
       };
       console.log(coor);
     },
     openWindow(event, marker, index, wit) {
       this.window_details = marker;
       this.$root.$emit("pageLoading");
-      this.$http.get("api/Closure/" + marker.id).then(response => {
+      this.$http.get("api/Closure/" + marker.id).then((response) => {
         // console.log(response.body);
         this.window_details = response.body;
         this.window_details.client_id = this.client_details.client_id;
@@ -3844,11 +4022,11 @@ export default {
         contact_person: this.client_details.client1.contact_person,
         location: this.client_details.client1.location,
         contact: this.client_details.client1.contact,
-        complaint: "FTTH INSTALLATION"
+        complaint: "FTTH INSTALLATION",
       };
       this.$bvModal.show("modalFSRPrintPreview");
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

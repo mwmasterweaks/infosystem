@@ -88,7 +88,6 @@ class Logger
 
     public function mailer($subject, $message, $sender, $senderName, $sendTo, $CCTO)
     {
-        return "ok";
         $mail = new PHPMailer(true);
         $mail->SMTPDebug = 0;
         //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
@@ -125,7 +124,6 @@ class Logger
         //$mail->addReplyTo($request->email, 'Mailer');
         //$mail->addCC('pbismonte@dctechmicro.com');
         //$mail->addBCC('his-her-email@gmail.com');
-
         //Attachments (optional)
         // $mail->addAttachment('/var/tmp/file.tar.gz');			// Add attachments
         // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');	// Optional name

@@ -206,6 +206,45 @@ export default function(Vue) {
       var date = new Date(Math.round((excelDate - 25569) * 86400 * 1000));
       var converted_date = date.toISOString().split("T")[0];
       return converted_date;
+    },
+    excelReportCSV(tbl, name) {
+      this.$nextTick(function() {
+        setTimeout(
+          function() {
+            var csv_data = [];
+            var tab = document.getElementById(tbl);
+
+            //var rows = document.getElementsByTagName("tr");
+            for (var i = 0; i < tab.rows.length; i++) {
+              // Get each column data
+              var cols = tab.rows[i].querySelectorAll("td,th");
+
+              // Stores each csv row data
+              var csvrow = [];
+              for (var j = 0; j < cols.length; j++) {
+                // Get the text data of each cell of
+                // a row and push it to csvrow
+                var temp = cols[j].innerHTML.replace(
+                  /<div[^>]*>|<\/div>/gi,
+                  ""
+                );
+                if (temp.includes(",")) temp = '"' + temp + '"';
+                csvrow.push(temp);
+              }
+
+              // Combine each column value with comma
+              csv_data.push(csvrow.join(","));
+            }
+            // combine each row data with new line character
+            csv_data = csv_data.join("\n");
+            this.downloadCSVFile(csv_data, name);
+            /* We will use this function later to download
+            the data in a csv file downloadCSVFile(csv_data);
+            */
+          }.bind(this),
+          1000
+        );
+      });
     }
   };
 

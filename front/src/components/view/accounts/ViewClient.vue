@@ -5644,6 +5644,8 @@ export default {
       this.updateClient();
     },
     search_data() {
+      this.$root.$emit("pageLoading");
+
       if (this.searchby == "account_no") {
         var temp = {
           key: "account_no",
@@ -5667,9 +5669,16 @@ export default {
           this.filterIn = "search";
 
           this.totalRows = this.items.length;
-          console.log(response.body);
+          this.$root.$emit("pageLoaded");
         })
         .catch((response) => {
+          swal({
+            title: "Error",
+            text: response.body.error,
+            icon: "error",
+            dangerMode: true,
+          });
+          this.$root.$emit("pageLoaded");
           console.log(response);
         });
     },
@@ -6271,6 +6280,7 @@ export default {
             var data = {
               ticket_type_id: type_id,
               client_id: item.id,
+              user_id: this.user.id,
               created_by: this.user.id,
               status: "Pending",
               state: "helpdesk",

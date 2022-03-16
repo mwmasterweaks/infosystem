@@ -7,6 +7,7 @@ use App\billing;
 use App\Package;
 use App\Client;
 use App\logs;
+use App\client_status_history;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -217,17 +218,29 @@ class ActivityTicketController extends Controller
         DB::beginTransaction();
         try {
             $id = $request->id;
+            $type = $request->type;
             $activity_ticket = (object)$request->activity_ticket;
-            DB::table("clients")
-                ->where("id", $id)
-                ->update([
-                    $request->row => $request->data,
+            if ($type == 'Temp Discon' || $type == 'Disconnected' || $type == 'Active') {
+                DB::table("clients")
+                    ->where("id", $id)
+                    ->update([
+                        $request->row => $type,
+                    ]);
+                client_status_history::insert([
+                    'status' => $type,
+                    'client_id' => $id,
+                    'user_id' => $request->user_id,
+                    'date_change' => Carbon::now(),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
                 ]);
+            }
 
             DB::table("activity_tickets")
                 ->where("id", $activity_ticket->id)
                 ->update([
-                    'status' => 'Completed',
+                    'status' => $request->status,
+                    'state' => $request->state,
                     'updated_by' => $request->user_id,
                     'date_applied' => Carbon::now(),
                 ]);
@@ -237,7 +250,7 @@ class ActivityTicketController extends Controller
                 'user_id' => $request->user_id,
                 'controller' => $this->cname,
                 'function_name' => 'updateClientStatus',
-                'action' => 'Update status to ' . $request->data,
+                'action' => 'Update status to ' . $type,
                 'source_table' => 'clients',
                 'source_id' => $id,
                 'data' => '',
@@ -398,12 +411,12 @@ class ActivityTicketController extends Controller
 
             foreach ($data->soa_items as $item) {
                 $item = (object) $item;
-                if ($item->isSelected) {
+                if ($item->selected) {
                     DB::table("billings")
                         ->where("id", $item->id)
                         ->update([
                             "description" => $item->description,
-                            "price" => $item->price_update,
+                            "price" => $item->amount_update,
                             "balance" => $item->balance_update
                         ]);
                 }

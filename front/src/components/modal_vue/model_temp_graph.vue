@@ -3,9 +3,11 @@
     <button
       v-b-modal="'modalTempGraph'"
       type="button"
-      style="margin-top:-20px;"
+      style="margin-top: -20px"
       class="btn btn-success btn-labeled pull-right margin-right-10"
-    >Installation Graph</button>
+    >
+      Installation Graph
+    </button>
     <b-modal
       id="modalTempGraph"
       size="xl"
@@ -41,10 +43,9 @@
               year: 'numeric',
               month: 'short',
               day: '2-digit',
-              weekday: 'short'
+              weekday: 'short',
             }"
             placeholder="Select date From"
-            @input="select_region_change"
             local="en"
           ></b-form-datepicker>
         </div>
@@ -62,10 +63,9 @@
               year: 'numeric',
               month: 'short',
               day: '2-digit',
-              weekday: 'short'
+              weekday: 'short',
             }"
             placeholder="Select date To"
-            @input="select_region_change"
             local="en"
           ></b-form-datepicker>
         </div>
@@ -75,18 +75,68 @@
         <div class="col-lg-2">
           <p class="textLabel">Region:</p>
         </div>
-        <div class="col-lg-3">
-          <model-list-select
+        <div class="col-lg-8">
+          <!-- <model-list-select
             :list="regions"
             v-model="selected_region"
             option-value="id"
             option-text="name"
             name="region"
             ref="region"
+            placeholder="Select/Search a Region..."k rlmnm  vmv  bbxn     bbgif
+          ></model-list-select> -->
+
+          <model-list-select
+            :list="regions"
+            v-model="selected_region"
+            option-value="id"
+            option-text="name"
             placeholder="Select/Search a Region..."
-            @input="select_region_change"
+            @input="checkAreas"
           ></model-list-select>
         </div>
+      </div>
+
+      <div class="rowFields mx-auto row">
+        <div class="col-lg-2">
+          <p class="textLabel">Area:</p>
+        </div>
+        <div class="col-lg-8">
+          <multiselect
+            v-model="selected_area"
+            :options="areas"
+            label="name"
+            track-by="id"
+            variant="success"
+            multiple
+            tag-placeholder="Add this area"
+            open-direction="bottom"
+            placeholder="Type to search or type area"
+            :hide-selected="true"
+            :clear-on-select="false"
+            :close-on-select="false"
+            :taggable="true"
+          ></multiselect>
+        </div>
+      </div>
+
+      <div class="rowFields mx-auto row">
+        <div class="col-lg-10">
+          <button
+            @click="select_region_change()"
+            type="button"
+            style="margin-top: -20px"
+            class="btn btn-success btn-labeled pull-right margin-right-10"
+          >
+            Generate
+          </button>
+        </div>
+        <!--
+          <p class="textLabel">Area:</p>
+
+        <div class="col-lg-8">
+
+        </div> -->
       </div>
 
       <div class="rowFields mx-auto row">
@@ -95,33 +145,45 @@
           <br />
           <br />
           <table class="overall-table">
-            <tr class="overall-tr" style="color:green">
+            <tr class="overall-tr" style="color: green">
               <td>Cum. Sales :</td>
-              <td>{{items.sales[items.sales.length-1]}}</td>
+              <td>{{ items.sales[items.sales.length - 1] }}</td>
             </tr>
-            <tr class="overall-tr" style="color:blue">
+            <tr class="overall-tr" style="color: blue">
               <td>Cum. Installed :</td>
-              <td>{{items.installed[items.installed.length-1]}}</td>
+              <td>{{ items.installed[items.installed.length - 1] }}</td>
             </tr>
-            <tr class="overall-tr" style="color:red">
+            <tr class="overall-tr" style="color: red">
               <td>Installed - Sales :</td>
-              <td>{{items.installed_minus_sales[items.installed_minus_sales.length-1]}}</td>
+              <td>
+                {{
+                  items.installed_minus_sales[
+                    items.installed_minus_sales.length - 1
+                  ]
+                }}
+              </td>
             </tr>
-            <tr class="overall-tr" style="color:yellow">
+            <tr class="overall-tr" style="color: yellow">
               <td>CNC Paid :</td>
-              <td>{{items.paidCounts[items.paidCounts.length-1]}}</td>
+              <td>{{ items.paidCounts[items.paidCounts.length - 1] }}</td>
             </tr>
-            <tr class="overall-tr" style="color:orange">
+            <tr class="overall-tr" style="color: orange">
               <td>Installed - CNC :</td>
-              <td>{{items.installed_minus_cnc[items.installed_minus_cnc.length-1]}}</td>
+              <td>
+                {{
+                  items.installed_minus_cnc[
+                    items.installed_minus_cnc.length - 1
+                  ]
+                }}
+              </td>
             </tr>
-            <tr class="overall-tr" style="color:pink">
+            <tr class="overall-tr" style="color: pink">
               <td>Contract :</td>
-              <td>{{items.contractCount[items.contractCount.length-1]}}</td>
+              <td>{{ items.contractCount[items.contractCount.length - 1] }}</td>
             </tr>
           </table>
         </div>
-        <div class="col-lg-9" style="background-color:white">
+        <div class="col-lg-9" style="background-color: white">
           <div>
             <line-chart
               v-if="load_chart"
@@ -143,15 +205,17 @@
 <script>
 import LineChart from "../../packages/LineChart.js";
 import { ModelListSelect } from "vue-search-select";
+import Multiselect from "vue-multiselect";
 import swal from "sweetalert";
 
 import VueRangedatePicker from "vue-rangedate-picker";
 
 export default {
   components: {
+    multiselect: Multiselect,
     "model-list-select": ModelListSelect,
     "rangedate-picker": VueRangedatePicker,
-    LineChart
+    LineChart,
   },
   data() {
     return {
@@ -163,19 +227,21 @@ export default {
         contractCount: [],
         installed_minus_cnc: [],
         installed_minus_sales: [],
-        paidCounts: []
+        paidCounts: [],
       },
       regions: [],
       selected_region: {
         id: "",
-        name: ""
+        name: "",
       },
+      selected_area: null,
+      areas: [],
       selected_date_from: "?",
       selected_date_to: "?",
       selectedDateRange: {},
       load_chart: false,
       chart_data: [],
-      roles: []
+      roles: [],
     };
   },
   created() {
@@ -184,11 +250,17 @@ export default {
     //this.chart_addData();
     var temp = {
       id: 0,
-      name: "All regions"
+      name: "All regions",
     };
     this.regions.unshift(temp);
+    this.load();
   },
   methods: {
+    load() {
+      this.$http.get("api/area").then((response) => {
+        this.areas = response.body;
+      });
+    },
     onDateSelected(daterange) {
       this.selected_date_from = this.formatDateMDY(daterange.start);
       if (daterange.end == null) daterange.end = daterange.start;
@@ -199,11 +271,7 @@ export default {
       }
     },
     select_region_change() {
-      if (
-        this.selected_region.id != "" &&
-        this.selected_date_from != null &&
-        this.selected_date_to != null
-      ) {
+      if (this.selected_date_from != null && this.selected_date_to != null) {
         this.callList();
       }
     },
@@ -212,10 +280,12 @@ export default {
       this.selectedDateRange.start = this.selected_date_from;
       this.selectedDateRange.end = this.selected_date_to;
       this.selectedDateRange.region_id = this.selected_region.id;
+      this.selectedDateRange.selected_area = this.selected_area;
 
+      this.$root.$emit("pageLoading");
       this.$http
         .post("api/temp_graph", this.selectedDateRange)
-        .then(response => {
+        .then((response) => {
           if (response.body.sales.length > 0) {
             this.items = response.body;
             console.log(response.body);
@@ -225,6 +295,19 @@ export default {
             this.items = [];
           }
           this.tblisBusy = false;
+
+          this.$root.$emit("pageLoaded");
+        })
+        .catch((response) => {
+          console.log(response.body);
+          swal({
+            title: response.body.error,
+            text: "",
+            icon: "error",
+            dangerMode: true,
+          });
+          this.tblisBusy = false;
+          this.$root.$emit("pageLoaded");
         });
     },
     formatDate(date) {
@@ -239,9 +322,9 @@ export default {
       return [year, month, day].join("-");
     },
     fnExcelReport(tbl) {
-      this.$nextTick(function() {
+      this.$nextTick(function () {
         setTimeout(
-          function() {
+          function () {
             var tab_text =
               "<table><tr><th colspan='2' style='font-size: large;'>Installation Performance Sheet</th></tr>" +
               "<tr></tr><tr>" +
@@ -320,7 +403,7 @@ export default {
         "Sept.",
         "Oct.",
         "Nov.",
-        "Dec."
+        "Dec.",
       ];
       return [mstring[month - 1], day, year].join(" ");
     },
@@ -333,44 +416,44 @@ export default {
             data: [10, 10, 10, 10],
             borderColor: ["green"],
             borderWidth: 1,
-            fill: false
+            fill: false,
           },
           {
             label: "Cumulative Installed",
             data: [10, 10, 10, 10],
             borderColor: ["blue"],
             borderWidth: 1,
-            fill: false
+            fill: false,
           },
           {
             label: "Installed minus sales",
             data: [10, 10, 10, 10],
             borderColor: ["red"],
             borderWidth: 1,
-            fill: false
+            fill: false,
           },
           {
             label: "CNC Confirmed Paid",
             data: [10, 10, 10, 10],
             borderColor: ["yellow"],
             borderWidth: 1,
-            fill: false
+            fill: false,
           },
           {
             label: "Installed minus CNC",
             data: [10, 10, 10, 10],
             borderColor: ["orange"],
             borderWidth: 1,
-            fill: false
+            fill: false,
           },
           {
             label: "Contract",
             data: [10, 10, 10, 10],
             borderColor: ["pink"],
             borderWidth: 1,
-            fill: false
-          }
-        ]
+            fill: false,
+          },
+        ],
       };
       this.chart_data.labels = data.date_label;
       this.chart_data.datasets[0].data = data.sales;
@@ -381,8 +464,15 @@ export default {
       this.chart_data.datasets[5].data = data.contractCount;
       this.load_chart = true;
       console.log(data);
-    }
-  }
+    },
+    checkAreas() {
+      this.$http
+        .get("api/checkAreas/" + this.selected_region.id)
+        .then((response) => {
+          this.selected_area = response.body;
+        });
+    },
+  },
 };
 </script>
 <style scoped>
@@ -411,3 +501,5 @@ td {
   padding: 5px;
 }
 </style>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css" />;

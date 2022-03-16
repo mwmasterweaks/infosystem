@@ -424,8 +424,9 @@ export default {
             ticket_type_id: this.cp.type,
             client_id: this.client.id,
             created_by: this.user.id,
-            status: "Addendum",
-            state: "am",
+            user_id: this.user.id,
+            status: "Check Balance",
+            state: "accounting",
             remarks: "Change package:" + this.cp.pack.name,
           };
 

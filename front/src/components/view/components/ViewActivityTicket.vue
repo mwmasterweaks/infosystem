@@ -174,7 +174,9 @@
                 row.item.status == 'Pending'
               "
               variant="success"
-              @click="btnChangeStatus(row.item, 'Temp Discon')"
+              @click="
+                btnChangeStatus(row.item, 'Temp Discon', 'Completed', 'all')
+              "
               size="sm"
               >Disconnect</b-button
             >
@@ -185,7 +187,9 @@
                 row.item.status == 'Pending'
               "
               variant="success"
-              @click="btnChangeStatus(row.item, 'Disconnected')"
+              @click="
+                btnChangeStatus(row.item, 'Disconnected', 'Completed', 'all')
+              "
               size="sm"
               >Disconnect</b-button
             >
@@ -196,7 +200,7 @@
                 row.item.status == 'Pending'
               "
               variant="success"
-              @click="btnChangeStatus(row.item, 'Active')"
+              @click="btnChangeStatus(row.item, 'Active', 'Completed', 'all')"
               size="sm"
               >Activate</b-button
             >
@@ -232,6 +236,15 @@
               size="sm"
               >Update SOA</b-button
             >
+
+            <b-button
+              v-if="roles.accounting && row.item.status == 'Check Balance'"
+              variant="success"
+              @click="btnChangeStatus(row.item, 'Addendum', 'Addendum', 'am')"
+              size="sm"
+              >Checked</b-button
+            >
+
             <p-check
               v-if="
                 roles.accounting &&
@@ -680,6 +693,13 @@
           @click="btnAddendumSigned"
           >Addendum Signed</b-button
         >
+        <b-button
+          v-if="editTicket.status == 'Check Balance'"
+          size="sm"
+          variant="success"
+          @click="btnGetSoa()"
+          >SOA</b-button
+        >
       </template>
     </b-modal>
     <!-- End modalViewJO -->
@@ -1035,7 +1055,7 @@
       :footer-bg-variant="' elBG'"
       :footer-text-variant="' elClr'"
       size="xl"
-      title="Update Billings"
+      title="Billings"
     >
       <div class="rowFields mx-auto row">
         <div class="col-lg-2">
@@ -1066,7 +1086,6 @@
             striped
             hover
             outlined
-            :fields="bill_modi_fields"
             :items="bill_modi_items"
             :busy="bill_modi_tblisBusy"
             thead-class="cursorPointer-th"
@@ -1080,14 +1099,14 @@
               <p-check
                 class="p-icon p-curve p-jelly p-bigger"
                 color="success"
-                v-model="row.item.isSelected"
+                v-model="row.item.selected"
               >
                 <i slot="extra" class="icon fas fa-check"></i>
               </p-check>
             </template>
 
             <template v-slot:cell(description)="row">
-              <span v-if="row.item.isSelected">
+              <span v-if="row.item.selected">
                 <input
                   type="text"
                   class="form-control"
@@ -1099,21 +1118,21 @@
               </span>
             </template>
 
-            <template v-slot:cell(price_update)="row">
-              <span v-if="row.item.isSelected">
+            <template v-slot:cell(amount_update)="row">
+              <span v-if="row.item.selected">
                 <input
                   type="text"
                   class="form-control"
                   v-b-tooltip.hover
                   title="Amount to be update"
                   placeholder="Amount"
-                  v-model="row.item.price_update"
+                  v-model="row.item.amount_update"
                 />
               </span>
             </template>
 
             <template v-slot:cell(balance_update)="row">
-              <span v-if="row.item.isSelected">
+              <span v-if="row.item.selected">
                 <input
                   type="text"
                   class="form-control"
@@ -1157,7 +1176,6 @@ export default {
       fields: [
         { key: "action", label: "Action", sortable: true },
         { key: "status", label: "Status", sortable: true },
-        { key: "state", label: "State", sortable: true },
         { key: "id", label: "Ticket #", sortable: true },
         { key: "ticket_type.name", label: "Ticket Type", sortable: true },
         { key: "client.acc_no", label: "Account #", sortable: true },
@@ -1165,8 +1183,8 @@ export default {
         { key: "client.branch.name", label: "Branch", sortable: true },
         { key: "created_by.name", label: "Created By", sortable: true },
         { key: "aging", label: "Aging", sortable: true },
+        { key: "date_applied", sortable: true },
         { key: "created_at", sortable: true },
-        { key: "updated_at", sortable: true },
       ],
       items: [],
       items_copy: [],
@@ -1381,7 +1399,7 @@ export default {
         );
       });
     },
-    btnChangeStatus(item, type) {
+    btnChangeStatus(item, type, status, state) {
       console.log(item);
       swal({
         title: "Are you sure?",
@@ -1395,7 +1413,9 @@ export default {
           var dataa = {
             id: item.client_id,
             row: "status",
-            data: type,
+            state: state,
+            status: status,
+            type: type,
             user_id: this.user.id,
             user_name: this.user.name,
             activity_ticket: item,
@@ -1598,6 +1618,48 @@ export default {
           this.$root.$emit("pageLoaded");
         });
     },
+    btnGetSoa() {
+      this.$bvModal.show("modalUpdateBilling");
+      this.bill_modi_tblisBusy = true;
+      this.$http
+        .post("api/Billing/soa/" + this.editTicket.client_id + "/wholebill")
+        .then((response) => {
+          console.log(response.body);
+          var itemTemp = [];
+          response.body.forEach((i, index) => {
+            var desc = "";
+            if (i.description != null) {
+              desc = i.description;
+            } else {
+              desc = i.remarks;
+            }
+            var temp = {
+              id: i.id,
+              date: i.date,
+              OR: i.or_number,
+              item: i.item,
+              description: desc,
+              AMT_CHRG: i.price,
+              AMT_PAID: i.amount,
+              balance: i.balance,
+              balance_sum: i.balanceSum,
+            };
+            itemTemp.push(temp);
+          });
+          this.bill_modi_items = itemTemp;
+          this.bill_modi_tblisBusy = false;
+        })
+        .catch((response) => {
+          console.log(response.body);
+          swal({
+            title: "Error",
+            text: response.body.error + " " + response.body.message,
+            icon: "error",
+            dangerMode: true,
+          });
+          this.tblisBusy = false;
+        });
+    },
     btnUpdateSoa(item) {
       this.editTicket = item;
       this.packageToUpdate = item.packageToUpdate;
@@ -1608,17 +1670,29 @@ export default {
       this.$http
         .post("api/Billing/to_pay/" + item.client_id + "/wholebill")
         .then((response) => {
-          var temp = response.body;
-          temp.forEach((i, index) => {
+          console.log(response.body);
+          var itemTemp = [];
+          response.body.forEach((i, index) => {
             var datenow = new Date();
             var date = new Date(i.date);
             i.price_update = item.packageToUpdate.mrr;
             i.balance_update = item.packageToUpdate.mrr;
             if (date >= datenow) {
-              i.isSelected = true;
-            }
+              i.selected = true;
+            } else i.selected = false;
+            var temp = {
+              id: i.id,
+              selected: i.selected,
+              date: i.date,
+              description: i.description,
+              amount: i.price,
+              balance: i.balance,
+              amount_update: i.price_update,
+              balance_update: i.balance_update,
+            };
+            itemTemp.push(temp);
           });
-          this.bill_modi_items = temp;
+          this.bill_modi_items = itemTemp;
           this.bill_modi_tblisBusy = false;
         })
         .catch((response) => {

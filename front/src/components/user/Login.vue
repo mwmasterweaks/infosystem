@@ -13,7 +13,7 @@
             <div class="col-lg-9 mx-auto">
               <b-input-group class>
                 <b-input-group-text slot="append">
-                  <i class="fas fa-envelope-square" style="color:black"></i>
+                  <i class="fas fa-envelope-square" style="color: black"></i>
                 </b-input-group-text>
                 <b-form-input
                   type="text"
@@ -30,7 +30,9 @@
                 />
               </b-input-group>
 
-              <small class="text-danger pull-left" v-show="errors.has('email')">Email is required.</small>
+              <small class="text-danger pull-left" v-show="errors.has('email')"
+                >Email is required.</small
+              >
             </div>
           </div>
           <br />
@@ -41,7 +43,7 @@
             <div class="col-lg-9 mx-auto">
               <b-input-group class>
                 <b-input-group-text slot="append">
-                  <i class="fas fa-key" style="color:black"></i>
+                  <i class="fas fa-key" style="color: black"></i>
                 </b-input-group-text>
                 <b-form-input
                   type="password"
@@ -57,18 +59,24 @@
                   v-on:keyup.enter="login"
                 />
               </b-input-group>
-              <small class="text-danger pull-left" v-show="errors.has('pass')">Password is required.</small>
+              <small class="text-danger pull-left" v-show="errors.has('pass')"
+                >Password is required.</small
+              >
             </div>
           </div>
         </div>
 
         <div class="elClr panel-footer">
-          <p class="pull-left" style="color: black;">Version 1.0.1</p>
+          <p class="pull-left" style="color: black">Version 1.0.1</p>
           <div class="heading-elements">
-            <button type="button" class="btn btn-success btn-labeled pull-right" v-on:click="login">
+            <button
+              type="button"
+              class="btn btn-success btn-labeled pull-right"
+              v-on:click="login"
+            >
               <b>
-                <i class="glyphicon glyphicon-plus"></i>
-              </b>Log in
+                <i class="glyphicon glyphicon-plus"></i> </b
+              >Log in
             </button>
           </div>
         </div>
@@ -84,7 +92,7 @@ export default {
     return {
       email: "",
       password: "",
-      password2: ""
+      password2: "",
     };
   },
   mounted() {
@@ -104,57 +112,57 @@ export default {
         client_secret: "crAxDEoDZWh0zbrpsKrchqcPvk5ibIHsgqOC9fnj",
         grant_type: "password",
         username: subEmail,
-        password: this.password
+        password: this.password,
       };
 
-      this.$http
-        .post("oauth/token", data)
-        .then(function(response) {
-          this.$auth.setToken(
-            response.body.access_token
-            //response.body.expires_in + Date.now()
-          );
-          this.$global.setEmail(subEmail);
-          window.location.href = "/";
-        })
-        .catch(response => {
-          this.$http.post("api/log_login", data).then(function(response) {
-            console.log(response.body);
-          });
-          this.$refs.email.focus();
-          swal("Error", "You have entered incorrect credentials.", "error");
-        });
+      this.$http.post("oauth/token", data).then(function (response) {
+        this.$auth.setToken(
+          response.body.access_token
+          //response.body.expires_in + Date.now()
+        );
+        this.$global.setEmail(subEmail);
+        window.location.href = "/";
+      });
+      // .catch(response => {
+      //   this.$http.post("api/log_login", data).then(function(response) {
+      //     console.log(response.body);
+      //   });
+      //   this.$refs.email.focus();
+      //   swal("Error", "You have entered incorrect credentials.", "error");
+      // });
     },
     test() {
-      this.$http.get("http://localhost:8000/api/test").then(function(response) {
-        console.log(response.body);
-      });
+      this.$http
+        .get("http://localhost:8000/api/test")
+        .then(function (response) {
+          console.log(response.body);
+        });
     },
     login1() {
       var user = {
         name: "sample",
         email: "sample",
         password: "sample",
-        password2: "sample"
+        password2: "sample",
       };
       this.$http
         .post("api/user", user)
-        .then(response => {
+        .then((response) => {
           swal(this.user.name, "Added successfully", "success");
         })
-        .catch(response => {
+        .catch((response) => {
           swal({
             title: "Error",
             text: response.body.error,
             icon: "error",
-            dangerMode: true
-          }).then(value => {
+            dangerMode: true,
+          }).then((value) => {
             if (value) {
             }
           });
         });
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

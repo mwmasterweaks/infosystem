@@ -49,7 +49,6 @@ class ClientDetailController extends Controller
                     ->take(100)
                     ->get();
             } else {
-
                 $tbl = Client_detail::with(['remarks_log.user'])
                     ->join("clients", "client_details.client_id", "clients.id")
                     ->leftJoin("schedules", function ($join) {
@@ -120,9 +119,7 @@ class ClientDetailController extends Controller
         foreach ($tbl as $item) {
             $id = $item->client_id;
             $Client = Client::with([
-
-                'package', 'modem', 'package_type', 'region', 'sales.user', 'engineer.user',
-
+                'package', 'modem', 'package_type', 'region', 'area', 'branch', 'sales.user', 'engineer.user',
                 'splitter_port.belongs_to_splitter_nap.belongs_to_splitter_lcp.belongs_to_olt.belongs_to_node'
             ])
                 ->where('id', $id)
@@ -169,8 +166,8 @@ class ClientDetailController extends Controller
                 $c->put('foc_layout', 'danger');
             if ($item->foc_layout == 'Outdoor layout done')
                 $c->put('foc_layout', 'info');
-            if ($item->otc == null || $item->otc == "Waiting for C&C advisory")
-                $c->put('otc', 'danger');
+            if ($item->otc == null)
+                $c->put('aging', 'danger');
             if ($item->cable_category == null)
                 $c->put('cable_category', 'danger');
             if ($Client[0]->contract == null)
@@ -1084,167 +1081,94 @@ class ClientDetailController extends Controller
     {
         try {
             if ($request->cbFilter != null) {
-
                 $temp = (object) $request->cbFilter;
-
                 unset($request);
-
                 $request = $temp;
             }
-
             $data = (object) $request->data;
-
-
-
             $tbl = Client_detail::with(['remarks_log.user'])
-
                 ->join("clients", "client_details.client_id", "clients.id")
-
                 ->leftJoin("schedules", function ($join) {
-
                     $join->on('client_details.id', '=', 'schedules.client_detail_id');
-
                     $join->on('client_details.target_date', '=', 'schedules.target_date');
                 })
-
                 ->leftJoin('teams', "schedules.team_id", "teams.id")
-
                 ->select("clients.*", "client_details.*", "teams.user_id as team_user_id")
-
                 ->orderByRaw("CASE WHEN client_details.target_date IS NULL THEN 1 ELSE 0 END, client_details.target_date");
-
-
-
+            // ->where("clients.status", "!=", "Cancelled");
             if ($request->region)
-
                 $tbl->where("clients.region_id", $data->region_id);
-
-
-
             if ($request->area) {
-
                 // $tbl->where("clients.area_id", $data->area_id);
-
                 $area_temp = [];
-
                 foreach ($data->area_id as $ii) {
-
                     $dd = (object)$ii;
-
                     $dd = $dd->id;
-
                     array_push($area_temp, $dd);
                 }
-
                 $tbl->whereIn("clients.area_id", $area_temp);
             }
-
             if ($request->address)
-
                 $tbl->where("clients.location", 'like', '%' . $data->address . '%');
-
             if ($request->package)
-
                 $tbl->where("clients.package_id", $data->package_id);
-
             if ($request->sales)
-
                 $tbl->where("clients.sales_id", $data->sales_id);
-
             if ($request->installation_date) {
-
                 $installation_date = (object) $data->installation_date;
-
                 $from = new Carbon($installation_date->from);
-
                 $to = new Carbon($installation_date->to);
-
                 // return $from->toDateString() . " " . $to->toDateString();
-
                 $tbl->whereBetween("client_details.target_date", [$from->toDateString(), $to->toDateString()]);
             }
-
             if ($request->foc_schedule) {
-
                 $date = new Carbon($data->foc_schedule_date);
-
                 $tbl->where("foc_schedule", $date->toDateString());
             }
-
             if ($request->aging) {
-
                 $aging = (object) $data->aging;
-
                 $from = new Carbon($aging->from);
-
                 $to = new Carbon($aging->to);
-
                 $tbl->whereBetween("client_details.aging", [$from->toDateString(), $to->toDateString()]);
             }
-
             if ($request->contract) {
-
                 if ($data->contract == "Done")
-
                     $tbl->whereNotNull("contract_status");
-
                 if ($data->contract == "Undone")
-
                     $tbl->whereNull("contract_status");
             }
-
             if ($request->otc) {
-
                 if ($data->otc == "Paid")
-
                     $tbl->whereNotNull("aging");
-
                 if ($data->otc == "Unpaid")
-
                     $tbl->whereNull("aging");
             }
-
             if ($request->layout_status)
-
                 $tbl->where("layout_status", $data->layout_status);
-
-
-
             if ($request->date_activated) {
-
                 if ($request->date_activated_type == "range") {
-
                     $date_activated = (object) $data->date_activated;
-
                     $from = new Carbon($date_activated->from);
-
                     $to = new Carbon($date_activated->to);
-
                     $tbl->whereBetween("client_details.date_activated", [$from->toDateString(), $to->toDateString()]);
                 }
-
                 if ($request->date_activated_type == "active") {
-
                     $tbl->whereNotNull("client_details.date_activated");
                 }
-
                 if ($request->date_activated_type == "not_active") {
-
                     $tbl->whereNull("client_details.date_activated");
                 }
             }
+            if ($request->created) {
+                // $date = new Carbon($data->created);
+                // $tbl->where("client_details.created_at", "like", "%" . $date->toDateString() . "%");
 
-
-
-            if ($request->created_at) {
-
-                $date = new Carbon($data->created_at);
-
-                $tbl->where("client_details.created_at", "like", "%" . $date->toDateString() . "%");
+                $created = (object) $data->created;
+                $from = new Carbon($created->from);
+                $to = new Carbon($created->to);
+                $tbl->whereBetween("client_details.created_at", [$from->toDateString(), $to->toDateString()]);
             }
-
             // return response()->json($request);
-
             return $this->ForQuery($tbl->get());
         } catch (\Exception $ex) {
 
@@ -3203,145 +3127,99 @@ class ClientDetailController extends Controller
     }
     public function temp_graph(Request $request) //installaion graph
     {
-
         if ($request->end == null)
-
             $request->end = $request->start;
-
-
-
         $from = new Carbon($request->start);
-
         $to = new Carbon($request->end);
-
         $region_id = $request->region_id;
-
-
-
         $from_copy = $from->copy();
-
         $to_copy = $from->copy();
-
-
-
         $date_label = [];
-
         $sales = [];
-
         $installed = [];
-
         $contractCount = [];
-
         $paidCounts = [];
-
         $installed_minus_sales = [];
-
         $installed_minus_cnc = [];
-
         $x = 0;
-
-
-
         while ($from_copy <= $to) {
-
             $salesCount = Client::with(['clientDetail'])
-
                 ->where(DB::raw('DATE(created_at)'), $from_copy->toDateString())
 
-                ->where("region_id", $region_id)
-
                 ->whereHas("clientDetail", function ($query) {
-
                     $query->whereNotNull("client_id");
-                })
+                });
 
-                ->count();
-
-
-
-            $installedCount = Client::with(['clientDetail'])
-
-                ->where("date_activated", $from_copy->toDateString())
-
-                ->where("region_id", $region_id)
-
-                ->count();
-
-
+            $installedCount = Client::with(['clientDetail']) //dili dyud ni siya ma equals dad2 sa installation kay kani siya base sa date nga na activate
+                ->where("date_activated", $from_copy->toDateString()) //kato dad2 is created dili base sa activated
+                ->whereHas("clientDetail", function ($query) { //sample range is 5-10 sa created - tapus kani siya na create is 4 na create pero sa 5 na active so count ni siya
+                    $query->whereNotNull("client_id");
+                });
 
             $paidCount = Client::join('client_details', 'client_details.client_id', 'clients.id')
-
                 ->where("aging", $from_copy->toDateString())
-
-                ->where("region_id", $region_id)
-
-                ->count();
-
-
+                ->whereHas("clientDetail", function ($query) {
+                    $query->whereNotNull("client_id");
+                });
 
             $contract = Client::join('client_details', 'client_details.client_id', 'clients.id')
-
                 ->where("contract", $from_copy->toDateString())
+                ->whereHas("clientDetail", function ($query) {
+                    $query->whereNotNull("client_id");
+                });
 
-                ->where("region_id", $region_id)
-
-                ->count();
-
-            array_push($date_label, $from_copy->toFormattedDateString());
-
-            if ($x > 0) {
-
-                array_push($sales, $sales[$x - 1] + $salesCount);
-
-                array_push($installed, $installed[$x - 1] + $installedCount);
-
-                array_push($paidCounts, $paidCounts[$x - 1] + $paidCount);
-
-                array_push($contractCount, $contractCount[$x - 1] + $contract);
+            if ($region_id == 0) {
+                $salesCount = $salesCount->get();
+                $installedCount = $installedCount->count();
+                $paidCount = $paidCount->count();
+                $contract = $contract->count();
             } else {
-
-                array_push($sales, $salesCount);
-
-                array_push($installed, $installedCount);
-
-                array_push($paidCounts, $paidCount);
-
-                array_push($contractCount, $contract);
+                $area_temp = [];
+                foreach ($request->selected_area as $ii) {
+                    $dd = (object)$ii;
+                    $dd = $dd->id;
+                    array_push($area_temp, $dd);
+                };
+                $salesCount = $salesCount->where("region_id", $region_id)
+                    ->whereIn("area_id", $area_temp)
+                    ->count();
+                $installedCount = $installedCount->where("region_id", $region_id)
+                    ->whereIn("area_id", $area_temp)
+                    ->count();
+                $paidCount = $paidCount->where("region_id", $region_id)
+                    ->whereIn("area_id", $area_temp)
+                    ->count();
+                $contract = $contract->where("region_id", $region_id)
+                    ->whereIn("area_id", $area_temp)
+                    ->count();
             }
 
-
-
+            array_push($date_label, $from_copy->toFormattedDateString());
+            if ($x > 0) {
+                array_push($sales, $sales[$x - 1] + $salesCount);
+                array_push($installed, $installed[$x - 1] + $installedCount);
+                array_push($paidCounts, $paidCounts[$x - 1] + $paidCount);
+                array_push($contractCount, $contractCount[$x - 1] + $contract);
+            } else {
+                array_push($sales, $salesCount);
+                array_push($installed, $installedCount);
+                array_push($paidCounts, $paidCount);
+                array_push($contractCount, $contract);
+            }
             array_push($installed_minus_sales, $installed[$x] - $sales[$x]);
-
             array_push($installed_minus_cnc, $installed[$x] - $paidCounts[$x]);
-
             $from_copy->addDay();
-
             $x++;
         }
-
         $c1 = collect();
-
-
-
         $c1->put("date_label", $date_label);
-
         $c1->put("sales", $sales);
-
         $c1->put("installed", $installed);
-
         $c1->put("installed_minus_sales", $installed_minus_sales);
-
         $c1->put("installed_minus_cnc", $installed_minus_cnc);
-
         $c1->put("paidCounts", $paidCounts);
-
         $c1->put("contractCount", $contractCount);
-
         //$from_copy->toDateString()
-
-
-
         return response()->json($c1);
     }
     public function trouble_graph(Request $request)

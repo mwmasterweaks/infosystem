@@ -1689,10 +1689,10 @@ export default {
               email: "mwmasterweaks@gmail.com",
               name: "Masterweak",
             },
-            // {
-            //   email: "pbismonte@dctechmicro.com",
-            //   name: "Peter Pogi"
-            // }
+            {
+              email: "pbismonte@dctechmicro.com",
+              name: "Peter Pogi",
+            },
           ];
           var ccto = [
             {

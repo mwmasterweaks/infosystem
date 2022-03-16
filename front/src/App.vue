@@ -41,7 +41,7 @@ export default {
     "my-navbar": Navbar,
     navbar2: SecondNavBar,
     login: Login,
-    register: Register
+    register: Register,
   },
   data() {
     return {
@@ -50,7 +50,7 @@ export default {
       isLoad: 0,
       loadCount: 0,
       user: [],
-      email: ""
+      email: "",
     };
   },
 
@@ -79,120 +79,137 @@ export default {
         this.getUser();
       }
     },
-    getData() {
-      this.$http.get("api/Engineer").then(function(response) {
-        this.$global.setEngineer(response.body);
-        console.log(response.body);
-        this.isLoad += 1; // 1
-        console.log("Engineer");
-        this.loadCount += 10;
-      });
-      // .catch(response => {
-      //   swal({
-      //     title: "Error",
-      //     text: response.body.error,
-      //     icon: "error",
-      //     dangerMode: true
-      //   }).then(value => {
-      //     this.loadCount = "Error";
-      //     this.logout();
-      //   });
-      // });
-
+    getEngineer() {
+      console.log("Load Engineer");
       this.$http
-        .get("api/Sales")
-        .then(function(response) {
-          this.$global.setSales(response.body);
-          this.isLoad += 1; // 2
-          console.log("Sales");
+        .get("api/Engineer")
+        .then(function (response) {
+          this.$global.setEngineer(response.body);
+          this.isLoad += 1; // 1
+          console.log("Engineer loaded");
+          this.getSales();
           this.loadCount += 10;
         })
-        .catch(response => {
+        .catch((response) => {
           swal({
             title: "Error",
             text: response.body.error,
             icon: "error",
-            dangerMode: true
+            dangerMode: true,
+          }).then((value) => {
+            this.loadCount = "Error";
+            this.logout();
+          });
+        });
+    },
+    getSales() {
+      console.log("Load Sales");
+      this.$http
+        .get("api/Sales")
+        .then(function (response) {
+          this.$global.setSales(response.body);
+          this.isLoad += 1; // 2
+          console.log("Sales loaded");
+          this.getPackageType();
+          this.loadCount += 10;
+        })
+        .catch((response) => {
+          swal({
+            title: "Error",
+            text: response.body.error,
+            icon: "error",
+            dangerMode: true,
           });
           this.loadCount = "Error";
           this.logout();
         });
-
+    },
+    getPackageType() {
+      console.log("Load PackageType");
       this.$http
         .get("api/PackageType")
-        .then(function(response) {
+        .then(function (response) {
           this.$global.setPackageTypes(response.body);
           this.isLoad += 1; // 6
+          console.log("PackageType loaded");
+          this.getTicketStatus();
           this.loadCount += 10;
-          console.log("PackageType");
         })
-        .catch(response => {
+        .catch((response) => {
           swal({
             title: "Error",
             text: response.body.error,
             icon: "error",
-            dangerMode: true
-          }).then(value => {
+            dangerMode: true,
+          }).then((value) => {
             this.loadCount = "Error";
             this.logout();
           });
         });
-
+    },
+    getTicketStatus() {
+      console.log("Load PackageType");
       this.$http
         .get("api/TicketStatus")
-        .then(function(response) {
+        .then(function (response) {
           this.$global.setTicketStatus(response.body);
+          console.log("TicketStatus loaded");
+          this.getRegion();
           this.isLoad += 1; // 7
           this.loadCount += 15;
-          console.log("TicketStatus");
         })
-        .catch(response => {
+        .catch((response) => {
           swal({
             title: "Error",
             text: response.body.error,
             icon: "error",
-            dangerMode: true
-          }).then(value => {
+            dangerMode: true,
+          }).then((value) => {
             this.loadCount = "Error";
             this.logout();
           });
         });
-
+    },
+    getRegion() {
+      console.log("Load Region");
       this.$http
         .get("api/Region")
-        .then(function(response) {
+        .then(function (response) {
           this.$global.setRegion(response.body);
           this.isLoad += 1; // 9
           this.loadCount += 20;
-          console.log("region");
+          console.log("region loaded");
+          this.getTeam();
         })
-        .catch(response => {
+        .catch((response) => {
           swal({
             title: "Error",
             text: response.body.error,
             icon: "error",
-            dangerMode: true
-          }).then(value => {
+            dangerMode: true,
+          }).then((value) => {
             this.loadCount = "Error";
             this.logout();
           });
         });
-
+    },
+    getTeam() {
+      console.log("Load team");
       this.$http
         .get("api/team")
-        .then(function(response) {
+        .then(function (response) {
           this.$global.setTeam(response.body);
           this.isLoad += 1; // 9
           this.loadCount += 15;
-          console.log("team");
+          console.log("team loaded");
         })
-        .catch(response => {
+        .catch((response) => {
           swal({
             title: "Error",
             text: response.body.error,
             icon: "error",
-            dangerMode: true
-          }).then(value => {
+            dangerMode: true,
+          }).then((value) => {
             this.loadCount = "Error";
             this.logout();
           });
@@ -200,19 +217,18 @@ export default {
     },
     getUser() {
       this.email = this.$global.getEmail();
-      this.$http.get("api/user/getUser/" + this.email).then(response => {
+      this.$http.get("api/user/getUser/" + this.email).then((response) => {
         this.$global.setUser(response.body);
         this.user = this.$global.getUser();
         if (response.body.status == "Active") {
-          this.getData();
           this.getUserRoles();
           this.loadCount += 20;
         } else {
           swal({
             title: "Your account was locked!",
             text: "Please contact the system administrator.",
-            icon: "info"
-          }).then(value => {
+            icon: "info",
+          }).then((value) => {
             this.loadCount = "Error";
             this.logout();
           });
@@ -220,28 +236,30 @@ export default {
       });
     },
     getUserRoles() {
+      console.log("Load role");
       this.$http
         .get("api/Role/" + this.user.id)
-        .then(response => {
+        .then((response) => {
           this.$global.setRoles(response.body.roles);
           // this.loadCount += 20;
-          console.log("role");
+          console.log("role loaded");
+          this.getEngineer();
           this.roles = this.$global.getRoles();
           this.isLoad += 1; // 11
         })
-        .catch(response => {
+        .catch((response) => {
           swal({
             title: "Error",
             text: response.body.error,
             icon: "error",
-            dangerMode: true
-          }).then(value => {
+            dangerMode: true,
+          }).then((value) => {
             this.loadCount = "Error";
             this.logout();
           });
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

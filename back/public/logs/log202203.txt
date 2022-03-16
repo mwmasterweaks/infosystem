@@ -40,3 +40,75 @@ To: 1
 
 2022-03-09 22:37:01	--	1	--	Import Payment	--	CustomerPaymentController	--	storePayment	--	message	--	Import payment : [{"Create Date":44626.29195601852,"Date":"2022-03-07","OR":"BTIUX754","Merchant Txn Id":1235147,"Ccy":"PHP","Amount":1200,"Fee":20,"Settlement":1180,"Proc":"ECPY","Statement_id":91168,"Account_name":"Lolet M. Morta","Remarks":"AAAAAAAAAAAaAA"},{"Create Date":44627.36417824074,"Date":"2022-03-07","OR":"J3NHJEW5","Merchant Txn Id":1236217,"Ccy":"PHP","Amount":1460,"Fee":10,"Settlement":1450,"Proc":"MBTC","Statement_id":92749,"Account_name":"Wilma Hinlog","Remarks":"BBBBBBBBBBB","Account_no":"RES-202108-26102"}]
 
+2022-03-11 13:40:08	--	1	--	Import Payment	--	CustomerPaymentController	--	storePayment	--	message	--	Import payment : [{"Create Date":44626.29195601852,"Date":"2022-03-07","OR":"BTIUX754","Merchant Txn Id":1235147,"Ccy":"PHP","Amount":1200,"Fee":20,"Settlement":1180,"Proc":"ECPY","Statement_id":91168,"Account_name":"Lolet M. Morta","Remarks":"AAAAAAAAAAAaAA"},{"Create Date":44627.36417824074,"Date":"2022-03-07","OR":"J3NHJEW5","Merchant Txn Id":1236217,"Ccy":"PHP","Amount":1460,"Fee":10,"Settlement":1450,"Proc":"MBTC","Statement_id":92749,"Account_name":"Wilma Hinlog","Remarks":"BBBBBBBBBBB","Account_no":"RES-202108-26102"}]
+
+2022-03-11 13:40:42	--	1	--	Import Payment	--	CustomerPaymentController	--	storePayment	--	message	--	Import payment : [{"Create Date":44626.29195601852,"Date":"2022-03-07","OR":"BTIUX754","Merchant Txn Id":1235147,"Ccy":"PHP","Amount":1200,"Fee":20,"Settlement":1180,"Proc":"ECPY","Statement_id":91168,"Account_name":"Lolet M. Morta","Remarks":"AAAAAAAAAAAaAA"},{"Create Date":44627.36417824074,"Date":"2022-03-07","OR":"J3NHJEW5","Merchant Txn Id":1236217,"Ccy":"PHP","Amount":1460,"Fee":10,"Settlement":1450,"Proc":"MBTC","Statement_id":92749,"Account_name":"Wilma Hinlog","Remarks":"BBBBBBBBBBB","Account_no":"RES-202108-26102"}]
+
+2022-03-11 13:54:52	--	1	--	Import Payment	--	CustomerPaymentController	--	storePayment	--	message	--	Import payment : [{"Create Date":44626.29195601852,"Date":"2022-03-07","OR":"BTIUX754","Merchant Txn Id":1235147,"Ccy":"PHP","Amount":1200,"Fee":20,"Settlement":1180,"Proc":"ECPY","Statement_id":91168,"Account_name":"Lolet M. Morta","Remarks":"AAAAAAAAAAAaAA","amount_applied_return":0},{"Create Date":44627.36417824074,"Date":"2022-03-07","OR":"J3NHJEW5","Merchant Txn Id":1236217,"Ccy":"PHP","Amount":1460,"Fee":10,"Settlement":1450,"Proc":"MBTC","Statement_id":92749,"Account_name":"Wilma Hinlog","Remarks":"BBBBBBBBBBB","Account_no":"RES-202108-26102","amount_applied_return":0}]
+
+2022-03-11 14:08:20	--	1	--	Import Payment	--	CustomerPaymentController	--	storePayment	--	message	--	Import payment : [{"Create Date":44626.29195601852,"Date":"2022-03-07","OR":"BTIUX754","Merchant Txn Id":1235147,"Ccy":"PHP","Amount":1200,"Fee":20,"Settlement":1180,"Proc":"ECPY","Statement_id":91168,"Account_name":"Lolet M. Morta","Remarks":"AAAAAAAAAAAaAA","amount_applied_return":0},{"Create Date":44627.36417824074,"Date":"2022-03-07","OR":"J3NHJEW5","Merchant Txn Id":1236217,"Ccy":"PHP","Amount":1460,"Fee":10,"Settlement":1450,"Proc":"MBTC","Statement_id":92749,"Account_name":"Wilma Hinlog","Remarks":"BBBBBBBBBBB","Account_no":"RES-202108-26102","amount_applied_return":0},{"Create Date":44627.36417824074,"Date":"2022-03-07","OR":"J3NHJEW5","Merchant Txn Id":1236217,"Ccy":"PHP","Amount":5460,"Fee":10,"Settlement":5450,"Proc":"MBTC","Statement_id":102717,"Account_name":"Peter Bismonte","Remarks":"cccccccccc","Account_no":"RES-202108-36102","amount_applied_return":0}]
+
+2022-03-11 14:10:00	--	1	--	Peter R. Bismonte	--	BillingController	--	deleteSOA	--	message	--	delete deleteSOA id 134118
+Old deleteSOA: {"id":134118,"client_id":11627,"user_id":1,"payment_method_id":309,"banking_payment_code_id":null,"amount":1460,"date":"2022-03-07","or_number":"J3NHJEW5","remarks":"BBBBBBBBBBB2022-03-16","tbl_name":"customer_payment","created_at":null,"updated_at":null}
+
+2022-03-11 14:10:08	--	1	--	Peter R. Bismonte	--	BillingController	--	deleteSOA	--	message	--	delete deleteSOA id 134114
+Old deleteSOA: {"id":134114,"client_id":11627,"user_id":1,"payment_method_id":309,"banking_payment_code_id":null,"amount":1460,"date":"2022-03-07","or_number":"J3NHJEW5","remarks":"BBBBBBBBBBB2022-03-16","tbl_name":"customer_payment","created_at":null,"updated_at":null}
+
+2022-03-11 14:10:16	--	1	--	Peter R. Bismonte	--	BillingController	--	deleteSOA	--	message	--	delete deleteSOA id 134116
+Old deleteSOA: {"id":134116,"client_id":11627,"user_id":1,"payment_method_id":309,"banking_payment_code_id":null,"amount":1460,"date":"2022-03-07","or_number":"J3NHJEW5","remarks":"BBBBBBBBBBB2022-03-16","tbl_name":"customer_payment","created_at":null,"updated_at":null}
+
+2022-03-11 14:10:56	--	1	--	Peter R. Bismonte	--	BillingController	--	deleteSOA	--	message	--	delete deleteSOA id 134120
+Old deleteSOA: {"id":134120,"client_id":11627,"user_id":1,"payment_method_id":309,"banking_payment_code_id":null,"amount":1460,"date":"2022-03-07","or_number":"J3NHJEW5","remarks":"BBBBBBBBBBB2022-03-16","tbl_name":"customer_payment","created_at":null,"updated_at":null}
+
+2022-03-11 16:41:55	--	1	--	Peter R. Bismonte	--	ClientController	--	update_per_row	--	message	--	update client id 19041
+Row: status
+From: 
+To: Active
+
+2022-03-12 08:33:40	--	1	--	Peter R. Bismonte	--	BillingController	--	deleteSOA	--	message	--	delete deleteSOA id 134121
+Old deleteSOA: {"id":134121,"client_id":19041,"user_id":1,"payment_method_id":309,"banking_payment_code_id":null,"amount":5460,"date":"2022-03-07","or_number":"J3NHJEW5","remarks":"cccccccccc2021-10-01, ","tbl_name":"customer_payment","created_at":null,"updated_at":null}
+
+2022-03-12 08:34:57	--	1	--	Import Payment	--	CustomerPaymentController	--	store	--	Error	--	Undefined property: stdClass::$Remarks
+
+2022-03-12 08:35:36	--	1	--	Import Payment	--	CustomerPaymentController	--	storePayment	--	message	--	Import payment : [{"Create Date":44626.29195601852,"Date":"2022-03-07","OR":"BTIUX754","Merchant Txn Id":1235147,"Ccy":"PHP","Amount":1200,"Fee":20,"Settlement":1180,"Proc":"ECPY","Statement_id":91168,"Account_name":"Lolet M. Morta","Remarks":"AAAAAAAAAAAaAA","amount_applied_return":0},{"Create Date":44627.36417824074,"Date":"2022-03-07","OR":"J3NHJEW5","Merchant Txn Id":1236217,"Ccy":"PHP","Amount":1460,"Fee":10,"Settlement":1450,"Proc":"MBTC","Statement_id":92749,"Account_name":"Wilma Hinlog","Remarks":"ab","Account_no":"RES-202108-26102","amount_applied_return":0},{"Create Date":44627.36417824074,"Date":"2022-03-07","OR":"J3NHJEW5","Merchant Txn Id":1236217,"Ccy":"PHP","Amount":5460,"Fee":10,"Settlement":5450,"Proc":"MBTC","Statement_id":102717,"Account_name":"Peter Bismonte","Remarks":"cccccccccc","Account_no":"RES-202108-36102","amount_applied_return":0}]
+
+2022-03-12 08:39:02	--	1	--	Import Payment	--	CustomerPaymentController	--	storePayment	--	message	--	Import payment : [{"Create Date":44626.29195601852,"Date":"2022-03-07","OR":"BTIUX754","Merchant Txn Id":1235147,"Ccy":"PHP","Amount":1200,"Fee":20,"Settlement":1180,"Proc":"ECPY","Statement_id":91168,"Account_name":"Lolet M. Morta","Remarks":"AAAAAAAAAAAaAA","amount_applied_return":0},{"Create Date":44627.36417824074,"Date":"2022-03-07","OR":"J3NHJEW5","Merchant Txn Id":1236217,"Ccy":"PHP","Amount":1460,"Fee":10,"Settlement":1450,"Proc":"MBTC","Statement_id":92749,"Account_name":"Wilma Hinlog","Remarks":"ab","Account_no":"RES-202108-26102","amount_applied_return":0},{"Create Date":44627.36417824074,"Date":"2022-03-07","OR":"J3NHJEW5","Merchant Txn Id":1236217,"Ccy":"PHP","Amount":5460,"Fee":10,"Settlement":5450,"Proc":"MBTC","Statement_id":102717,"Account_name":"Peter Bismonte","Remarks":"cccccccccc","Account_no":"RES-202108-36102","amount_applied_return":0}]
+
+2022-03-12 11:37:36	--	1	--	Peter R. Bismonte	--	ActivityTicketController	--	update	--	message	--	update activity_ticket id 4145
+From: {"ticket_type_id":5,"client_id":13197,"created_by":1,"updated_by":null,"status":"Addendum","state":"am","remarks":"Change package:SP4R12104"}
+To: 1
+
+2022-03-12 11:37:47	--	1	--	Peter R. Bismonte	--	ActivityTicketController	--	update	--	message	--	update activity_ticket id 4145
+From: {"ticket_type_id":5,"client_id":13197,"created_by":1,"updated_by":1,"status":"Pending","state":"helpdesk","remarks":"Change package:SP4R12104"}
+To: 1
+
+2022-03-12 12:10:17	--	1	--	Peter R. Bismonte	--	BillingController	--	deleteSOA	--	message	--	delete deleteSOA id 134127
+Old deleteSOA: {"id":134127,"client_id":19041,"user_id":1,"payment_method_id":309,"banking_payment_code_id":null,"amount":5460,"date":"2022-03-07","or_number":"J3NHJEW5","remarks":"cccccccccc","tbl_name":"customer_payment","created_at":null,"updated_at":null}
+
+2022-03-12 12:10:47	--	1	--	Peter R. Bismonte	--	BillingController	--	deleteSOA	--	message	--	delete deleteSOA id 134124
+Old deleteSOA: {"id":134124,"client_id":19041,"user_id":1,"payment_method_id":309,"banking_payment_code_id":null,"amount":5460,"date":"2022-03-07","or_number":"J3NHJEW5","remarks":"cccccccccc2021-10-01, ","tbl_name":"customer_payment","created_at":null,"updated_at":null}
+
+2022-03-12 12:10:59	--	1	--	Peter R. Bismonte	--	BillingController	--	updateSOA	--	message	--	update soa id 408033
+From: {"client_id":19041,"date":"2021-10-01","item":"MRR - Internet (RES)","description":"MRR - RES Oct 1, 2021 - Oct 31, 2021","price":1120,"balance":0,"tbl_name":"bill"}
+To: {"id":408033,"client_id":19041,"date":"2021-10-01","item":"MRR - Internet (RES)","description":"MRR - RES Oct 1, 2021 - Oct 31, 2021","price":1120,"balance":"1120","tbl_name":"bill","created_at":"2021-12-23 21:02:33","updated_at":"2022-03-12 12:10:59"}
+
+2022-03-12 12:12:14	--	1	--	Import Payment	--	CustomerPaymentController	--	storePayment	--	message	--	Import payment : [{"Create Date":44626.29195601852,"Date":"2022-03-07","OR":"BTIUX754","Merchant Txn Id":1235147,"Ccy":"PHP","Amount":1200,"Fee":20,"Settlement":1180,"Proc":"ECPY","Statement_id":91168,"Account_name":"Lolet M. Morta","Remarks":"AAAAAAAAAAAaAA","amount_applied_return":0},{"Create Date":44627.36417824074,"Date":"2022-03-07","OR":"J3NHJEW5","Merchant Txn Id":1236217,"Ccy":"PHP","Amount":1460,"Fee":10,"Settlement":1450,"Proc":"MBTC","Statement_id":92749,"Account_name":"Wilma Hinlog","Remarks":"ab","Account_no":"RES-202108-26102","amount_applied_return":0},{"Create Date":44627.36417824074,"Date":"2022-03-07","OR":"J3NHJEW5","Merchant Txn Id":1236217,"Ccy":"PHP","Amount":5460,"Fee":10,"Settlement":5450,"Proc":"MBTC","Statement_id":102717,"Account_name":"Peter Bismonte","Remarks":"cccccccccc","Account_no":"RES-202108-36102","amount_applied_return":0}]
+
+2022-03-12 12:13:01	--	1	--	Peter R. Bismonte	--	BillingController	--	updateSOA	--	message	--	update soa id 164848
+From: {"client_id":11627,"date":"2022-03-16","item":"MRR - Internet (RES)","description":"MRR - RES Mar 15, 2022 - Apr 14, 2022","price":1460,"balance":0,"tbl_name":"bill"}
+To: {"id":164848,"client_id":11627,"date":"2022-03-16","item":"MRR - Internet (RES)","description":"MRR - RES Mar 15, 2022 - Apr 14, 2022","price":1460,"balance":"1460","tbl_name":"bill","created_at":"2021-07-27 14:28:57","updated_at":"2022-03-12 12:13:01"}
+
+2022-03-12 12:13:08	--	1	--	Peter R. Bismonte	--	BillingController	--	deleteSOA	--	message	--	delete deleteSOA id 134126
+Old deleteSOA: {"id":134126,"client_id":11627,"user_id":1,"payment_method_id":309,"banking_payment_code_id":null,"amount":1460,"date":"2022-03-07","or_number":"J3NHJEW5","remarks":"ab2022-04-16","tbl_name":"customer_payment","created_at":null,"updated_at":null}
+
+2022-03-12 12:13:17	--	1	--	Peter R. Bismonte	--	BillingController	--	deleteSOA	--	message	--	delete deleteSOA id 134123
+Old deleteSOA: {"id":134123,"client_id":11627,"user_id":1,"payment_method_id":309,"banking_payment_code_id":null,"amount":1460,"date":"2022-03-07","or_number":"J3NHJEW5","remarks":"ab2022-03-16","tbl_name":"customer_payment","created_at":null,"updated_at":null}
+
+2022-03-12 16:14:59	--	1	--	Peter R. Bismonte	--	ActivityTicketController	--	update	--	message	--	update activity_ticket id 4144
+From: {"ticket_type_id":4,"client_id":19041,"created_by":1,"updated_by":1,"status":"Addendum","state":"am","remarks":"Change package:SPL30M30M","date_applied":"2022-03-12"}
+To: 1
+
+2022-03-12 16:15:05	--	1	--	Peter R. Bismonte	--	ActivityTicketController	--	update	--	message	--	update activity_ticket id 4144
+From: {"ticket_type_id":4,"client_id":19041,"created_by":1,"updated_by":1,"status":"Pending","state":"helpdesk","remarks":"Change package:SPL30M30M","date_applied":"2022-03-12"}
+To: 1
+

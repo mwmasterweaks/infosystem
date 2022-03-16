@@ -717,7 +717,7 @@
                   DISCONNECTION
                   <br />&nbsp;&nbsp;&nbsp;FIVE (5) DAYS FROM DUE DATE WITHOUT
                   PRIOR NOTICE. <br />&nbsp;&nbsp;&nbsp;Reconnection fee of
-                  P560.00 will be charged if payment was made 15 days after
+                  P1,120.00 will be charged if payment was made 15 days after
                   disconnection. <br />&nbsp;&nbsp;&nbsp;DISREGARD THIS
                   STATEMENT IF PAYMENT HAS BEEN MADE.
                   <br />
